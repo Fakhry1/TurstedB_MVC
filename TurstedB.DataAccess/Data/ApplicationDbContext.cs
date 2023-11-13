@@ -15,7 +15,6 @@ namespace TrustedB.DataAccess.Data
         }
 
        
-
         public DbSet<Topics> Topics { get; set; }
         
 
