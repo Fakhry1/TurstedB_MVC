@@ -30,6 +30,9 @@ namespace TrustedB.Models
         [DisplayName("File Size")]
         public string FileSize { get; set; }
 
+        [DisplayName("Active")]
+        public string Active { get; set; }
+
         [DisplayName("Creation Date")]
         public DateOnly CreationDate { get; set; }
 
