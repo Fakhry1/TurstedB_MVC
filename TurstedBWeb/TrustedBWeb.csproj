@@ -21,11 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
+    <ProjectReference Include="..\TurstedB.DataAccess\TrustedB.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TurstedB.DataAccess\TrustedB.DataAccess.csproj" />
+    <Folder Include="wwwroot\Files\Topics\" />
   </ItemGroup>
 
 </Project>

@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using System.Reflection;
-//using BProject.Services;
+using TrustedBWeb.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Identity.UI.Services.IEmailSender
-using Microsoft.AspNetCore.Identity.UI.Services;
+
 using TrustedB.DataAccess.Data;
-using TrustedB.Services;
+
 using TurstedB.DataAccess.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -74,6 +74,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseDefaultFiles();
+
 
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 app.UseRouting();
@@ -84,4 +86,5 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+
 app.Run();

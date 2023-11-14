@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Localization;
 using System.Reflection;
 
-namespace TrustedB.Services
+namespace TrustedBWeb.Services
 {
     /// <summary>
     /// Dummy class to group shared resources
