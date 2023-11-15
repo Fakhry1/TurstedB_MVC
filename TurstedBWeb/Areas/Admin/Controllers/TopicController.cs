@@ -55,7 +55,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
            
         }
 
-
+        [HttpPost]
         public IActionResult Upsert(Topics topic)
         {
             if (ModelState.IsValid)

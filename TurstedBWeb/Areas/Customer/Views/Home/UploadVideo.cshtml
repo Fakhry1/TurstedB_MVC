@@ -1,0 +1,89 @@
+﻿
+
+<div id="contend">
+    <div class="row>">
+        <div class="col-lg-12">
+            <div id="ImageDrop" class="dropzone" enctype="multipart/form-data">
+
+            </div>
+            <span id="waiting" style="display:none;"> file is uploading</span>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <h5>Priview</h5>
+        <div id="preview" style="width:400px;height:250px;overflow-x:scroll">
+
+        </div>
+        <span id="servermessage" style="display:none;"></span>
+    </div>
+
+</div>
+
+@section Scripts{
+
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script>
+        Dropzone.autoDiscover = false;
+
+        $(document).ready(function () {
+
+            var $myDropZone = new Dropzone('div#ImageDrop', {
+                url: "/Home/UploadMultiStream",//when file uploading which server function should trigger in controller
+                addRemoveLinks: true,
+                uploadMultiple: false,
+                //parallelUploads: 5,
+                maxFilesize: 3.0,
+                timeout: 864000,
+                acceptedFiles: ".jpeg,.jpg,.png",
+                maxFiles: 5,//also increase this value
+                dictDefaultMessage: "Please drop/select the image in jpeg/png format only and Upload",
+                previewsContainer: '#preview',
+                headers: {
+                    'session': 'test',
+                    'type': '1'
+                },
+                init: function () {
+                    //this.hiddenFileInput.removeAttribute('multiple');
+                }
+            });
+
+            $myDropZone.on("success", function (file, response) {
+                $(".dz-success-mark svg").css("background", "green");
+                $(".dz-error-mark").css("display", "none");
+                $('#waiting').css('display', 'none');
+                $('#previewhead').css('display', 'block');
+                $('#servermessage').css('display', 'block');
+                $('#servermessage').html("Image uploaded and received message from server as" + response.message);
+
+            });
+            $myDropZone.on("removedfile", function (file) {
+                $(".dz-success-mark svg").css("background", "green");
+                $(".dz-error-mark").css("display", "none");
+                alert("removed");
+            });
+            $myDropZone.on("error", function (file, message, xhr) {
+                $(".dz-error-mark svg").css("background", "red");
+                $(".dz-success-mark").css("display", "none");
+
+
+                if (this.files.length  addheregreaterthan symbol 1) {
+                alert("Remove uploaded file and re-upload");
+                this.removeFile(file);
+            }
+
+            if (file.type != "image/jpg" && file.type != "image/jpeg" && file.type != "image/png") {
+                alert("Only jpg or png files only accepted");
+            }
+            if (message == "Server responded with 0 code.") {
+                alert("Server failed to upload image. Try later!");
+            }
+        })
+        $myDropZone.on("sending", function (file) {
+            $('#waiting').css('display', 'block');
+        });
+
+
+     });
+    </script>
+}

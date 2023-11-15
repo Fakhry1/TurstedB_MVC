@@ -1,5 +1,7 @@
 ﻿ <!-- Start Stepper HTML -->
-<div class="container mt-5">
+ @model Topics
+ <div class="container mt-5">
+    <div class="row">
     <form id="form-id">
         <div class="accordion" id="accordionExample">
             <div class="steps">
@@ -58,4 +60,144 @@
 
     </form>
 </div>
+</div>
 <!-- End Start Stepper HTML -->
+
+<div class="card shadow border-0 ">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> @(Model.TopicId != Guid.Empty  ? @_localization.Getkey("Update") : @_localization.Getkey("Create")) @_localization.Getkey("Topic")</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body ">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="TopicId" hidden />
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="border p-3">
+
+                        <div class="row">
+                        <div class="form-floating py-2 col-4">
+                            <input asp-for="Titel" class="form-control border-0 shadow" />
+                            <label asp-for="Titel" class="ms-2"></label>
+                            <span asp-validation-for="Titel" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating py-2 col-4">
+
+                            <select asp-for="TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="توجيه",Value="توجيه" }
+                                    ,new SelectListItem {Text="درس فيديو",Value="درس فيديو" } ,new SelectListItem {Text="درس صوت",Value="درس صوت" }
+                                    ,new SelectListItem {Text="اعلان",Value="اعلان" } ,new SelectListItem {Text="صور",Value="صور" }} ) class="form-select">
+                                <option disabled selected></option>
+                            </select>
+                            <label asp-for="TopicClassification" class="ms-2"></label>
+                        </div>
+                            <div class="form-floating py-2 col-4">
+
+                                <select asp-for="TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="قيد اعداد",Value="قيد اعداد" }
+                                        ,new SelectListItem {Text="اعتماد",Value="اعتماد" } ,new SelectListItem {Text="تصحيح لغوي",Value="تصحيح لغوي" }
+                                        ,new SelectListItem {Text="اعتماد تصميم",Value="اعتماد تصميم" } ,new SelectListItem {Text="نشر",Value="نشر" }} ) class="form-select">
+                                    <option disabled selected></option>
+                                </select>
+                                <label asp-for="TopicClassification" class="ms-2"></label>
+                            </div>
+
+                       
+                        </div>
+                        <div class="row">
+                        <div class="form-floating py-2 col-12">
+                            <label asp-for="TopicDiscription" class="ms-2 text-muted mb-1"></label>
+                            <textarea asp-for="TopicDiscription" class="form-control"></textarea>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                       @* 
+                        <div class="form-floating py-2 col-4">
+                            <input asp-for="TopicFile" class="form-control border-0 shadow" />
+                            <label asp-for="TopicFile" class="ms-2"></label>
+                       
+                        </div>*@
+
+
+
+                        <div class="form-floating py-2 col-6">
+
+                            <select asp-for="TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="نعم",Value="نعم" }
+                                   ,new SelectListItem {Text="لا",Value="لا" }} ) class="form-select">
+                                <option disabled selected></option>
+                            </select>
+                            <label asp-for="TopicClassification" class="ms-2"></label>
+                        </div>
+                            <div class="form-floating py-2 col-6">
+                                <input type="date" asp-for="CreationDate" class="form-control" />
+                                <label asp-for="CreationDate" class="ms-2"></label>
+                                @* <span asp-validation-for="Brother.BirthDate" class="text-danger"></span>*@
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                        <div class="custom-filepy-2 col-12">
+                            <label asp-for="TopicFile" style="cursor: pointer; float:left" >
+                                <file id="output" src="@Model.TopicFile" style="width:300px;" />
+                                <a class="btn btn-outline-dark">
+                                    <i class="bi bi-pen"></i>
+                                </a>
+                            </label>
+                            <input asp-for="TopicFile" type="file" onchange="loadFile(event)" style="display: none;">
+                        </div>
+                        </div>
+                        
+                     
+
+                        <div class="row pt-2">
+                            <div class="col-6 col-md-3">
+                                @if (Model.TopicId != Guid.Empty)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Update")</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Create")</button>
+                                }
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="Topic" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                                    @_localization.Getkey("Back to List")
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons  lists   table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
+        });
+    </script>
+
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

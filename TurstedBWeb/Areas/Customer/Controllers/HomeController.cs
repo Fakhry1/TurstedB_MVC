@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
+using TrustedB.Models;
+using TrustedBWeb.Areas.Admin.Controllers;
+using TurstedB.DataAccess.Repository.IRepository;
 using TurstedBWeb.Models;
 
 namespace TrustedBWeb.Areas.Customer.Controllers
@@ -8,10 +12,16 @@ namespace TrustedBWeb.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        //private readonly IWebHostEnvironment _hostEnvironment;
+        public string fileName = "";
+
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment)
         {
             _logger = logger;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -19,6 +29,58 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             return View();
         }
 
-      
+        public IActionResult UploadVideo(int? id)
+        {
+            return View();
+        }
+
+            //[DisableRequestSizeLimit]
+        [HttpPost]
+        public IActionResult UploadVideo()
+        {
+            
+                string webRootPath = _webHostEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files;
+                var filetype = HttpContext.Request.Headers["type"].FirstOrDefault();
+                var description = HttpContext.Request.Headers["session"].FirstOrDefault();
+                
+
+                //add new topic
+
+
+                if (files.Count > 0)
+                    {
+                        string fileName = Guid.NewGuid().ToString();
+                        var uploads = Path.Combine(webRootPath, @"Files\Topics");
+                        var extension = Path.GetExtension(files[0].FileName);
+
+                        using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                        {
+                            files[0].CopyTo(fileStreams);
+                        }
+                      var fullpath = @"Files\Topics\" + fileName + extension;
+
+                    }
+            //var videofile = HttpContext.Request.Form.Files;
+            //var filetype = HttpContext.Request.Headers["type"].FirstOrDefault();
+            //var description = HttpContext.Request.Headers["session"].FirstOrDefault();
+
+            //var file = Path.Combine("wwwroot", "Upload\\" + videofile.FileName);
+
+            //using (var stream = new FileStream(file, FileMode.Create))
+            //{
+            //    await videofile.CopyToAsync(stream);
+            //}
+
+             return Json(new { status = true, message = files[0].FileName });
+            //return View();
+        }
+           
+
+
+
+
+
+
+        }
     }
-}
