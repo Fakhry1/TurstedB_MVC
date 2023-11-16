@@ -97,12 +97,12 @@
                         </div>
                             <div class="form-floating py-2 col-4">
 
-                                <select asp-for="TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="قيد اعداد",Value="قيد اعداد" }
+                                <select asp-for="State" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="قيد اعداد",Value="قيد اعداد" }
                                         ,new SelectListItem {Text="اعتماد",Value="اعتماد" } ,new SelectListItem {Text="تصحيح لغوي",Value="تصحيح لغوي" }
                                         ,new SelectListItem {Text="اعتماد تصميم",Value="اعتماد تصميم" } ,new SelectListItem {Text="نشر",Value="نشر" }} ) class="form-select">
                                     <option disabled selected></option>
                                 </select>
-                                <label asp-for="TopicClassification" class="ms-2"></label>
+                                <label asp-for="State" class="ms-2"></label>
                             </div>
 
                        
@@ -115,16 +115,14 @@
                         </div>
 
                         <div class="row">
-                       @* 
+                        
                         <div class="form-floating py-2 col-4">
-                            <input asp-for="TopicFile" class="form-control border-0 shadow" />
-                            <label asp-for="TopicFile" class="ms-2"></label>
+                            <input asp-for="FileSize" class="form-control border-0 shadow" />
+                                <label asp-for="FileSize" class="ms-2"></label>
                        
-                        </div>*@
+                        </div>
 
-
-
-                        <div class="form-floating py-2 col-6">
+                        <div class="form-floating py-2 col-4">
 
                             <select asp-for="TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="نعم",Value="نعم" }
                                    ,new SelectListItem {Text="لا",Value="لا" }} ) class="form-select">
@@ -132,43 +130,10 @@
                             </select>
                             <label asp-for="TopicClassification" class="ms-2"></label>
                         </div>
-                            <div class="form-floating py-2 col-6">
+                            <div class="form-floating py-2 col-4">
                                 <input type="date" asp-for="CreationDate" class="form-control" />
                                 <label asp-for="CreationDate" class="ms-2"></label>
                                 @* <span asp-validation-for="Brother.BirthDate" class="text-danger"></span>*@
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                        <div class="custom-filepy-2 col-12">
-                            <label asp-for="TopicFile" style="cursor: pointer; float:left" >
-                                <file id="output" src="@Model.TopicFile" style="width:300px;" />
-                                <a class="btn btn-outline-dark">
-                                    <i class="bi bi-pen"></i>
-                                </a>
-                            </label>
-                            <input asp-for="TopicFile" type="file" onchange="loadFile(event)" style="display: none;">
-                        </div>
-                        </div>
-                        
-                     
-
-                        <div class="row pt-2">
-                            <div class="col-6 col-md-3">
-                                @if (Model.TopicId != Guid.Empty)
-                                {
-                                    <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Update")</button>
-                                }
-                                else
-                                {
-                                    <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Create")</button>
-                                }
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <a asp-controller="Topic" asp-action="Index" class="btn btn-outline-primary border  form-control">
-                                    @_localization.Getkey("Back to List")
-                                </a>
                             </div>
                         </div>
 
@@ -177,6 +142,117 @@
 
             </div>
 
+            <div class="container row" style="margin-top: 10px;">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#msg">@_localization.Getkey("PDF Document")</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#pro">@_localization.Getkey("Image")</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#set">@_localization.Getkey("Video")</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#tarq">@_localization.Getkey("Audio")</a>
+                    </li>
+
+                </ul>
+
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+            <div class="tab-pane container active" id="msg">
+                <div class="row pt-3">
+                   
+                        <h4>الوثيقة</h4>
+                        <div class="form-control col-12">
+                            <label asp-for="TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.TopicFile">
+                                @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
+                                @* <a class="btn btn-outline-dark">
+                                <i class="bi bi-pen"></i>
+                                </a>*@
+                            </label>
+                            <input asp-for="TopicFile" type="file" onchange="loadFile(event)">
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="tab-pane container fade" id="pro">
+                <div class="row pt-3">
+                   
+                        <h4>الصور</h4>
+                        <div class="form-control col-12">
+                            <label asp-for="TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.TopicFile">
+                                @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
+                                @* <a class="btn btn-outline-dark">
+                                <i class="bi bi-pen"></i>
+                                </a>*@
+                            </label>
+                            <input asp-for="TopicFile" type="file" onchange="loadFile(event)">
+                        </div>
+                   
+                </div>
+            </div>
+
+                    <div class="tab-pane container fade" id="set">
+                <div class="row pt-3">
+                    
+                        <h4>الفيديو</h4>
+                        <div class="form-control col-12">
+                            <label asp-for="TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.TopicFile">
+                                @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
+                                @* <a class="btn btn-outline-dark">
+                                <i class="bi bi-pen"></i>
+                                </a>*@
+                            </label>
+                            <input asp-for="TopicFile" type="file" onchange="loadFile(event)">
+                        </div>
+                    
+                </div>
+            </div>
+
+               <div class="tab-pane container fade" id="tarq">
+                <div class="row pt-3">
+                    
+                        <h4>الصوت</h4>
+                        <div class="form-control col-12">
+                            <label asp-for="TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.TopicFile">
+                                @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
+                                @* <a class="btn btn-outline-dark">
+                                <i class="bi bi-pen"></i>
+                                </a>*@
+                            </label>
+                            <input asp-for="TopicFile" type="file" onchange="loadFile(event)">
+                        </div>
+                   
+                </div>
+            </div>
+            </div>
+
+                </>
+
+                <!-- Tabs content -->
+            </div>
+            <div class="row pt-2">
+                <div class="col-6 col-md-3">
+                    @if (Model.TopicId != Guid.Empty)
+                    {
+                        <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Update")</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Create")</button>
+                    }
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-controller="Topic" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                        @_localization.Getkey("Back to List")
+                    </a>
+                </div>
+            </div>
         </form>
     </div>
 </div>

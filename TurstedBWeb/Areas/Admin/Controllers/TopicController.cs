@@ -17,9 +17,10 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         public string fileName = "";
 
         public List<Topics> topicList;
-        public TopicController(ILogger<TopicController> logger)
+        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment)
         {
             _logger = logger;
+            _hostEnvironment = hostEnvironment;
         }
 
         public IActionResult Index()
