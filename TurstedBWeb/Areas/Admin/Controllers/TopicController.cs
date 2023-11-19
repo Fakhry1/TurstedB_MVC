@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
 using TrustedB.Models;
+using TrustedB.Models.ViewModels;
 using TurstedB.DataAccess.Repository.IRepository;
 using TurstedBWeb.Models;
 
@@ -42,29 +43,33 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         public IActionResult Upsert(Guid? id)
         {
-           Topics topic = new Topics();
+            TopicVM topicVM = new()
+            {
+                topic=new Topics()
+            };
+          // var topic = new Topics();
             if (id == null)
             {
                 //new 
-                return View(topic);
+                return View(topicVM);
             }else
             {
                 //eidt
-                topic = _unitOfWork.Topics.Get(u => u.TopicId == id);
-                return View(topic);
+                topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id);
+                return View(topicVM);
             }
            
         }
 
         [HttpPost]
-        public IActionResult Upsert(Topics topic)
+        public IActionResult Upsert(TopicVM topicVM)
         {
             if (ModelState.IsValid)
             {
                 string webRootPath = _hostEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;
                 //add new topic
-                if (topic.TopicId == Guid.Empty)
+                if (topicVM.topic.TopicId == Guid.Empty)
                 {
                    
                     if (files.Count > 0)
@@ -77,11 +82,11 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         {
                             files[0].CopyTo(fileStreams);
                         }
-                        topic.TopicFile = @"Files\Topics\" + fileName + extension;
+                        topicVM.topic.TopicFile = @"Files\Topics\" + fileName + extension;
 
                     }
 
-                    _unitOfWork.Topics.Add(topic);
+                    _unitOfWork.Topics.Add(topicVM.topic);
                 }
                 else //Eidt new topic
 
@@ -92,7 +97,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         var uploads = Path.Combine(webRootPath, @"Files\Topics");
                         var extension_new = Path.GetExtension(files[0].FileName);
 
-                        var imagePath = Path.Combine(webRootPath, topic.TopicFile.TrimStart('\\'));
+                        var imagePath = Path.Combine(webRootPath,topicVM.topic.TopicFile.TrimStart('\\'));
 
                         if (System.IO.File.Exists(imagePath))
                         {
@@ -103,10 +108,10 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         {
                             files[0].CopyTo(fileStreams);
                         }
-                        topic.TopicFile = @"Files\Topics\" + fileName + extension_new;
+                        topicVM.topic.TopicFile = @"Files\Topics\" + fileName + extension_new;
                     }
 
-                    _unitOfWork.Topics.Update(topic);
+                    _unitOfWork.Topics.Update(topicVM.topic);
                 }
 
                 _unitOfWork.Save();
@@ -115,7 +120,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             }
             else
             {
-                return View(topic);
+                return View(topicVM);
             }
 
          }

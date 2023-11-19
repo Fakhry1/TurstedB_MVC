@@ -14,26 +14,32 @@ namespace TrustedB.Models
         public string Titel { get; set; }
 
         [DisplayName("Topic Discription")]
-        public string? TopicDiscription { get; set; }
+        [ValidateNever]
+        public string TopicDiscription { get; set; }
 
         [DisplayName("Topic Classification")]
-        public string? TopicClassification { get; set; }
+        [ValidateNever]
+        public string TopicClassification { get; set; }
 
         [DisplayName("State")]
-        public string? State { get; set; }
+        [ValidateNever]
+        public string State { get; set; }
 
         //file name
         [DisplayName("Topic File")]
         [ValidateNever]
-        public string? TopicFile { get; set; }
+        public string TopicFile { get; set; }
 
         [DisplayName("File Size")]
-        public string? FileSize { get; set; }
+        [ValidateNever]
+        public string FileSize { get; set; }
 
         [DisplayName("Active")]
-        public string? Active { get; set; }
+        [ValidateNever]
+        public string Active { get; set; }
 
         [DisplayName("Creation Date")]
+        [ValidateNever]
         public DateOnly CreationDate { get; set; }
 
     }

@@ -1,5 +1,5 @@
 ﻿ <!-- Start Stepper HTML -->
- @model Topics
+@model TopicVM
  <div class="container mt-5">
     <div class="row">
     <form id="form-id">
@@ -67,13 +67,13 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2"> @(Model.TopicId != Guid.Empty  ? @_localization.Getkey("Update") : @_localization.Getkey("Create")) @_localization.Getkey("Topic")</h2>
+                <h2 class="text-white py-2"> @(Model.topic.TopicId != Guid.Empty  ? @_localization.Getkey("Update") : @_localization.Getkey("Create")) @_localization.Getkey("Topic")</h2>
             </div>
         </div>
     </div>
     <div class="card-body ">
         <form method="post" class="row" enctype="multipart/form-data">
-            <input asp-for="TopicId" hidden />
+            <input asp-for="topic.TopicId" hidden />
 
             <div class="row">
                 <div class="col-12">
@@ -81,58 +81,58 @@
 
                         <div class="row">
                         <div class="form-floating py-2 col-4">
-                            <input asp-for="Titel" class="form-control border-0 shadow" />
-                            <label asp-for="Titel" class="ms-2"></label>
-                            <span asp-validation-for="Titel" class="text-danger"></span>
+                                <input asp-for="topic.Titel" class="form-control border-0 shadow" />
+                                <label asp-for="topic.Titel" class="ms-2"></label>
+                                <span asp-validation-for="topic.Titel" class="text-danger"></span>
                         </div>
 
                         <div class="form-floating py-2 col-4">
 
-                            <select asp-for="TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="توجيه",Value="توجيه" }
+                                <select asp-for="topic.TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="توجيه",Value="توجيه" }
                                     ,new SelectListItem {Text="درس فيديو",Value="درس فيديو" } ,new SelectListItem {Text="درس صوت",Value="درس صوت" }
                                     ,new SelectListItem {Text="اعلان",Value="اعلان" } ,new SelectListItem {Text="صور",Value="صور" }} ) class="form-select">
                                 <option disabled selected></option>
                             </select>
-                            <label asp-for="TopicClassification" class="ms-2"></label>
+                                <label asp-for="topic.TopicClassification" class="ms-2"></label>
                         </div>
                             <div class="form-floating py-2 col-4">
 
-                                <select asp-for="State" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="قيد اعداد",Value="قيد اعداد" }
+                                <select asp-for="topic.State" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="قيد اعداد",Value="قيد اعداد" }
                                         ,new SelectListItem {Text="اعتماد",Value="اعتماد" } ,new SelectListItem {Text="تصحيح لغوي",Value="تصحيح لغوي" }
                                         ,new SelectListItem {Text="اعتماد تصميم",Value="اعتماد تصميم" } ,new SelectListItem {Text="نشر",Value="نشر" }} ) class="form-select">
                                     <option disabled selected></option>
                                 </select>
-                                <label asp-for="State" class="ms-2"></label>
+                                <label asp-for="topic.State" class="ms-2"></label>
                             </div>
 
                        
                         </div>
                         <div class="row">
                         <div class="form-floating py-2 col-12">
-                            <label asp-for="TopicDiscription" class="ms-2 text-muted mb-1"></label>
-                            <textarea asp-for="TopicDiscription" class="form-control"></textarea>
+                                <label asp-for="topic.TopicDiscription" class="ms-2 text-muted mb-1"></label>
+                                <textarea asp-for="topic.TopicDiscription" class="form-control"></textarea>
                         </div>
                         </div>
 
                         <div class="row">
                         
                         <div class="form-floating py-2 col-4">
-                            <input asp-for="FileSize" class="form-control border-0 shadow" />
-                                <label asp-for="FileSize" class="ms-2"></label>
+                                <input asp-for="topic.FileSize" class="form-control border-0 shadow" />
+                                <label asp-for="topic.FileSize" class="ms-2"></label>
                        
                         </div>
 
                         <div class="form-floating py-2 col-4">
 
-                            <select asp-for="TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="نعم",Value="نعم" }
+                                <select asp-for="topic.Active" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="نعم",Value="نعم" }
                                    ,new SelectListItem {Text="لا",Value="لا" }} ) class="form-select">
                                 <option disabled selected></option>
                             </select>
-                            <label asp-for="TopicClassification" class="ms-2"></label>
+                                <label asp-for="topic.Active" class="ms-2"></label>
                         </div>
                             <div class="form-floating py-2 col-4">
-                                <input type="date" asp-for="CreationDate" class="form-control" />
-                                <label asp-for="CreationDate" class="ms-2"></label>
+                                <input type="date" asp-for="topic.CreationDate" class="form-control" />
+                                <label asp-for="topic.CreationDate" class="ms-2"></label>
                                 @* <span asp-validation-for="Brother.BirthDate" class="text-danger"></span>*@
                             </div>
                         </div>
@@ -168,13 +168,13 @@
                    
                         <h4>الوثيقة</h4>
                         <div class="form-control col-12">
-                            <label asp-for="TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.TopicFile">
+                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
                                 @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
                                 @* <a class="btn btn-outline-dark">
                                 <i class="bi bi-pen"></i>
                                 </a>*@
                             </label>
-                            <input asp-for="TopicFile" type="file" onchange="loadFile(event)">
+                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
                         </div>
                     
                 </div>
@@ -185,13 +185,13 @@
                    
                         <h4>الصور</h4>
                         <div class="form-control col-12">
-                            <label asp-for="TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.TopicFile">
+                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
                                 @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
                                 @* <a class="btn btn-outline-dark">
                                 <i class="bi bi-pen"></i>
                                 </a>*@
                             </label>
-                            <input asp-for="TopicFile" type="file" onchange="loadFile(event)">
+                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
                         </div>
                    
                 </div>
@@ -202,13 +202,13 @@
                     
                         <h4>الفيديو</h4>
                         <div class="form-control col-12">
-                            <label asp-for="TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.TopicFile">
+                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
                                 @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
                                 @* <a class="btn btn-outline-dark">
                                 <i class="bi bi-pen"></i>
                                 </a>*@
                             </label>
-                            <input asp-for="TopicFile" type="file" onchange="loadFile(event)">
+                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
                         </div>
                     
                 </div>
@@ -219,13 +219,13 @@
                     
                         <h4>الصوت</h4>
                         <div class="form-control col-12">
-                            <label asp-for="TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.TopicFile">
+                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
                                 @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
                                 @* <a class="btn btn-outline-dark">
                                 <i class="bi bi-pen"></i>
                                 </a>*@
                             </label>
-                            <input asp-for="TopicFile" type="file" onchange="loadFile(event)">
+                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
                         </div>
                    
                 </div>
@@ -238,7 +238,7 @@
             </div>
             <div class="row pt-2">
                 <div class="col-6 col-md-3">
-                    @if (Model.TopicId != Guid.Empty)
+                    @if (Model.topic.TopicId != Guid.Empty)
                     {
                         <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Update")</button>
                     }
