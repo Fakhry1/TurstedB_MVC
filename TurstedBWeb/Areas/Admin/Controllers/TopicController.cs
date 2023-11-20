@@ -17,25 +17,22 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         private readonly IWebHostEnvironment _hostEnvironment;
         public string fileName = "";
 
-        public List<Topics> topicList;
-        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment)
+       // public List<Topics> topicList;
+        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _hostEnvironment = hostEnvironment;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
 
-            if (topicList == null)
-            {
-                topicList = new List<Topics>(); 
-            } 
-            else
-            { 
-
+            
+            var  topicList = new List<Topics>(); 
+           
             topicList = _unitOfWork.Topics.GetAll().ToList();
-           } 
+         
             return View(topicList);
         }
 
