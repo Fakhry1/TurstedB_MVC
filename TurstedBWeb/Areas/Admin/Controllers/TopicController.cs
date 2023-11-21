@@ -16,26 +16,24 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         private readonly IWebHostEnvironment _hostEnvironment;
         public string fileName = "";
+        public string slash = @"\";
 
-        public List<Topics> topicList;
-        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment)
+        //public var topicList;
+        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _hostEnvironment = hostEnvironment;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-
-            if (topicList == null)
-            {
-                topicList = new List<Topics>(); 
-            } 
-            else
-            { 
-
+            var topicList = new List<Topics>();
+           
+             
             topicList = _unitOfWork.Topics.GetAll().ToList();
-           } 
+           
+
             return View(topicList);
         }
 
@@ -126,8 +124,24 @@ namespace TrustedBWeb.Areas.Admin.Controllers
          }
 
 
+        //__________________download______________________
 
-            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult DownloadFile(Guid? id)
+        {
+            string webRootPath = _hostEnvironment.WebRootPath;
+            var fileName = _unitOfWork.Topics.Get(u => u.TopicId == id);
+            //var slash = '\';
+            //Build the File Path.
+            string path = Path.Combine(webRootPath)  + slash + fileName.TopicFile;
+
+            //Read the File data into Byte Array.
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+
+            //Send the File to Download.
+            return File(bytes, "application/octet-stream", fileName.TopicFile);
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
