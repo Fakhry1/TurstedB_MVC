@@ -2,7 +2,7 @@
 @model TopicVM
  <div class="container mt-5">
     <div class="row">
-    <form id="form-id">
+        <form  enctype="multipart/form-data" method="post">
         <div class="accordion" id="accordionExample">
             <div class="steps">
                 <progress id="progress" value=0 max=100></progress>
@@ -218,15 +218,17 @@
                 <div class="row pt-3">
                     
                         <h4>الصوت</h4>
-                        <div class="form-control col-12">
-                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
-                                @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
-                                @* <a class="btn btn-outline-dark">
-                                <i class="bi bi-pen"></i>
-                                </a>*@
-                            </label>
-                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
+                            <div class="form-floating py-2 col-6">
+                               @* <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile"></label>*@
+                                <input asp-for="topic.TopicFile" type="file" name="file1" id="file1" onchange="uploadFile()"><br>
                         </div>
+
+                            <div class="form-floating py-2 col-6">
+                                <progress class="bg-primary" id="progressBar" value="0" max="100" style="width:300px;"></progress>
+                                <h4 id="status"></h4>
+                                <p id="loaded_n_total"></p>
+                         </div>
+
                    
                 </div>
             </div>
@@ -265,13 +267,59 @@
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
         });
     </script>
-
+@*
     <script>
         var loadFile = function (event) {
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
+    </script>*@
+
+    @*____________________________________*@
+
+    <script>
+        function _(el) {
+            return document.getElementById(el);
+        }
+
+        function uploadFile() {
+            var file = _("file1").files[0];
+            // alert(file.name+" | "+file.size+" | "+file.type);
+            var formdata = new FormData();
+            formdata.append("file1", file);
+            var ajax = new XMLHttpRequest();
+            ajax.upload.addEventListener("progress", progressHandler, false);
+            //ajax.addEventListener("load", completeHandler, false);
+            ajax.addEventListener("error", errorHandler, false);
+            ajax.addEventListener("abort", abortHandler, false);
+            ajax.open("POST", "file_upload_parser.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
+            //use file_upload_parser.php from above url
+            ajax.send(formdata);
+        }
+
+        function progressHandler(event) {
+            _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
+            var percent = (event.loaded / event.total) * 100;
+            _("progressBar").value = Math.round(percent);
+            //_("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+        }
+
+        function completeHandler(event) {
+            _("status").innerHTML = event.target.responseText;
+            //_("progressBar").value = 0; //wil clear progress bar after successful upload
+        }
+
+        function errorHandler(event) {
+            _("status").innerHTML = "Upload Failed";
+        }
+
+        function abortHandler(event) {
+            _("status").innerHTML = "Upload Aborted";
+        }
     </script>
+
+    @*_____________________________________*@
+
 
     @{
         <partial name="_ValidationScriptsPartial" />
