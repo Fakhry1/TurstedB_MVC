@@ -181,20 +181,62 @@
             </div>
 
             <div class="tab-pane container fade" id="pro">
-                <div class="row pt-3">
+                @*<div class="row pt-3">
                    
                         <h4>الصور</h4>
                         <div class="form-control col-12">
                                 <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
-                                @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
-                                @* <a class="btn btn-outline-dark">
-                                <i class="bi bi-pen"></i>
-                                </a>*@
+                             
                             </label>
                                 <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
                         </div>
                    
-                </div>
+                </div>*@
+
+                        <div class="row">
+
+                            @if (Model.topic.TopicFile == null)
+                            {
+                            <div class="form-floating py-2 col-6">
+                                <h4>اختر الملف</h4>
+                                <input asp-for="topic.TopicFile" type="file" name="file1" id="file1" onchange="uploadFile()" class="w-100 bg-light"><br>
+                            </div>
+
+                            <div class="form-floating py-2 col-6 ">
+                                <h4>نسبة التحميل</h4>
+                                <progress class="bg-primary w-100" id="progressBar" value="0" max="100"></progress>
+                                <h4 id="status"></h4>
+                                <p id="loaded_n_total"></p>
+                            </div>
+                            }
+                            else
+                            {
+                            <div class="form-floating col-6 ">
+                            <h4>الملف</h4>
+                            <input type="text" asp-for="topic.TopicFile" class="form-control border-0 shadow" disabled />
+                            </div>
+
+                             <div class="custom-file mb-3 col-6">
+                                   @* <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
+                                        <file id="output" src="@Model.topic.TopicFile" style="width:100px;" />
+                                        <a class="btn btn-outline-dark">
+                                            <i class="bi bi-pen"></i>
+                                        </a>
+                                    </label>*@
+
+                                    <div class="form-floating py-2 col-6 ">
+                                        <h4>نسبة التحميل</h4>
+                                        <progress class="bg-primary w-100" id="progressBar" value="0" max="100"></progress>
+                                        <h4 id="status"></h4>
+                                        <p id="loaded_n_total"></p>
+                                    </div>
+                                    <input asp-for="topic.TopicFile" type="file" accept="image/*" onchange="loadFile(event)" style="display: none;">
+                             </div>
+
+                            }
+
+
+                        </div>
             </div>
 
                     <div class="tab-pane container fade" id="set">
@@ -223,7 +265,7 @@
                                 <input asp-for="topic.TopicFile" type="file" name="file1" id="file1" onchange="uploadFile()"><br>
                         </div>
 
-                            <div class="form-floating py-2 col-6">
+                          <div class="form-floating py-2 col-6">
                                 <progress class="bg-primary" id="progressBar" value="0" max="100" style="width:300px;"></progress>
                                 <h4 id="status"></h4>
                                 <p id="loaded_n_total"></p>
