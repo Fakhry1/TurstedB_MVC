@@ -142,144 +142,74 @@
 
             </div>
 
-            <div class="container row" style="margin-top: 10px;">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#msg">@_localization.Getkey("PDF Document")</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#pro">@_localization.Getkey("Image")</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#set">@_localization.Getkey("Video")</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#tarq">@_localization.Getkey("Audio")</a>
-                    </li>
-
-                </ul>
-
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-            <div class="tab-pane container active" id="msg">
-                <div class="row pt-3">
-                   
-                        <h4>الوثيقة</h4>
-                        <div class="form-control col-12">
-                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
-                                @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
-                                @* <a class="btn btn-outline-dark">
-                                <i class="bi bi-pen"></i>
-                                </a>*@
-                            </label>
-                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
-                        </div>
-                    
+            <div class="row">
+            @if (Model.topic.TopicId != Guid.Empty && Model.topic.TopicFile != null)
+            {
+                <div class="custom-file mb-3 col-4">
+                        <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
+                            <img id="output" src="@Model.topic.TopicFile" style="width:100px;" />
+                        <a class="btn btn-outline-dark">
+                            <i class="bi bi-pen"></i>
+                        </a>
+                    </label>
+                        <input asp-for="topic.TopicFile" type="file" accept="image/*" onchange="loadFile(event)" style="display: none;">
                 </div>
-            </div>
+            }
+            else
+            {
 
-            <div class="tab-pane container fade" id="pro">
-                @*<div class="row pt-3">
-                   
-                        <h4>الصور</h4>
-                        <div class="form-control col-12">
-                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
-                             
-                            </label>
-                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
-                        </div>
-                   
-                </div>*@
+                    <div>
+                        <h5>File upload progress</h5>
+                       @* <input type="file" id="file-uploader">*@
 
-                        <div class="row">
+                        <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
 
-                            @if (Model.topic.TopicFile == null)
-                            {
-                            <div class="form-floating py-2 col-6">
-                                <h4>اختر الملف</h4>
-                                <input asp-for="topic.TopicFile" type="file" name="file1" id="file1" onchange="uploadFile()" class="w-100 bg-light"><br>
-                            </div>
-
-                            <div class="form-floating py-2 col-6 ">
-                                <h4>نسبة التحميل</h4>
-                                <progress class="bg-primary w-100" id="progressBar" value="0" max="100"></progress>
-                                <h4 id="status"></h4>
-                                <p id="loaded_n_total"></p>
-                            </div>
-                            }
-                            else
-                            {
-                            <div class="form-floating col-6 ">
-                            <h4>الملف</h4>
-                            <input type="text" asp-for="topic.TopicFile" class="form-control border-0 shadow" disabled />
-                            </div>
-
-                             <div class="custom-file mb-3 col-6">
-                                   @* <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
-                                        <file id="output" src="@Model.topic.TopicFile" style="width:100px;" />
-                                        <a class="btn btn-outline-dark">
-                                            <i class="bi bi-pen"></i>
-                                        </a>
-                                    </label>*@
-
-                                    <div class="form-floating py-2 col-6 ">
-                                        <h4>نسبة التحميل</h4>
-                                        <progress class="bg-primary w-100" id="progressBar" value="0" max="100"></progress>
-                                        <h4 id="status"></h4>
-                                        <p id="loaded_n_total"></p>
-                                    </div>
-                                    <input asp-for="topic.TopicFile" type="file" accept="image/*" onchange="loadFile(event)" style="display: none;">
-                             </div>
-
-                            }
-
-
-                        </div>
-            </div>
-
-                    <div class="tab-pane container fade" id="set">
-                <div class="row pt-3">
-                    
-                        <h4>الفيديو</h4>
-                        <div class="form-control col-12">
-                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
-                                @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
-                                @* <a class="btn btn-outline-dark">
-                                <i class="bi bi-pen"></i>
-                                </a>*@
-                            </label>
-                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
-                        </div>
-                    
-                </div>
-            </div>
-
-               <div class="tab-pane container fade" id="tarq">
-                <div class="row pt-3">
-                    
-                        <h4>الصوت</h4>
-                            <div class="form-floating py-2 col-6">
-                               @* <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile"></label>*@
-                                <input asp-for="topic.TopicFile" type="file" name="file1" id="file1" onchange="uploadFile()"><br>
+                       @* <div id="feedback">
                         </div>
 
-                          <div class="form-floating py-2 col-6">
-                                <progress class="bg-primary" id="progressBar" value="0" max="100" style="width:300px;"></progress>
-                                <h4 id="status"></h4>
-                                <p id="loaded_n_total"></p>
-                         </div>
+                        <label id="progress-label" for="progress"></label>
+                        <progress id="progress" value="0" max="100"> </progress>*@
 
-                   
-                </div>
-            </div>
+                      </div>
+
+@*
+                    <div id="up-wrap">
+                        <div id="upload"></div>
+
+                        <!-- (A) PROGRESS BAR -->
+                        <div id="up-progress">
+                            <div id="up-bar"></div>
+                            <div id="up-percent">0%</div>
+                        </div>
+                        <input asp-for="topic.TopicFile" type="file" id="up-file" onchange="loadFile(event)">
+                        <label for="up-file" id="up-label">
+                            Select File
+                        </label>
+                      </div>*@
+
+@*
+                    <div id="up-wrap">
+                        <div id="upload"></div>
+
+                        <!-- (A) PROGRESS BAR -->
+                        <div id="up-progress">
+                            <div id="up-bar"></div>
+                            <div id="up-percent">0%</div>
+                        </div>
+
+                        <!-- (B) FILE PICKER -->
+                        <input type="file" id="up-file" disabled>
+                        <label for="up-file" id="up-label">
+                            Select File
+                        </label>
+
+                        <!-- (X) VISIT CODE-BOXX -->
+
+                    </div>*@
+            }
+
             </div>
 
-                </>
-
-                <!-- Tabs content -->
-            </div>
             <div class="row pt-2">
                 <div class="col-6 col-md-3">
                     @if (Model.topic.TopicId != Guid.Empty)
@@ -309,34 +239,36 @@
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
         });
     </script>
-@*
+
     <script>
         var loadFile = function (event) {
-            var image = document.getElementById('output');
+            var image = document.getElementById('up-file');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
-    </script>*@
+    </script>
 
-    @*____________________________________*@
+    @*____________________________________
 
-    <script>
+    @*<script>
         function _(el) {
             return document.getElementById(el);
         }
 
-        function uploadFile() {
+        function uploadFile(event) {
             var file = _("file1").files[0];
             // alert(file.name+" | "+file.size+" | "+file.type);
             var formdata = new FormData();
             formdata.append("file1", file);
             var ajax = new XMLHttpRequest();
+
+
             ajax.upload.addEventListener("progress", progressHandler, false);
             //ajax.addEventListener("load", completeHandler, false);
             ajax.addEventListener("error", errorHandler, false);
             ajax.addEventListener("abort", abortHandler, false);
             ajax.open("POST", "file_upload_parser.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
             //use file_upload_parser.php from above url
-            ajax.send(formdata);
+           // ajax.send(formdata);
         }
 
         function progressHandler(event) {
@@ -359,8 +291,124 @@
             _("status").innerHTML = "Upload Aborted";
         }
     </script>
-
+*@
     @*_____________________________________*@
+
+
+    <script>
+        var uprog = {
+            // (A) INIT
+            hBar: null,     // html progress bar
+            hPercent: null, // html upload percentage
+            hFile: null,    // html file picker
+            init: () => {
+                // (A1) GET HTML ELEMENTS
+                uprog.hBar = document.getElementById("up-bar");
+                uprog.hPercent = document.getElementById("up-percent");
+                uprog.hFile = document.getElementById("up-file");
+
+                // (A2) ATTACH AJAX UPLOAD + ENABLE UPLOAD
+                uprog.hFile.onchange = uprog.upload;
+                uprog.hFile.disabled = false;
+
+
+            },
+
+            // (B) HELPER - UPDATE PROGRESS BAR
+            update: percent => {
+                percent = percent + "%";
+                uprog.hBar.style.width = percent;
+                uprog.hPercent.innerHTML = percent;
+                if (percent == "100%") { uprog.hFile.disabled = false; }
+            },
+
+            // (C) PROCESS UPLOAD
+
+
+            upload: async () => {
+                // (C1) GET FILE + UPDATE HTML INTERFACE
+                let file = uprog.hFile.files[0];
+                uprog.hFile.disabled = true; // disable upload button
+                uprog.hFile.value = ""; // reset file picker
+
+                // DUMMY UPLOAD DEMO
+                await new Promise(e => { setTimeout(e, 500) });
+                uprog.update(25);
+                await new Promise(e => { setTimeout(e, 500) });
+                uprog.update(50);
+                await new Promise(e => { setTimeout(e, 500) });
+                uprog.update(75);
+                await new Promise(e => { setTimeout(e, 500) });
+                uprog.update(100);
+
+
+                /* THIS SHOULD BE THE ACTUAL AJAX UPLOAD
+                // (C2) AJAX UPLOAD
+                let xhr = new XMLHttpRequest(),
+                    data = new FormData();
+                data.append("upfile", file);
+                xhr.open("POST", "upload.php");
+
+                // (C3) UPLOAD PROGRESS
+                let percent = 0, width = 0;
+                xhr.upload.onloadstart = evt => uprog.update(0);
+                xhr.upload.onloadend = evt => uprog.update(100);
+                xhr.upload.onprogress = evt => {
+                  percent = Math.ceil((evt.loaded / evt.total) * 100);
+                  uprog.update(percent);
+                };
+
+                // (C4) ON LOAD & ERRORS
+                xhr.onload = function () {
+                  if (this.response!= "OK" || this.status!=200) {
+                    // TODO - DO SOMETHING ON ERROR
+                    // alert("ERROR!");
+                    // reset form?
+                    console.log(this);
+                    console.log(this.response);
+                    console.log(this.status);
+                  } else {
+                    uprog.update(100);
+                    // TODO - DO SOMETHING ON COMPLETE
+                  }
+                };
+                xhr.onerror = err => console.error(err);
+
+                // (C5) GO!
+                xhr.send(data);*/
+            }
+        };
+        window.addEventListener("load", uprog.init);
+    </script>
+
+    <script>
+
+        const fileUploader = document.getElementById('file-uploader');
+        const feedback = document.getElementById('feedback');
+        const progress = document.getElementById('progress');
+
+        const reader = new FileReader();
+
+        fileUploader.addEventListener('change', (event) => {
+            const files = event.target.files;
+            const file = files[0];
+            reader.readAsDataURL(file);
+
+            reader.addEventListener('progress', (event) => {
+                if (event.loaded && event.total) {
+                    const percent = (event.loaded / event.total) * 100;
+                    progress.value = percent;
+                    document.getElementById('progress-label').innerHTML = Math.round(percent) + '%';
+
+                    if (percent === 100) {
+                        let msg = `<span style="color:green;">File <u><b>${file.name}</b></u> has been uploaded successfully.</span>`;
+                        feedback.innerHTML = msg;
+                    }
+                }
+            });
+        });
+
+    </script>
 
 
     @{
