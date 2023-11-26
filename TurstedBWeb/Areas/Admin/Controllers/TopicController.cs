@@ -60,6 +60,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [DisableRequestSizeLimit]
         public IActionResult Upsert(TopicVM topicVM)
         {
             if (ModelState.IsValid)
@@ -91,11 +92,12 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 {
                     if (files.Count > 0)
                     {
+                        var Tid = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
                         string fileName = Guid.NewGuid().ToString();
                         var uploads = Path.Combine(webRootPath, @"Files\Topics");
                         var extension_new = Path.GetExtension(files[0].FileName);
 
-                        var imagePath = Path.Combine(webRootPath,topicVM.topic.TopicFile.TrimStart('\\'));
+                        var imagePath = Path.Combine(webRootPath, Tid.TopicFile.TrimStart('\\'));
 
                         if (System.IO.File.Exists(imagePath))
                         {

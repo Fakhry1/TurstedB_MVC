@@ -131,158 +131,66 @@
                                 <label asp-for="topic.Active" class="ms-2"></label>
                         </div>
                             <div class="form-floating py-2 col-4">
-                                <input type="date" asp-for="topic.CreationDate" class="form-control" />
+                                <input type="dateonly" asp-for="topic.CreationDate" class="form-control" />
                                 <label asp-for="topic.CreationDate" class="ms-2"></label>
                                 @* <span asp-validation-for="Brother.BirthDate" class="text-danger"></span>*@
                             </div>
                         </div>
+
+
+                        <div class="row">
+
+                            @if (Model.topic.TopicId != Guid.Empty && Model.topic.TopicFile != null)
+                            {
+                               
+                                <div class="custom-file mb-3 col-4">
+                                <label  style="cursor: pointer; float:right" class="">
+                                    : الملف الحالي
+
+                                        topic.TopicFile
+                                   @* <input asp-for="topic.TopicFile" class="form-control border-0 shadow mb-5" disabled>*@
+                                   
+                                </label>
+                               
+
+                             
+                                 @* <label asp-for="topic.TopicFile" style="cursor: pointer; float:right" class="mr-5">
+                                تعديل الملف الحالي
+                                        <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)" class="form-control mr-5 mb-5">
+                                 </label>*@
+
+                                    @*<label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
+
+                                    </label>*@
+                                    <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)" class="mr-5">
+                                </div>
+                                
+                            }
+                            else
+                            {
+                                <div class="custom-file mb-3 col-4">
+
+                                    <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
+                                     
+                                    </label>
+                                    <input asp-for="topic.TopicFile" type="file"  onchange="loadFile(event)" >
+
+                                </div>
+                            }
+
+
+                        </div>
+
+                        
 
                     </div>
                 </div>
 
             </div>
 
-            <div class="container row" style="margin-top: 10px;">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#msg">@_localization.Getkey("PDF Document")</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#pro">@_localization.Getkey("Image")</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#set">@_localization.Getkey("Video")</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#tarq">@_localization.Getkey("Audio")</a>
-                    </li>
-
-                </ul>
-
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-            <div class="tab-pane container active" id="msg">
-                <div class="row pt-3">
-                   
-                        <h4>الوثيقة</h4>
-                        <div class="form-control col-12">
-                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
-                                @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
-                                @* <a class="btn btn-outline-dark">
-                                <i class="bi bi-pen"></i>
-                                </a>*@
-                            </label>
-                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
-                        </div>
-                    
-                </div>
-            </div>
-
-            <div class="tab-pane container fade" id="pro">
-                @*<div class="row pt-3">
-                   
-                        <h4>الصور</h4>
-                        <div class="form-control col-12">
-                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
-                             
-                            </label>
-                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
-                        </div>
-                   
-                </div>*@
-
-                        <div class="row">
-
-                            @if (Model.topic.TopicFile == null)
-                            {
-                            <div class="form-floating py-2 col-6">
-                                <h4>اختر الملف</h4>
-                                <input asp-for="topic.TopicFile" type="file" name="file1" id="file1" onchange="uploadFile()" class="w-100 bg-light"><br>
-                            </div>
-
-                            <div class="form-floating py-2 col-6 ">
-                                <h4>نسبة التحميل</h4>
-                                <progress class="bg-primary w-100" id="progressBar" value="0" max="100"></progress>
-                                <h4 id="status"></h4>
-                                <p id="loaded_n_total"></p>
-                            </div>
-                            }
-                            else
-                            {
-                            <div class="form-floating col-6 ">
-                            <h4>الملف</h4>
-                            <input type="text" asp-for="topic.TopicFile" class="form-control border-0 shadow" disabled />
-                            </div>
-
-                             <div class="custom-file mb-3 col-6">
-                                   @* <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
-                                        <file id="output" src="@Model.topic.TopicFile" style="width:100px;" />
-                                        <a class="btn btn-outline-dark">
-                                            <i class="bi bi-pen"></i>
-                                        </a>
-                                    </label>*@
-
-                                    <div class="form-floating py-2 col-6 ">
-                                        <h4>نسبة التحميل</h4>
-                                        <progress class="bg-primary w-100" id="progressBar" value="0" max="100"></progress>
-                                        <h4 id="status"></h4>
-                                        <p id="loaded_n_total"></p>
-                                    </div>
-                                    <input asp-for="topic.TopicFile" type="file" accept="image/*" onchange="loadFile(event)" style="display: none;">
-                             </div>
-
-                            }
-
-
-                        </div>
-            </div>
-
-                    <div class="tab-pane container fade" id="set">
-                <div class="row pt-3">
-                    
-                        <h4>الفيديو</h4>
-                        <div class="form-control col-12">
-                                <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile">
-                                @*  <file id="output" src="@Model.TopicFile" style="width:300px;" />*@
-                                @* <a class="btn btn-outline-dark">
-                                <i class="bi bi-pen"></i>
-                                </a>*@
-                            </label>
-                                <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
-                        </div>
-                    
-                </div>
-            </div>
-
-               <div class="tab-pane container fade" id="tarq">
-                <div class="row pt-3">
-                    
-                        <h4>الصوت</h4>
-                            <div class="form-floating py-2 col-6">
-                               @* <label asp-for="topic.TopicFile" style="cursor: pointer; float:left" id="output" src="@Model.topic.TopicFile"></label>*@
-                                <input asp-for="topic.TopicFile" type="file" name="file1" id="file1" onchange="uploadFile()"><br>
-                        </div>
-
-                          <div class="form-floating py-2 col-6">
-                                <progress class="bg-primary" id="progressBar" value="0" max="100" style="width:300px;"></progress>
-                                <h4 id="status"></h4>
-                                <p id="loaded_n_total"></p>
-                         </div>
-
-                   
-                </div>
-            </div>
-            </div>
-
-                </>
-
-                <!-- Tabs content -->
-            </div>
             <div class="row pt-2">
                 <div class="col-6 col-md-3">
-                    @if (Model.topic.TopicId != Guid.Empty)
+                    @if (Model.topic.TopicId != Guid.Empty && Model.topic.TopicFile != null)
                     {
                         <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Update")</button>
                     }
@@ -309,55 +217,18 @@
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
         });
     </script>
-@*
+
     <script>
         var loadFile = function (event) {
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
-    </script>*@
+    </script>
 
     @*____________________________________*@
 
     <script>
-        function _(el) {
-            return document.getElementById(el);
-        }
-
-        function uploadFile() {
-            var file = _("file1").files[0];
-            // alert(file.name+" | "+file.size+" | "+file.type);
-            var formdata = new FormData();
-            formdata.append("file1", file);
-            var ajax = new XMLHttpRequest();
-            ajax.upload.addEventListener("progress", progressHandler, false);
-            //ajax.addEventListener("load", completeHandler, false);
-            ajax.addEventListener("error", errorHandler, false);
-            ajax.addEventListener("abort", abortHandler, false);
-            ajax.open("POST", "file_upload_parser.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
-            //use file_upload_parser.php from above url
-            ajax.send(formdata);
-        }
-
-        function progressHandler(event) {
-            _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
-            var percent = (event.loaded / event.total) * 100;
-            _("progressBar").value = Math.round(percent);
-            //_("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
-        }
-
-        function completeHandler(event) {
-            _("status").innerHTML = event.target.responseText;
-            //_("progressBar").value = 0; //wil clear progress bar after successful upload
-        }
-
-        function errorHandler(event) {
-            _("status").innerHTML = "Upload Failed";
-        }
-
-        function abortHandler(event) {
-            _("status").innerHTML = "Upload Aborted";
-        }
+       
     </script>
 
     @*_____________________________________*@
