@@ -131,7 +131,7 @@
                                 <label asp-for="topic.Active" class="ms-2"></label>
                         </div>
                             <div class="form-floating py-2 col-4">
-                                <input type="date" asp-for="topic.CreationDate" class="form-control" />
+                                <input type="Date" asp-for="topic.CreationDate" class="form-control" />
                                 <label asp-for="topic.CreationDate" class="ms-2"></label>
                                 @* <span asp-validation-for="Brother.BirthDate" class="text-danger"></span>*@
                             </div>
@@ -143,16 +143,13 @@
             </div>
 
             <div class="row">
-            @if (Model.topic.TopicId != Guid.Empty && Model.topic.TopicFile != null)
+            @if (Model.topic.TopicId != Guid.Empty)
             {
                 <div class="custom-file mb-3 col-4">
                         <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
-                            <img id="output" src="@Model.topic.TopicFile" style="width:100px;" />
-                        <a class="btn btn-outline-dark">
-                            <i class="bi bi-pen"></i>
-                        </a>
-                    </label>
-                        <input asp-for="topic.TopicFile" type="file" accept="image/*" onchange="loadFile(event)" style="display: none;">
+                            <h4>@Model.topic.TopicFile</h4>
+                        </label>
+                        <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
                 </div>
             }
             else
@@ -160,52 +157,20 @@
 
                     <div>
                         <h5>File upload progress</h5>
-                       @* <input type="file" id="file-uploader">*@
 
-                        <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
+                        <input asp-for="topic.TopicFile" type="file" id="file-uploader">
 
-                       @* <div id="feedback">
+                        <div id="feedback">
                         </div>
-
                         <label id="progress-label" for="progress"></label>
-                        <progress id="progress" value="0" max="100"> </progress>*@
+                        <progress id="progress" value="0" max="100"> </progress>
 
-                      </div>
+                   </div>
 
-@*
-                    <div id="up-wrap">
-                        <div id="upload"></div>
+                  
 
-                        <!-- (A) PROGRESS BAR -->
-                        <div id="up-progress">
-                            <div id="up-bar"></div>
-                            <div id="up-percent">0%</div>
-                        </div>
-                        <input asp-for="topic.TopicFile" type="file" id="up-file" onchange="loadFile(event)">
-                        <label for="up-file" id="up-label">
-                            Select File
-                        </label>
-                      </div>*@
 
-@*
-                    <div id="up-wrap">
-                        <div id="upload"></div>
-
-                        <!-- (A) PROGRESS BAR -->
-                        <div id="up-progress">
-                            <div id="up-bar"></div>
-                            <div id="up-percent">0%</div>
-                        </div>
-
-                        <!-- (B) FILE PICKER -->
-                        <input type="file" id="up-file" disabled>
-                        <label for="up-file" id="up-label">
-                            Select File
-                        </label>
-
-                        <!-- (X) VISIT CODE-BOXX -->
-
-                    </div>*@
+                   
             }
 
             </div>
@@ -247,139 +212,9 @@
         };
     </script>
 
-    @*____________________________________
+   
+  
 
-    @*<script>
-        function _(el) {
-            return document.getElementById(el);
-        }
-
-        function uploadFile(event) {
-            var file = _("file1").files[0];
-            // alert(file.name+" | "+file.size+" | "+file.type);
-            var formdata = new FormData();
-            formdata.append("file1", file);
-            var ajax = new XMLHttpRequest();
-
-
-            ajax.upload.addEventListener("progress", progressHandler, false);
-            //ajax.addEventListener("load", completeHandler, false);
-            ajax.addEventListener("error", errorHandler, false);
-            ajax.addEventListener("abort", abortHandler, false);
-            ajax.open("POST", "file_upload_parser.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
-            //use file_upload_parser.php from above url
-           // ajax.send(formdata);
-        }
-
-        function progressHandler(event) {
-            _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
-            var percent = (event.loaded / event.total) * 100;
-            _("progressBar").value = Math.round(percent);
-            //_("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
-        }
-
-        function completeHandler(event) {
-            _("status").innerHTML = event.target.responseText;
-            //_("progressBar").value = 0; //wil clear progress bar after successful upload
-        }
-
-        function errorHandler(event) {
-            _("status").innerHTML = "Upload Failed";
-        }
-
-        function abortHandler(event) {
-            _("status").innerHTML = "Upload Aborted";
-        }
-    </script>
-*@
-    @*_____________________________________*@
-
-
-    <script>
-        var uprog = {
-            // (A) INIT
-            hBar: null,     // html progress bar
-            hPercent: null, // html upload percentage
-            hFile: null,    // html file picker
-            init: () => {
-                // (A1) GET HTML ELEMENTS
-                uprog.hBar = document.getElementById("up-bar");
-                uprog.hPercent = document.getElementById("up-percent");
-                uprog.hFile = document.getElementById("up-file");
-
-                // (A2) ATTACH AJAX UPLOAD + ENABLE UPLOAD
-                uprog.hFile.onchange = uprog.upload;
-                uprog.hFile.disabled = false;
-
-
-            },
-
-            // (B) HELPER - UPDATE PROGRESS BAR
-            update: percent => {
-                percent = percent + "%";
-                uprog.hBar.style.width = percent;
-                uprog.hPercent.innerHTML = percent;
-                if (percent == "100%") { uprog.hFile.disabled = false; }
-            },
-
-            // (C) PROCESS UPLOAD
-
-
-            upload: async () => {
-                // (C1) GET FILE + UPDATE HTML INTERFACE
-                let file = uprog.hFile.files[0];
-                uprog.hFile.disabled = true; // disable upload button
-                uprog.hFile.value = ""; // reset file picker
-
-                // DUMMY UPLOAD DEMO
-                await new Promise(e => { setTimeout(e, 500) });
-                uprog.update(25);
-                await new Promise(e => { setTimeout(e, 500) });
-                uprog.update(50);
-                await new Promise(e => { setTimeout(e, 500) });
-                uprog.update(75);
-                await new Promise(e => { setTimeout(e, 500) });
-                uprog.update(100);
-
-
-                /* THIS SHOULD BE THE ACTUAL AJAX UPLOAD
-                // (C2) AJAX UPLOAD
-                let xhr = new XMLHttpRequest(),
-                    data = new FormData();
-                data.append("upfile", file);
-                xhr.open("POST", "upload.php");
-
-                // (C3) UPLOAD PROGRESS
-                let percent = 0, width = 0;
-                xhr.upload.onloadstart = evt => uprog.update(0);
-                xhr.upload.onloadend = evt => uprog.update(100);
-                xhr.upload.onprogress = evt => {
-                  percent = Math.ceil((evt.loaded / evt.total) * 100);
-                  uprog.update(percent);
-                };
-
-                // (C4) ON LOAD & ERRORS
-                xhr.onload = function () {
-                  if (this.response!= "OK" || this.status!=200) {
-                    // TODO - DO SOMETHING ON ERROR
-                    // alert("ERROR!");
-                    // reset form?
-                    console.log(this);
-                    console.log(this.response);
-                    console.log(this.status);
-                  } else {
-                    uprog.update(100);
-                    // TODO - DO SOMETHING ON COMPLETE
-                  }
-                };
-                xhr.onerror = err => console.error(err);
-
-                // (C5) GO!
-                xhr.send(data);*/
-            }
-        };
-        window.addEventListener("load", uprog.init);
-    </script>
 
     <script>
 
@@ -409,6 +244,7 @@
         });
 
     </script>
+
 
 
     @{

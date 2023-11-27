@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
+using TrustedB.DataAccess.Repository;
 using TrustedB.Models;
 using TrustedB.Models.ViewModels;
 using TurstedB.DataAccess.Repository.IRepository;
@@ -91,11 +92,12 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 {
                     if (files.Count > 0)
                     {
+                        var Tpath = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
                         string fileName = Guid.NewGuid().ToString();
                         var uploads = Path.Combine(webRootPath, @"Files\Topics");
                         var extension_new = Path.GetExtension(files[0].FileName);
 
-                        var imagePath = Path.Combine(webRootPath,topicVM.topic.TopicFile.TrimStart('\\'));
+                        var imagePath = Path.Combine(webRootPath, Tpath.TopicFile.TrimStart('\\'));
 
                         if (System.IO.File.Exists(imagePath))
                         {
