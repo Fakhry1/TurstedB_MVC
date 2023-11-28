@@ -131,57 +131,51 @@
                                 <label asp-for="topic.Active" class="ms-2"></label>
                         </div>
                             <div class="form-floating py-2 col-4">
-<<<<<<< HEAD
-                                <input type="Date" asp-for="topic.CreationDate" class="form-control" />
-=======
-                                <input type="dateonly" asp-for="topic.CreationDate" class="form-control" />
->>>>>>> 473475ed1fc206a4e2e8d1ef5be008578f0f3e39
+
+                                <input type="date" asp-for="topic.CreationDate" class="form-control" />
+                                                      
+
                                 <label asp-for="topic.CreationDate" class="ms-2"></label>
                                 @* <span asp-validation-for="Brother.BirthDate" class="text-danger"></span>*@
                             </div>
                         </div>
 
 
-                        <div class="row">
 
-                            @if (Model.topic.TopicId != Guid.Empty && Model.topic.TopicFile != null)
+
+                        <div class="row">
+                            @if (Model.topic.TopicId != Guid.Empty)
                             {
                                
-                                <div class="custom-file mb-3 col-4">
-                                <label  style="cursor: pointer; float:right" class="">
-                                    : الملف الحالي
-
-                                        topic.TopicFile
-                                   @* <input asp-for="topic.TopicFile" class="form-control border-0 shadow mb-5" disabled>*@
+                                    
                                    
-                                </label>
-                               
 
-                             
-                                 @* <label asp-for="topic.TopicFile" style="cursor: pointer; float:right" class="mr-5">
-                                تعديل الملف الحالي
-                                        <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)" class="form-control mr-5 mb-5">
-                                 </label>*@
 
-                                    @*<label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
+                                    <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
+                                      
+                                        <a class="btn btn-outline-dark">
+                                            <i class="bi bi-pen"></i>
+                                        </a>
+                                   </label>
 
-                                    </label>*@
-                                    <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)" class="mr-5">
-                                </div>
+                                    <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
                                 
                             }
                             else
                             {
-                                <div class="custom-file mb-3 col-4">
+                               
+                              
+                                    <div class="custom-file mb-3 col-4">
+                                       @*<h5>اختار الملف</h5>
+                                        <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">*@
 
-                                    <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
-                                     
-                                    </label>
-                                    <input asp-for="topic.TopicFile" type="file"  onchange="loadFile(event)" >
+                                    @*<label asp-for="topic.TopicFile" class="control-label">Bijlages</label>*@
+                                    <input asp-for="topic.TopicFile" id="input-25" name="input25[]" type="file" multiple class="file-loading">
+                                    </div>
 
-                                </div>
+
+
                             }
-
 
                         </div>
 
@@ -192,45 +186,13 @@
 
             </div>
 
-<<<<<<< HEAD
-            <div class="row">
-            @if (Model.topic.TopicId != Guid.Empty)
-            {
-                <div class="custom-file mb-3 col-4">
-                        <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
-                            <h4>@Model.topic.TopicFile</h4>
-                        </label>
-                        <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
-                </div>
-            }
-            else
-            {
 
-                    <div>
-                        <h5>File upload progress</h5>
-
-                        <input asp-for="topic.TopicFile" type="file" id="file-uploader">
-
-                        <div id="feedback">
-                        </div>
-                        <label id="progress-label" for="progress"></label>
-                        <progress id="progress" value="0" max="100"> </progress>
-
-                   </div>
-
-                  
+           
 
 
-                   
-            }
-
-            </div>
-
-=======
->>>>>>> 473475ed1fc206a4e2e8d1ef5be008578f0f3e39
             <div class="row pt-2">
                 <div class="col-6 col-md-3">
-                    @if (Model.topic.TopicId != Guid.Empty && Model.topic.TopicFile != null)
+                    @if (Model.topic.TopicId != Guid.Empty)
                     {
                         <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Update")</button>
                     }
@@ -258,54 +220,28 @@
         });
     </script>
 
+
+    <script src="~/js/UploadFile.js" asp-append-version="true"></script>
+
     <script>
         var loadFile = function (event) {
             var image = document.getElementById('up-file');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
-<<<<<<< HEAD
-=======
+
     </script>
 
-    @*____________________________________*@
+   @* ____________________________________*@
 
-    <script>
-       
->>>>>>> 473475ed1fc206a4e2e8d1ef5be008578f0f3e39
-    </script>
-
-   
-  
-
-
-    <script>
-
-        const fileUploader = document.getElementById('file-uploader');
-        const feedback = document.getElementById('feedback');
-        const progress = document.getElementById('progress');
-
-        const reader = new FileReader();
-
-        fileUploader.addEventListener('change', (event) => {
-            const files = event.target.files;
-            const file = files[0];
-            reader.readAsDataURL(file);
-
-            reader.addEventListener('progress', (event) => {
-                if (event.loaded && event.total) {
-                    const percent = (event.loaded / event.total) * 100;
-                    progress.value = percent;
-                    document.getElementById('progress-label').innerHTML = Math.round(percent) + '%';
-
-                    if (percent === 100) {
-                        let msg = `<span style="color:green;">File <u><b>${file.name}</b></u> has been uploaded successfully.</span>`;
-                        feedback.innerHTML = msg;
-                    }
-                }
+   <script>
+        $(document).on('ready', function () {
+            $("#input-25").fileinput({
+                language: 'nl'
             });
         });
+   </script>
 
-    </script>
+
 
 
 

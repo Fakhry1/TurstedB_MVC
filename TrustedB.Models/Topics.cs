@@ -28,7 +28,7 @@ namespace TrustedB.Models
         //file name
         [DisplayName("Topic File")]
         [ValidateNever]
-        public string TopicFile { get; set; }
+        public string? TopicFile { get; set; }
 
         [DisplayName("File Size")]
         [ValidateNever]
@@ -40,7 +40,7 @@ namespace TrustedB.Models
 
         [DisplayName("Creation Date")]
         [ValidateNever]
-        public DateOnly CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
     }
 

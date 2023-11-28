@@ -1,1 +1,67 @@
-﻿Wellcome
+﻿<!-- http://plugins.krajee.com/file-input -->
+<!-- http://plugins.krajee.com/file-preview-management-demo -->
+
+<form action="/test_upload" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td style='width:300px'>
+                <label class="control-label">Image Sample</label>
+                <input id="image-attachment" name="imageattachment[]" type="file" multiple class="file-loading">
+            </td>
+            <td style='width:300px'>
+                <label class="control-label">Video Sample</label>
+                <input id="video-attachment" name="videoattachment[]" type="file" multiple class="file-loading">
+            </td>
+        </tr>
+    </table>
+
+    <input type='submit' value='Save' />
+</form>
+@section Scripts{
+
+    <script>
+        $(function () {
+            $("#image-attachment").fileinput({
+                minFileCount: 0,
+                maxFileCount: 1,
+                showUpload: false,
+                showCaption: false,
+
+                initialPreview: [
+                    //depend on previous data
+                    'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg'
+                ],
+                initialPreviewAsData: true,
+                initialPreviewConfig: [
+                    //depend on previous data
+                    {
+                        caption: "Moon.jpg",
+                        size: 930321,
+                        width: "120px",
+                        key: 1,
+                        showDelete: true
+                    }
+                ],
+                deleteUrl: "/site/file-delete",
+                overwriteInitial: true,
+                initialCaption: "The Moon and the Earth"
+            });
+
+
+            $("#video-attachment").fileinput({
+                minFileCount: 0,
+                maxFileCount: 1,
+                initialPreview: [
+                    "https://kartik-v.github.io/bootstrap-fileinput-samples/samples/small.mp4"
+                ],
+                initialPreviewAsData: true,
+                initialPreviewConfig: [{ type: "video", size: 375000, filetype: "video/mp4", caption: "KrajeeSample.mp4", url: "/file-upload-batch/2", key: 1 }],
+                deleteUrl: "/site/file-delete",
+                overwriteInitial: true,
+                initialCaption: "The Moon and the Earth"
+            });
+
+        });
+    </script>
+
+}
