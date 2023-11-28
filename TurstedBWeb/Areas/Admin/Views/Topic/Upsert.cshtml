@@ -170,7 +170,7 @@
                                         <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">*@
 
                                     @*<label asp-for="topic.TopicFile" class="control-label">Bijlages</label>*@
-                                    <input asp-for="topic.TopicFile" id="input-25" name="input25[]" type="file" multiple class="file-loading">
+                                    <input asp-for="topic.TopicFile" id="input-20"  type="file">
                                     </div>
 
 
@@ -234,10 +234,25 @@
    @* ____________________________________*@
 
    <script>
-        $(document).on('ready', function () {
-            $("#input-25").fileinput({
-                language: 'nl'
+        $(document).ready(function () {
+            // For Bootstrap 5.x
+            $("#input-20").fileinput({
+                browseClass: "btn btn-info",
+                mainClass: "d-grid",
+                showCaption: false,
+                showRemove: false,
+                showUpload: false
             });
+           
+            // For Bootstrap 4.x uncomment and use below code
+            /*
+            $("#input-20").fileinput({
+                browseClass: "btn btn-primary btn-block",
+                showCaption: false,
+                showRemove: false,
+                showUpload: false
+            });
+            */
         });
    </script>
 
