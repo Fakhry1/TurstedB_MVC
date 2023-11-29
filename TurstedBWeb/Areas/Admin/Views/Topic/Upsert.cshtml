@@ -1,5 +1,10 @@
 ﻿ <!-- Start Stepper HTML -->
 @model TopicVM
+
+@{
+    var url = @Model.topic.TopicFile;
+   
+}
  <div class="container mt-5">
     <div class="row">
         <form  enctype="multipart/form-data" method="post">
@@ -147,38 +152,37 @@
                             @if (Model.topic.TopicId != Guid.Empty)
                             {
                                
-                                    
-                                   
-
-
-                                    <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
+                                   @* <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
                                       
                                         <a class="btn btn-outline-dark">
                                             <i class="bi bi-pen"></i>
                                         </a>
                                    </label>
 
-                                    <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">
+                                    <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">*@
+
+                                <div class="form-floating py-2 col-4 ">
+
+                                    <input asp-for="topic.TopicFile" id="input-21" type="file">
+                                </div>
+                                
                                 
                             }
                             else
                             {
-                               
-                              
-                                    <div class="custom-file mb-3 col-4">
-                                       @*<h5>اختار الملف</h5>
-                                        <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">*@
-
-                                    @*<label asp-for="topic.TopicFile" class="control-label">Bijlages</label>*@
-                                    <input asp-for="topic.TopicFile" id="input-20"  type="file">
-                                    </div>
 
 
+                                <div class="form-floating py-2 col-4 ">
+                                       
+                                    <input asp-for="topic.TopicFile" id="input-20" type="file">
+                                </div>
+
+                                
 
                             }
 
-                        </div>
-
+                       
+                            </div>
                         
 
                     </div>
@@ -221,8 +225,6 @@
     </script>
 
 
-    <script src="~/js/UploadFile.js" asp-append-version="true"></script>
-
     <script>
         var loadFile = function (event) {
             var image = document.getElementById('up-file');
@@ -243,21 +245,27 @@
                 showRemove: false,
                 showUpload: false
             });
-           
-            // For Bootstrap 4.x uncomment and use below code
-            /*
-            $("#input-20").fileinput({
-                browseClass: "btn btn-primary btn-block",
-                showCaption: false,
-                showRemove: false,
-                showUpload: false
-            });
-            */
-        });
+         });
    </script>
 
-
-
+    <script>
+        $(document).ready(function () {
+            // For Bootstrap 5.x
+            $("#input-21").fileinput({
+                browseClass: "btn btn-info",
+                mainClass: "d-grid",
+                showCaption: false,
+                showRemove: false,
+                showUpload: false,
+                initialPreview: [
+                    //depend on previous data
+                    'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg'
+                ],
+                initialPreviewAsData: true
+              
+            });
+        });
+    </script>
 
 
     @{

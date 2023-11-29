@@ -96,13 +96,13 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
                         var Tpath = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
 
-                        var Tid = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
+                        //var Tid = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
 
                         string fileName = Guid.NewGuid().ToString();
                         var uploads = Path.Combine(webRootPath, @"Files\Topics");
                         var extension_new = Path.GetExtension(files[0].FileName);
 
-                        var imagePath = Path.Combine(webRootPath, Tid.TopicFile.TrimStart('\\'));
+                        var imagePath = Path.Combine(webRootPath, Tpath.TopicFile.TrimStart('\\'));
 
                         if (System.IO.File.Exists(imagePath))
                         {
