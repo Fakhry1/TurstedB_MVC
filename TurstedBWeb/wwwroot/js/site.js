@@ -2,7 +2,7 @@
 const stepButtons = document.querySelectorAll('.step-button');
 const progress = document.querySelector('#progress');
 var form = document.getElementById("form-id");
-var step = 2;
+var step = @State;
 
 Array.from(stepButtons).forEach((button, index) => {
     if (index < step) { button.classList.add('done') }
