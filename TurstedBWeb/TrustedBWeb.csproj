@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TurstedB.DataAccess\TrustedB.DataAccess.csproj" />
+    <ProjectReference Include="..\TurstedB.Utility\TrustedB.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>

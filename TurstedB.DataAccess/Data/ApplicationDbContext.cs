@@ -16,7 +16,9 @@ namespace TrustedB.DataAccess.Data
 
        
         public DbSet<Topics> Topics { get; set; }
-        
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
