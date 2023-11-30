@@ -108,7 +108,11 @@ namespace TrustedBWeb.Areas.Identity.Pages.Account
         {
             if(!_roleManager.RoleExistsAsync(SD.Role_Initiator).GetAwaiter().GetResult())
             {
-
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Initiator)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Approval)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_CorrectLanguage)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_DesignApproval)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Publisher)).GetAwaiter().GetResult();
             }
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
