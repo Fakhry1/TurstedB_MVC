@@ -15,19 +15,19 @@ namespace TrustedB.Models
 
         [DisplayName("Phone")]
         [ValidateNever]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         [DisplayName("Role in Tariqa")]
         [ValidateNever]
         public string? TariqaRole { get; set; }
 
-        [DisplayName("Role")]
-        [NotMapped]
-        public string Role { get; set; }
+        //[DisplayName("Role")]
+        //[NotMapped]
+        //public string Role { get; set; }
 
         [DisplayName("Note")]
         [ValidateNever]
-        public string Note { get; set; }
+        public string? Note { get; set; }
 
     }
 

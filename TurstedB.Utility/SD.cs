@@ -19,6 +19,10 @@ namespace TrustedB.Utility
 
         public const string Role_Publisher  = "Publisher";
 
+        public const string Role_Admin = "Admin";
+
+        public const string Role_Brother = "Brother";
+
 
 
     }
