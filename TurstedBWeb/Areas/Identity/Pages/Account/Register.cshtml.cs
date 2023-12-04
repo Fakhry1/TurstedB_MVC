@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using TrustedB.Models;
 using TrustedB.Utility;
 
 namespace TrustedBWeb.Areas.Identity.Pages.Account
@@ -107,7 +108,7 @@ namespace TrustedBWeb.Areas.Identity.Pages.Account
             public string? Role {  get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
-
+            [Required]
             public string? Name { get; set; }
             public string? Phone { get; set; }
             public string? TariqaRole { get; set; }
@@ -118,13 +119,15 @@ namespace TrustedBWeb.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if(!_roleManager.RoleExistsAsync(SD.Role_Initiator).GetAwaiter().GetResult())
+            if(!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Initiator)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Approval)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_CorrectLanguage)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_DesignApproval)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Publisher)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Brother)).GetAwaiter().GetResult();
             }
 
             Input = new()
@@ -150,6 +153,12 @@ namespace TrustedBWeb.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.Name = Input.Name;
+                user.TariqaRole = Input.TariqaRole;
+                user.Phone = Input.Phone;
+                user.Note = Input.TariqaRole;
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -196,11 +205,11 @@ namespace TrustedBWeb.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private ApplicationUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<ApplicationUser>();
             }
             catch
             {

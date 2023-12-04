@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
+using System.Security.Claims;
 using TrustedB.DataAccess.Repository;
 using TrustedB.Models;
 using TrustedB.Models.ViewModels;
@@ -15,16 +17,19 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         private readonly ILogger<TopicController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly UserManager<IdentityUser> _userManager;
+
+       private readonly IWebHostEnvironment _hostEnvironment;
         public string fileName = "";
         public string slash = @"\";
 
         //public var topicList;
-        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork)
+        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _hostEnvironment = hostEnvironment;
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -64,8 +69,12 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         [DisableRequestSizeLimit]
         public IActionResult Upsert(TopicVM topicVM)
         {
+
             if (ModelState.IsValid)
             {
+                
+                var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                
                 string webRootPath = _hostEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;
                 //add new topic
@@ -85,8 +94,15 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         topicVM.topic.TopicFile = @"Files\Topics\" + fileName + extension;
 
                     }
-
                     _unitOfWork.Topics.Add(topicVM.topic);
+                    var Shistory = new StateHistory();
+                    //Shistory.StateHistoryId = new Guid();
+                    Shistory.State = topicVM.topic.State;
+                    Shistory.TopicId = topicVM.topic.TopicId;
+                    //userID
+                    Shistory.Id = userLoginId;
+                    _unitOfWork.StateHistory.Add(Shistory);
+                   
                 }
                 else //Eidt new topic
 

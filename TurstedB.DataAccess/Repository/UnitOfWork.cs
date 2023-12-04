@@ -21,11 +21,14 @@ namespace TrustedB.DataAccess.Repository
 
         public ITopicRepository Topics { get; private set; }
 
+        public IStateHistoryRepositoryRepository StateHistory { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
            
             Topics = new   TopicRepository(_db);
+            StateHistory = new StateHistoryRepository(_db);
 
 
         }

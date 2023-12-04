@@ -19,6 +19,8 @@ namespace TrustedB.DataAccess.Data
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
+        public DbSet<StateHistory> StateHistory { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

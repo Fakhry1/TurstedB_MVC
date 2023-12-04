@@ -18,10 +18,11 @@ namespace TrustedBWeb.Areas.Customer.Controllers
         //private readonly IWebHostEnvironment _hostEnvironment;
         public string fileName = "";
 
-        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment)
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _webHostEnvironment = webHostEnvironment;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()

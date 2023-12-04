@@ -8,7 +8,6 @@ Array.from(stepButtons).forEach((button, index) => {
     if (index < step) { button.classList.add('done') }
     progress.setAttribute('value', step * 100 / (stepButtons.length - 1));
 });
-
 Array.from(stepButtons).forEach((button, index) => {
     button.addEventListener('click', () => {
         progress.setAttribute('value', index * 100 / (stepButtons.length - 1));//there are 3 buttons. 2 spaces.

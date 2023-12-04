@@ -12,6 +12,7 @@ namespace TurstedB.DataAccess.Repository.IRepository
     {
        
         ITopicRepository Topics { get; }
+        IStateHistoryRepositoryRepository StateHistory { get; }
 
         void Save();
     }
