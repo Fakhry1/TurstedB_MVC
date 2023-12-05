@@ -13,7 +13,7 @@ namespace TrustedB.Models.ViewModels
     public class TopicVM
     {
         public Topics topic { get; set; }
-        //public StateHistory stateHistory { get; set; }
+        public List<StateHistory>? StateHistoryList  { get; set; }
         //public IdentityUser user { get; set; }
        
     }

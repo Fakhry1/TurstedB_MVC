@@ -79,7 +79,7 @@
     <div class="card-body ">
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="topic.TopicId" hidden />
-           @*  <input asp-for="stateHistory.Id" hidden /> *@
+          
             <div class="row">
                 <div class="col-12">
                     <div class="border p-3">
@@ -158,20 +158,19 @@
                             </select>
                                 <label asp-for="topic.Active" class="ms-2"></label>
                         </div>
+
                             <div class="form-floating py-2 col-4">
 
-                                <input type="date" asp-for="topic.CreationDate" class="form-control" />
-                                                      
-
+                                <input type="text" asp-for="topic.CreationDate" class="form-control" disabled />
+                              
                                 <label asp-for="topic.CreationDate" class="ms-2"></label>
-                                @* <span asp-validation-for="Brother.BirthDate" class="text-danger"></span>*@
+                             
                             </div>
+
                         </div>
 
-
-
-
                         <div class="row">
+                            <hr class="hr mt-3" />
                             @if (Model.topic.TopicId != Guid.Empty)
                             {
                                
@@ -183,18 +182,18 @@
                                    </label>
 
                                     <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">*@
-
-                                <div class="form-floating py-2 col-4 ">
+                              
+                                <div class="form-floating col-4 ">
 
                                     <input asp-for="topic.TopicFile" id="input-21" type="file">
                                 </div>
-                                
-                                
+                               
+
                             }
                             else
                             {
 
-
+                               
                                 <div class="form-floating py-2 col-4 ">
                                        
                                     <input asp-for="topic.TopicFile" id="input-20" type="file">
@@ -203,7 +202,43 @@
                                 
 
                             }
+                            @* ______________________State History___________________________________ *@
+                           
+                            <div class="form-floating col-6 ">
 
+                                <table id="tblData" class="table table-success table-striped" style="width:100%">
+                                <thead>
+
+                                    <tr>
+                                        <th>@_localization.Getkey("User")</th>
+                                        <th>@_localization.Getkey("State")</th>
+                                       
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @foreach (var obj in Model.StateHistoryList.OrderBy(u => u.StateSetDate))
+                                    {
+                                        <tr>
+                                            <td>@obj.ApplicationUser.Name</td>
+                                            <td>
+                                                <div>
+                                                @obj.State
+                                                </div>
+                                                <div class="h6" >
+                                                        @obj.StateSetDate
+                                                </div>
+                                                
+                                            </td>
+                                            
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            </div>
+                           @*  ___________________________________________________________ *@
                        
                             </div>
                         
@@ -214,11 +249,8 @@
             </div>
 
 
-           
-
-
             <div class="row pt-2">
-                <div class="col-6 col-md-3">
+                <div class="col-6 ">
                     @if (Model.topic.TopicId != Guid.Empty)
                     {
                         <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Update")</button>
@@ -228,7 +260,7 @@
                         <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Create")</button>
                     }
                 </div>
-                <div class="col-6 col-md-3">
+                <div class="col-6">
                     <a asp-controller="Topic" asp-action="Index" class="btn btn-outline-primary border  form-control">
                         @_localization.Getkey("Back to List")
                     </a>

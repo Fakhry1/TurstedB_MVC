@@ -21,12 +21,14 @@ namespace TrustedB.Models
         [ValidateNever]
         public Topics Topics { get; set; }
 
-        public string? Id { get; set; }
+        public string? ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
 
-        public DateTime StateDate { get; set; } = DateTime.UtcNow;
+        public string StateSetDate { get; set; }
+
+        //public TimeOnly StateTime { get; set; }
 
 
     }

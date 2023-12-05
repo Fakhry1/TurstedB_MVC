@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
 using System.Diagnostics;
 using System.Security.Claims;
 using TrustedB.DataAccess.Repository;
@@ -51,7 +52,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             {
                 topic=new Topics()
             };
-          // var topic = new Topics();
+         
             if (id == null)
             {
                 //new 
@@ -60,6 +61,8 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             {
                 //eidt
                 topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id);
+                topicVM.StateHistoryList = _unitOfWork.StateHistory.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser").ToList();
+                
                 return View(topicVM);
             }
            
@@ -69,7 +72,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         [DisableRequestSizeLimit]
         public IActionResult Upsert(TopicVM topicVM)
         {
-
+          
             if (ModelState.IsValid)
             {
                 
@@ -94,23 +97,22 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         topicVM.topic.TopicFile = @"Files\Topics\" + fileName + extension;
 
                     }
-                    _unitOfWork.Topics.Add(topicVM.topic);
-                    var Shistory = new StateHistory();
-                    //Shistory.StateHistoryId = new Guid();
-                    Shistory.State = topicVM.topic.State;
-                    Shistory.TopicId = topicVM.topic.TopicId;
-                    //userID
-                    Shistory.Id = userLoginId;
-                    _unitOfWork.StateHistory.Add(Shistory);
+                         topicVM.topic.CreationDate = DateTime.UtcNow.AddMinutes(180).ToString(); 
+                         _unitOfWork.Topics.Add(topicVM.topic);
+                         var Shistory = new StateHistory();
+                         Shistory.State = topicVM.topic.State;
+                         Shistory.TopicId = topicVM.topic.TopicId;
+                         Shistory.ApplicationUserId = userLoginId;
+                         Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
+                         _unitOfWork.StateHistory.Add(Shistory);
                    
                 }
                 else //Eidt new topic
 
                 {
+                    var Tpath = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
                     if (files.Count > 0)
                     {
-
-                        var Tpath = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
 
                         //var Tid = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
 
@@ -131,8 +133,22 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         }
                         topicVM.topic.TopicFile = @"Files\Topics\" + fileName + extension_new;
                     }
+                    else
+                    {
+                        topicVM.topic.TopicFile = Tpath.TopicFile;
+                    }
+
+                    topicVM.topic.CreationDate = Tpath.CreationDate;
 
                     _unitOfWork.Topics.Update(topicVM.topic);
+
+                    var Shistory = new StateHistory();
+                    Shistory.State = topicVM.topic.State;
+                    Shistory.TopicId = topicVM.topic.TopicId;
+                    //userID
+                    Shistory.ApplicationUserId = userLoginId;
+                    Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
+                    _unitOfWork.StateHistory.Add(Shistory);
                 }
 
                 _unitOfWork.Save();

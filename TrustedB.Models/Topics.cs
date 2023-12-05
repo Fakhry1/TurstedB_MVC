@@ -40,7 +40,7 @@ namespace TrustedB.Models
 
         [DisplayName("Creation Date")]
         [ValidateNever]
-        public DateTime CreationDate { get; set; }
+        public string CreationDate { get; set; }
 
     }
 
