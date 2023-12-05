@@ -265,8 +265,9 @@ namespace TrustedB.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("CreationDate")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("FileSize")
                         .IsRequired()

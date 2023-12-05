@@ -204,7 +204,7 @@
                             }
                             @* ______________________State History___________________________________ *@
                            
-                            <div class="form-floating col-6 ">
+                            <div class="form-floating col-8 ">
 
                                 <table id="tblData" class="table table-success table-striped" style="width:100%">
                                 <thead>
@@ -305,17 +305,32 @@
    <script>
         $(document).ready(function () {
             // For Bootstrap 5.x
+            var url = '/Files/Topics/c44d4289-7d42-4edd-a0b7-986beab0e461.mp4'
+
+           // C: \Users\fsatt\source\repos\Fakhry1\TurstedB_MVC\TurstedBWeb\wwwroot\Files\Topics\c44d4289-7d42-4edd-a0b7-986beab0e461.mp4
             $("#input-21").fileinput({
                 browseClass: "btn btn-info",
                 mainClass: "d-grid",
                 showCaption: false,
                 showRemove: false,
                 showUpload: false,
+
+                // allowedFileTypes: ["pdf", "video/mp4"],
                 initialPreview: [
                     //depend on previous data
-                    'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg'
+                    // 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg'
+                    // '~\Files\Topics\0997bc6d-fbab-4ad8-b0e0-9e1619ab3b78.png'
+                   url
+
+                    //'https://plugins.krajee.com/samples/sample-2.pdf'
+                ],
+                initialPreviewConfig: [
+                   // { type: 'pdf', filetype: "pdf" }
+                    // Url:https://plugins.krajee.com/file-preview-management-demo#preview-data
+                    { type: "video", filetype: "video/mp4" }
                 ],
                 initialPreviewAsData: true
+                
               
             });
         });
