@@ -3,7 +3,8 @@
 
 @{
     var State = 0;
-   
+    var path = "" ;
+
 }
  <div class="container mt-5">
     <div class="row">
@@ -111,6 +112,7 @@
                             </div>
                              @if (Model.topic.TopicId != Guid.Empty)
                             {
+                                
                                 @if (@Model.topic.State == "قيد اعداد")
                                 {
                                     State = 1;
@@ -173,21 +175,16 @@
                             <hr class="hr mt-3" />
                             @if (Model.topic.TopicId != Guid.Empty)
                             {
-                               
-                                   @* <label asp-for="topic.TopicFile" style="cursor: pointer; float:left">
-                                      
-                                        <a class="btn btn-outline-dark">
-                                            <i class="bi bi-pen"></i>
-                                        </a>
-                                   </label>
 
-                                    <input asp-for="topic.TopicFile" type="file" onchange="loadFile(event)">*@
-                              
-                                <div class="form-floating col-4 ">
+                               @*  path = @Model.topic.TopicFile; *@
+
+                            <div class="form-floating col-4 ">
 
                                     <input asp-for="topic.TopicFile" id="input-21" type="file">
                                 </div>
-                               
+
+                             
+
 
                             }
                             else
@@ -212,12 +209,15 @@
                                     <tr>
                                         <th>@_localization.Getkey("User")</th>
                                         <th>@_localization.Getkey("State")</th>
+                                        
                                        
 
                                     </tr>
 
                                 </thead>
                                 <tbody>
+                                        @if (Model.StateHistoryList != null)
+                                        {
                                     @foreach (var obj in Model.StateHistoryList.OrderBy(u => u.StateSetDate))
                                     {
                                         <tr>
@@ -231,9 +231,11 @@
                                                 </div>
                                                 
                                             </td>
+                                                    
                                             
                                         </tr>
                                     }
+                                        }
                                 </tbody>
                             </table>
 
@@ -241,7 +243,7 @@
                            @*  ___________________________________________________________ *@
                        
                             </div>
-                        
+                       @*  <img class='kv-preview-data file-preview-image' src='https://picsum.photos/id/260/1920/1080'> *@
 
                     </div>
                 </div>
@@ -303,11 +305,12 @@
          });
    </script>
    <script>
-        $(document).ready(function () {
-            // For Bootstrap 5.x
-            var url = '/Files/Topics/c44d4289-7d42-4edd-a0b7-986beab0e461.mp4'
+        var url = '@Model.topic.TopicFile';
 
-           // C: \Users\fsatt\source\repos\Fakhry1\TurstedB_MVC\TurstedBWeb\wwwroot\Files\Topics\c44d4289-7d42-4edd-a0b7-986beab0e461.mp4
+     
+      
+        $(document).ready(function () {
+           
             $("#input-21").fileinput({
                 browseClass: "btn btn-info",
                 mainClass: "d-grid",
@@ -317,17 +320,18 @@
 
                 // allowedFileTypes: ["pdf", "video/mp4"],
                 initialPreview: [
-                    //depend on previous data
-                    // 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg'
-                    // '~\Files\Topics\0997bc6d-fbab-4ad8-b0e0-9e1619ab3b78.png'
-                   url
 
-                    //'https://plugins.krajee.com/samples/sample-2.pdf'
+                     url
+                                // "\\Files\\Topics\\46f1691f-c62f-4c56-abb8-f8e7a15ec6cf.mp4"
+
+                    
+
                 ],
                 initialPreviewConfig: [
                    // { type: 'pdf', filetype: "pdf" }
-                    // Url:https://plugins.krajee.com/file-preview-management-demo#preview-data
-                    { type: "video", filetype: "video/mp4" }
+
+                           { type: "video", filetype: "video/mp4"}
+
                 ],
                 initialPreviewAsData: true
                 
@@ -342,8 +346,7 @@
         const progress = document.querySelector('#progress');
         var form = document.getElementById("form-id");
         var step = @State;
-
-        Array.from(stepButtons).forEach((button, index) => {
+               Array.from(stepButtons).forEach((button, index) => {
             if (index < step) { button.classList.add('done') }
             progress.setAttribute('value', step * 100 / (stepButtons.length - 1));
         });
@@ -374,6 +377,6 @@
 
 
     @{
-        <partial name="_ValidationScriptsPartial" />
+                                    <partial name="_ValidationScriptsPartial" />
     }
 }

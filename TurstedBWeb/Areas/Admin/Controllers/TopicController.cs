@@ -94,7 +94,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         {
                             files[0].CopyTo(fileStreams);
                         }
-                        topicVM.topic.TopicFile = @"Files\Topics\" + fileName + extension;
+                        topicVM.topic.TopicFile = @"\Files\Topics\" + fileName + extension;
 
                     }
                          topicVM.topic.CreationDate = DateTime.UtcNow.AddMinutes(180).ToString(); 
