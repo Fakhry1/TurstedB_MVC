@@ -3,8 +3,7 @@
 
 @{
     var State = 0;
-    var path = "" ;
-
+    
 }
  <div class="container mt-5">
     <div class="row">
@@ -14,7 +13,7 @@
                 <progress id="progress" value=0 max=100></progress>
                 <div class="step-item">
                     <button id="your-id" class="step-button text-center" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" disabled>
                         1
                     </button>
                     <div class="step-title">
@@ -23,7 +22,7 @@
                 </div>
                 <div class="step-item">
                     <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" disabled>
                         2
                     </button>
                     <div class="step-title">
@@ -32,7 +31,7 @@
                 </div>
                 <div class="step-item">
                     <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" disabled>
                         3
                     </button>
                     <div class="step-title">
@@ -42,7 +41,7 @@
 
                 <div class="step-item">
                     <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" disabled>
                         4
                     </button>
                     <div class="step-title">
@@ -52,7 +51,7 @@
 
                 <div class="step-item">
                     <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" disabled>
                         5
                     </button>
                     <div class="step-title">
@@ -68,8 +67,9 @@
 </div>
 </div>
 <!-- End Start Stepper HTML -->
-
-<div class="card shadow border-0 ">
+<form method="post" class="row" enctype="multipart/form-data">
+ <div class="row">
+<div class="card border-1 ">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -78,9 +78,11 @@
         </div>
     </div>
     <div class="card-body ">
-        <form method="post" class="row" enctype="multipart/form-data">
+       
             <input asp-for="topic.TopicId" hidden />
-            <input type="hidden" value=@Model.topic.TopicFile id="myVar" />
+            <input type="hidden" value=@Model.topic.TopicFile id="Url" />
+            <input type="hidden" value="video" id="Type" />
+            <input type="hidden" value="video/mp4" id="TypeFile" />
           
             <div class="row">
                 <div class="col-12">
@@ -88,7 +90,7 @@
 
                         <div class="row">
                         <div class="form-floating py-2 col-4">
-                                <input asp-for="topic.Titel" class="form-control border-0 shadow" />
+                                <input asp-for="topic.Titel" class="form-control " />
                                 <label asp-for="topic.Titel" class="ms-2"></label>
                                 <span asp-validation-for="topic.Titel" class="text-danger"></span>
                         </div>
@@ -147,13 +149,13 @@
 
                         <div class="row">
                         
-                        <div class="form-floating py-2 col-4">
-                                <input asp-for="topic.FileSize" class="form-control border-0 shadow" />
+                       @*  <div class="form-floating py-2 col-4">
+                                <input asp-for="topic.FileSize" class="form-control" />
                                 <label asp-for="topic.FileSize" class="ms-2"></label>
                        
-                        </div>
+                        </div> *@
 
-                        <div class="form-floating py-2 col-4">
+                        <div class="form-floating py-2 col-6">
 
                                 <select asp-for="topic.Active" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="نعم",Value="نعم" }
                                    ,new SelectListItem {Text="لا",Value="لا" }} ) class="form-select">
@@ -162,7 +164,7 @@
                                 <label asp-for="topic.Active" class="ms-2"></label>
                         </div>
 
-                            <div class="form-floating py-2 col-4">
+                            <div class="form-floating py-2 col-6">
 
                                 <input type="text" asp-for="topic.CreationDate" class="form-control" disabled />
                               
@@ -172,89 +174,132 @@
 
                         </div>
 
-                        <div class="row">
-                            <hr class="hr mt-3" />
-                            @if (Model.topic.TopicId != Guid.Empty)
-                            {
-
-                                path = @Model.topic.TopicFile;
-
-                                @Html.Hidden("myVar", @Model.topic.TopicFile);
-
-                            <div class="form-floating col-4 ">
-
-                                    <input asp-for="topic.TopicFile" id="input-21" type="file">
-                                </div>
-
-                             
-
-
-                            }
-                            else
-                            {
-
-                               
-                                <div class="form-floating py-2 col-4 ">
-                                       
-                                    <input asp-for="topic.TopicFile" id="input-20" type="file">
-                                </div>
-
-                                
-
-                            }
-                            @* ______________________State History___________________________________ *@
-                           
-                            <div class="form-floating col-8 ">
-
-                                <table id="tblData" class="table table-success table-striped" style="width:100%">
-                                <thead>
-
-                                    <tr>
-                                        <th>@_localization.Getkey("User")</th>
-                                        <th>@_localization.Getkey("State")</th>
-                                        
-                                       
-
-                                    </tr>
-
-                                </thead>
-                                <tbody>
-                                        @if (Model.StateHistoryList != null)
-                                        {
-                                    @foreach (var obj in Model.StateHistoryList.OrderBy(u => u.StateSetDate))
-                                    {
-                                        <tr>
-                                            <td>@obj.ApplicationUser.Name</td>
-                                            <td>
-                                                <div>
-                                                @obj.State
-                                                </div>
-                                                <div class="h6" >
-                                                        @obj.StateSetDate
-                                                </div>
-                                                
-                                            </td>
-                                                    
-                                            
-                                        </tr>
-                                    }
-                                        }
-                                </tbody>
-                            </table>
-
-                            </div>
+                     
+                          
+                          
                            @*  ___________________________________________________________ *@
                        
-                            </div>
-                       @*  <img class='kv-preview-data file-preview-image' src='https://picsum.photos/id/260/1920/1080'> *@
-
+                          
+                      
                     </div>
                 </div>
 
             </div>
 
+            @* ________________________________________________________________________________ *@
+            <div class="container">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#file"> @_localization.Getkey("File")</a>
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-bs-toggle="tab" href="#state"> @_localization.Getkey("States")</a>
+                    </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane container active" id="file">
+                    <div class=" col-12  p-3 mb-5 ">
+                       
+                        <div class="row">
+                                    <div class="form-floating py-2 col-12">
+                                        <input asp-for="topic.FileSize" class="form-control" />
+                                        <label asp-for="topic.FileSize" class="ms-2"></label>
 
-            <div class="row pt-2">
+                                    </div>
+                                    @* <div class="form-floating py-2 col-4">
+                                        <input asp-for="topic.FileSize" class="form-control" />
+                                        <label asp-for="topic.FileSize" class="ms-2"></label>
+
+                                    </div>
+                                    <div class="form-floating py-2 col-4">
+                                        <input asp-for="topic.FileSize" class="form-control" />
+                                        <label asp-for="topic.FileSize" class="ms-2"></label>
+
+                                    </div> *@
+                        </div>
+                                <div class="row">
+                                    <div class=" col-3 "></div>
+                                    @if (Model.topic.TopicId != Guid.Empty)
+                                    {
+
+                                        <div class=" col-6 ">
+                                            <input asp-for="topic.TopicFile" id="input-21" type="file">
+                                        </div>
+
+
+                                    }
+                                    else
+                                    {
+
+                                        <div class=" col-6 ">
+
+                                            <input asp-for="topic.TopicFile" id="input-20" type="file">
+                                        </div>
+
+
+                                    }
+                                    <div class=" col-3 "></div>
+                                    </div>
+                        
+                    </div>
+                </div>
+            
+
+                    <div class="tab-pane container " id="state">
+                        <div class="form-floating py-2 col-6 shadow-sm p-3 mb-5 rounded border border-1">
+                            <div class="text-danger">
+                                <div class="row">
+                                    <div class="form-floating col-6 ">
+
+                                        <table id="tblData" class="table table-success table-striped" style="width:100%">
+                                            <thead>
+
+                                                <tr>
+                                                    <th>@_localization.Getkey("User")</th>
+                                                    <th>@_localization.Getkey("State")</th>
+
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+                                                @if (Model.StateHistoryList != null)
+                                                {
+                                                    @foreach (var obj in Model.StateHistoryList.OrderBy(u => u.StateSetDate))
+                                                    {
+                                                        <tr>
+                                                            <td>@obj.ApplicationUser.Name</td>
+                                                            <td>
+                                                                <div>
+                                                                    @obj.State
+                                                                </div>
+                                                                <div class="h6">
+                                                                    @obj.StateSetDate
+                                                                </div>
+
+                                                            </td>
+
+
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                </div>
+                </div>
+
+            @* _______________________________________________________________________________ *@
+
+        </div>
+    </div>
+</div>
+            <div class="row mt-2">
                 <div class="col-6 ">
                     @if (Model.topic.TopicId != Guid.Empty)
                     {
@@ -271,10 +316,8 @@
                     </a>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
-
+       
+</form>
 @section Scripts{
     <script>
         tinymce.init({
@@ -283,7 +326,6 @@
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
         });
     </script>
-
 
     <script>
         var loadFile = function (event) {
@@ -309,10 +351,9 @@
    </script>
    <script>
 
-
-        // var url = "\\Files\\Topics\\46f1691f-c62f-4c56-abb8-f8e7a15ec6cf.mp4";
-
-        var url = $('#myVar').val();
+        var url = $('#Url').val();
+        var Type = $('#Type').val();
+        var TypeFile = $('#TypeFile').val();
       
         $(document).ready(function () {
            
@@ -322,17 +363,14 @@
                 showCaption: false,
                 showRemove: false,
                 showUpload: false,
-
-                // allowedFileTypes: ["pdf", "video/mp4"],
                 initialPreview: [
                     
                     url
                 
                 ],
                 initialPreviewConfig: [
-                   // { type: 'pdf', filetype: "pdf" }
-
-                           { type: "video", filetype: "video/mp4"}
+                  
+                    { type: Type, filetype: TypeFile }
 
                 ],
                 initialPreviewAsData: true
@@ -361,24 +399,20 @@
 
                     if (index >= secindex) {
                         item.classList.add('done');
-                        //document.getElementById("your-id").addEventListener("click", function () {
-                        //    form.submit();
-                        //});
-
+                        
                     }
                     if (index < secindex) {
                         item.classList.remove('done');
-                        //document.getElementById("your-id").addEventListener("click", function () {
-                        //    form.submit();
-                        //});
+                        
                     }
                 })
             })
         });
     </script>
 
-
     @{
-                                        <partial name="_ValidationScriptsPartial" />
+
+           <partial name="_ValidationScriptsPartial" />
+
     }
 }

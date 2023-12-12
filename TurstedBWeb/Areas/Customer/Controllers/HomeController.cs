@@ -46,9 +46,6 @@ namespace TrustedBWeb.Areas.Customer.Controllers
                 var description = HttpContext.Request.Headers["session"].FirstOrDefault();
                 
 
-                //add new topic
-
-
                 if (files.Count > 0)
                     {
                         string fileName = Guid.NewGuid().ToString();
@@ -62,16 +59,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
                       var fullpath = @"Files\Topics\" + fileName + extension;
 
                     }
-            //var videofile = HttpContext.Request.Form.Files;
-            //var filetype = HttpContext.Request.Headers["type"].FirstOrDefault();
-            //var description = HttpContext.Request.Headers["session"].FirstOrDefault();
-
-            //var file = Path.Combine("wwwroot", "Upload\\" + videofile.FileName);
-
-            //using (var stream = new FileStream(file, FileMode.Create))
-            //{
-            //    await videofile.CopyToAsync(stream);
-            //}
+            
 
              return Json(new { status = true, message = files[0].FileName });
             //return View();
