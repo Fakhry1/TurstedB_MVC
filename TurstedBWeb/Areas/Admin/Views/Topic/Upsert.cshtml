@@ -3,57 +3,62 @@
 
 @{
     var State = 0;
-    
+    var filetype = "video";
+    var filetypeEx = "video/mp4";
+
 }
+<form method="post" class="row" enctype="multipart/form-data">
  <div class="container mt-5">
     <div class="row">
-        <form  enctype="multipart/form-data" method="post">
+       @*  <form  enctype="multipart/form-data" method="post"> *@
         <div class="accordion" id="accordionExample">
             <div class="steps">
                 <progress id="progress" value=0 max=100></progress>
                 <div class="step-item">
                     <button id="your-id" class="step-button text-center" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" disabled>
-                        1
+                            اعداد
                     </button>
                     <div class="step-title">
-                        قيد اعداد
+                           @*  <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Update")</button> *@
+                       قيد اعداد
                     </div>
                 </div>
                 <div class="step-item">
-                    <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" disabled>
-                        2
-                    </button>
+                        <input asp-for="topic.State" id="your-id" type="submit" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                               data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" value="اعتماد">
+                            
+                    </input>
                     <div class="step-title">
                         اعتماد
                     </div>
                 </div>
                 <div class="step-item">
-                    <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" disabled>
-                        3
-                    </button>
+                        <input asp-for="topic.State" id="your-id" type="submit" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                               data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" value="لغة" >
+                      
+                        </input>
                     <div class="step-title">
-                        تصحيح لغوي
+                           @*  <label asp-for="topic.Titel" class="ms-2"></label> *@
+                            تصحيح لغوي
                     </div>
                 </div>
 
                 <div class="step-item">
-                    <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" disabled>
-                        4
-                    </button>
+                        <input asp-for="topic.State" id="your-id" type="submit" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                               data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" value="تصميم">
+                         
+                        </input>
                     <div class="step-title">
                         اعتماد تصميم
                     </div>
                 </div>
 
                 <div class="step-item">
-                    <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" disabled>
-                        5
-                    </button>
+                        <input asp-for="topic.State" id="your-id" type="submit" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                               data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" value="نشر">
+                            
+                         </input>
                     <div class="step-title">
                         نشر
                     </div>
@@ -63,11 +68,11 @@
 
         </div>
 
-    </form>
+  @*   </form> *@
 </div>
 </div>
 <!-- End Start Stepper HTML -->
-<form method="post" class="row" enctype="multipart/form-data">
+
  <div class="row">
 <div class="card border-1 ">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -79,10 +84,20 @@
     </div>
     <div class="card-body ">
        
+
+
             <input asp-for="topic.TopicId" hidden />
-            <input type="hidden" value=@Model.topic.TopicFile id="Url" />
-            <input type="hidden" value="video" id="Type" />
-            <input type="hidden" value="video/mp4" id="TypeFile" />
+
+             @if (Model.topic.TopicId != Guid.Empty)
+                {
+                    @if (@Model.topic.State == "قيد اعداد")
+                    {
+                        State = 1;
+                    }
+                }
+                <input type="hidden" value=@Model.topic.TopicFile id="Url" />
+                <input type="hidden" value=@filetype id="Type" />
+                <input type="hidden" value=@filetypeEx id="TypeFile" />
           
             <div class="row">
                 <div class="col-12">
@@ -106,9 +121,9 @@
                         </div>
                             <div class="form-floating py-2 col-4">
 
-                                <select asp-for="topic.State" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="قيد اعداد",Value="قيد اعداد" }
-                                        ,new SelectListItem {Text="اعتماد",Value="اعتماد" } ,new SelectListItem {Text="تصحيح لغوي",Value="تصحيح لغوي" }
-                                        ,new SelectListItem {Text="اعتماد تصميم",Value="اعتماد تصميم" } ,new SelectListItem {Text="نشر",Value="نشر" }} ) class="form-select">
+                                <select asp-for="topic.State" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="اعداد",Value="اعداد" }
+                                            ,new SelectListItem {Text="اعتماد",Value="اعتماد" } ,new SelectListItem {Text="لغة",Value="لغة" }
+                                        ,new SelectListItem {Text="تصميم",Value="تصميم" } ,new SelectListItem {Text="نشر",Value="نشر" }} ) class="form-select">
                                     <option disabled selected></option>
                                 </select>
                                 <label asp-for="topic.State" class="ms-2"></label>
@@ -124,11 +139,12 @@
                                 {
                                     State = 2;
                                 }
-                                else if (@Model.topic.State == "تصحيح لغوي")
+                                    else if ((@Model.topic.State == "لغة"))
                                 {
+                                   // Model.topic.State = "تصحيح لغوي";
                                     State = 3;
                                 }
-                                else if (@Model.topic.State == "اعتماد تصميم")
+                                else if (@Model.topic.State == "تصميم")
                                 {
                                     State = 4;
                                 }
@@ -246,10 +262,10 @@
             
 
                     <div class="tab-pane container " id="state">
-                        <div class="form-floating py-2 col-6 shadow-sm p-3 mb-5 rounded border border-1">
+                        <div class="form-floating py-2 col-12 shadow-sm p-3 mb-5 rounded border border-1">
                             <div class="text-danger">
                                 <div class="row">
-                                    <div class="form-floating col-6 ">
+                                    <div class="form-floating col-12 ">
 
                                         <table id="tblData" class="table table-success table-striped" style="width:100%">
                                             <thead>
@@ -308,6 +324,7 @@
                     else
                     {
                         <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Create")</button>
+                        State = 1;
                     }
                 </div>
                 <div class="col-6">
@@ -345,7 +362,7 @@
                 mainClass: "d-grid",
                 showCaption: false,
                 showRemove: false,
-                showUpload: false
+                showUpload: true
             });
          });
    </script>
@@ -362,7 +379,7 @@
                 mainClass: "d-grid",
                 showCaption: false,
                 showRemove: false,
-                showUpload: false,
+                showUpload: true,
                 initialPreview: [
                     
                     url
