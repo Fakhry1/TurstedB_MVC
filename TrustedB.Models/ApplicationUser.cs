@@ -21,13 +21,18 @@ namespace TrustedB.Models
         [ValidateNever]
         public string? TariqaRole { get; set; }
 
-        //[DisplayName("Role")]
-        //[NotMapped]
-        //public string Role { get; set; }
-
         [DisplayName("Note")]
         [ValidateNever]
         public string? Note { get; set; }
+
+        [DisplayName("Role")]
+        [ValidateNever]
+        public string? Role { get; set; }
+
+        [NotMapped]
+        public string RoleId { get; set; }
+        [NotMapped]
+        public string RoleName { get; set; }
 
     }
 

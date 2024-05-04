@@ -39,7 +39,12 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="Admin" asp-controller="Topic" asp-action="Index1">Test</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">@_localization.Getkey("Users")</a>
+                        </li>
                     </ul>
+
+                   
 
                     <partial name="_LoginPartial" />
 

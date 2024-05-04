@@ -24,6 +24,9 @@ namespace TrustedB.Utility
         public const string Role_Brother = "Brother";
 
 
+        public const string Success = "Success";
+        public const string Error = "Error";
+
 
     }
 }
