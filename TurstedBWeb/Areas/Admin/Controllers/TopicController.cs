@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
@@ -13,19 +14,20 @@ using TurstedBWeb.Models;
 namespace TrustedBWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class TopicController : Controller
     {
         private readonly ILogger<TopicController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
        private readonly IWebHostEnvironment _hostEnvironment;
         public string fileName = "";
         public string slash = @"\";
 
         //public var topicList;
-        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager)
+        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _hostEnvironment = hostEnvironment;
@@ -83,7 +85,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 //add new topic
                 if (topicVM.topic.TopicId == Guid.Empty)
                 {
-                   
+
                     if (files.Count > 0)
                     {
                         string fileName = Guid.NewGuid().ToString();
@@ -97,15 +99,15 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         topicVM.topic.TopicFile = @"\Files\Topics\" + fileName + extension;
 
                     }
-                         topicVM.topic.CreationDate = DateTime.UtcNow.AddMinutes(180).ToString(); 
-                         _unitOfWork.Topics.Add(topicVM.topic);
-                         var Shistory = new StateHistory();
-                         Shistory.State = topicVM.topic.State;
-                         Shistory.TopicId = topicVM.topic.TopicId;
-                         Shistory.ApplicationUserId = userLoginId;
-                         Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
-                         _unitOfWork.StateHistory.Add(Shistory);
-                   
+                    topicVM.topic.CreationDate = DateTime.UtcNow.AddMinutes(180).ToString();
+                    _unitOfWork.Topics.Add(topicVM.topic);
+                    var Shistory = new StateHistory();
+                    Shistory.State = topicVM.topic.State;
+                    Shistory.TopicId = topicVM.topic.TopicId;
+                    Shistory.ApplicationUserId = userLoginId;
+                    Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
+                    _unitOfWork.StateHistory.Add(Shistory);
+
                 }
                 else //Eidt new topic
 
@@ -141,7 +143,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                     topicVM.topic.CreationDate = Tpath.CreationDate;
 
                     _unitOfWork.Topics.Update(topicVM.topic);
-
+                    if (Tpath.State != topicVM.topic.State) { 
                     var Shistory = new StateHistory();
                     Shistory.State = topicVM.topic.State;
                     Shistory.TopicId = topicVM.topic.TopicId;
@@ -149,6 +151,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                     Shistory.ApplicationUserId = userLoginId;
                     Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
                     _unitOfWork.StateHistory.Add(Shistory);
+                }
                 }
 
                 _unitOfWork.Save();

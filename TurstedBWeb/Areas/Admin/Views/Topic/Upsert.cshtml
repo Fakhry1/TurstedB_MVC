@@ -65,9 +65,9 @@
 
     </form>
 </div>
-</div>
+
 <!-- End Start Stepper HTML -->
-<form method="post" class="row" enctype="multipart/form-data">
+
  <div class="row">
 <div class="card border-1 ">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -78,7 +78,7 @@
         </div>
     </div>
     <div class="card-body ">
-       
+                <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="topic.TopicId" hidden />
             <input type="hidden" value=@Model.topic.TopicFile id="Url" />
             <input type="hidden" value="video" id="Type" />
@@ -246,12 +246,12 @@
             
 
                     <div class="tab-pane container " id="state">
-                        <div class="form-floating py-2 col-6 shadow-sm p-3 mb-5 rounded border border-1">
+                        <div class="form-floating py-2 col-12 shadow-sm p-3 mb-5 rounded border border-1">
                             <div class="text-danger">
                                 <div class="row">
-                                    <div class="form-floating col-6 ">
+                                    <div class="form-floating col-12">
 
-                                        <table id="tblData" class="table table-success table-striped" style="width:100%">
+                                        <table id="tblData" class="table table-light table-striped" style="width:100%">
                                             <thead>
 
                                                 <tr>
@@ -296,9 +296,9 @@
 
             @* _______________________________________________________________________________ *@
 
-        </div>
-    </div>
-</div>
+       
+   
+
             <div class="row mt-2">
                 <div class="col-6 ">
                     @if (Model.topic.TopicId != Guid.Empty)
@@ -318,6 +318,10 @@
             </div>
        
 </form>
+</div>
+</div>
+</div>
+</div>
 @section Scripts{
     <script>
         tinymce.init({

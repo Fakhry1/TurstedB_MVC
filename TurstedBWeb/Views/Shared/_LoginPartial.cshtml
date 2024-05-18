@@ -4,24 +4,45 @@
 @inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-translate h4"></i>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="nav-item">
+                <a class="dropdown-item text-center" asp-action="ChangeLanguage" asp-area="Customer" asp-controller="Home" asp-route-culture="ar"> @_localization.Getkey("عربي")</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="dropdown-item text-center" asp-action="ChangeLanguage" asp-area="Customer" asp-controller="Home" asp-route-culture="en"> @_localization.Getkey("English") </a>
+            </li>
+        </ul>
     </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link " id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link " id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+
+            <a id="manage" class="nav-link">Hello @UserManager.GetUserName(User)</a>
+
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link border-0">@_localization.Getkey("Logout")</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        @* <li class="nav-item">
+    <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li> *@
+        <li class="nav-item">
+            <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">@_localization.Getkey("Login")</a>
+        </li>
+        @* <li class="nav-item">
+    <h4><a class="nav-link" asp-area="Admin" asp-controller="Account" asp-action="Register">Register</a></h4>
+    </li> *@
+    }
 </ul>
