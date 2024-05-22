@@ -141,8 +141,14 @@
   <data name="Accounts List" xml:space="preserve">
     <value>قائمة الحسابات</value>
   </data>
+  <data name="Active" xml:space="preserve">
+    <value>مفعل</value>
+  </data>
   <data name="Activities In Tariqa" xml:space="preserve">
     <value>النشاط في الطريقة</value>
+  </data>
+  <data name="Add New Topic" xml:space="preserve">
+    <value>اضافة طلب جديد</value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
@@ -260,6 +266,9 @@
   </data>
   <data name="Creation Date" xml:space="preserve">
     <value>تاريخ التاسيس</value>
+  </data>
+  <data name="CreationDate" xml:space="preserve">
+    <value>تاريخ الانشاء</value>
   </data>
   <data name="Credit Account" xml:space="preserve">
     <value>الحساب الدائن</value>
@@ -450,6 +459,9 @@
   <data name="Specialization" xml:space="preserve">
     <value>التخصص</value>
   </data>
+  <data name="State" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
   <data name="Sundries" xml:space="preserve">
     <value>النثريات</value>
   </data>
@@ -461,6 +473,18 @@
   </data>
   <data name="Tariqa Information" xml:space="preserve">
     <value>معلومات الطريقة</value>
+  </data>
+  <data name="Titel" xml:space="preserve">
+    <value>عنوان</value>
+  </data>
+  <data name="Topic List" xml:space="preserve">
+    <value>قائمة الطلبات</value>
+  </data>
+  <data name="TopicClassification" xml:space="preserve">
+    <value>التصنيف</value>
+  </data>
+  <data name="Topics" xml:space="preserve">
+    <value>الطلبات</value>
   </data>
   <data name="Transaction" xml:space="preserve">
     <value>القيد</value>
@@ -488,6 +512,9 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>تعديل</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>المستخدمين</value>
   </data>
   <data name="Whatsup Phone" xml:space="preserve">
     <value>رقم الواتس</value>

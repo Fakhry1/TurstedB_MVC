@@ -227,6 +227,69 @@ namespace TrustedB.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("TrustedB.Models.Attachments", b =>
+                {
+                    b.Property<Guid>("FileId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AttachmentSetDate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileType")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("TopicId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("FileId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("Attachments");
+                });
+
+            modelBuilder.Entity("TrustedB.Models.CommentHistory", b =>
+                {
+                    b.Property<Guid>("CommentHistoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CommentSetDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("TopicId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("CommentHistoryId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("CommentHistory");
+                });
+
             modelBuilder.Entity("TrustedB.Models.StateHistory", b =>
                 {
                     b.Property<Guid>("StateHistoryId")
@@ -269,10 +332,6 @@ namespace TrustedB.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("FileSize")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("text");
@@ -287,9 +346,6 @@ namespace TrustedB.DataAccess.Migrations
 
                     b.Property<string>("TopicDiscription")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TopicFile")
                         .HasColumnType("text");
 
                     b.HasKey("TopicId");
@@ -369,6 +425,40 @@ namespace TrustedB.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TrustedB.Models.Attachments", b =>
+                {
+                    b.HasOne("TrustedB.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("TrustedB.Models.Topics", "Topic")
+                        .WithMany()
+                        .HasForeignKey("TopicId");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("TrustedB.Models.CommentHistory", b =>
+                {
+                    b.HasOne("TrustedB.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TrustedB.Models.Topics", "Topic")
+                        .WithMany()
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Topic");
                 });
 
             modelBuilder.Entity("TrustedB.Models.StateHistory", b =>

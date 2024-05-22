@@ -23,12 +23,18 @@ namespace TrustedB.DataAccess.Repository
 
         public IStateHistoryRepositoryRepository StateHistory { get; private set; }
 
+        public ICommentHistoryRepository CommentHistory { get; private set; }
+
+        public IAttachmentsRepository Attachments { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
            
             Topics = new   TopicRepository(_db);
             StateHistory = new StateHistoryRepository(_db);
+            CommentHistory = new CommentHistoryRepository(_db);
+            Attachments = new AttachmentsRepository(_db);
 
 
         }

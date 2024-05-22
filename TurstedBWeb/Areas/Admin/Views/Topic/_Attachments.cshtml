@@ -1,0 +1,90 @@
+﻿@model TopicVM
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row border mt-2">
+      @*   <input asp-for="requests.RequestId" hidden id="ID" /> *@
+    <div class=" py-2 col-3">
+        <div class="custom-file mb-3 text-center p-2">
+
+                <input asp-for="attachments.FilePath" type="file" id="output" onchange="loadFile(event)">
+               @*  <label asp-for="attachments.FilePath"> <i class="bi bi-upload h3"></i></label> *@
+
+        </div>
+       
+    </div>
+    <div class="form-floating py-2  col-3">
+        <input type="text" asp-for="attachments.FileName" class="form-control" />
+        <label asp-for="attachments.FileName" class="ms-2 text-body "></label>
+    </div>
+        <div class="form-floating py-2  col-3">
+            <input type="text" asp-for="attachments.FileType" class="form-control" />
+            <label asp-for="attachments.FileType" class="ms-2 text-body "></label>
+        </div>
+    <div class="py-2  col-3">
+            <button type="submit" class="btn btn-primary form-control" asp-controller="Topic" asp-action="Attachment" asp-route-id="@Model.topic.TopicId">@_localization.Getkey("Save")</button>
+    </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class=" col-12  p-3 mb-5 ">
+        @if (Model.topic.TopicId != null)
+        {
+        <table id="tblData" class="table table-light table-striped " style="width:100%">
+            <thead>
+
+                <tr>
+                    <th>@_localization.Getkey("User")</th>
+                    <th>@_localization.Getkey("File Name")</th>
+                    <th>@_localization.Getkey("File Type")</th>
+                    <th>@_localization.Getkey("Upload Date")</th>
+                    <th>@_localization.Getkey("Download")</th>
+
+
+                </tr>
+
+            </thead>
+            <tbody>
+                @if (Model.AttachmentsList != null)
+                {
+                    @foreach (var obj in Model.AttachmentsList.OrderBy(u => u.AttachmentSetDate))
+                    {
+                        <tr>
+                            <td>@obj.ApplicationUser.Name</td>
+                            <td>@obj.FileName</td>
+                             <td>@obj.FileType</td>
+                            <td>
+                                <div class="h6">
+                                    @obj.AttachmentSetDate
+                                </div>
+                            </td>
+                            <td>
+                                 <a asp-controller="Maher" asp-action="DownloadFile" asp-route-id="@obj.TopicId" class="btn btn-primary mx-2 text-center">
+                                        <i class="bi bi-download h4"></i>
+                                    </a>
+                            </td>
+
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+          } 
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            window.alert(image.src);
+        };
+    </script>
+    <script>
+        document.getElementById("Files").disabled = false;
+    </script>
+}

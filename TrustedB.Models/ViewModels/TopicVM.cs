@@ -12,9 +12,12 @@ namespace TrustedB.Models.ViewModels
 {
     public class TopicVM
     {
-        public Topics topic { get; set; }
+        public Topics? topic { get; set; }
+        public Attachments? attachments { get; set; }
+
         public List<StateHistory>? StateHistoryList  { get; set; }
-        //public IdentityUser user { get; set; }
-       
+        public List<Attachments>? AttachmentsList { get; set; }
+        
+
     }
 }

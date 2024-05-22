@@ -86,19 +86,6 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 if (topicVM.topic.TopicId == Guid.Empty)
                 {
 
-                    if (files.Count > 0)
-                    {
-                        string fileName = Guid.NewGuid().ToString();
-                        var uploads = Path.Combine(webRootPath, @"Files\Topics");
-                        var extension = Path.GetExtension(files[0].FileName);
-
-                        using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                        {
-                            files[0].CopyTo(fileStreams);
-                        }
-                        topicVM.topic.TopicFile = @"\Files\Topics\" + fileName + extension;
-
-                    }
                     topicVM.topic.CreationDate = DateTime.UtcNow.AddMinutes(180).ToString();
                     _unitOfWork.Topics.Add(topicVM.topic);
                     var Shistory = new StateHistory();
@@ -113,32 +100,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
                 {
                     var Tpath = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
-                    if (files.Count > 0)
-                    {
 
-                        //var Tid = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
-
-                        string fileName = Guid.NewGuid().ToString();
-                        var uploads = Path.Combine(webRootPath, @"Files\Topics");
-                        var extension_new = Path.GetExtension(files[0].FileName);
-
-                        var imagePath = Path.Combine(webRootPath, Tpath.TopicFile.TrimStart('\\'));
-
-                        if (System.IO.File.Exists(imagePath))
-                        {
-                            System.IO.File.Delete(imagePath);
-                        }
-
-                        using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension_new), FileMode.Create))
-                        {
-                            files[0].CopyTo(fileStreams);
-                        }
-                        topicVM.topic.TopicFile = @"Files\Topics\" + fileName + extension_new;
-                    }
-                    else
-                    {
-                        topicVM.topic.TopicFile = Tpath.TopicFile;
-                    }
 
                     topicVM.topic.CreationDate = Tpath.CreationDate;
 
@@ -168,20 +130,19 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         //__________________download______________________
 
-        public IActionResult DownloadFile(Guid? id)
-        {
-            string webRootPath = _hostEnvironment.WebRootPath;
-            var fileName = _unitOfWork.Topics.Get(u => u.TopicId == id);
-            //var slash = '\';
-            //Build the File Path.
-            string path = Path.Combine(webRootPath)  + slash + fileName.TopicFile;
+        //public IActionResult DownloadFile(Guid? id)
+        //{
+        //    string webRootPath = _hostEnvironment.WebRootPath;
+        //    var fileName = _unitOfWork.Topics.Get(u => u.TopicId == id);
 
-            //Read the File data into Byte Array.
-            byte[] bytes = System.IO.File.ReadAllBytes(path);
+        //    string path = Path.Combine(webRootPath)  + slash + fileName.TopicFile;
 
-            //Send the File to Download.
-            return File(bytes, "application/octet-stream", fileName.TopicFile);
-        }
+        //    //Read the File data into Byte Array.
+        //    byte[] bytes = System.IO.File.ReadAllBytes(path);
+
+        //    //Send the File to Download.
+        //    return File(bytes, "application/octet-stream", fileName.TopicFile);
+        //}
 
 
         public IActionResult Index1()
@@ -189,6 +150,58 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
             return View();
         }
+
+        //______________________________Attachments_________________
+
+        [HttpPost]
+        [DisableRequestSizeLimit]
+        public IActionResult Attachment(Guid? id, TopicVM topicVM)
+        {
+           
+            if (ModelState.IsValid)
+            {
+                var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                string webRootPath = _hostEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files;
+
+                //add new Request
+                if (topicVM.topic != null && topicVM.attachments !=null)
+                {
+
+                    if (files.Count > 0)
+                    {
+                        string fileName = Guid.NewGuid().ToString();
+                        var uploads = Path.Combine(webRootPath, @"Files\Topics");
+                        var extension = Path.GetExtension(files[0].FileName);
+                        var attchmentPath = Path.Combine(uploads, fileName + extension);
+
+                        using (var fileStreams = new FileStream(attchmentPath, FileMode.Create))
+                        {
+                            files[0].CopyTo(fileStreams);
+                            fileStreams.Close();
+                            var data = System.IO.File.ReadAllBytes(attchmentPath);
+                           
+                        }
+
+
+                        topicVM.attachments.FilePath = @"\Files\Attachments\" + fileName + extension;
+
+                    }
+                    
+                    topicVM.attachments.AttachmentSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
+                    topicVM.attachments.ApplicationUserId = userLoginId;
+                    topicVM.attachments.TopicId = topicVM.topic.TopicId;
+                    _unitOfWork.Attachments.Add(topicVM.attachments);
+                    _unitOfWork.Save();
+
+
+                }
+            }
+
+            return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
+
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -24,16 +24,7 @@ namespace TrustedB.Models
         [DisplayName("State")]
         [ValidateNever]
         public string State { get; set; }
-
-        //file name
-        [DisplayName("Topic File")]
-        [ValidateNever]
-        public string? TopicFile { get; set; }
-
-        [DisplayName("File Size")]
-        [ValidateNever]
-        public string FileSize { get; set; }
-
+                
         [DisplayName("Active")]
         [ValidateNever]
         public string Active { get; set; }

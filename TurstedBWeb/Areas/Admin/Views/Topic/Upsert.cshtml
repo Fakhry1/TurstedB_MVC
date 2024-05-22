@@ -80,7 +80,7 @@
     <div class="card-body ">
                 <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="topic.TopicId" hidden />
-            <input type="hidden" value=@Model.topic.TopicFile id="Url" />
+            @* <input type="hidden" value=@Model.topic.TopicFile id="Url" /> *@
             <input type="hidden" value="video" id="Type" />
             <input type="hidden" value="video/mp4" id="TypeFile" />
           
@@ -199,23 +199,17 @@
             <div class="tab-content">
                 <div class="tab-pane container active" id="file">
                     <div class=" col-12  p-3 mb-5 ">
-                       
+
+                                     <partial name="_Attachments" />
+
+                       @* 
                         <div class="row">
                                     <div class="form-floating py-2 col-12">
                                         <input asp-for="topic.FileSize" class="form-control" />
                                         <label asp-for="topic.FileSize" class="ms-2"></label>
 
                                     </div>
-                                    @* <div class="form-floating py-2 col-4">
-                                        <input asp-for="topic.FileSize" class="form-control" />
-                                        <label asp-for="topic.FileSize" class="ms-2"></label>
-
-                                    </div>
-                                    <div class="form-floating py-2 col-4">
-                                        <input asp-for="topic.FileSize" class="form-control" />
-                                        <label asp-for="topic.FileSize" class="ms-2"></label>
-
-                                    </div> *@
+                                   
                         </div>
                                 <div class="row">
                                     <div class=" col-3 "></div>
@@ -239,7 +233,7 @@
 
                                     }
                                     <div class=" col-3 "></div>
-                                    </div>
+                                    </div> *@
                         
                     </div>
                 </div>
