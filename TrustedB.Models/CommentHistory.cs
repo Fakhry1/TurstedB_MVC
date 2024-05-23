@@ -14,17 +14,20 @@ namespace TrustedB.Models
         [DisplayName("Comment")]
         [ValidateNever]
         public string Comment { get; set; }
-        [Required]
+
+        [DisplayName("Topic")]
         public Guid TopicId { get; set; }
         [ForeignKey("TopicId")]
         [ValidateNever]
         public Topics? Topic { get; set; }
 
+        [DisplayName("User")]
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser? ApplicationUser { get; set; }
 
+        [DisplayName("Creation Date")]
         public string CommentSetDate { get; set; }
 
         //public TimeOnly StateTime { get; set; }

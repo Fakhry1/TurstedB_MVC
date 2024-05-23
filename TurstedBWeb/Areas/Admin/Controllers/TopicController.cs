@@ -14,7 +14,7 @@ using TurstedBWeb.Models;
 namespace TrustedBWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+  
     public class TopicController : Controller
     {
         private readonly ILogger<TopicController> _logger;
@@ -62,7 +62,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             }else
             {
                 //eidt
-                topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id);
+                topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id, includeProperties: "ApplicationUser");
                 topicVM.StateHistoryList = _unitOfWork.StateHistory.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser").ToList();
                 
                 return View(topicVM);
@@ -79,15 +79,16 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             {
                 
                 var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                
-                string webRootPath = _hostEnvironment.WebRootPath;
-                var files = HttpContext.Request.Form.Files;
+
                 //add new topic
                 if (topicVM.topic.TopicId == Guid.Empty)
                 {
 
                     topicVM.topic.CreationDate = DateTime.UtcNow.AddMinutes(180).ToString();
+                    topicVM.topic.ApplicationUserId = userLoginId;
                     _unitOfWork.Topics.Add(topicVM.topic);
+
+                    //Add satae
                     var Shistory = new StateHistory();
                     Shistory.State = topicVM.topic.State;
                     Shistory.TopicId = topicVM.topic.TopicId;
@@ -95,21 +96,20 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                     Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
                     _unitOfWork.StateHistory.Add(Shistory);
 
+                    
                 }
                 else //Eidt new topic
 
                 {
-                    var Tpath = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
+                    var oldTopic = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId, includeProperties: "ApplicationUser");
 
-
-                    topicVM.topic.CreationDate = Tpath.CreationDate;
+                    topicVM.topic.CreationDate = oldTopic.CreationDate;
 
                     _unitOfWork.Topics.Update(topicVM.topic);
-                    if (Tpath.State != topicVM.topic.State) { 
+                    if (oldTopic.State != topicVM.topic.State) { 
                     var Shistory = new StateHistory();
                     Shistory.State = topicVM.topic.State;
                     Shistory.TopicId = topicVM.topic.TopicId;
-                    //userID
                     Shistory.ApplicationUserId = userLoginId;
                     Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
                     _unitOfWork.StateHistory.Add(Shistory);
@@ -117,7 +117,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 }
 
                 _unitOfWork.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
 
             }
             else

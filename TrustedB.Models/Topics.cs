@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrustedB.Models
 {
@@ -32,6 +33,12 @@ namespace TrustedB.Models
         [DisplayName("Creation Date")]
         [ValidateNever]
         public string CreationDate { get; set; }
+
+        [DisplayName("User")]
+        public string ApplicationUserId { get; set; }
+        [ForeignKey("ApplicationUserId")]
+        [ValidateNever]
+        public ApplicationUser? ApplicationUser { get; set; }
 
     }
 
