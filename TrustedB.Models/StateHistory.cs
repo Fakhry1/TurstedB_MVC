@@ -19,14 +19,14 @@ namespace TrustedB.Models
         public Guid TopicId { get; set; }
         [ForeignKey("TopicId")]
         [ValidateNever]
-        public Topics Topics { get; set; }
+        public Topics? Topics { get; set; }
 
         public string? ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
-        public ApplicationUser ApplicationUser { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
 
-        public string StateSetDate { get; set; }
+        public string? StateSetDate { get; set; }
 
         //public TimeOnly StateTime { get; set; }
 

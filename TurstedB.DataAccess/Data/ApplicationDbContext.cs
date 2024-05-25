@@ -22,6 +22,7 @@ namespace TrustedB.DataAccess.Data
         public DbSet<StateHistory> StateHistory { get; set; }
         public DbSet<CommentHistory> CommentHistory { get; set; }
         public DbSet<Attachments> Attachments { get; set; }
+        public DbSet<TopicsStates> TopicsStates { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

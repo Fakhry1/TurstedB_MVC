@@ -3,320 +3,331 @@
 
 @{
     var State = 0;
-    
+
 }
- <div class="container mt-5">
+<div class="container mt-5">
     <div class="row">
-        <form  enctype="multipart/form-data" method="post">
-        <div class="accordion" id="accordionExample">
-            <div class="steps">
-                <progress id="progress" value=0 max=100></progress>
-                <div class="step-item">
-                    <button id="your-id" class="step-button text-center" type="button" data-bs-toggle="collapse"
+        <form enctype="multipart/form-data" method="post">
+            <div class="accordion" id="accordionExample">
+                <div class="steps">
+                    <progress id="progress" value=0 max=100></progress>
+                    <div class="step-item">
+                        <button id="your-id" class="step-button text-center" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" disabled>
-                        1
-                    </button>
-                    <div class="step-title">
-                        قيد اعداد
+                            1
+                        </button>
+                        <div class="step-title">
+                            قيد اعداد
+                        </div>
                     </div>
-                </div>
-                <div class="step-item">
-                    <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" disabled>
-                        2
-                    </button>
-                    <div class="step-title">
-                        اعتماد
+                    <div class="step-item">
+                        <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" disabled>
+                            2
+                        </button>
+                        <div class="step-title">
+                            اعتماد
+                        </div>
                     </div>
-                </div>
-                <div class="step-item">
-                    <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                    <div class="step-item">
+                        <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" disabled>
-                        3
-                    </button>
-                    <div class="step-title">
-                        تصحيح لغوي
+                            3
+                        </button>
+                        <div class="step-title">
+                            تصحيح لغوي
+                        </div>
                     </div>
-                </div>
 
-                <div class="step-item">
-                    <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                    <div class="step-item">
+                        <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" disabled>
-                        4
-                    </button>
-                    <div class="step-title">
-                        اعتماد تصميم
+                            4
+                        </button>
+                        <div class="step-title">
+                            اعتماد تصميم
+                        </div>
                     </div>
-                </div>
 
-                <div class="step-item">
-                    <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                    <div class="step-item">
+                        <button id="your-id" type="button" class="step-button text-center collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" disabled>
-                        5
-                    </button>
-                    <div class="step-title">
-                        نشر
+                            5
+                        </button>
+                        <div class="step-title">
+                            نشر
+                        </div>
                     </div>
                 </div>
+
+
             </div>
 
-
-        </div>
-
-    </form>
-</div>
-
-<!-- End Start Stepper HTML -->
-
- <div class="row">
-<div class="card border-1 ">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2"> @(Model.topic.TopicId != Guid.Empty  ? @_localization.Getkey("Update") : @_localization.Getkey("Create")) @_localization.Getkey("Topic")</h2>
-            </div>
-        </div>
+        </form>
     </div>
-    <div class="card-body ">
-                <form method="post" class="row" enctype="multipart/form-data">
-            <input asp-for="topic.TopicId" hidden />
-            @* <input type="hidden" value=@Model.topic.TopicFile id="Url" /> *@
-            <input type="hidden" value="video" id="Type" />
-            <input type="hidden" value="video/mp4" id="TypeFile" />
-          
-            <div class="row">
-                <div class="col-12">
-                    <div class="border p-3">
 
-                        <div class="row">
-                        <div class="form-floating py-2 col-4">
-                                <input asp-for="topic.Titel" class="form-control " />
-                                <label asp-for="topic.Titel" class="ms-2"></label>
-                                <span asp-validation-for="topic.Titel" class="text-danger"></span>
+    <!-- End Start Stepper HTML -->
+    <form method="post" class="row" enctype="multipart/form-data">
+        <div class="row">
+            <div class="card border-1 ">
+                <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h2 class="text-white py-2"> @(Model.topic.TopicId != Guid.Empty ? @_localization.Getkey("Update") : @_localization.Getkey("Create")) @_localization.Getkey("Topic")</h2>
                         </div>
-
-                        <div class="form-floating py-2 col-4">
-
-                                <select asp-for="topic.TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="توجيه",Value="توجيه" }
-                                    ,new SelectListItem {Text="درس فيديو",Value="درس فيديو" } ,new SelectListItem {Text="درس صوت",Value="درس صوت" }
-                                    ,new SelectListItem {Text="اعلان",Value="اعلان" } ,new SelectListItem {Text="صور",Value="صور" }} ) class="form-select">
-                                <option disabled selected></option>
-                            </select>
-                                <label asp-for="topic.TopicClassification" class="ms-2"></label>
-                        </div>
-                            <div class="form-floating py-2 col-4">
-
-                                <select asp-for="topic.State" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="قيد اعداد",Value="قيد اعداد" }
-                                        ,new SelectListItem {Text="اعتماد",Value="اعتماد" } ,new SelectListItem {Text="تصحيح لغوي",Value="تصحيح لغوي" }
-                                        ,new SelectListItem {Text="اعتماد تصميم",Value="اعتماد تصميم" } ,new SelectListItem {Text="نشر",Value="نشر" }} ) class="form-select">
-                                    <option disabled selected></option>
-                                </select>
-                                <label asp-for="topic.State" class="ms-2"></label>
-                            </div>
-                             @if (Model.topic.TopicId != Guid.Empty)
-                            {
-                                
-                                @if (@Model.topic.State == "قيد اعداد")
-                                {
-                                    State = 1;
-                                }
-                                else if (@Model.topic.State == "اعتماد")
-                                {
-                                    State = 2;
-                                }
-                                else if (@Model.topic.State == "تصحيح لغوي")
-                                {
-                                    State = 3;
-                                }
-                                else if (@Model.topic.State == "اعتماد تصميم")
-                                {
-                                    State = 4;
-                                }
-                                else if (@Model.topic.State == "نشر")
-                                {
-                                    State = 5;
-                                }
-                            }
-
-                       
-                        </div>
-                        <div class="row">
-                        <div class="form-floating py-2 col-12">
-                                <label asp-for="topic.TopicDiscription" class="ms-2 text-muted mb-1"></label>
-                                <textarea asp-for="topic.TopicDiscription" class="form-control"></textarea>
-                        </div>
-                        </div>
-
-                        <div class="row">
-                        
-                       @*  <div class="form-floating py-2 col-4">
-                                <input asp-for="topic.FileSize" class="form-control" />
-                                <label asp-for="topic.FileSize" class="ms-2"></label>
-                       
-                        </div> *@
-
-                        <div class="form-floating py-2 col-6">
-
-                                <select asp-for="topic.Active" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="نعم",Value="نعم" }
-                                   ,new SelectListItem {Text="لا",Value="لا" }} ) class="form-select">
-                                <option disabled selected></option>
-                            </select>
-                                <label asp-for="topic.Active" class="ms-2"></label>
-                        </div>
-
-                            <div class="form-floating py-2 col-6">
-
-                                <input type="text" asp-for="topic.CreationDate" class="form-control" disabled />
-                              
-                                <label asp-for="topic.CreationDate" class="ms-2"></label>
-                             
-                            </div>
-
-                        </div>
-
-                     
-                          
-                          
-                           @*  ___________________________________________________________ *@
-                       
-                          
-                      
                     </div>
                 </div>
+                <div class="card-body ">
 
-            </div>
+                    <input asp-for="topic.TopicId" hidden />
+                    @* <input type="hidden" value=@Model.topic.TopicFile id="Url" /> *@
+                    <input type="hidden" value="video" id="Type" />
+                    <input type="hidden" value="video/mp4" id="TypeFile" />
 
-            @* ________________________________________________________________________________ *@
-            <div class="container">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#file"> @_localization.Getkey("File")</a>
-                </li>
-                    <li class="nav-item">
-                        <a class="nav-link " data-bs-toggle="tab" href="#state"> @_localization.Getkey("States")</a>
-                    </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane container active" id="file">
-                    <div class=" col-12  p-3 mb-5 ">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="border p-3">
 
-                                     <partial name="_Attachments" />
+                                <div class="row">
+                                    <div class="form-floating py-2 col-4">
+                                        <input asp-for="topic.Titel" class="form-control " />
+                                        <label asp-for="topic.Titel" class="ms-2"></label>
+                                        <span asp-validation-for="topic.Titel" class="text-danger"></span>
+                                    </div>
 
-                       @* 
-                        <div class="row">
+                                    <div class="form-floating py-2 col-4">
+
+                                        <select asp-for="topic.TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="توجيه",Value="توجيه" }
+                                                ,new SelectListItem {Text="درس فيديو",Value="درس فيديو" } ,new SelectListItem {Text="درس صوت",Value="درس صوت" }
+                                                ,new SelectListItem {Text="اعلان",Value="اعلان" } ,new SelectListItem {Text="صور",Value="صور" }} ) class="form-select">
+                                            <option disabled selected></option>
+                                        </select>
+                                        <label asp-for="topic.TopicClassification" class="ms-2"></label>
+                                    </div>
+
+                                    @if (Model.topic.TopicId != Guid.Empty)
+                                    {
+                                        <div class="form-floating py-2 col-4">
+
+                                            <input class="form-control" value="@(Model.topic.TopicsStates.ArabicName)" disabled />
+                                            <label  class="ms-2">State</label>
+
+                                        </div>
+                                    }else{
+                                        <div class="form-floating py-2 col-4">
+
+                                            <input class="form-control" value="" disabled />
+                                            <label class="ms-2">State</label>
+
+                                        </div>
+                                    }
+                                    @if (Model.topic.TopicId != Guid.Empty)
+                                    {
+
+                                        @if (@Model.topic.stateId == 1)
+                                        {
+                                            State = 1;
+                                        }
+                                        else if (@Model.topic.stateId == 2)
+                                        {
+                                            State = 2;
+                                        }
+                                        else if (@Model.topic.stateId == 3)
+                                        {
+                                            State = 3;
+                                        }
+                                        else if (@Model.topic.stateId == 4)
+                                        {
+                                            State = 4;
+                                        }
+                                        else if (@Model.topic.stateId == 5)
+                                        {
+                                            State = 5;
+                                        }
+                                    }
+
+
+                                </div>
+                                <div class="row">
                                     <div class="form-floating py-2 col-12">
-                                        <input asp-for="topic.FileSize" class="form-control" />
-                                        <label asp-for="topic.FileSize" class="ms-2"></label>
+                                        <label asp-for="topic.TopicDiscription" class="ms-2 text-muted mb-1"></label>
+                                        <textarea asp-for="topic.TopicDiscription" class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    @*  <div class="form-floating py-2 col-4">
+                                    <input asp-for="topic.FileSize" class="form-control" />
+                                    <label asp-for="topic.FileSize" class="ms-2"></label>
+
+                                    </div> *@
+
+                                    <div class="form-floating py-2 col-6">
+
+                                        <select asp-for="topic.Active" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="نعم",Value="نعم" }
+                                                ,new SelectListItem {Text="لا",Value="لا" }} ) class="form-select">
+                                            <option disabled selected></option>
+                                        </select>
+                                        <label asp-for="topic.Active" class="ms-2"></label>
+                                    </div>
+
+                                    <div class="form-floating py-2 col-6">
+
+                                        <input type="text" asp-for="topic.CreationDate" class="form-control" disabled />
+
+                                        <label asp-for="topic.CreationDate" class="ms-2"></label>
 
                                     </div>
-                                   
+
+                                </div>
+
+
+
+
+                                @*  ___________________________________________________________ *@
+
+
+
+                            </div>
                         </div>
-                                <div class="row">
+
+                    </div>
+
+                    @* ________________________________________________________________________________ *@
+                    <div class="container">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#file"> @_localization.Getkey("File")</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " data-bs-toggle="tab" href="#state"> @_localization.Getkey("States")</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane container active" id="file">
+                                <div class=" col-12  p-3 mb-5 ">
+
+                                    <partial name="_Attachments" />
+
+                                    @*
+                                    <div class="row">
+                                    <div class="form-floating py-2 col-12">
+                                    <input asp-for="topic.FileSize" class="form-control" />
+                                    <label asp-for="topic.FileSize" class="ms-2"></label>
+
+                                    </div>
+
+                                    </div>
+                                    <div class="row">
                                     <div class=" col-3 "></div>
                                     @if (Model.topic.TopicId != Guid.Empty)
                                     {
 
-                                        <div class=" col-6 ">
-                                            <input asp-for="topic.TopicFile" id="input-21" type="file">
-                                        </div>
+                                    <div class=" col-6 ">
+                                    <input asp-for="topic.TopicFile" id="input-21" type="file">
+                                    </div>
 
 
                                     }
                                     else
                                     {
 
-                                        <div class=" col-6 ">
+                                    <div class=" col-6 ">
 
-                                            <input asp-for="topic.TopicFile" id="input-20" type="file">
-                                        </div>
+                                    <input asp-for="topic.TopicFile" id="input-20" type="file">
+                                    </div>
 
 
                                     }
                                     <div class=" col-3 "></div>
                                     </div> *@
-                        
-                    </div>
-                </div>
-            
 
-                    <div class="tab-pane container " id="state">
-                        <div class="form-floating py-2 col-12 shadow-sm p-3 mb-5 rounded border border-1">
-                            <div class="text-danger">
-                                <div class="row">
-                                    <div class="form-floating col-12">
-
-                                        <table id="tblData" class="table table-light table-striped" style="width:100%">
-                                            <thead>
-
-                                                <tr>
-                                                    <th>@_localization.Getkey("User")</th>
-                                                    <th>@_localization.Getkey("State")</th>
-
-                                                </tr>
-
-                                            </thead>
-                                            <tbody>
-                                                @if (Model.StateHistoryList != null)
-                                                {
-                                                    @foreach (var obj in Model.StateHistoryList.OrderBy(u => u.StateSetDate))
-                                                    {
-                                                        <tr>
-                                                            <td>@obj.ApplicationUser.Name</td>
-                                                            <td>
-                                                                <div>
-                                                                    @obj.State
-                                                                </div>
-                                                                <div class="h6">
-                                                                    @obj.StateSetDate
-                                                                </div>
-
-                                                            </td>
-
-
-                                                        </tr>
-                                                    }
-                                                }
-                                            </tbody>
-                                        </table>
-
-                                    </div>
                                 </div>
                             </div>
+
+
+                            <div class="tab-pane container " id="state">
+                                <div class="form-floating py-2 col-12 shadow-sm p-3 mb-5 rounded border border-1">
+                                    <div class="text-danger">
+                                        <div class="row">
+                                            <div class="form-floating col-12">
+
+                                                <table id="tblData" class="table table-light table-striped" style="width:100%">
+                                                    <thead>
+
+                                                        <tr>
+                                                            <th>@_localization.Getkey("User")</th>
+                                                            <th>@_localization.Getkey("State")</th>
+
+                                                        </tr>
+
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (Model.StateHistoryList != null)
+                                                        {
+                                                            @foreach (var obj in Model.StateHistoryList.OrderBy(u => u.StateSetDate))
+                                                            {
+                                                                <tr>
+                                                                    <td>@obj.ApplicationUser.Name</td>
+                                                                    <td>
+                                                                        <div>
+                                                                            @obj.State
+                                                                        </div>
+                                                                        <div class="h6">
+                                                                            @obj.StateSetDate
+                                                                        </div>
+
+                                                                    </td>
+
+
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    
-                </div>
-                </div>
-                </div>
+                    </div>
 
-            @* _______________________________________________________________________________ *@
+                    @* _______________________________________________________________________________ *@
 
-       
-   
 
-            <div class="row mt-2">
-                <div class="col-6 ">
-                    @if (Model.topic.TopicId != Guid.Empty)
-                    {
-                        <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Update")</button>
-                    }
-                    else
-                    {
-                        <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Create")</button>
-                    }
-                </div>
-                <div class="col-6">
-                    <a asp-controller="Topic" asp-action="Index" class="btn btn-outline-primary border  form-control">
-                        @_localization.Getkey("Back to List")
-                    </a>
+
+
+                    <div class="row mt-2">
+                        <div class="col-6 ">
+                            @if (Model.topic.TopicId != Guid.Empty)
+                            {
+                                <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Update")</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary form-control">@_localization.Getkey("Create")</button>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <a asp-controller="Topic" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                                @_localization.Getkey("Back to List")
+                            </a>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
-       
-</form>
+
+        </div>
+    </form>
 </div>
-</div>
-</div>
-</div>
-@section Scripts{
+
+@section Scripts {
     <script>
         tinymce.init({
             selector: 'textarea',
@@ -333,9 +344,9 @@
 
     </script>
 
-   @* ____________________________________*@
+    @* ____________________________________*@
 
-   <script>
+    <script>
         $(document).ready(function () {
             // For Bootstrap 5.x
             $("#input-20").fileinput({
@@ -345,16 +356,16 @@
                 showRemove: false,
                 showUpload: false
             });
-         });
-   </script>
-   <script>
+        });
+    </script>
+    <script>
 
         var url = $('#Url').val();
         var Type = $('#Type').val();
         var TypeFile = $('#TypeFile').val();
-      
+
         $(document).ready(function () {
-           
+
             $("#input-21").fileinput({
                 browseClass: "btn btn-info",
                 mainClass: "d-grid",
@@ -362,18 +373,18 @@
                 showRemove: false,
                 showUpload: false,
                 initialPreview: [
-                    
+
                     url
-                
+
                 ],
                 initialPreviewConfig: [
-                  
+
                     { type: Type, filetype: TypeFile }
 
                 ],
                 initialPreviewAsData: true
-                
-              
+
+
             });
         });
     </script>
@@ -384,7 +395,7 @@
         const progress = document.querySelector('#progress');
         var form = document.getElementById("form-id");
         var step = @State;
-               Array.from(stepButtons).forEach((button, index) => {
+        Array.from(stepButtons).forEach((button, index) => {
             if (index < step) { button.classList.add('done') }
             progress.setAttribute('value', step * 100 / (stepButtons.length - 1));
         });
@@ -397,11 +408,11 @@
 
                     if (index >= secindex) {
                         item.classList.add('done');
-                        
+
                     }
                     if (index < secindex) {
                         item.classList.remove('done');
-                        
+
                     }
                 })
             })
@@ -410,7 +421,7 @@
 
     @{
 
-           <partial name="_ValidationScriptsPartial" />
+        <partial name="_ValidationScriptsPartial" />
 
     }
 }

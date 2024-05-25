@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TrustedB.DataAccess.Data;
@@ -11,9 +12,11 @@ using TrustedB.DataAccess.Data;
 namespace TrustedB.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240525182820_updateTopic")]
+    partial class updateTopic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,6 +306,7 @@ namespace TrustedB.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("StateSetDate")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("TopicId")
@@ -324,12 +328,18 @@ namespace TrustedB.DataAccess.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Active")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("text");
 
                     b.Property<string>("CreationDate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("State")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Titel")
@@ -337,40 +347,18 @@ namespace TrustedB.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("TopicClassification")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TopicDiscription")
+                        .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int?>("stateId")
-                        .HasColumnType("integer");
 
                     b.HasKey("TopicId");
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("stateId");
-
                     b.ToTable("Topics");
-                });
-
-            modelBuilder.Entity("TrustedB.Models.TopicsStates", b =>
-                {
-                    b.Property<int>("stateId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("stateId"));
-
-                    b.Property<string>("ArabicName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EnglishName")
-                        .HasColumnType("text");
-
-                    b.HasKey("stateId");
-
-                    b.ToTable("TopicsStates");
                 });
 
             modelBuilder.Entity("TrustedB.Models.ApplicationUser", b =>
@@ -504,13 +492,7 @@ namespace TrustedB.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("TrustedB.Models.TopicsStates", "TopicsStates")
-                        .WithMany()
-                        .HasForeignKey("stateId");
-
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("TopicsStates");
                 });
 #pragma warning restore 612, 618
         }
