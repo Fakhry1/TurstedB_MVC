@@ -27,6 +27,8 @@ namespace TrustedB.DataAccess.Repository
 
         public IAttachmentsRepository Attachments { get; private set; }
 
+        public ITopicsStatesRepository TopicsStates { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -35,6 +37,7 @@ namespace TrustedB.DataAccess.Repository
             StateHistory = new StateHistoryRepository(_db);
             CommentHistory = new CommentHistoryRepository(_db);
             Attachments = new AttachmentsRepository(_db);
+            TopicsStates = new TopicsStatesRepository(_db);
 
 
         }

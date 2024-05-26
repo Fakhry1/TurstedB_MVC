@@ -40,7 +40,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             var topicList = new List<Topics>();
            
              
-            topicList = _unitOfWork.Topics.GetAll().ToList();
+            topicList = _unitOfWork.Topics.GetAll(includeProperties: "ApplicationUser,TopicsStates").ToList();
            
 
             return View(topicList);
@@ -62,7 +62,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             }else
             {
                 //eidt
-                topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id, includeProperties: "ApplicationUser");
+                topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id, includeProperties: "ApplicationUser,TopicsStates");
                 topicVM.StateHistoryList = _unitOfWork.StateHistory.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser").ToList();
                 
                 return View(topicVM);
@@ -79,18 +79,18 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             {
                 
                 var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
+                
                 //add new topic
                 if (topicVM.topic.TopicId == Guid.Empty)
                 {
 
                     topicVM.topic.CreationDate = DateTime.UtcNow.AddMinutes(180).ToString();
                     topicVM.topic.ApplicationUserId = userLoginId;
+                    topicVM.topic.stateId = 1;
                     _unitOfWork.Topics.Add(topicVM.topic);
 
-                    //Add satae
                     var Shistory = new StateHistory();
-                    Shistory.State = topicVM.topic.State;
+                    Shistory.State = "قيد اعداد";
                     Shistory.TopicId = topicVM.topic.TopicId;
                     Shistory.ApplicationUserId = userLoginId;
                     Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
@@ -101,14 +101,15 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 else //Eidt new topic
 
                 {
-                    var oldTopic = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId, includeProperties: "ApplicationUser");
+                    var oldTopic = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
+
 
                     topicVM.topic.CreationDate = oldTopic.CreationDate;
 
                     _unitOfWork.Topics.Update(topicVM.topic);
-                    if (oldTopic.State != topicVM.topic.State) { 
+                    if (oldTopic.stateId != topicVM.topic.stateId) { 
                     var Shistory = new StateHistory();
-                    Shistory.State = topicVM.topic.State;
+                    Shistory.State = topicVM.topic.TopicsStates.ArabicName;
                     Shistory.TopicId = topicVM.topic.TopicId;
                     Shistory.ApplicationUserId = userLoginId;
                     Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();

@@ -1,75 +1,70 @@
-﻿@* 
-	<link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/css/ionicons.min.css" asp-append-version="true" />
+﻿<section class="ftco-section" id="buttons">
+			<div class="container">
+				<div class="row mb-4">
+					<div class="col-md-12">
+						<h2 class="heading-section"> Button #06</h2>
+					</div>
+				</div>
 
 
-<section class="ftco-section" id="buttons">
-	<div class="container">
-		<div class="row mb-4">
-			<div class="col-md-12">
-				<h2 class="heading-section"> Button #06</h2>
+				<div class="row">
+					<div class="col-md-3 mb-3">
+						<button type="button" class="btn btn-primary w-100 align-items-stretch d-flex">
+							<div class="icon icon-left d-flex align-items-center justify-content-center">
+								<i class="ion-ios-brush"></i>
+							</div>
+							<div class="text text-right">
+								<h4>275</h4>
+								<span>New Posts</span>
+							</div>
+						</button>
+					</div>
+					<div class="col-md-3 mb-3">
+						<button type="button" class="btn btn-secondary w-100 align-items-stretch d-flex">
+							<div class="icon icon-left d-flex align-items-center justify-content-center">
+								<i class="ion-ios-chatboxes"></i>
+							</div>
+							<div class="text text-right">
+								<h4>109</h4>
+								<span>New Comment</span>
+							</div>
+						</button>
+					</div>
+					
+					<div class="col-md-3 mb-3">
+						<button type="button" class="btn btn-dark w-100 align-items-stretch d-flex">
+							<div class="text text-left">
+								<h4>275</h4>
+								<span>New Projects</span>
+							</div>
+							<div class="icon icon-right d-flex align-items-center justify-content-center">
+								<i class="ion-ios-briefcase"></i>
+							</div>
+						</button>
+					</div>
+					<div class="col-md-3 mb-3">
+						<button type="button" class="btn btn-primary w-100 align-items-stretch d-flex">
+							<div class="text text-left">
+								<h4>109</h4>
+								<span>New Clients</span>
+							</div>
+							<div class="icon icon-right d-flex align-items-center justify-content-center">
+								<i class="ion-ios-people"></i>
+							</div>
+						</button>
+					</div>
+					
+					
+				</div>
 			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-md-3 mb-3">
-				
-				<button type="button" class="btn btn-primary w-100 align-items-stretch d-flex" asp-area="Admin" asp-controller="Topic" asp-action="Index">
-					<div class="icon icon-left d-flex align-items-center justify-content-center">
-						<i class="bi bi-x-diamond-fill h3"></i>
-					</div>
-					<div class="text text-center">
-						<h4>275</h4>
-						<span>@_localization.Getkey("Topics")</span>
-					</div>
-				</button>
-			</div>
-			<div class="col-md-3 mb-3">
-				<button type="button" class="btn btn-secondary w-100 align-items-stretch d-flex">
-					<div class="icon icon-left d-flex align-items-center justify-content-center">
-						<i class="ion-ios-chatboxes"></i>
-					</div>
-					<div class="text text-right">
-						<h4>109</h4>
-						<span>New Comment</span>
-					</div>
-				</button>
-			</div>
-	
-			
-
-			<div class="col-md-3 mb-3">
-				<button type="button" class="btn btn-quarternary w-100 align-items-stretch d-flex">
-					<div class="text text-left">
-						<h4>275</h4>
-						<span>New Projects</span>
-					</div>
-					<div class="icon icon-right d-flex align-items-center justify-content-center">
-						<i class="ion-ios-briefcase"></i>
-					</div>
-				</button>
-			</div>
-			<div class="col-md-3 mb-3">
-				<button type="button" class="btn btn-primary w-100 align-items-stretch d-flex">
-					<div class="text text-left">
-						<h4>109</h4>
-						<span>New Clients</span>
-					</div>
-					<div class="icon icon-right d-flex align-items-center justify-content-center">
-						<i class="ion-ios-people"></i>
-					</div>
-				</button>
-			</div>
-			
-		
-		</div>
+	  </section>
+<div class="dropdown">
+	<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Dropdown button
+	</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		<a class="dropdown-item" href="#">Action</a>
+		<a class="dropdown-item" href="#">Another action</a>
+		<a class="dropdown-item" href="#">Something else here</a>
 	</div>
-</section>
-
-@section Scripts{
-	<script src="~/js/main.js" asp-append-version="true"></script>
-
-	<script src="~/js/popper.js" asp-append-version="true"></script>
-
-} *@
+</div>
