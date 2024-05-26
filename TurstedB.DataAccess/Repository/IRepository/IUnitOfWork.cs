@@ -16,6 +16,7 @@ namespace TurstedB.DataAccess.Repository.IRepository
         IStateHistoryRepositoryRepository StateHistory { get; }
         IAttachmentsRepository Attachments { get; }
         ITopicsStatesRepository TopicsStates { get; }
+        IStateTransitionRepository StateTransition { get; }
 
         void Save();
     }

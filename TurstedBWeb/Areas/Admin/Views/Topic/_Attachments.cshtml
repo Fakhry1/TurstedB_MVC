@@ -16,10 +16,21 @@
         <input type="text" asp-for="attachments.FileName" class="form-control" />
         <label asp-for="attachments.FileName" class="ms-2 text-body "></label>
     </div>
-        <div class="form-floating py-2  col-3">
+       @*  <div class="form-floating py-2  col-3">
             <input type="text" asp-for="attachments.FileType" class="form-control" />
             <label asp-for="attachments.FileType" class="ms-2 text-body "></label>
+        </div> *@
+
+        <div class="form-floating py-2 col-3">
+
+            <select asp-for="attachments.FileType" asp-items=@(new List<SelectListItem> { new SelectListItem {Text=".pdf",Value=".pdf" }
+                    ,new SelectListItem {Text=".mp4",Value=".mp4" } ,new SelectListItem {Text=".mp3",Value=".mp3" }
+                    ,new SelectListItem {Text=".png",Value=".png" } ,new SelectListItem {Text=".jpg",Value=".jpg" }} ) class="form-select">
+                <option disabled selected></option>
+            </select>
+            <label asp-for="attachments.FileType" class="ms-2"></label>
         </div>
+
     <div class="py-2  col-3">
             <button type="submit" class="btn btn-primary form-control" asp-controller="Topic" asp-action="Attachment" asp-route-id="@Model.topic.TopicId">@_localization.Getkey("Save")</button>
     </div>
@@ -38,6 +49,7 @@
                     <th>@_localization.Getkey("File Name")</th>
                     <th>@_localization.Getkey("File Type")</th>
                     <th>@_localization.Getkey("Upload Date")</th>
+                    <th>@_localization.Getkey("State")</th>
                     <th>@_localization.Getkey("Download")</th>
 
 
@@ -53,11 +65,14 @@
                             <td>@obj.ApplicationUser.Name</td>
                             <td>@obj.FileName</td>
                              <td>@obj.FileType</td>
+                               
                             <td>
                                 <div class="h6">
                                     @obj.AttachmentSetDate
                                 </div>
                             </td>
+
+                                <td>@obj.TopicsStates.ArabicName</td>
                             <td>
                                  <a asp-controller="Maher" asp-action="DownloadFile" asp-route-id="@obj.TopicId" class="btn btn-primary mx-2 text-center">
                                         <i class="bi bi-download h4"></i>

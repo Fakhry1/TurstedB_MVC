@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TrustedB.DataAccess.Data;
@@ -11,9 +12,11 @@ using TrustedB.DataAccess.Data;
 namespace TrustedB.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240526113802_AddSeedToTransitionStates")]
+    partial class AddSeedToTransitionStates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,16 +254,11 @@ namespace TrustedB.DataAccess.Migrations
                     b.Property<Guid?>("TopicId")
                         .HasColumnType("uuid");
 
-                    b.Property<int?>("stateId")
-                        .HasColumnType("integer");
-
                     b.HasKey("FileId");
 
                     b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("TopicId");
-
-                    b.HasIndex("stateId");
 
                     b.ToTable("Attachments");
                 });
@@ -560,15 +558,9 @@ namespace TrustedB.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("TopicId");
 
-                    b.HasOne("TrustedB.Models.TopicsStates", "TopicsStates")
-                        .WithMany()
-                        .HasForeignKey("stateId");
-
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Topic");
-
-                    b.Navigation("TopicsStates");
                 });
 
             modelBuilder.Entity("TrustedB.Models.CommentHistory", b =>

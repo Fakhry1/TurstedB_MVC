@@ -159,6 +159,12 @@
   <data name="Amount" xml:space="preserve">
     <value>القيمة</value>
   </data>
+  <data name="Approve Desgin" xml:space="preserve">
+    <value>اعتماد تصميم</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>اعتماد</value>
+  </data>
   <data name="Aqar Type" xml:space="preserve">
     <value>نوع العقار</value>
   </data>
@@ -203,6 +209,9 @@
   </data>
   <data name="Category Name" xml:space="preserve">
     <value>اسم التصنيف</value>
+  </data>
+  <data name="Check Lang" xml:space="preserve">
+    <value>تصحيح لغوي</value>
   </data>
   <data name="City" xml:space="preserve">
     <value>مدينة</value>
@@ -275,6 +284,9 @@
   </data>
   <data name="Creidet" xml:space="preserve">
     <value>دائن</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>قيد اعداد</value>
   </data>
   <data name="Debit" xml:space="preserve">
     <value>مدين</value>
@@ -377,6 +389,9 @@
   </data>
   <data name="Phone Number" xml:space="preserve">
     <value>رقم الهاتف</value>
+  </data>
+  <data name="Publish" xml:space="preserve">
+    <value>نشر</value>
   </data>
   <data name="Qualification" xml:space="preserve">
     <value>المؤهل</value>

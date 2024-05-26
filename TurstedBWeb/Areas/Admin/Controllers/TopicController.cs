@@ -8,13 +8,15 @@ using System.Security.Claims;
 using TrustedB.DataAccess.Repository;
 using TrustedB.Models;
 using TrustedB.Models.ViewModels;
+using TrustedB.Utility;
+using TrustedBWeb.Logic;
 using TurstedB.DataAccess.Repository.IRepository;
 using TurstedBWeb.Models;
 
 namespace TrustedBWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-  
+
     public class TopicController : Controller
     {
         private readonly ILogger<TopicController> _logger;
@@ -22,7 +24,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
 
-       private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IWebHostEnvironment _hostEnvironment;
         public string fileName = "";
         public string slash = @"\";
 
@@ -38,10 +40,10 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var topicList = new List<Topics>();
-           
-             
+
+
             topicList = _unitOfWork.Topics.GetAll(includeProperties: "ApplicationUser,TopicsStates").ToList();
-           
+
 
             return View(topicList);
         }
@@ -52,34 +54,36 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         {
             TopicVM topicVM = new()
             {
-                topic=new Topics()
+                topic = new Topics()
             };
-         
+
             if (id == null)
             {
                 //new 
                 return View(topicVM);
-            }else
+            }
+            else
             {
                 //eidt
                 topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id, includeProperties: "ApplicationUser,TopicsStates");
                 topicVM.StateHistoryList = _unitOfWork.StateHistory.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser").ToList();
-                
+                topicVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser,TopicsStates").ToList();
+
                 return View(topicVM);
             }
-           
+
         }
 
         [HttpPost]
         [DisableRequestSizeLimit]
         public IActionResult Upsert(TopicVM topicVM)
         {
-          
+            Handel handel = new Handel(_unitOfWork);
             if (ModelState.IsValid)
             {
-                
+
                 var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                
+
                 //add new topic
                 if (topicVM.topic.TopicId == Guid.Empty)
                 {
@@ -90,31 +94,37 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                     _unitOfWork.Topics.Add(topicVM.topic);
 
                     var Shistory = new StateHistory();
-                    Shistory.State = "قيد اعداد";
+                    Shistory.State = handel.StateName(1);
                     Shistory.TopicId = topicVM.topic.TopicId;
                     Shistory.ApplicationUserId = userLoginId;
                     Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
                     _unitOfWork.StateHistory.Add(Shistory);
 
-                    
+
                 }
                 else //Eidt new topic
 
                 {
                     var oldTopic = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
+                   
+                    var newState = topicVM.topic.stateId;
+                    bool transition = handel.StateTransition(oldTopic.stateId, newState);
 
+                 
 
-                    topicVM.topic.CreationDate = oldTopic.CreationDate;
+                    if (oldTopic.stateId != newState && transition)
+                    {
+                        topicVM.topic = oldTopic;
+                        topicVM.topic.stateId = newState;
+                        _unitOfWork.Topics.Update(topicVM.topic);
 
-                    _unitOfWork.Topics.Update(topicVM.topic);
-                    if (oldTopic.stateId != topicVM.topic.stateId) { 
-                    var Shistory = new StateHistory();
-                    Shistory.State = topicVM.topic.TopicsStates.ArabicName;
-                    Shistory.TopicId = topicVM.topic.TopicId;
-                    Shistory.ApplicationUserId = userLoginId;
-                    Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
-                    _unitOfWork.StateHistory.Add(Shistory);
-                }
+                        var Shistory = new StateHistory();
+                        Shistory.State = handel.StateName(newState);
+                        Shistory.TopicId = topicVM.topic.TopicId;
+                        Shistory.ApplicationUserId = userLoginId;
+                        Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
+                        _unitOfWork.StateHistory.Add(Shistory);
+                    }
                 }
 
                 _unitOfWork.Save();
@@ -126,7 +136,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 return View(topicVM);
             }
 
-         }
+        }
 
 
         //__________________download______________________
@@ -158,7 +168,13 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         [DisableRequestSizeLimit]
         public IActionResult Attachment(Guid? id, TopicVM topicVM)
         {
-           
+            //if (id == null)
+            //{
+            //    TempData[SD.Error] = "Please Add Topic firstly";
+            //    return RedirectToAction(nameof(Upsert));
+            //}
+            topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id,includeProperties: "ApplicationUser,TopicsStates");
+
             if (ModelState.IsValid)
             {
                 var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -166,7 +182,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 var files = HttpContext.Request.Form.Files;
 
                 //add new Request
-                if (topicVM.topic != null && topicVM.attachments !=null)
+                if (topicVM.topic != null && topicVM.attachments != null)
                 {
 
                     if (files.Count > 0)
@@ -174,24 +190,32 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         string fileName = Guid.NewGuid().ToString();
                         var uploads = Path.Combine(webRootPath, @"Files\Topics");
                         var extension = Path.GetExtension(files[0].FileName);
-                        var attchmentPath = Path.Combine(uploads, fileName + extension);
+
+                        if (topicVM.attachments.FileType != extension)
+                        {
+                            TempData[SD.Error] = "Please Add"+ topicVM.attachments.FileType + "file";
+                              return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
+                        }
+
+                            var attchmentPath = Path.Combine(uploads, fileName + extension);
 
                         using (var fileStreams = new FileStream(attchmentPath, FileMode.Create))
                         {
                             files[0].CopyTo(fileStreams);
                             fileStreams.Close();
                             var data = System.IO.File.ReadAllBytes(attchmentPath);
-                           
+
                         }
 
 
                         topicVM.attachments.FilePath = @"\Files\Attachments\" + fileName + extension;
 
                     }
-                    
+
                     topicVM.attachments.AttachmentSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
                     topicVM.attachments.ApplicationUserId = userLoginId;
                     topicVM.attachments.TopicId = topicVM.topic.TopicId;
+                    topicVM.attachments.stateId = topicVM.topic.stateId;
                     _unitOfWork.Attachments.Add(topicVM.attachments);
                     _unitOfWork.Save();
 

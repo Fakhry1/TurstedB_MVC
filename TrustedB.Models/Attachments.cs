@@ -38,6 +38,12 @@ namespace TrustedB.Models
         [DisplayName("Creation Date")]
         public string? AttachmentSetDate { get; set; }
 
+        [DisplayName("State")]
+        [ValidateNever]
+        public int? stateId { get; set; }
+        [ForeignKey("stateId")]
+        public TopicsStates? TopicsStates { get; set; }
+
         //public TimeOnly StateTime { get; set; }
 
 

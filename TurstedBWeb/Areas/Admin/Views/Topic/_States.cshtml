@@ -1,0 +1,62 @@
+﻿@model TopicVM
+<form method="post" enctype="multipart/form-data">
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="accordion" id="accordionExample">
+            <div class="steps">
+                <progress id="progress" value=0 max=100></progress>
+                <div class="step-item">
+                    @* <input asp-for="requests.State" type="submit" id="your-id1" class="step-button text-center " data-bs-toggle="collapse"
+                           data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" value="1" /> *@
+
+                    <input asp-for="topic.stateId" id="your-id" type="submit" class="step-button text-center collapsed"
+                           data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" value=1 />
+                        
+                    <div class="step-title text-white">
+                            @_localization.Getkey("Current")
+                    </div>
+                </div>
+                    <div class="step-item text-white">
+                        <input asp-for="topic.stateId" id="your-id2" type="submit" class="step-button text-center collapsed"
+                           data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" value=2 />
+
+                        <div class="step-title text-white">
+                            @_localization.Getkey("Approved")
+                    </div>
+                </div>
+                    <div class="step-item text-white">
+                        <input asp-for="topic.stateId" id="your-id3" type="submit" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                           data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" value=3 />
+
+                        <div class="step-title text-white">
+                            @_localization.Getkey("Check Lang")
+                    </div>
+                </div>
+
+                    <div class="step-item text-white">
+                        <input asp-for="topic.stateId" id="your-id4" type="submit" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                           data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" value=4 />
+
+                    <div class="step-title">
+                            @_localization.Getkey("Approve Desgin")
+                    </div>
+                </div>
+
+                    <div class="step-item text-white">
+                        <input asp-for="topic.stateId" id="your-id5" type="submit" class="step-button text-center collapsed" data-bs-toggle="collapse"
+                           data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" value=5 />
+
+
+                    <div class="step-title">
+                            @_localization.Getkey("Publish")
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+</form>

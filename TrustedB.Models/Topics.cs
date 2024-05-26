@@ -35,13 +35,8 @@ namespace TrustedB.Models
         [ValidateNever]
         public string? CreationDate { get; set; }
 
-        public string? ApplicationUserId { get; set; }
-        [ForeignKey("ApplicationUserId")]
-        [ValidateNever]
-        public ApplicationUser? ApplicationUser { get; set; }
-
         [DisplayName("User")]
-        public string ApplicationUserId { get; set; }
+        public string? ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser? ApplicationUser { get; set; }
