@@ -14,10 +14,12 @@ namespace TrustedB.Models.ViewModels
     {
         public Topics? topic { get; set; }
         public Attachments? attachments { get; set; }
+        public CommentHistory? comments { get; set; }
 
         public List<StateHistory>? StateHistoryList  { get; set; }
         public List<Attachments>? AttachmentsList { get; set; }
-        
+        public List<CommentHistory>? CommentList { get; set; }
+
 
     }
 }

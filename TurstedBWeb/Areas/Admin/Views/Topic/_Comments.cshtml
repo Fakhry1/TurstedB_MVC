@@ -1,0 +1,58 @@
+﻿@model TopicVM
+<form method="post" enctype="multipart/form-data">
+<div class="row border">
+    <div class=" py-2 col-3">
+
+        <h5 class="text-body py-2"> @_localization.Getkey("Add New Comment") </h5>
+    </div>
+    <div class=" py-2  col-6">
+        <input type="text" asp-for="comments.Comment" class="form-control" id="NewComment" />
+
+    </div>
+    <div class="py-2  col-3">
+            <button type="submit" class="btn btn-primary form-control" asp-controller="Topic" asp-action="AddComments" asp-route-id="@Model.topic.TopicId">@_localization.Getkey("Save")</button>
+    </div>
+</div>
+</form>
+<div class="row">
+    <div class=" col-12  p-3 mb-5 ">
+        @*   @if (Model.requests.RequestId != Guid.Empty){ *@
+        <table id="tblData" class="table table-light table-striped " style="width:100%">
+            <thead>
+
+                <tr>
+                    <th>@_localization.Getkey("User")</th>
+                    <th>@_localization.Getkey("Comments")</th>
+                    
+                    <th>@_localization.Getkey("State")</th>
+
+
+                </tr>
+
+            </thead>
+            <tbody>
+                @if (Model.CommentList != null)
+                {
+                    @foreach (var obj in Model.CommentList.OrderBy(u => u.CommentSetDate))
+                    {
+                        <tr>
+                            <td>@obj.ApplicationUser.Name</td>
+                            <td>
+                                <div>
+                                    @obj.Comment
+                                </div>
+                                <div class="h6">
+                                    @obj.CommentSetDate
+                                </div>
+
+                            </td>
+                            <td>@obj.TopicsStates.ArabicName</td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        
+    </div>
+</div>

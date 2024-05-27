@@ -68,6 +68,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id, includeProperties: "ApplicationUser,TopicsStates");
                 topicVM.StateHistoryList = _unitOfWork.StateHistory.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser").ToList();
                 topicVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser,TopicsStates").ToList();
+                topicVM.CommentList = _unitOfWork.CommentHistory.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser,TopicsStates").ToList();
 
                 return View(topicVM);
             }
@@ -146,7 +147,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         //    string webRootPath = _hostEnvironment.WebRootPath;
         //    var fileName = _unitOfWork.Topics.Get(u => u.TopicId == id);
 
-        //    string path = Path.Combine(webRootPath)  + slash + fileName.TopicFile;
+        //    string path = Path.Combine(webRootPath) + slash + fileName.TopicFile;
 
         //    //Read the File data into Byte Array.
         //    byte[] bytes = System.IO.File.ReadAllBytes(path);
@@ -155,12 +156,6 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         //    return File(bytes, "application/octet-stream", fileName.TopicFile);
         //}
 
-
-        public IActionResult Index1()
-        {
-
-            return View();
-        }
 
         //______________________________Attachments_________________
 
@@ -226,6 +221,36 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
 
         }
+
+
+        //_____________________addComments_______________________
+
+        [HttpPost]
+        [DisableRequestSizeLimit]
+        public IActionResult AddComments(Guid? id, TopicVM topicVM)
+        {
+           
+            var oldTopic = _unitOfWork.Topics.Get(u => u.TopicId == id);
+            var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (ModelState.IsValid)
+            {
+                var commentHistory = new CommentHistory();
+                commentHistory.Comment = topicVM.comments.Comment;
+                commentHistory.TopicId = oldTopic.TopicId;
+                commentHistory.ApplicationUserId = userLoginId;
+                commentHistory.stateId = oldTopic.stateId;
+                commentHistory.CommentSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
+                _unitOfWork.CommentHistory.Add(commentHistory);
+                _unitOfWork.Save();
+            }
+            else
+            {
+                return View(topicVM);
+            }
+            return RedirectToAction("Upsert", new { id = oldTopic.TopicId});
+        }
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

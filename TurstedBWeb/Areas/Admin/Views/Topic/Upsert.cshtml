@@ -199,9 +199,12 @@
 
                     @* ________________________________________________________________________________ *@
                     <div class="container">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs mt-2">
                             <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#file"> @_localization.Getkey("File")</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " data-bs-toggle="tab" href="#comment"> @_localization.Getkey("Comments")</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " data-bs-toggle="tab" href="#state"> @_localization.Getkey("States")</a>
@@ -216,6 +219,18 @@
                                         <partial name="_Attachments" />
                                     }
                                     
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane container active" id="comment">
+                                <div class=" col-12  p-3 mb-5 ">
+
+                                    @if (Model.topic.TopicId != Guid.Empty)
+                                    {
+                                        <partial name="_Comments" />
+                                    }
+
 
                                 </div>
                             </div>
