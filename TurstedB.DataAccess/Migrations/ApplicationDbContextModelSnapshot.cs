@@ -272,18 +272,15 @@ namespace TrustedB.DataAccess.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Comment")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("CommentSetDate")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("TopicId")
+                    b.Property<Guid?>("TopicId")
                         .HasColumnType("uuid");
 
                     b.Property<int?>("stateId")
@@ -447,38 +444,6 @@ namespace TrustedB.DataAccess.Migrations
                     b.HasKey("stateId");
 
                     b.ToTable("TopicsStates");
-
-                    b.HasData(
-                        new
-                        {
-                            stateId = 1,
-                            ArabicName = "قيد اعداد",
-                            EnglishName = "Current"
-                        },
-                        new
-                        {
-                            stateId = 2,
-                            ArabicName = "اعتماد",
-                            EnglishName = "Approved"
-                        },
-                        new
-                        {
-                            stateId = 3,
-                            ArabicName = "تصحيح لغوي",
-                            EnglishName = "Check Lang"
-                        },
-                        new
-                        {
-                            stateId = 4,
-                            ArabicName = "اعتماد تصميم",
-                            EnglishName = "Approve Desgin"
-                        },
-                        new
-                        {
-                            stateId = 5,
-                            ArabicName = "نشر",
-                            EnglishName = "Publish"
-                        });
                 });
 
             modelBuilder.Entity("TrustedB.Models.ApplicationUser", b =>
@@ -580,15 +545,11 @@ namespace TrustedB.DataAccess.Migrations
                 {
                     b.HasOne("TrustedB.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("TrustedB.Models.Topics", "Topic")
                         .WithMany()
-                        .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TopicId");
 
                     b.HasOne("TrustedB.Models.TopicsStates", "TopicsStates")
                         .WithMany()
