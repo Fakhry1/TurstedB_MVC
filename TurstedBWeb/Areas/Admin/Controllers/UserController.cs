@@ -5,10 +5,12 @@ using TrustedB.Models;
 using TrustedB.Models.ViewModels;
 using TrustedB.Utility;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TrustedB.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _db;
