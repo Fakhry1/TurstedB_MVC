@@ -19,7 +19,10 @@ namespace TrustedB.Models
 
         [DisplayName("Topic Classification")]
         [ValidateNever]
-        public string? TopicClassification { get; set; }
+
+        public int? CategoryID { get; set; }
+        [ForeignKey("CategoryID")]
+        public Category? Category { get; set; }
 
         [DisplayName("State")]
         [ValidateNever]

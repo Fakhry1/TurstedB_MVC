@@ -124,13 +124,11 @@
                                     </div>
 
                                     <div class="form-floating py-2 col-4">
-
-                                        <select asp-for="topic.TopicClassification" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="توجيه",Value="توجيه" }
-                                                ,new SelectListItem {Text="درس فيديو",Value="درس فيديو" } ,new SelectListItem {Text="درس صوت",Value="درس صوت" }
-                                                ,new SelectListItem {Text="اعلان",Value="اعلان" } ,new SelectListItem {Text="صور",Value="صور" }} ) class="form-select">
-                                            <option disabled selected></option>
+                                        <select asp-for="topic.CategoryID" asp-items="@Model.CategoryList" class="form-select">
+                                            <option selected>- Select Category -</option>
                                         </select>
-                                        <label asp-for="topic.TopicClassification" class="ms-2"></label>
+                                       
+                                        <label asp-for="topic.CategoryID" class="ms-2"></label>
                                     </div>
 
                                     @if (Model.topic.TopicId != Guid.Empty)

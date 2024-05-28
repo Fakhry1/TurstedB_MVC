@@ -28,7 +28,10 @@ namespace TrustedB.DataAccess.Repository
         public IAttachmentsRepository Attachments { get; private set; }
 
         public ITopicsStatesRepository TopicsStates { get; private set; }
+
         public IStateTransitionRepository StateTransition { get; private set; }
+
+        public ICategoryRepository Category { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -40,6 +43,7 @@ namespace TrustedB.DataAccess.Repository
             Attachments = new AttachmentsRepository(_db);
             TopicsStates = new TopicsStatesRepository(_db);
             StateTransition = new StateTransitionRepository(_db);
+            Category = new CategoryRepository(_db);
 
         }
 

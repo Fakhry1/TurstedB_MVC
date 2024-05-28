@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TrustedB.DataAccess.Data;
@@ -11,9 +12,11 @@ using TrustedB.DataAccess.Data;
 namespace TrustedB.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240528175605_addCategory")]
+    partial class addCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -389,50 +392,6 @@ namespace TrustedB.DataAccess.Migrations
                     b.HasKey("StateTransitionId");
 
                     b.ToTable("StateTransition");
-
-                    b.HasData(
-                        new
-                        {
-                            StateTransitionId = 1,
-                            Statefrom = 1,
-                            Stateto = 2
-                        },
-                        new
-                        {
-                            StateTransitionId = 2,
-                            Statefrom = 2,
-                            Stateto = 3
-                        },
-                        new
-                        {
-                            StateTransitionId = 3,
-                            Statefrom = 3,
-                            Stateto = 4
-                        },
-                        new
-                        {
-                            StateTransitionId = 4,
-                            Statefrom = 4,
-                            Stateto = 5
-                        },
-                        new
-                        {
-                            StateTransitionId = 5,
-                            Statefrom = 4,
-                            Stateto = 1
-                        },
-                        new
-                        {
-                            StateTransitionId = 6,
-                            Statefrom = 3,
-                            Stateto = 1
-                        },
-                        new
-                        {
-                            StateTransitionId = 7,
-                            Statefrom = 2,
-                            Stateto = 1
-                        });
                 });
 
             modelBuilder.Entity("TrustedB.Models.Topics", b =>
@@ -447,14 +406,14 @@ namespace TrustedB.DataAccess.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("text");
 
-                    b.Property<int?>("CategoryID")
-                        .HasColumnType("integer");
-
                     b.Property<string>("CreationDate")
                         .HasColumnType("text");
 
                     b.Property<string>("Titel")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TopicClassification")
                         .HasColumnType("text");
 
                     b.Property<string>("TopicDiscription")
@@ -466,8 +425,6 @@ namespace TrustedB.DataAccess.Migrations
                     b.HasKey("TopicId");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("CategoryID");
 
                     b.HasIndex("stateId");
 
@@ -491,38 +448,6 @@ namespace TrustedB.DataAccess.Migrations
                     b.HasKey("stateId");
 
                     b.ToTable("TopicsStates");
-
-                    b.HasData(
-                        new
-                        {
-                            stateId = 1,
-                            ArabicName = "قيد اعداد",
-                            EnglishName = "Current"
-                        },
-                        new
-                        {
-                            stateId = 2,
-                            ArabicName = "اعتماد",
-                            EnglishName = "Approved"
-                        },
-                        new
-                        {
-                            stateId = 3,
-                            ArabicName = "تصحيح لغوي",
-                            EnglishName = "Check Lang"
-                        },
-                        new
-                        {
-                            stateId = 4,
-                            ArabicName = "اعتماد تصميم",
-                            EnglishName = "Approve Desgin"
-                        },
-                        new
-                        {
-                            stateId = 5,
-                            ArabicName = "نشر",
-                            EnglishName = "Publish"
-                        });
                 });
 
             modelBuilder.Entity("TrustedB.Models.ApplicationUser", b =>
@@ -664,17 +589,11 @@ namespace TrustedB.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("TrustedB.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryID");
-
                     b.HasOne("TrustedB.Models.TopicsStates", "TopicsStates")
                         .WithMany()
                         .HasForeignKey("stateId");
 
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("Category");
 
                     b.Navigation("TopicsStates");
                 });

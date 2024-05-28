@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TrustedB.DataAccess.Data;
@@ -11,9 +12,11 @@ using TrustedB.DataAccess.Data;
 namespace TrustedB.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240528190516_AddSeedData")]
+    partial class AddSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,32 +285,6 @@ namespace TrustedB.DataAccess.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Category");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            ArabicName = "توجيه",
-                            EnglishName = "Guide"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            ArabicName = "صور",
-                            EnglishName = "Images"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            ArabicName = "مرئيات",
-                            EnglishName = "Videos"
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            ArabicName = "صوتيات",
-                            EnglishName = "Audio"
-                        });
                 });
 
             modelBuilder.Entity("TrustedB.Models.CommentHistory", b =>
@@ -447,8 +424,8 @@ namespace TrustedB.DataAccess.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("text");
 
-                    b.Property<int?>("CategoryID")
-                        .HasColumnType("integer");
+                    b.Property<string>("Category")
+                        .HasColumnType("text");
 
                     b.Property<string>("CreationDate")
                         .HasColumnType("text");
@@ -466,8 +443,6 @@ namespace TrustedB.DataAccess.Migrations
                     b.HasKey("TopicId");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("CategoryID");
 
                     b.HasIndex("stateId");
 
@@ -664,17 +639,11 @@ namespace TrustedB.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("TrustedB.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryID");
-
                     b.HasOne("TrustedB.Models.TopicsStates", "TopicsStates")
                         .WithMany()
                         .HasForeignKey("stateId");
 
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("Category");
 
                     b.Navigation("TopicsStates");
                 });

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
 using System.Diagnostics;
@@ -54,7 +55,12 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         {
             TopicVM topicVM = new()
             {
-                topic = new Topics()
+                topic = new Topics(),
+                CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.ArabicName,
+                    Value = i.CategoryId.ToString()
+                })
             };
 
             if (id == null)
@@ -65,7 +71,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             else
             {
                 //eidt
-                topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id, includeProperties: "ApplicationUser,TopicsStates");
+                topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id, includeProperties: "ApplicationUser,TopicsStates,Category");
                 topicVM.StateHistoryList = _unitOfWork.StateHistory.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser").ToList();
                 topicVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser,TopicsStates").ToList();
                 topicVM.CommentList = _unitOfWork.CommentHistory.GetAll(filter: o => (o.TopicId == topicVM.topic.TopicId), includeProperties: "ApplicationUser,TopicsStates").ToList();
@@ -106,7 +112,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 else //Eidt new topic
 
                 {
-                    var oldTopic = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
+                    var oldTopic = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId, includeProperties: "ApplicationUser,TopicsStates,Category");
                    
                     var newState = topicVM.topic.stateId;
                     bool transition = handel.StateTransition(oldTopic.stateId, newState);

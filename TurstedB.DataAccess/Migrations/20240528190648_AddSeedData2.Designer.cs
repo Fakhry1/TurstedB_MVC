@@ -12,8 +12,8 @@ using TrustedB.DataAccess.Data;
 namespace TrustedB.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240525182820_updateTopic")]
-    partial class updateTopic
+    [Migration("20240528190648_AddSeedData2")]
+    partial class AddSeedData2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -254,13 +254,63 @@ namespace TrustedB.DataAccess.Migrations
                     b.Property<Guid?>("TopicId")
                         .HasColumnType("uuid");
 
+                    b.Property<int?>("stateId")
+                        .HasColumnType("integer");
+
                     b.HasKey("FileId");
 
                     b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("TopicId");
 
+                    b.HasIndex("stateId");
+
                     b.ToTable("Attachments");
+                });
+
+            modelBuilder.Entity("TrustedB.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CategoryId"));
+
+                    b.Property<string>("ArabicName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EnglishName")
+                        .HasColumnType("text");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            ArabicName = "توجيه",
+                            EnglishName = "Guide"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            ArabicName = "صور",
+                            EnglishName = "Images"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            ArabicName = "مرئيات",
+                            EnglishName = "Videos"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            ArabicName = "صوتيات",
+                            EnglishName = "Audio"
+                        });
                 });
 
             modelBuilder.Entity("TrustedB.Models.CommentHistory", b =>
@@ -270,25 +320,27 @@ namespace TrustedB.DataAccess.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Comment")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("CommentSetDate")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("TopicId")
+                    b.Property<Guid?>("TopicId")
                         .HasColumnType("uuid");
+
+                    b.Property<int?>("stateId")
+                        .HasColumnType("integer");
 
                     b.HasKey("CommentHistoryId");
 
                     b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("TopicId");
+
+                    b.HasIndex("stateId");
 
                     b.ToTable("CommentHistory");
                 });
@@ -306,7 +358,6 @@ namespace TrustedB.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("StateSetDate")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("TopicId")
@@ -321,6 +372,72 @@ namespace TrustedB.DataAccess.Migrations
                     b.ToTable("StateHistory");
                 });
 
+            modelBuilder.Entity("TrustedB.Models.StateTransition", b =>
+                {
+                    b.Property<int>("StateTransitionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("StateTransitionId"));
+
+                    b.Property<Guid?>("RoleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("Statefrom")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("Stateto")
+                        .HasColumnType("integer");
+
+                    b.HasKey("StateTransitionId");
+
+                    b.ToTable("StateTransition");
+
+                    b.HasData(
+                        new
+                        {
+                            StateTransitionId = 1,
+                            Statefrom = 1,
+                            Stateto = 2
+                        },
+                        new
+                        {
+                            StateTransitionId = 2,
+                            Statefrom = 2,
+                            Stateto = 3
+                        },
+                        new
+                        {
+                            StateTransitionId = 3,
+                            Statefrom = 3,
+                            Stateto = 4
+                        },
+                        new
+                        {
+                            StateTransitionId = 4,
+                            Statefrom = 4,
+                            Stateto = 5
+                        },
+                        new
+                        {
+                            StateTransitionId = 5,
+                            Statefrom = 4,
+                            Stateto = 1
+                        },
+                        new
+                        {
+                            StateTransitionId = 6,
+                            Statefrom = 3,
+                            Stateto = 1
+                        },
+                        new
+                        {
+                            StateTransitionId = 7,
+                            Statefrom = 2,
+                            Stateto = 1
+                        });
+                });
+
             modelBuilder.Entity("TrustedB.Models.Topics", b =>
                 {
                     b.Property<Guid>("TopicId")
@@ -328,37 +445,85 @@ namespace TrustedB.DataAccess.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Active")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("text");
 
-                    b.Property<string>("CreationDate")
-                        .IsRequired()
+                    b.Property<string>("Category")
                         .HasColumnType("text");
 
-                    b.Property<string>("State")
-                        .IsRequired()
+                    b.Property<string>("CreationDate")
                         .HasColumnType("text");
 
                     b.Property<string>("Titel")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("TopicClassification")
-                        .IsRequired()
+                    b.Property<string>("TopicDiscription")
                         .HasColumnType("text");
 
-                    b.Property<string>("TopicDiscription")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int?>("stateId")
+                        .HasColumnType("integer");
 
                     b.HasKey("TopicId");
 
                     b.HasIndex("ApplicationUserId");
 
+                    b.HasIndex("stateId");
+
                     b.ToTable("Topics");
+                });
+
+            modelBuilder.Entity("TrustedB.Models.TopicsStates", b =>
+                {
+                    b.Property<int>("stateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("stateId"));
+
+                    b.Property<string>("ArabicName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EnglishName")
+                        .HasColumnType("text");
+
+                    b.HasKey("stateId");
+
+                    b.ToTable("TopicsStates");
+
+                    b.HasData(
+                        new
+                        {
+                            stateId = 1,
+                            ArabicName = "قيد اعداد",
+                            EnglishName = "Current"
+                        },
+                        new
+                        {
+                            stateId = 2,
+                            ArabicName = "اعتماد",
+                            EnglishName = "Approved"
+                        },
+                        new
+                        {
+                            stateId = 3,
+                            ArabicName = "تصحيح لغوي",
+                            EnglishName = "Check Lang"
+                        },
+                        new
+                        {
+                            stateId = 4,
+                            ArabicName = "اعتماد تصميم",
+                            EnglishName = "Approve Desgin"
+                        },
+                        new
+                        {
+                            stateId = 5,
+                            ArabicName = "نشر",
+                            EnglishName = "Publish"
+                        });
                 });
 
             modelBuilder.Entity("TrustedB.Models.ApplicationUser", b =>
@@ -445,28 +610,36 @@ namespace TrustedB.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("TopicId");
 
+                    b.HasOne("TrustedB.Models.TopicsStates", "TopicsStates")
+                        .WithMany()
+                        .HasForeignKey("stateId");
+
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Topic");
+
+                    b.Navigation("TopicsStates");
                 });
 
             modelBuilder.Entity("TrustedB.Models.CommentHistory", b =>
                 {
                     b.HasOne("TrustedB.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("TrustedB.Models.Topics", "Topic")
                         .WithMany()
-                        .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TopicId");
+
+                    b.HasOne("TrustedB.Models.TopicsStates", "TopicsStates")
+                        .WithMany()
+                        .HasForeignKey("stateId");
 
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Topic");
+
+                    b.Navigation("TopicsStates");
                 });
 
             modelBuilder.Entity("TrustedB.Models.StateHistory", b =>
@@ -492,7 +665,13 @@ namespace TrustedB.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
+                    b.HasOne("TrustedB.Models.TopicsStates", "TopicsStates")
+                        .WithMany()
+                        .HasForeignKey("stateId");
+
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("TopicsStates");
                 });
 #pragma warning restore 612, 618
         }

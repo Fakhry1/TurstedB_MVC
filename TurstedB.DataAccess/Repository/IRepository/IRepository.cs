@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using TrustedB.Models;
 
 namespace TrustedB.DataAccess.Repository.IRepository
 {
@@ -15,5 +16,8 @@ namespace TrustedB.DataAccess.Repository.IRepository
         void Add(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entity);
+
+        IEnumerable<T> GetAllPagination(int recSkip, int pageSize, Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
+
     }
 }

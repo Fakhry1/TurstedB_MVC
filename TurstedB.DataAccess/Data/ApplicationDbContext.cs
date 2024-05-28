@@ -24,6 +24,7 @@ namespace TrustedB.DataAccess.Data
         public DbSet<Attachments> Attachments { get; set; }
         public DbSet<TopicsStates> TopicsStates { get; set; }
         public DbSet<StateTransition> StateTransition { get; set; }
+        public DbSet<Category> Category { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,6 +45,13 @@ namespace TrustedB.DataAccess.Data
                 new { StateTransitionId = 5, Statefrom = 4, Stateto = 1 },
                  new { StateTransitionId = 6, Statefrom = 3, Stateto = 1 },
                  new { StateTransitionId = 7, Statefrom = 2, Stateto = 1 }
+                );
+
+            modelBuilder.Entity<Category>().HasData(
+                  new { CategoryId = 1, ArabicName = "توجيه", EnglishName = "Guide" },
+                  new { CategoryId = 2, ArabicName = "صور", EnglishName = "Images" },
+                  new { CategoryId = 3, ArabicName = "مرئيات", EnglishName = "Videos" },
+                  new { CategoryId = 4, ArabicName = "صوتيات", EnglishName = "Audio" }
                 );
 
             base.OnModelCreating(modelBuilder);
