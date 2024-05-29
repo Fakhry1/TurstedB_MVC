@@ -209,7 +209,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         }
 
 
-                        topicVM.attachments.FilePath = @"\Files\Attachments\" + fileName + extension;
+                        topicVM.attachments.FilePath = @"\Files\Topics\" + fileName + extension;
 
                     }
 
@@ -218,6 +218,12 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                     topicVM.attachments.TopicId = topicVM.topic.TopicId;
                     topicVM.attachments.stateId = topicVM.topic.stateId;
                     _unitOfWork.Attachments.Add(topicVM.attachments);
+
+                    if (topicVM.attachments.MainFile =="true") 
+                    {
+                        topicVM.topic.MainFile = topicVM.attachments.FilePath;
+                        _unitOfWork.Topics.Update(topicVM.topic);
+                    }
                     _unitOfWork.Save();
 
 

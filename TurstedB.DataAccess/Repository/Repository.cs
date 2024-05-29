@@ -79,7 +79,7 @@ namespace TrustedB.DataAccess.Repository
             dbSet.RemoveRange(entity);
         }
 
-        public IEnumerable<T> GetAllPagination(int recSkip, int recTak, Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+        public IEnumerable<T> GetAllPagination(int recSkip, int recTak, Expression<Func<T, bool>>? filter, string? includeProperties = null)
         {
 
             IQueryable<T> query = dbSet;

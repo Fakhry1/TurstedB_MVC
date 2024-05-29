@@ -66,76 +66,31 @@
                 </tbody>
             </table> *@
             <div class="container">
+                <div class="row d-flex flex-row">
                 @foreach (var obj in Model.OrderBy(u => u.CreationDate))
-                    {
-                <div class="row">
+              {
+                   
                     <div class="col-4">
                 <div class="card shadow-sm border-0 rounded">
                     <div class="card-body p-0">
-                                    <img src="~/Files/Topics/02effc0c-02c0-4477-a67f-497e155b4866.jpg" alt="" class="w-100 card-img-top">
+
+                                    <img src="@obj.MainFile" alt="" class="w-100 card-img-top">
                         <div class="p-4">
-                            <h5 class="mb-0">Mark Rockwell</h5>
-                            <p class="small text-muted">CEO - Consultant</p>
-                            <ul class="social mb-0 list-inline mt-3">
-                                <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
-                                <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
-                                <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                                        <h5 class="mb-0">@obj.Titel</h5>
+                                        <p class="small text-muted">@obj.TopicDiscription</p>
+                                        <ul class="social mb-0 list-inline text-start mt-3">
+                                <li class="text-end"><a href="#" class="btn btn-success">التفاصيل</a></li>
+                                
                             </ul>
                         </div>
                     </div>
                 </div>
-            
 
-            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            </div>
                 </div>
-
-                        <div class="col-4">
-                            <div class="card shadow-sm border-0 rounded">
-                                <div class="card-body p-0">
-                                    <img src="~/Files/Topics/02effc0c-02c0-4477-a67f-497e155b4866.jpg" alt="" class="w-100 card-img-top">
-                                    <div class="p-4">
-                                        <h5 class="mb-0">Mark Rockwell</h5>
-                                        <p class="small text-muted">CEO - Consultant</p>
-                                        <ul class="social mb-0 list-inline mt-3">
-                                            <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
-                                            <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
-                                            <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
-                                            <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                            </div>
-                        </div>
-
-                        <div class="col-4">
-                            <div class="card shadow-sm border-0 rounded">
-                                <div class="card-body p-0">
-                                    <img src="~/Files/Topics/02effc0c-02c0-4477-a67f-497e155b4866.jpg" alt="" class="w-100 card-img-top">
-                                    <div class="p-4">
-                                        <h5 class="mb-0">Mark Rockwell</h5>
-                                        <p class="small text-muted">CEO - Consultant</p>
-                                        <ul class="social mb-0 list-inline mt-3">
-                                            <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
-                                            <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
-                                            <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
-                                            <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                            </div>
-                        </div>
-        </div>
+   
+        
         }
+                    </div>
             </div>
         </div>
         @* ________________________Pagination_________________ *@
@@ -150,25 +105,25 @@
                                 @* @if (pager.CurrentPage >= 1)
                             { *@
                                 <li class="page-item ">
-                                    <a class="page-link" asp-area="Admin" asp-controller="Maher" asp-action="Index" asp-route-pg="1">First</a>
+                                    <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="1">First</a>
                                 </li>
                                 <li class="page-item ">
-                                    <a class="page-link " asp-area="Admin" asp-controller="Maher" asp-action="Index" asp-route-pg="@Prev">Prev</a>
+                                    <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Prev">Prev</a>
                                 </li>
                                 @*   } *@
                                 @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
                                 {
                                     <li class="page-item @(pge == pager.CurrentPage ? "active": "")">
-                                        <a class="page-link" asp-area="Admin" asp-controller="Maher" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                                        <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@pge">@pge</a>
                                     </li>
                                 }
                                 @*  @if( pager.TotalPages>0)
                             { *@
                                 <li class="page-item ">
-                                    <a class="page-link" asp-area="Admin" asp-controller="Maher" asp-action="Index" asp-route-pg="@Next">Next</a>
+                                    <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Next">Next</a>
                                 </li>
                                 <li class="page-item ">
-                                    <a class="page-link " asp-area="Admin" asp-controller="Maher" asp-action="Index" asp-route-pg="@ToltalP">Last</a>
+                                    <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@ToltalP">Last</a>
                                 </li>
                                 @* } *@
 

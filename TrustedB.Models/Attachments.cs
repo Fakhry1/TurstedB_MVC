@@ -45,7 +45,9 @@ namespace TrustedB.Models
         public TopicsStates? TopicsStates { get; set; }
 
         //public TimeOnly StateTime { get; set; }
-
+        [DisplayName("Main File")]
+        [ValidateNever]
+        public string? MainFile { get; set; }
 
     }
 

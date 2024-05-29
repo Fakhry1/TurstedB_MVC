@@ -44,6 +44,10 @@ namespace TrustedB.Models
         [ValidateNever]
         public ApplicationUser? ApplicationUser { get; set; }
 
+        [DisplayName("Main File")]
+        [ValidateNever]
+        public string? MainFile { get; set; }
+
     }
 
 }
