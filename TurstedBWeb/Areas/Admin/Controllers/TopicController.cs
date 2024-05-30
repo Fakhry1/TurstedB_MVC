@@ -43,7 +43,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             var topicList = new List<Topics>();
 
 
-            topicList = _unitOfWork.Topics.GetAll(includeProperties: "ApplicationUser,TopicsStates").ToList();
+            topicList = _unitOfWork.Topics.GetAll(includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
 
 
             return View(topicList);

@@ -33,6 +33,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             return View();
         }
 
+        //Guidance
         public IActionResult Guidance(int pg = 1)
         {
             const int pageSize = 3;
@@ -49,7 +50,12 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             return View(data);
             
         }
-            //Guidance
+        //Guidance Details
+        public IActionResult GuidanceDetails(Guid? Id)
+        {
+
+            return PartialView();
+        }
 
             #region Localization
             public IActionResult ChangeLanguage(string culture)
