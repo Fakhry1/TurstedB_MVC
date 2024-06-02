@@ -1,4 +1,4 @@
-﻿@model List<Topics>
+﻿@model RequestDetailsVM
 
 
 @{
@@ -27,16 +27,18 @@
             </div>
        @*  </div> *@
 
-    <div class="modal fade modal-dialog modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+@*     <div class="modal fade modal-dialog modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-dark ">
-                    
+
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 </div>
                 <div class="modal-body">
-                    ...
+                    
+                    <partial name="_GuidanceDetails" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -44,15 +46,16 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </div> *@
+    
         <div class="card-body p-4 ">
 
             <div class="container">
                 <div class="row d-flex flex-row">
-                    @foreach (var obj in Model.OrderBy(u => u.CreationDate))
+                    @foreach (var obj in Model.TopicList.OrderBy(u => u.CreationDate))
                     {
-
+                       
+                    
                     <div class="col-lg-4 col-sm-4">
                             <div class="card shadow-sm border-0 rounded">
                                 <div class="card-body p-0">
@@ -63,9 +66,22 @@
                                         <p class="small text-muted">@obj.TopicDiscription</p>
                                         <ul class="social mb-0 list-inline text-start mt-3">
                                         <li class="text-end">
-                                            <a class="btn-success btn" href="@Url.Action("GuidanceDetails","Home")" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">التفاصيل</a>
-                                          
-                                         </li>
+                                            @* <a class="btn-success btn" href="@Url.Action("GuidanceDetails","Home")" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">التفاصيل</a>
+                                           *@
+
+
+
+                                            <a asp-controller="Home" asp-action="GuidanceDetails" asp-route-Id="@obj.TopicId" class="btn-success btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            التفاصيل
+                                        </a> 
+                                            @* <a class="btn-success btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                التفاصيل
+                                            </a> *@
+                                            @* @await Html.PartialAsync("_GuidanceDetails", new RequestDetailsVM { topic = @obj }) *@
+                                          @*   @Html.Action("GuidanceDetails", "Home", new { Id = @obj.TopicId });
+                                            *@
+                                            
+                                        </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -73,11 +89,15 @@
 
                         </div>
 
-
+                    
                     }
                 </div>
             </div>
-        </div>
+
+       
+    </div>
+    
+
         @* ________________________Pagination_________________ *@
         <div class="container">
             <div class="row">

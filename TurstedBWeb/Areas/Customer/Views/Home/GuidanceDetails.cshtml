@@ -1,12 +1,24 @@
-﻿<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+﻿@model RequestDetailsVM
+
+<div class="modal fade modal-dialog modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <div class="modal-header bg-dark ">
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
             </div>
             <div class="modal-body">
-                ...
+                <form asp-action="GuidanceDetails" asp-route-Id="@Model.topic.TopicId">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="topic.Titel"></label>
+                        <input asp-for="topic.Titel" class="form-control" value="@Model.topic.Titel" disabled />
+                    </div>
+                </form>
+               @*  <a asp-controller="Home" asp-action="GuidanceDetails" asp-route-Id="@Model.TopicId" class="btn-success btn" type="button" >
+                الملفات 
+                </a>  *@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -15,3 +27,67 @@
         </div>
     </div>
 </div>
+@* 
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@_localization.Getkey("Topic List")</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        @if(Model.topic != null){
+        <div class="row pb-3">
+
+                <div class="form-floating py-2 col-4">
+                    <input asp-for="topic.Titel" class="form-control" value="@Model.topic.Titel" disabled/>
+                    <label asp-for="topic.Titel" class="ms-2"></label>
+                    <span asp-validation-for="topic.Titel" class="text-danger"></span>
+                </div>
+
+            <div class="form-floating py-2 col-4">
+                <input asp-for="topic.CategoryID" class="form-control" value="@Model.topic.Category.ArabicName" disabled />
+                <label asp-for="topic.CategoryID" class="ms-2"></label>
+                <span asp-validation-for="topic.CategoryID" class="text-danger"></span>
+            </div>
+           
+        </div>
+
+        <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+
+                <tr>
+                    <th>@_localization.Getkey("File Name")</th>
+                    <th>@_localization.Getkey("File Type")</th>
+                    <th>@_localization.Getkey("Download")</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var obj in Model.AttachmentsList.OrderBy(u => u.AttachmentSetDate))
+                {
+                    <tr>
+                        <td>@obj.FileName</td>
+                        <td>@obj.FileType</td>
+                        <td></td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="Topic" asp-action="DownloadFile" asp-route-id="@obj.TopicId" class="btn btn-primary rounded text-center">
+                                    <i class="bi bi-download h4"></i>
+                                </a>
+                                <a asp-controller="Topic" asp-action="Upsert" asp-route-id="@obj.TopicId" class="btn btn-primary mx-2 rounded">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+ *@

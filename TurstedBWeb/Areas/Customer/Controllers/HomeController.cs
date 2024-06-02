@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using TrustedB.DataAccess.Data;
 using TrustedB.Models;
 using TrustedB.Models.ViewModels;
@@ -34,8 +35,10 @@ namespace TrustedBWeb.Areas.Customer.Controllers
         }
 
         //Guidance
-        public IActionResult Guidance(int pg = 1)
+        public IActionResult Guidance(int pg = 1 )
         {
+            RequestDetailsVM requestDetailsVM = new RequestDetailsVM();
+            
             const int pageSize = 3;
             if (pg < 1) { pg = 1; }
 
@@ -43,22 +46,25 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             var pager = new Pager(recsCount, pg, pageSize);
             int recSkip = (pg - 1) * pageSize;
 
-            //GetAllPagination
-            var data = _unitOfWork.Topics.GetAllPagination(recSkip, pager.PageSize, filter: o => (o.CategoryID == 1), includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
+             //GetAllPagination
+            requestDetailsVM.TopicList = _unitOfWork.Topics.GetAllPagination(recSkip, pager.PageSize, filter: o => (o.CategoryID == 1), includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
             this.ViewBag.Pager = pager;
 
-            return View(data);
+            return View(requestDetailsVM);
             
         }
         //Guidance Details
         public IActionResult GuidanceDetails(Guid? Id)
         {
-
-            return PartialView();
+            RequestDetailsVM requestDetailsVM = new RequestDetailsVM();
+            requestDetailsVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == Id, includeProperties: "Category");
+            requestDetailsVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == Id)).ToList();
+            //return PartialView("_GuidanceDetails", requestDetailsVM.topic);
+            return View(requestDetailsVM);
         }
 
-            #region Localization
-            public IActionResult ChangeLanguage(string culture)
+        #region Localization
+        public IActionResult ChangeLanguage(string culture)
         {
             Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName, CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)), new CookieOptions()
             {
