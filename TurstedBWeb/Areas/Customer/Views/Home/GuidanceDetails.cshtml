@@ -1,6 +1,6 @@
 ﻿@model RequestDetailsVM
 
-<div class="modal fade modal-dialog modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@* <div class="modal fade modal-dialog modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-dark ">
@@ -16,9 +16,7 @@
                         <input asp-for="topic.Titel" class="form-control" value="@Model.topic.Titel" disabled />
                     </div>
                 </form>
-               @*  <a asp-controller="Home" asp-action="GuidanceDetails" asp-route-Id="@Model.TopicId" class="btn-success btn" type="button" >
-                الملفات 
-                </a>  *@
+            
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -26,8 +24,8 @@
             </div>
         </div>
     </div>
-</div>
-@* 
+</div> *@
+
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
@@ -47,10 +45,16 @@
                 </div>
 
             <div class="form-floating py-2 col-4">
-                <input asp-for="topic.CategoryID" class="form-control" value="@Model.topic.Category.ArabicName" disabled />
-                <label asp-for="topic.CategoryID" class="ms-2"></label>
-                <span asp-validation-for="topic.CategoryID" class="text-danger"></span>
+                <input  class="form-control" value="@Model.topic.Category.ArabicName" disabled />
+                <label class="ms-2">Categroy</label>
+               
             </div>
+
+                <div class="form-floating py-2 col-4">
+                    <input class="form-control" value="@Model.topic.TopicDiscription" disabled />
+                    <label class="ms-2">Description</label>
+                  
+                </div>
            
         </div>
 
@@ -60,8 +64,7 @@
                 <tr>
                     <th>@_localization.Getkey("File Name")</th>
                     <th>@_localization.Getkey("File Type")</th>
-                    <th>@_localization.Getkey("Download")</th>
-
+                   
                 </tr>
 
             </thead>
@@ -74,13 +77,10 @@
                         <td></td>
                         <td>
                             <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Topic" asp-action="DownloadFile" asp-route-id="@obj.TopicId" class="btn btn-primary rounded text-center">
+                                <a asp-controller="Topic" asp-action="DownloadFile" asp-route-id="@obj.FileId" class="btn btn-primary rounded text-center">
                                     <i class="bi bi-download h4"></i>
                                 </a>
-                                <a asp-controller="Topic" asp-action="Upsert" asp-route-id="@obj.TopicId" class="btn btn-primary mx-2 rounded">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                
+                               
                             </div>
                         </td>
                     </tr>
@@ -90,4 +90,4 @@
         }
     </div>
 </div>
- *@
+ 
