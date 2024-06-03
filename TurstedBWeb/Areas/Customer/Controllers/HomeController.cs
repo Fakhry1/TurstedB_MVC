@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
+using System.Security.Policy;
 using TrustedB.DataAccess.Data;
 using TrustedB.Models;
 using TrustedB.Models.ViewModels;
@@ -19,13 +20,16 @@ namespace TrustedBWeb.Areas.Customer.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ApplicationDbContext _appcontext;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public string fileName = "";
+        public string slash = @"\";
 
-        public HomeController( IUnitOfWork unitOfWork, ApplicationDbContext appcontext)
+        public HomeController( IUnitOfWork unitOfWork, ApplicationDbContext appcontext, IWebHostEnvironment hostEnvironment)
         {
            
             _unitOfWork = unitOfWork;
             _appcontext = appcontext;
-          
+            _hostEnvironment = hostEnvironment;
         }
 
 
@@ -62,6 +66,22 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             //return PartialView("_GuidanceDetails", requestDetailsVM.topic);
             return View(requestDetailsVM);
         }
+
+
+        public IActionResult DownloadFile(Guid? id)
+        {
+            string webRootPath = _hostEnvironment.WebRootPath;
+            var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
+
+            string path = Path.Combine(webRootPath) + slash + fileName.FilePath;
+
+            //Read the File data into Byte Array.
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+
+            //Send the File to Download.
+            return File(bytes, "application/octet-stream", fileName.FilePath);
+        }
+
 
         #region Localization
         public IActionResult ChangeLanguage(string culture)

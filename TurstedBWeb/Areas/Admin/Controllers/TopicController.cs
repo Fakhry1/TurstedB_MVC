@@ -151,15 +151,15 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         //public IActionResult DownloadFile(Guid? id)
         //{
         //    string webRootPath = _hostEnvironment.WebRootPath;
-        //    var fileName = _unitOfWork.Topics.Get(u => u.TopicId == id);
+        //    var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
 
-        //    string path = Path.Combine(webRootPath) + slash + fileName.TopicFile;
+        //    string path = Path.Combine(webRootPath) + slash + fileName.FilePath;
 
         //    //Read the File data into Byte Array.
         //    byte[] bytes = System.IO.File.ReadAllBytes(path);
 
         //    //Send the File to Download.
-        //    return File(bytes, "application/octet-stream", fileName.TopicFile);
+        //    return File(bytes, "application/octet-stream", fileName.FilePath);
         //}
 
 
