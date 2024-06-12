@@ -39,7 +39,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
         }
 
         //Guidance
-        public IActionResult Guidance(int pg = 1 )
+        public IActionResult Guidance(Guid? Id,int pg = 1 )
         {
             RequestDetailsVM requestDetailsVM = new RequestDetailsVM();
             
@@ -52,18 +52,31 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
              //GetAllPagination
             requestDetailsVM.TopicList = _unitOfWork.Topics.GetAllPagination(recSkip, pager.PageSize, filter: o => (o.CategoryID == 1), includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
+            //foreach(var topic in requestDetailsVM.TopicList) 
+            //{
+            //    requestDetailsVM.Test = 
+            //}
             this.ViewBag.Pager = pager;
+
+            if ( Id !=null )
+            {
+                requestDetailsVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == Id, includeProperties: "Category");
+                requestDetailsVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == Id)).ToList();
+            }
 
             return View(requestDetailsVM);
             
         }
-        //Guidance Details
+        //[HttpPost]
+        //[DisableRequestSizeLimit]
         public IActionResult GuidanceDetails(Guid? Id)
         {
             RequestDetailsVM requestDetailsVM = new RequestDetailsVM();
             requestDetailsVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == Id, includeProperties: "Category");
             requestDetailsVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == Id)).ToList();
             //return PartialView("_GuidanceDetails", requestDetailsVM.topic);
+
+            //var AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == Id)).ToList();
             return View(requestDetailsVM);
         }
 

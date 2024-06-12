@@ -25,6 +25,7 @@ namespace TrustedB.DataAccess.Data
         public DbSet<TopicsStates> TopicsStates { get; set; }
         public DbSet<StateTransition> StateTransition { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<SubCategory> SubCategory { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

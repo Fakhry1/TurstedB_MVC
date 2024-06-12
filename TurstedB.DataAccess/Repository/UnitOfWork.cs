@@ -33,6 +33,8 @@ namespace TrustedB.DataAccess.Repository
 
         public ICategoryRepository Category { get; private set; }
 
+        public ISubCategoryRepository SubCategory { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -44,6 +46,7 @@ namespace TrustedB.DataAccess.Repository
             TopicsStates = new TopicsStatesRepository(_db);
             StateTransition = new StateTransitionRepository(_db);
             Category = new CategoryRepository(_db);
+            SubCategory = new SubCategoryRepository(_db);
 
         }
 

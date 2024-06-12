@@ -124,11 +124,19 @@
                                     </div>
 
                                     <div class="form-floating py-2 col-4">
-                                        <select asp-for="topic.CategoryID" asp-items="@Model.CategoryList" class="form-select">
+                                        <select id="CagtegoryList" asp-for="topic.CategoryID" asp-items="@Model.CategoryList" class="form-select">
                                             <option selected>- Select Category -</option>
                                         </select>
                                        
                                         <label asp-for="topic.CategoryID" class="ms-2"></label>
+                                    </div>
+
+                                    <div class="form-floating py-2 col-4">
+                                        <select id="SubCagtegoryList" asp-for="topic.SubCategoryID"  class="form-select">
+                                            <option selected>- Select SubCategory -</option>
+                                        </select>
+
+                                        <label asp-for="topic.SubCategoryID" class="ms-2"></label>
                                     </div>
 
                                     @if (Model.topic.TopicId != Guid.Empty)
@@ -325,16 +333,43 @@
     </script>
 
     <script>
+
+        $(document).ready(function () {
+            getSubCategory();
+        })
+        $("#CagtegoryList").change(function () {
+            getSubCategory();
+        });
+        var getSubCategory = function () {
+            $.ajax({
+                url: '@Url.Action("GetSubCategroy", "Topic")',
+                type: 'GET',
+                data: { categoryID: $('#CagtegoryList').val(), },
+            },
+                success: function (data) {
+                    $(data).each(
+                        function (index, item) {
+                            $('#SubCagtegoryList').append('<option value="' + item.subCategoryId + '">' + item.subArabicName + '</option>')
+                        }
+
+                    );
+                }
+
+                    })
+                }
+    </script>
+
+   @*  <script>
         var loadFile = function (event) {
             var image = document.getElementById('up-file');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
 
-    </script>
+    </script> *@
 
     @* ____________________________________*@
 
-    <script>
+   @*  <script>
         $(document).ready(function () {
             // For Bootstrap 5.x
             $("#input-20").fileinput({
@@ -345,8 +380,8 @@
                 showUpload: false
             });
         });
-    </script>
-    <script>
+    </script> *@
+ @*    <script>
 
         var url = $('#Url').val();
         var Type = $('#Type').val();
@@ -375,38 +410,10 @@
 
             });
         });
-    </script>
+    </script> *@
 
-    <script>
-
-        const stepButtons = document.querySelectorAll('.step-button');
-        const progress = document.querySelector('#progress');
-        var form = document.getElementById("form-id");
-        var step = @State;
-        Array.from(stepButtons).forEach((button, index) => {
-            if (index < step) { button.classList.add('done') }
-            progress.setAttribute('value', step * 100 / (stepButtons.length - 1));
-        });
-
-        Array.from(stepButtons).forEach((button, index) => {
-            button.addEventListener('click', () => {
-                progress.setAttribute('value', index * 100 / (stepButtons.length - 1));//there are 3 buttons. 2 spaces.
-                //stepButtons.classList.add('done');
-                stepButtons.forEach((item, secindex) => {
-
-                    if (index >= secindex) {
-                        item.classList.add('done');
-
-                    }
-                    if (index < secindex) {
-                        item.classList.remove('done');
-
-                    }
-                })
-            })
-        });
-    </script>
-
+    
+   
     @{
 
         <partial name="_ValidationScriptsPartial" />

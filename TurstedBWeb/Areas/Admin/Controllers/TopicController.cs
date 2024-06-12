@@ -60,6 +60,11 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 {
                     Text = i.ArabicName,
                     Value = i.CategoryId.ToString()
+                }),
+                SubCategoryList = _unitOfWork.SubCategory.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.SubArabicName,
+                    Value = i.SubCategoryId.ToString()
                 })
             };
 
@@ -263,9 +268,14 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             return RedirectToAction("Upsert", new { id = oldTopic.TopicId});
         }
 
+        [HttpGet]
+        public JsonResult GetSubCategroy(int? categoryID)
+        {
+            var subCategroyList = _unitOfWork.SubCategory.GetAll(filter: o => (o.CategoryID == categoryID)).ToList();
+            return Json(subCategroyList);
+        }
 
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

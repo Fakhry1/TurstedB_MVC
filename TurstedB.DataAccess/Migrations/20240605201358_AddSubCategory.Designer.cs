@@ -12,8 +12,8 @@ using TrustedB.DataAccess.Data;
 namespace TrustedB.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240530064103_NewMigration")]
-    partial class NewMigration
+    [Migration("20240605201358_AddSubCategory")]
+    partial class AddSubCategory
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -441,6 +441,30 @@ namespace TrustedB.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("TrustedB.Models.SubCategory", b =>
+                {
+                    b.Property<int>("SubCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SubCategoryId"));
+
+                    b.Property<int?>("CategoryID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SubArabicName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SubEnglishName")
+                        .HasColumnType("text");
+
+                    b.HasKey("SubCategoryId");
+
+                    b.HasIndex("CategoryID");
+
+                    b.ToTable("SubCategory");
+                });
+
             modelBuilder.Entity("TrustedB.Models.Topics", b =>
                 {
                     b.Property<Guid>("TopicId")
@@ -462,6 +486,9 @@ namespace TrustedB.DataAccess.Migrations
                     b.Property<string>("MainFile")
                         .HasColumnType("text");
 
+                    b.Property<int?>("SubCategoryID")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Titel")
                         .IsRequired()
                         .HasColumnType("text");
@@ -477,6 +504,8 @@ namespace TrustedB.DataAccess.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CategoryID");
+
+                    b.HasIndex("SubCategoryID");
 
                     b.HasIndex("stateId");
 
@@ -667,6 +696,15 @@ namespace TrustedB.DataAccess.Migrations
                     b.Navigation("Topics");
                 });
 
+            modelBuilder.Entity("TrustedB.Models.SubCategory", b =>
+                {
+                    b.HasOne("TrustedB.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID");
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("TrustedB.Models.Topics", b =>
                 {
                     b.HasOne("TrustedB.Models.ApplicationUser", "ApplicationUser")
@@ -677,6 +715,10 @@ namespace TrustedB.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryID");
 
+                    b.HasOne("TrustedB.Models.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryID");
+
                     b.HasOne("TrustedB.Models.TopicsStates", "TopicsStates")
                         .WithMany()
                         .HasForeignKey("stateId");
@@ -684,6 +726,8 @@ namespace TrustedB.DataAccess.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Category");
+
+                    b.Navigation("SubCategory");
 
                     b.Navigation("TopicsStates");
                 });

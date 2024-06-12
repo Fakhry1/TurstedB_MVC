@@ -24,6 +24,10 @@ namespace TrustedB.Models
         [ForeignKey("CategoryID")]
         public Category? Category { get; set; }
 
+        public int? SubCategoryID { get; set; }
+        [ForeignKey("SubCategoryID")]
+        public SubCategory? SubCategory { get; set; }
+
         [DisplayName("State")]
         [ValidateNever]
         public int? stateId { get; set; }

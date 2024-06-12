@@ -21,6 +21,7 @@ namespace TrustedB.Models.ViewModels
         public List<CommentHistory>? CommentList { get; set; }
 
         public IEnumerable<SelectListItem>? CategoryList { get; set; }
+        public IEnumerable<SelectListItem>? SubCategoryList { get; set; }
 
 
     }

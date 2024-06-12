@@ -18,35 +18,15 @@
 }
 
 <div class="container-fluid">
-    @* <div class="card shadow border-0 my-4 "> *@
-       @*  <div class="card-header bg-secondary bg-gradient ml-0 py-3"> *@
+   
             <div class="row shadow mt-1">
                 <div class="col-12 text-center">
                     <h2 class="text-primary py-2">@_localization.Getkey("Request List")</h2>
                 </div>
             </div>
-       @*  </div> *@
+     
 
-  
-@*     <div class="modal fade modal-dialog modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-dark ">
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                </div>
-                <div class="modal-body">
-                    
-                    <partial name="_GuidanceDetails" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div> *@
    @*  https://www.youtube.com/watch?v=X3Jc5UfGhhE
     https://www.youtube.com/watch?v=VF6wlRshzDQ
   *@
@@ -68,21 +48,11 @@
                                         <p class="small text-muted">@obj.TopicDiscription</p>
                                         <ul class="social mb-0 list-inline text-start mt-3">
                                         <li class="text-end">
-                                            @* <a class="btn-success btn" href="@Url.Action("GuidanceDetails","Home")" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">التفاصيل</a>
-                                           *@
-
-                                            
 
                                             <a asp-controller="Home" asp-action="GuidanceDetails" asp-route-Id="@obj.TopicId" class="btn-success btn" type="button">
                                             التفاصيل
-                                            </a> 
-
-                                            @* <a class="btn-success btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                التفاصيل
-                                            </a> *@
-                                            @* @await Html.PartialAsync("_GuidanceDetails", new RequestDetailsVM { topic = @obj }) *@
-                                          @*   @Html.Action("GuidanceDetails", "Home", new { Id = @obj.TopicId });
-                                            *@
+                                            </a>
+                                           
                                             
                                         </li>
                                         </ul>
