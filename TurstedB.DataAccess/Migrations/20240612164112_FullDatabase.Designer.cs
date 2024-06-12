@@ -12,8 +12,8 @@ using TrustedB.DataAccess.Data;
 namespace TrustedB.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240605201358_AddSubCategory")]
-    partial class AddSubCategory
+    [Migration("20240612164112_FullDatabase")]
+    partial class FullDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
