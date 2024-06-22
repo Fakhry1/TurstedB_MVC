@@ -4,7 +4,7 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-4">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="py-2 text-white">Log in</h2>
+                <h2 class="py-2 text-white">@_localization.Getkey("Log in")</h2>
             </div>
         </div>
     </div>
@@ -13,18 +13,18 @@
             <div class="col-md-12">
                 <section>
                     <form id="account" method="post">
-                        <h3 class="border-bottom pb-3 mb-4 text-secondary text-center">
+                       @*  <h3 class="border-bottom pb-3 mb-4 text-secondary text-center">
                             Use a local account to log in.
-                        </h3>
+                        </h3> *@
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                         <div class="form-floating mb-3">
                             <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                            <label asp-for="Input.Email" class="form-label">Email</label>
+                            <label asp-for="Input.Email" class="form-label">@_localization.Getkey("Email")</label>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
                             <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                            <label asp-for="Input.Password" class="form-label">Password</label>
+                            <label asp-for="Input.Password" class="form-label">@_localization.Getkey("Password")</label>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
                         <div class="checkbox mb-3">
@@ -34,18 +34,18 @@
                             </label>
                         </div>
                         <div>
-                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">@_localization.Getkey("Log in")</button>
                         </div>
-                        <div class="d-flex justify-content-between pt-2">
-                            <p>
-                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                            </p>
-                            <p>
+                        <div class=" justify-content-between pt-2">
+
+                            <a class="btn bg-secondary bg-gradient text-white" id="forgot-password" asp-page="./ForgotPassword">@_localization.Getkey("Change your password?")</a>
+                          
+                            @* <p>
                                 <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                             </p>
                             <p>
                                 <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                            </p>
+                            </p> *@
                         </div>
                     </form>
                 </section>

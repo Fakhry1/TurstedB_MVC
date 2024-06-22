@@ -12,11 +12,14 @@ namespace TrustedB.Models
 
         
         [DisplayName("Arabic Name")]
+        [ValidateNever]
         public string? SubArabicName { get; set; }
 
         [DisplayName("English Name")]
+        [ValidateNever]
         public string? SubEnglishName { get; set; }
 
+        [ValidateNever]
         public int? CategoryID { get; set; }
         [ForeignKey("CategoryID")]
         public Category? Category { get; set; }
