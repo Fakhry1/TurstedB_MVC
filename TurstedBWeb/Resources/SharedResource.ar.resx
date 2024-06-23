@@ -348,6 +348,9 @@
   <data name="Gender" xml:space="preserve">
     <value>النوع</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>مرحبا</value>
+  </data>
   <data name="Hobbies" xml:space="preserve">
     <value>الهوايات</value>
   </data>
@@ -607,33 +610,9 @@
     <value>المستخدمين</value>
   </data>
   <data name="Users List" xml:space="preserve">
-    <value>قائمة المستخجمين</value>
+    <value>قائمة المستخدمين</value>
   </data>
   <data name="Whatsup Phone" xml:space="preserve">
     <value>رقم الواتس</value>
-  </data>
-  <data name="Will be Generated Auto" xml:space="preserve">
-    <value>سوف يتولد تلقائيا</value>
-  </data>
-  <data name="Zawia" xml:space="preserve">
-    <value>زاوية</value>
-  </data>
-  <data name="Zawia Discribtion" xml:space="preserve">
-    <value>وصف الزاوية</value>
-  </data>
-  <data name="Zawia List" xml:space="preserve">
-    <value>قائمة الزوايا</value>
-  </data>
-  <data name="Zawia Name" xml:space="preserve">
-    <value>اسم الزاوية</value>
-  </data>
-  <data name="Zawia Number" xml:space="preserve">
-    <value>رقم الزاوية</value>
-  </data>
-  <data name="Zawias" xml:space="preserve">
-    <value>الزوايا</value>
-  </data>
-  <data name="Zawias Mangement" xml:space="preserve">
-    <value>ادارة الزوايا</value>
   </data>
 </root>
