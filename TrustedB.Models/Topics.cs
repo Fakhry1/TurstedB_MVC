@@ -9,8 +9,9 @@ namespace TrustedB.Models
     {
         [Key]
         public Guid TopicId { get; set; }
-        [Required]
+        
         [DisplayName("Topic Titel")]
+        [ValidateNever]
         public string? Titel { get; set; }
 
         [DisplayName("Topic Discription")]

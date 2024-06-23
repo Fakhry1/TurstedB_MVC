@@ -117,21 +117,23 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                 else //Eidt new topic
 
                 {
-                    var oldTopic = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId, includeProperties: "ApplicationUser,TopicsStates,Category");
+                    //var newState = topicVM.topic.stateId;
+                    var oldTopic = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
                    
-                    var newState = topicVM.topic.stateId;
-                    bool transition = handel.StateTransition(oldTopic.stateId, newState);
+                    
+                    bool transition = handel.StateTransition(oldTopic.stateId, topicVM.topic.stateId);
 
                  
 
-                    if (oldTopic.stateId != newState && transition)
+                    if (oldTopic.stateId != topicVM.topic.stateId && transition)
                     {
-                        topicVM.topic = oldTopic;
-                        topicVM.topic.stateId = newState;
-                        _unitOfWork.Topics.Update(topicVM.topic);
+                        //topicVM.topic = oldTopic;
+                        oldTopic.stateId = topicVM.topic.stateId;
+                        //var test = oldTopic;
+                        _unitOfWork.Topics.Update(oldTopic);
 
                         var Shistory = new StateHistory();
-                        Shistory.State = handel.StateName(newState);
+                        Shistory.State = handel.StateName(topicVM.topic.stateId);
                         Shistory.TopicId = topicVM.topic.TopicId;
                         Shistory.ApplicationUserId = userLoginId;
                         Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();

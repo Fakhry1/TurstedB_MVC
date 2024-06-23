@@ -2,7 +2,7 @@
 @model TopicVM
 
 @{
-    var State = 0;
+    var State = 1;
 
 }
 <div class="container mt-3">
@@ -117,14 +117,14 @@
                             <div class="border p-3">
 
                                 <div class="row">
-                                    <div class="form-floating py-2 col-4">
-                                        <input asp-for="topic.Titel" class="form-control " />
+                                    <div class="form-floating py-2 col-6">
+                                        <input asp-for="topic.Titel" class="form-control " disabled="@(State == 1?false:true)"/>
                                         <label asp-for="topic.Titel" class="ms-2"></label>
-                                        <span asp-validation-for="topic.Titel" class="text-danger"></span>
+                                      @*   <span asp-validation-for="topic.Titel" class="text-danger"></span> *@
                                     </div>
 
                                     <div class="form-floating py-2 col-3">
-                                        <select id="CagtegoryList" asp-for="topic.CategoryID" asp-items="@Model.CategoryList" class="form-select">
+                                        <select id="CagtegoryList" asp-for="topic.CategoryID" asp-items="@Model.CategoryList" class="form-select" disabled="@(State == 1?false:true)">
                                             <option selected disabled></option>
                                         </select>
                                        
@@ -132,35 +132,19 @@
                                     </div>
 
                                     <div class="form-floating py-2 col-3">
-                                        <select id="SubCagtegoryList" asp-for="topic.SubCategoryID"  class="form-select">
+                                        <select id="SubCagtegoryList" asp-for="topic.SubCategoryID" class="form-select" disabled="@(State == 1?false:true)">
                                             <option selected disabled></option>
                                         </select>
 
                                         <label asp-for="topic.SubCategoryID" class="ms-2"></label>
                                     </div>
 
-                                    @if (Model.topic.TopicId != Guid.Empty)
-                                    {
-                                        <div class="form-floating py-2 col-2">
-
-                                            <input class="form-control" value="@(Model.topic.TopicsStates.ArabicName)" disabled />
-                                            <label class="ms-2">@_localization.Getkey("State")</label>
-
-                                        </div>
-                                    }else{
-                                        <div class="form-floating py-2 col-2">
-
-                                            <input class="form-control" value="" disabled />
-                                            <label class="ms-2">@_localization.Getkey("State")</label>
-
-                                        </div>
-                                    }
-                                   
+                                  
                                 </div>
                                 <div class="row">
                                     <div class="form-floating py-2 col-12">
                                         <label asp-for="topic.TopicDiscription" class="ms-2 text-muted mb-1"></label>
-                                        <textarea asp-for="topic.TopicDiscription" class="form-control"></textarea>
+                                        <textarea asp-for="topic.TopicDiscription" class="form-control" disabled="@(State == 1?false:true)"></textarea>
                                     </div>
                                 </div>
 
@@ -175,7 +159,7 @@
                                     <div class="form-floating py-2 col-6">
 
                                         <select asp-for="topic.Active" asp-items=@(new List<SelectListItem> { new SelectListItem {Text="نعم",Value="نعم" }
-                                                ,new SelectListItem {Text="لا",Value="لا" }} ) class="form-select">
+                                                ,new SelectListItem {Text="لا",Value="لا" }} ) class="form-select" disabled="@(State == 1?false:true)">
                                             <option disabled selected></option>
                                         </select>
                                         <label asp-for="topic.Active" class="ms-2"></label>
@@ -229,7 +213,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane container active" id="comment">
+                            <div class="tab-pane container " id="comment">
                                 <div class=" col-12  p-3 mb-5 ">
 
                                     @if (Model.topic.TopicId != Guid.Empty)
@@ -262,7 +246,7 @@
                                                     <tbody>
                                                         @if (Model.StateHistoryList != null)
                                                         {
-                                                            @foreach (var obj in Model.StateHistoryList.OrderBy(u => u.StateSetDate))
+                                                            @foreach (var obj in Model.StateHistoryList.OrderBy(u => u.State))
                                                             {
                                                                 <tr>
                                                                     <td>@obj.ApplicationUser.Name</td>
@@ -357,6 +341,35 @@
 
                     })
                 }
+    </script>
+
+    <script>
+        const stepButtons = document.querySelectorAll('.step-button');
+        const progress = document.querySelector('#progress');
+        var form = document.getElementById("form-id");
+        var step = @State;
+        Array.from(stepButtons).forEach((button, index) => {
+            if (index < step) { button.classList.add('done') }
+            progress.setAttribute('value', step * 100 / (stepButtons.length - 1));
+        });
+
+        Array.from(stepButtons).forEach((button, index) => {
+            button.addEventListener('click', () => {
+                progress.setAttribute('value', index * 100 / (stepButtons.length - 1));//there are 3 buttons. 2 spaces.
+                //stepButtons.classList.add('done');
+                stepButtons.forEach((item, secindex) => {
+
+                    if (index >= secindex) {
+                        item.classList.add('done');
+
+                    }
+                    if (index < secindex) {
+                        item.classList.remove('done');
+
+                    }
+                })
+            })
+        });
     </script>
 
    @*  <script>

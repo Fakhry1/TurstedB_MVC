@@ -318,11 +318,20 @@
   <data name="Documentations" xml:space="preserve">
     <value>الوثائق</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>الايميل</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>Eng</value>
+  </data>
+  <data name="File Name" xml:space="preserve">
+    <value>اسم الملف</value>
+  </data>
+  <data name="File Type" xml:space="preserve">
+    <value>نوع الملف</value>
   </data>
   <data name="Files" xml:space="preserve">
     <value>الملفات</value>
@@ -587,6 +596,9 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>تعديل</value>
+  </data>
+  <data name="Upload Date" xml:space="preserve">
+    <value>تاريخ الارفاق</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>مستخدم</value>
