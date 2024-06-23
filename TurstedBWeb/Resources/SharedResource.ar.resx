@@ -321,6 +321,9 @@
   <data name="Download" xml:space="preserve">
     <value>تحميل</value>
   </data>
+  <data name="Download Files" xml:space="preserve">
+    <value>تحميل الملفات</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>الايميل</value>
   </data>
@@ -347,6 +350,9 @@
   </data>
   <data name="Gender" xml:space="preserve">
     <value>النوع</value>
+  </data>
+  <data name="Guidance List" xml:space="preserve">
+    <value>التوجيهات</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>مرحبا</value>
