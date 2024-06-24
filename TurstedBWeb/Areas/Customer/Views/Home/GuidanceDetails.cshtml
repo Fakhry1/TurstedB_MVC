@@ -12,19 +12,21 @@
         @if (Model.topic != null)
         {
 
-            <div class="row pb-3">
+            <div class="row pb-3 border shadow">
 
-                <div class="form-floating py-2 col-4">
+              @*   <div class="form-floating py-2 col-4">
                     <input class="form-control" value="@Model.topic.Category.ArabicName" disabled />
                     <label class="ms-2">Categroy</label>
 
-                </div>
+                </div> *@
+                <p><h5 class="text-success">@Model.topic.Category.ArabicName</h5></p>
+                <p>@Model.topic.TopicDiscription</p>
 
-                <div class="form-floating py-2 col-8">
+                @* <div class="form-floating py-2 col-8">
                     <input class="form-control" value="@Model.topic.TopicDiscription" disabled />
                     <label class="ms-2">Description</label>
 
-                </div>
+                </div> *@
 
             </div>
 

@@ -1,0 +1,22 @@
+﻿@model RequestDetailsVM
+<div class="row d-flex flex-row">
+    <div class="col-12 text-end">
+        <h5 class=" py-2">@_localization.Getkey("Download Files")</h5>
+    </div>
+    @foreach (var obj in Model.AttachmentsList.OrderBy(u => u.AttachmentSetDate))
+    {
+
+        <div class="col-lg-3 col-sm-3">
+            <div class="card  border-0 rounded">
+                <div class="card-body p-0">
+                    @obj.FileName
+
+                    <a asp-controller="Home" asp-action="DownloadFile" asp-route-id="@obj.FileId" class="btn btn-primary rounded text-center">
+                        <i class="bi bi-download h6"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

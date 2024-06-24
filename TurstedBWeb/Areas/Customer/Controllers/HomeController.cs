@@ -62,6 +62,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             {
                 requestDetailsVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == Id, includeProperties: "Category");
                 requestDetailsVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == Id)).ToList();
+                ViewBag.FileList = requestDetailsVM.AttachmentsList;
             }
 
             return View(requestDetailsVM);
@@ -95,6 +96,13 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             return File(bytes, "application/octet-stream", fileName.FilePath);
         }
 
+        public IActionResult AttachmentList(Guid? Id)
+        {
+
+            ViewBag.FileList = _unitOfWork.Attachments.GetAll(u => u.TopicId == Id).ToList();
+           //ViewBag.AttachmentList = fileList;
+            return View();
+        }
 
         #region Localization
         public IActionResult ChangeLanguage(string culture)
