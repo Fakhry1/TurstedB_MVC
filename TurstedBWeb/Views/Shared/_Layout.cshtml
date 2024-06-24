@@ -15,7 +15,46 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg border-bottom border-danger border-3 ">
+
+        <nav class="navbar navbar-expand-lg border-bottom border-1  bg-primary " style="height: 3rem;">
+            <div class="container-fluid ">
+
+
+               
+@*                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button> *@
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+                    <ul class="navbar-nav">
+                        @* <li class="nav-item h5">
+                            <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Index">@_localization.Getkey("Home")</a>
+                        </li>
+                        <li class="nav-item h5">
+                            <a class="nav-link " asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Topics")</a>
+                        </li>
+                      
+                        <li class="nav-item h5">
+                            <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">@_localization.Getkey("Users")</a>
+                        </li> *@
+                    </ul>
+
+
+                    <partial name="_LoginPartial" />
+                   
+
+
+                   @*  <partial name="_LoginPartial" /> *@
+
+                </div>
+            </div>
+
+        </nav>
+
+
+
+        <nav class="navbar navbar-expand-lg border-bottom border-primary border-3 ">
             <div class="container-fluid">
              
                     
@@ -54,7 +93,7 @@
                             </a>
 
                        
-                            <partial name="_LoginPartial" />
+                          
                        
                     </div>
                 </div>
