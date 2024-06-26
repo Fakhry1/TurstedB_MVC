@@ -15,8 +15,8 @@
 </head>
 <body>
     <header>
-
-        <nav class="navbar navbar-expand-lg border-bottom border-1  bg-primary " style="height: 3rem;">
+        <div id="top-header">
+        <nav class="navbar navbar-expand-lg" style="height: 2rem;">
             <div class="container-fluid ">
 
                 @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -25,10 +25,8 @@
                 </button>  *@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 
-                    <ul class="navbar-nav position-absolute top-0 start-0">
-                        @* <li class="nav-item">
-                            <a class="nav-link text-white " asp-area="Customer" asp-controller="Home" asp-action="Index">@_localization.Getkey("Home")</a>
-                        </li> *@
+                        <ul class="navbar-nav header-links pull-left">
+                       
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Topics")</a>
                         </li>
@@ -38,23 +36,23 @@
                         </li>
                     </ul>
 
-
+                       
                     <partial name="_LoginPartial" />
-                   
+                      
 
                 </div>
             </div>
 
         </nav>
 
-
+        </div>
 
         <nav class="navbar navbar-expand-lg border-bottom border-primary border-3 shadow" style="height: 4rem;">
             <div class="container-fluid">
              
                     
                         <a class="navbar-brand me-auto" asp-area="" asp-controller="Home" asp-action="Index">
-                              <img src="~/Files/Logo/BName.png" class="" style="width:140px;" />
+                              <img src="~/Files/Logo/guid.png" class="" style="width:140px;" />
                              
  
                         </a>
@@ -83,7 +81,7 @@
 
                     <a class="navbar-brand align-items-center position-absolute top-0 start-0" asp-area="" asp-controller="Home" asp-action="Index">
 
-                        <img src="~/Files/Logo/Blogo.png" class="" style="width:50px;" />
+                        <img src="~/Files/Logo/guid.png" class="" style="width:50px;" />
 
                             </a>
 
