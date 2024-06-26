@@ -1069,3 +1069,19 @@ nav {
         margin-right: 5px;
     }
 
+#note {
+    position: relative;
+    animation: noteAnimate 10s infinite;
+    animation-timing-function: ease-in-out;
+    display: flex;
+    align-items: center;
+}
+@keyframes noteAnimate {
+    from {
+        right: -735px;
+    }
+
+    to {
+        right: 735px;
+    }
+}

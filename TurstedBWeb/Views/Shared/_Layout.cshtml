@@ -52,7 +52,7 @@
              
                     
                         <a class="navbar-brand me-auto" asp-area="" asp-controller="Home" asp-action="Index">
-                              <img src="~/Files/Logo/guid.png" class="" style="width:140px;" />
+                              <img src="~/Files/Logo/BName.png" class="" style="width:140px;" />
                              
  
                         </a>
@@ -67,21 +67,32 @@
                                     <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-action="Index">@_localization.Getkey("Home")</a>
                                 </li>
                         <li class="nav-item ">
-                            <a class="nav-link" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Topics")</a>
+                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Guidance">@_localization.Getkey("Guidance")</a>
                                 </li>
-                                @* <li class="nav-item">
-                                <a class="nav-link " asp-area="Admin" asp-controller="Topic" asp-action="Index1">Test</a>
-                                </li> *@
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">@_localization.Getkey("Users")</a>
-                                </li>
-                            </ul>
+
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Images")</a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Audios")</a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Vedios")</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Reading")</a>
+                        </li>
+                        
+
+                    </ul>
 
 
 
                     <a class="navbar-brand align-items-center position-absolute top-0 start-0" asp-area="" asp-controller="Home" asp-action="Index">
 
-                        <img src="~/Files/Logo/guid.png" class="" style="width:50px;" />
+                        <img src="~/Files/Logo/Blogo.png" class="" style="width:50px;" />
 
                             </a>
 
@@ -93,7 +104,7 @@
             
         </nav>
     </header>
-    <div class="container">
+    <div >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

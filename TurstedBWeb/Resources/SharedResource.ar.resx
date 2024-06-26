@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About Us" xml:space="preserve">
+    <value>عن الموقع</value>
+  </data>
   <data name="Account" xml:space="preserve">
     <value>الحساب</value>
   </data>
@@ -176,6 +179,9 @@
   </data>
   <data name="Area Space" xml:space="preserve">
     <value>المساحة</value>
+  </data>
+  <data name="Audios" xml:space="preserve">
+    <value>استماع</value>
   </data>
   <data name="Back to List" xml:space="preserve">
     <value>رجوع للقائمة</value>
@@ -351,6 +357,9 @@
   <data name="Gender" xml:space="preserve">
     <value>النوع</value>
   </data>
+  <data name="Guidance" xml:space="preserve">
+    <value>توجيهات</value>
+  </data>
   <data name="Guidance List" xml:space="preserve">
     <value>التوجيهات</value>
   </data>
@@ -365,6 +374,9 @@
   </data>
   <data name="House Address" xml:space="preserve">
     <value>وصف العنوان كتابة</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>صور</value>
   </data>
   <data name="Item" xml:space="preserve">
     <value>البند</value>
@@ -452,6 +464,9 @@
   </data>
   <data name="RE Items" xml:space="preserve">
     <value>بنود الصرف والايراد</value>
+  </data>
+  <data name="Reading" xml:space="preserve">
+    <value>اطلاع</value>
   </data>
   <data name="Receipt" xml:space="preserve">
     <value>الايصال</value>
@@ -617,6 +632,9 @@
   </data>
   <data name="Users List" xml:space="preserve">
     <value>قائمة المستخدمين</value>
+  </data>
+  <data name="Vedios" xml:space="preserve">
+    <value>مشاهدة</value>
   </data>
   <data name="Whatsup Phone" xml:space="preserve">
     <value>رقم الواتس</value>
