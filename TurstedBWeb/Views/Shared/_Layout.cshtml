@@ -63,12 +63,15 @@
                         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 
                     <ul class="navbar-nav position-absolute top-0 start-50 translate-middle-x">
-                                <li class="nav-item">
-                                    <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-action="Index">@_localization.Getkey("Home")</a>
+                        <li class="nav-item ">
+                                        <a class="nav-link active " asp-area="Customer" asp-controller="Home" asp-action="Index">
+                                        <i class="bi bi-house-door h5"></i>
+                                        @_localization.Getkey("Home")
+                                        </a>
                                 </li>
                         <li class="nav-item ">
                             <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Guidance">@_localization.Getkey("Guidance")</a>
-                                </li>
+                             </li>
 
                         <li class="nav-item ">
                             <a class="nav-link" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Images")</a>
