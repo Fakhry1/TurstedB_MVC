@@ -17,7 +17,7 @@ using TurstedBWeb.Models;
 namespace TrustedBWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
+    [Authorize]
     public class TopicController : Controller
     {
         private readonly ILogger<TopicController> _logger;
