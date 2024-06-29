@@ -34,7 +34,7 @@
     <div class="py-2  col-3">
             <div class="form-check form-switch">
                 <input asp-for="attachments.MainFile" class="form-check-input" type="checkbox">
-                <label asp-for="attachments.MainFile" class="form-check-label">Main File?</label>
+                <label asp-for="attachments.MainFile" class="form-check-label">@_localization.Getkey("Main File?")</label>
             </div>
             <button type="submit" class="btn btn-primary form-control" asp-controller="Topic" asp-action="Attachment" asp-route-id="@Model.topic.TopicId">@_localization.Getkey("Save")</button>
     </div>
@@ -78,7 +78,7 @@
 
                                 <td>@obj.TopicsStates.ArabicName</td>
                             <td>
-                                 <a asp-controller="Maher" asp-action="DownloadFile" asp-route-id="@obj.TopicId" class="btn btn-primary mx-2 text-center">
+                                 <a asp-controller="Topic" asp-action="DownloadFile" asp-route-id="@obj.FileId" class="btn btn-primary mx-2 text-center">
                                         <i class="bi bi-download h4"></i>
                                     </a>
                             </td>

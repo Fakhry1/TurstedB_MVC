@@ -155,19 +155,19 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         //__________________download______________________
 
-        //public IActionResult DownloadFile(Guid? id)
-        //{
-        //    string webRootPath = _hostEnvironment.WebRootPath;
-        //    var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
+        public IActionResult DownloadFile(Guid? id)
+        {
+            string webRootPath = _hostEnvironment.WebRootPath;
+            var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
 
-        //    string path = Path.Combine(webRootPath) + slash + fileName.FilePath;
+            string path = Path.Combine(webRootPath) + slash + fileName.FilePath;
 
-        //    //Read the File data into Byte Array.
-        //    byte[] bytes = System.IO.File.ReadAllBytes(path);
+            //Read the File data into Byte Array.
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
 
-        //    //Send the File to Download.
-        //    return File(bytes, "application/octet-stream", fileName.FilePath);
-        //}
+            //Send the File to Download.
+            return File(bytes, "application/octet-stream", fileName.FilePath);
+        }
 
 
         //______________________________Attachments_________________
