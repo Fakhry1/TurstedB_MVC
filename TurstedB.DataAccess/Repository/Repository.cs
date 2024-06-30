@@ -9,6 +9,7 @@ using TrustedB.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using TrustedB.DataAccess.Data;
+using TrustedB.Models;
 
 namespace TrustedB.DataAccess.Repository
 {
@@ -83,6 +84,7 @@ namespace TrustedB.DataAccess.Repository
         {
 
             IQueryable<T> query = dbSet;
+            
             if (filter != null)
             {
                 query = query.Skip(recSkip).Take(recTak).Where(filter);
@@ -100,6 +102,33 @@ namespace TrustedB.DataAccess.Repository
             return query.ToList();
 
         }
+
+
+        public IEnumerable<T> GetAllPaginationAudio(int recSkip, int recTak, Expression<Func<T, bool>>? filter, string? includeProperties = null)
+        {
+
+            IQueryable<T> query = dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+
+            }
+            query = query.Skip(recSkip).Take(recTak);
+
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+
+            return query.ToList();
+
+        }
+
 
     }
 }

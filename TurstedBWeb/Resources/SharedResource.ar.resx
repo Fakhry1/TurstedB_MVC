@@ -180,6 +180,9 @@
   <data name="Area Space" xml:space="preserve">
     <value>المساحة</value>
   </data>
+  <data name="Audio - Qasaeid and Hadara" xml:space="preserve">
+    <value>استماع - قصائد وحضرات</value>
+  </data>
   <data name="Audios" xml:space="preserve">
     <value>استماع</value>
   </data>
@@ -420,6 +423,9 @@
   <data name="Neighborhood" xml:space="preserve">
     <value>الحي</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>التالي</value>
+  </data>
   <data name="Note" xml:space="preserve">
     <value>الملاحظات</value>
   </data>
@@ -449,6 +455,9 @@
   </data>
   <data name="Phone Number" xml:space="preserve">
     <value>رقم الهاتف</value>
+  </data>
+  <data name="Prev" xml:space="preserve">
+    <value>السابق</value>
   </data>
   <data name="Publish" xml:space="preserve">
     <value>نشر</value>

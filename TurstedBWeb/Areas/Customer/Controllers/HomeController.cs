@@ -110,8 +110,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         public IActionResult Audio(int pg = 1)
         {
-           
-
+     
             const int pageSize = 3;
             if (pg < 1) { pg = 1; }
 
@@ -120,10 +119,9 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             int recSkip = (pg - 1) * pageSize;
 
             //GetAllPagination
-            //var TopicList = _unitOfWork.Topics.GetAllPagination(recSkip, pager.PageSize, filter: o => (o.CategoryID == 4)).ToList();
+            var TopicList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 4)).ToList();
 
-
-            var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
+            //var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
             this.ViewBag.Pager = pager;
 
             return View(TopicList);
