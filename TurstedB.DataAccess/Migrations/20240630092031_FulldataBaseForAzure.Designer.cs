@@ -12,8 +12,8 @@ using TrustedB.DataAccess.Data;
 namespace TrustedB.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240612164112_FullDatabase")]
-    partial class FullDatabase
+    [Migration("20240630092031_FulldataBaseForAzure")]
+    partial class FulldataBaseForAzure
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -490,7 +490,6 @@ namespace TrustedB.DataAccess.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Titel")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TopicDiscription")

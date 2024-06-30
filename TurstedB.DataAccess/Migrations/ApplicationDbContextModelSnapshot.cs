@@ -487,7 +487,6 @@ namespace TrustedB.DataAccess.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Titel")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TopicDiscription")

@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TrustedB.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class FullDatabase : Migration
+    public partial class FulldataBaseForAzure : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -233,7 +233,7 @@ namespace TrustedB.DataAccess.Migrations
                 columns: table => new
                 {
                     TopicId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Titel = table.Column<string>(type: "text", nullable: false),
+                    Titel = table.Column<string>(type: "text", nullable: true),
                     TopicDiscription = table.Column<string>(type: "text", nullable: true),
                     CategoryID = table.Column<int>(type: "integer", nullable: true),
                     SubCategoryID = table.Column<int>(type: "integer", nullable: true),
