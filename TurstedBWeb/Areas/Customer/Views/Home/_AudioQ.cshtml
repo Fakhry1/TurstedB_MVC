@@ -1,0 +1,54 @@
+﻿@model AudioVM
+
+<style>
+
+    audio {
+        max-height: 100%;
+        max-width: 100%;
+        margin: auto;
+        object-fit: contain;
+    }
+</style>
+
+<div class="row d-flex">
+
+    <div class="col-10">
+        <div class="card-body p-4 ">
+
+            <div class="container">
+                <div class="row d-flex flex-row">
+                    @foreach (var obj in Model.AudioQList.OrderBy(u => u.CreationDate))
+                    {
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="card shadow-sm border rounded">
+                                <div class="card-body p-0">
+                                    <div class="text-center shadow p-1">
+                                        <h6 class="mb-1 mt-1">@obj.Titel</h6>
+                                        <audio controls>
+
+                                            <source src="@obj.MainFile" type="audio/ogg">
+                                            <source src="@obj.MainFile" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        <p class="small text-muted text-truncate">
+                                            @obj.TopicDiscription
+                                            <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile">
+                                                <i class="bi bi-download h6"></i>
+                                            </a>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

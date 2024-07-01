@@ -88,10 +88,10 @@
                                 @* @if (pager.CurrentPage >= 1)
                             { *@
                                 <li class="page-item ">
-                                    <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="1">First</a>
+                                <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="1">>@_localization.Getkey("First")</a>
                                 </li>
                                 <li class="page-item ">
-                                    <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Prev">Prev</a>
+                                <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Prev">>@_localization.Getkey("Prev")</a>
                                 </li>
                                 @*   } *@
                                 @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
@@ -103,10 +103,10 @@
                                 @*  @if( pager.TotalPages>0)
                             { *@
                                 <li class="page-item ">
-                                    <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Next">Next</a>
+                                <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
                                 </li>
                                 <li class="page-item ">
-                                    <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@ToltalP">Last</a>
+                                <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@ToltalP">@_localization.Getkey("Last")</a>
                                 </li>
                                 @* } *@
 

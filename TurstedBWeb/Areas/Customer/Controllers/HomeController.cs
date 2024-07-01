@@ -108,23 +108,26 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         //______________________________Audio____________________________________
 
-        public IActionResult Audio(int pg = 1)
+        public IActionResult AllAudio(int pg = 1)
         {
      
-            const int pageSize = 3;
+            AudioVM audioVM = new AudioVM();
+
+            const int pageSize = 1;
             if (pg < 1) { pg = 1; }
 
-            int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).Count();
+            int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).Count() + _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 5)).Count();
             var pager = new Pager(recsCount, pg, pageSize);
             int recSkip = (pg - 1) * pageSize;
 
             //GetAllPagination
-            var TopicList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 4)).ToList();
+            audioVM.AudioQList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 4)).ToList();
+            audioVM.AudioLesonList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 5)).ToList();
 
             //var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
             this.ViewBag.Pager = pager;
 
-            return View(TopicList);
+            return View(audioVM);
 
         }
 
@@ -140,7 +143,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             int recSkip = (pg - 1) * pageSize;
 
             //GetAllPagination
-            var TopicList = _unitOfWork.Topics.GetAllPagination(recSkip, pager.PageSize, filter: o => (o.CategoryID == 5), includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
+            var TopicList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 5)).ToList();
 
             this.ViewBag.Pager = pager;
 
