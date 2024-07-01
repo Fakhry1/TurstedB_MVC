@@ -113,7 +113,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
      
             AudioVM audioVM = new AudioVM();
 
-            const int pageSize = 1;
+            const int pageSize = 4;
             if (pg < 1) { pg = 1; }
 
             int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).Count() + _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 5)).Count();
@@ -131,25 +131,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         }
 
-        public IActionResult AudioLeasones(int pg = 1)
-        {
-            //RequestDetailsVM requestDetailsVM = new RequestDetailsVM();
-
-            const int pageSize = 3;
-            if (pg < 1) { pg = 1; }
-
-            int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 1)).Count();
-            var pager = new Pager(recsCount, pg, pageSize);
-            int recSkip = (pg - 1) * pageSize;
-
-            //GetAllPagination
-            var TopicList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 5)).ToList();
-
-            this.ViewBag.Pager = pager;
-
-            return View(TopicList);
-
-        }
+        
         #region Localization
         public IActionResult ChangeLanguage(string culture)
         {
