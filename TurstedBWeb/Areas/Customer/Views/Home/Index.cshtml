@@ -1,317 +1,17 @@
-﻿@*
-<style>
-
-    h2 {
-        color: #333;
-        text-align: center;
-        text-transform: uppercase;
-        font-family: "Roboto", sans-serif;
-        font-weight: bold;
-        position: relative;
-        margin: 30px 0 60px;
-    }
-
-        h2::after {
-            content: "";
-            width: 100px;
-            position: absolute;
-            margin: 0 auto;
-            height: 3px;
-            background: #8fbc54;
-            left: 0;
-            right: 0;
-            bottom: -10px;
-        }
-
-    .col-center {
-        margin: 0 auto;
-        float: none !important;
-    }
-
-    .carousel {
-        margin: 50px auto;
-        padding: 0 70px;
-    }
-
-        .carousel .item {
-            color: #999;
-            font-size: 14px;
-            text-align: center;
-            overflow: hidden;
-            min-height: 290px;
-        }
-
-            .carousel .item .img-box {
-                width: 135px;
-                height: 135px;
-                margin: 0 auto;
-                padding: 5px;
-                border: 1px solid #ddd;
-                border-radius: 50%;
-            }
-
-        .carousel .img-box img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            border-radius: 50%;
-        }
-
-        .carousel .testimonial {
-            padding: 30px 0 10px;
-        }
-
-        .carousel .overview {
-            font-style: italic;
-        }
-
-            .carousel .overview b {
-                text-transform: uppercase;
-                color: #7AA641;
-            }
-
-        .carousel .carousel-control {
-            width: 40px;
-            height: 40px;
-            margin-top: -20px;
-            top: 50%;
-            background: none;
-        }
-
-    .carousel-control i {
-        font-size: 68px;
-        line-height: 42px;
-        position: absolute;
-        display: inline-block;
-        color: rgba(0, 0, 0, 0.8);
-        text-shadow: 0 3px 3px #e6e6e6, 0 0 0 #000;
-    }
-
-    .carousel .carousel-indicators {
-        bottom: -40px;
-    }
-
-    .carousel-indicators li, .carousel-indicators li.active {
-        width: 10px;
-        height: 10px;
-        margin: 1px 3px;
-        border-radius: 50%;
-    }
-
-    .carousel-indicators li {
-        background: #999;
-        border-color: transparent;
-        box-shadow: inset 0 2px 1px rgba(0,0,0,0.2);
-    }
-
-        .carousel-indicators li.active {
-            background: #555;
-            box-shadow: inset 0 2px 1px rgba(0,0,0,0.2);
-        }
-</style>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-center">
-            <h2>Testimonials</h2>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- Carousel indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-                <!-- Wrapper for carousel items -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="img-box">
-                            <img src="~/Files/Logo/bg.jpg" alt="">
-                        </div>
-                        <p class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-                        <p class="overview"><b>Paula Wilson</b>, Media Analyst</p>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="img-box">
-                            <img src="~/Files/Logo/bg.jpg" alt="">
-                        </div>
-                        <p class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget nisi a mi suscipit tincidunt. Utmtc tempus dictum risus. Pellentesque viverra sagittis quam at mattis. Suspendisse potenti. Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
-                        <p class="overview"><b>Antonio Moreno</b>, Web Developer</p>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="img-box">
-                            <img src="~/Files/Logo/bg.jpg" alt="">
-                        </div>
-                        <p class="testimonial">Phasellus vitae suscipit justo. Mauris pharetra feugiat ante id lacinia. Etiam faucibus mauris id tempor egestas. Duis luctus turpis at accumsan tincidunt. Phasellus risus risus, volutpat vel tellus ac, tincidunt fringilla massa. Etiam hendrerit dolor eget rutrum.</p>
-                        <p class="overview"><b>Michael Holz</b>, Seo Analyst</p>
-                    </div>
-                </div>
-                <!-- Carousel controls -->
-
-                <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
-                    <i class="carousel-control-prev-icon"></i>
-                </a>
-
-
-                <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
-                    <i class="carousel-control-next-icon"></i>
-                </a>
-
-            </div>
-        </div>
-    </div>
-</div>
- *@
-
-
-@* <style>
-
-    h2 {
-        color: #333;
-        text-align: center;
-        text-transform: uppercase;
-        font-family: "Roboto", sans-serif;
-        font-weight: bold;
-        position: relative;
-        margin: 30px 0 60px;
-    }
-
-        h2::after {
-            content: "";
-            width: 100px;
-            position: absolute;
-            margin: 0 auto;
-            height: 3px;
-            background: #8fbc54;
-            left: 0;
-            right: 0;
-            bottom: -10px;
-        }
-
-    .col-center {
-        margin: 0 auto;
-        float: none !important;
-    }
-
-    .carousel {
-        margin: 50px auto;
-        padding: 0 70px;
-    }
-
-        .carousel .item {
-            color: #999;
-            font-size: 14px;
-            text-align: center;
-            overflow: hidden;
-            min-height: 290px;
-        }
-
-            .carousel .item .img-box {
-                width: 135px;
-                height: 135px;
-                margin: 0 auto;
-                padding: 5px;
-                border: 1px solid #ddd;
-                border-radius: 50%;
-            }
-
-        .carousel .img-box img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            border-radius: 50%;
-        }
-
-        .carousel .testimonial {
-            padding: 30px 0 10px;
-        }
-
-        .carousel .overview {
-            font-style: italic;
-        }
-
-            .carousel .overview b {
-                text-transform: uppercase;
-                color: #7AA641;
-            }
-
-        .carousel .carousel-control {
-            width: 40px;
-            height: 40px;
-            margin-top: -20px;
-            top: 50%;
-            background: none;
-        }
-
-    .carousel-control i {
-        font-size: 68px;
-        line-height: 42px;
-        position: absolute;
-        display: inline-block;
-        color: rgba(0, 0, 0, 0.8);
-        text-shadow: 0 3px 3px #e6e6e6, 0 0 0 #000;
-    }
-
-    .carousel .carousel-indicators {
-        bottom: -40px;
-    }
-
-    .carousel-indicators li, .carousel-indicators li.active {
-        width: 10px;
-        height: 10px;
-        margin: 1px 3px;
-        border-radius: 50%;
-    }
-
-    .carousel-indicators li {
-        background: #999;
-        border-color: transparent;
-        box-shadow: inset 0 2px 1px rgba(0,0,0,0.2);
-    }
-
-        .carousel-indicators li.active {
-            background: #555;
-            box-shadow: inset 0 2px 1px rgba(0,0,0,0.2);
-        }
-
-    .radius-10 {
-        border-radius: 10px !important;
-    }
-
-    .border-info {
-        border-left: 5px solid #0dcaf0 !important;
-    }
-
-    .border-danger {
-        border-left: 5px solid #fd3550 !important;
-    }
-
-    .border-success {
-        border-left: 5px solid #15ca20 !important;
-    }
-
-    .border-warning {
-        border-left: 5px solid #ffc107 !important;
-    }
-
-</style> *@
+﻿
 @* https://www.bootdey.com/snippets/view/dashboard-border-cards#html *@
 
 
 <div class="border shadow">
     <div class="row mt-1 mb-1">
-        <div class="col-1  shadow mr-5">
+        <div class="col-lg-1 col-md-1 col-sm-1  shadow ">
     <p class="mb-0 text-body p-2">اخر الاخبار</p>
         </div>
-    <div class="overflow-hidden col-8">
+        <div class="overflow-hidden col-lg-8 col-md-8 col-sm-8">
 
             <div id="note" class="ps-2 ">
 
-                <ul class="list-inline">
-                    <li class="list-inline-item">This is a list item.</li>
-                    <li class="list-inline-item">And another one.</li>
-                    <li class="list-inline-item ">But they're displayed inline.</li>
-                </ul>
-            @* <p class="text-body mb-0 link-hover">سلام علي قوم بنا قد تواصلو سلام علي قوم بنا قد تواصلو </p> *@
+            <p class="text-body mb-0 link-hover">سلام علي قوم بنا قد تواصلو سلام علي قوم بنا قد تواصلو </p>
 
         </div>
 
@@ -319,12 +19,11 @@
 
     </div>
 
-  
-
     </div>
+
     <div class="row">
        
-        <div class="col-md-12 col-center">
+        <div class="col-md-12 ">
            
 
             <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -333,7 +32,7 @@
                     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
-                <div class="carousel-inner">
+                <div class="carousel-inner p-1">
                     <div class="mx-auto carousel-item active">
 
                         <img class="d-block w-100" src="~/Files/Logo/bg.jpg" alt="">
@@ -359,134 +58,105 @@
 </div>
 
 
-@* <img src="~/Files/Logo/bg.jpg" class="w-100" /> *@
+<div class="row m-3 mb-5">
+<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-2">
+    <div class="card radius-10 border-bottom border-0 border-3 border-info shadow">
+    <div class="box-part text-center">
 
-<section class="ftco-section" id="buttons">
-    <div class="container">
-        <div class="row mb-4">
-            @* <div class="col-md-12">
-                <h3 class="heading-section">@_localization.Getkey("Topics")</h3>
-            </div> *@
+        <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+
+        <div class="title">
+                <h4 class="my-1 text-info text-center"><i class="bi bi-dpad h2"></i></h4>
+        </div>
+
+        <div class="text">
+            <p class="text-truncate">Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</p>
         </div>
 
 
-        <div class="row">
-            <div class="col-md-3 mb-3">
-                @* <button type="button" class="btn border-left border-primary shadow w-100 align-items-stretch d-flex">
-                    <div class="icon icon-left d-flex align-items-center justify-content-center">
-                        <i class="ion-ios-brush"></i>
-                    </div>
-                    <div class="text text-right">
-                        <h4>275</h4>
-                        <span>New Posts</span>
-                    </div>
-                </button> *@
-                <div class="col">
-                    <div class="card radius-10 border-start border-0 border-3 border-info shadow">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a class="navbar-brand me-auto" asp-area="Customer" asp-controller="Home" asp-action="Guidance">
-                                   @*  <p class="mb-0 text-secondary text-center">التوجيهات</p> *@
-                                    <h4 class="my-1 text-info text-center"><i class="bi bi-dpad h2"></i></h4>
-                                        <p class="mb-0 font-13">تجربة تجربة تجربة تجربة تجربة تجربة تجربة تجربة </p>
-                                    </a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @* <div class="col-md-3 mb-3">
-                <button type="button" class="btn btn-secondary w-100 align-items-stretch d-flex">
-                    <div class="icon icon-left d-flex align-items-center justify-content-center">
-                        <i class="ion-ios-chatboxes"></i>
-                    </div>
-                    <div class="text text-right">
-                        <h4>109</h4>
-                        <span>New Comment</span>
-                    </div>
-                </button>
-            </div> *@
-            <div class="col">
-                <div class="card radius-10 border-start border-0 border-3 border-danger shadow">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div>
-                                <a class="navbar-brand me-auto" asp-area="Customer" asp-controller="Home" asp-action="AllAudio">
-                                <h4 class="my-1 text-danger text-center"><i class="bi bi-images h2"></i></h4>
-                                    <p class="mb-0 font-13">Audio Audio Audio Audio Audio Audio</p>
-                                </a>
-                            </div>
-                            <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto">
-                                <i class="fa fa-dollar"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @* <div class="col-md-3 mb-3">
-                <button type="button" class="btn btn-dark w-100 align-items-stretch d-flex">
-                    <div class="text text-left">
-                        <h4>275</h4>
-                        <span>New Projects</span>
-                    </div>
-                    <div class="icon icon-right d-flex align-items-center justify-content-center">
-                        <i class="ion-ios-briefcase"></i>
-                    </div>
-                </button>
-            </div> *@
+            <a class="mb-1 btn btn-outline-primary navbar-brand me-auto" asp-area="Customer" asp-controller="Home" asp-action="Guidance">
+                Learn More
+            </a>
+        
 
-            <div class="col">
-                <div class="card radius-10 border-start border-0 border-3 border-success shadow">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div>
-                              @*   <p class="mb-0 text-secondary">Bounce Rate</p> *@
-                                <h4 class="my-1 text-success text-center"><i class="bi bi-file-earmark-music h2"></i></i></h4>
-                                <p class="mb-0 font-13">تجربة تجربة تجربة تجربة تجربة تجربة تجربة تجربة</p>
-                            </div>
-                            <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
-                                <i class="fa fa-bar-chart"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           @*  <div class="col-md-3 mb-3">
-                <button type="button" class="btn btn-primary w-100 align-items-stretch d-flex">
-                    <div class="text text-left">
-                        <h4>109</h4>
-                        <span>New Clients</span>
-                    </div>
-                    <div class="icon icon-right d-flex align-items-center justify-content-center">
-                        <i class="ion-ios-people"></i>
-                    </div>
-                </button>
-            </div> *@
-            <div class="col">
-                <div class="card radius-10 border-start border-0 border-3 border-warning shadow">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div>
-                               @*  <p class="mb-0 text-secondary">Total Customers</p> *@
-                                <h4 class="my-1 text-warning text-center"><i class="bi bi-file-earmark-play h2"></i></i></h4>
-                                <p class="mb-0 font-13">تجربة تجربة تجربة تجربة تجربة تجربة تجربة تجربة</p>
-                            </div>
-                            <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto">
-                                <i class="fa fa-users"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    </div>
+</div>
+</div>
 
 
-            @* <div class="ratio ratio-16x9 col-4">
-                <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" ></iframe>
-            </div> *@
 
+<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-2">
+<div class="card radius-10 border-bottom border-0 border-3 border-info shadow">
+    <div class="box-part text-center">
+
+        <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+
+        <div class="title">
+            <h4 class="my-1 text-danger text-center"><i class="bi bi-file-earmark-music h2"></i></h4>
+        </div>
+
+        <div class="text">
+            <p class="text-truncate">Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</p>
+        </div>
+
+
+        <a class="mb-1 btn btn-outline-primary navbar-brand me-auto" asp-area="Customer" asp-controller="Home" asp-action="AllAudio">
+            Learn More
+        </a>
+
+
+    </div>
+</div>
+</div>
+
+
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-2">
+        <div class="card radius-10 border-bottom border-0 border-3 border-info shadow">
+            <div class="box-part text-center">
+
+                <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+
+                <div class="title">
+                    <h4 class="my-1 text-success text-center"><i class="bi bi-images h2"></i> </h4>
+                </div>
+
+                <div class="text">
+                    <p class="text-truncate">Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</p>
+                </div>
+
+
+                <a class="mb-1 btn btn-outline-primary navbar-brand me-auto" asp-area="Customer" asp-controller="Home" asp-action="AllImages">
+                    Learn More
+                </a>
+
+
+            </div>
         </div>
     </div>
-</section>
+
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-2">
+        <div class="card radius-10 border-bottom border-0 border-3 border-info shadow">
+            <div class="box-part text-center">
+
+                <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+
+                <div class="title">
+                    <h4 class="my-1 text-warning text-center"><i class="bi bi-file-earmark-play h2"></i></h4>
+                </div>
+
+                <div class="text">
+                    <p class="text-truncate">Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</p>
+                </div>
+
+
+                <a class="mb-1 btn btn-outline-primary navbar-brand me-auto" asp-area="Customer" asp-controller="Home" asp-action="AllImages">
+                    Learn More
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

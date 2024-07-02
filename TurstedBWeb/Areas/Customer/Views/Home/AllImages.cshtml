@@ -1,0 +1,113 @@
+﻿@model List<Topics>
+
+
+@{
+    Pager pager = new Pager();
+    int pageNo = 0;
+    int ToltalP = 0;
+    int Next = 0;
+    int Prev = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+        ToltalP = pager.TotalPages;
+        Next = pageNo + 1;
+        Prev = pageNo - 1;
+    }
+}
+
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 bg-light m-1">
+
+        <div>
+        <a class="navbar-brand me-auto" asp-area="Customer" asp-controller="Home" asp-action="Guidance">
+        <div class="card radius-10 border-bottom border-0 border-2 border-info shadow">
+            <div class="box-part text-center">
+
+                <div class="text">
+
+                       جداريات
+
+                </div>
+
+            </div>
+        </div>
+        </a>
+        </div>
+
+        <div class="mt-2">
+        <a class="navbar-brand me-auto" asp-area="Customer" asp-controller="Home" asp-action="Guidance">
+            <div class="card radius-10 border-bottom border-0 border-2 border-info shadow">
+                <div class="box-part text-center">
+
+                    <div class="text">
+
+                         طلبات طلبات
+
+                    </div>
+
+                </div>
+            </div>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <div class="row mt-3">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="card radius-10 border-bottom border-0  shadow">
+            <div class="box-part text-center">
+
+                <div >
+
+                            <img src="~/Files/Logo/guid1.jpg" class="img-thumbnail" />
+
+                </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></button>
+                              
+                            </div>
+
+                            <small class="text-muted">Image titele</small>
+
+                            <div class="btn-group">
+                                <button asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="bi bi-display h4"></i></button>
+                               
+                            </div>
+
+
+                        </div>
+                        <!-- Button trigger modal -->
+                       
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="~/Files/Logo/guid1.jpg" class="w-100" />
+                                    </div>
+                                    <div class="modal-footer">
+                                       @*  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> *@
+                                        <button asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
