@@ -1,5 +1,9 @@
 ﻿
-@* https://www.bootdey.com/snippets/view/dashboard-border-cards#html *@
+
+
+@{
+    int subCategory = 2;
+}
 
 
 <div class="border shadow">
@@ -125,7 +129,7 @@
                 </div>
 
 
-                <a class="mb-1 btn btn-outline-primary navbar-brand me-auto" asp-area="Customer" asp-controller="Home" asp-action="AllImages">
+                <a class="mb-1 btn btn-outline-primary navbar-brand me-auto" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="@subCategory" asp-action="AllImages">
                     Learn More
                 </a>
 
