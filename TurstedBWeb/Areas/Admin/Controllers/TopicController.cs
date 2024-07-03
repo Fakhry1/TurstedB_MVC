@@ -139,6 +139,15 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         Shistory.StateSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
                         _unitOfWork.StateHistory.Add(Shistory);
                     }
+                    else
+                    {
+                        if (topicVM.topic.Titel != null)
+                            topicVM.topic.stateId = oldTopic.stateId;
+                        topicVM.topic.CreationDate = oldTopic.CreationDate;
+                        topicVM.topic.ApplicationUserId = oldTopic.ApplicationUserId;
+                        topicVM.topic.MainFile = oldTopic.MainFile; 
+                            _unitOfWork.Topics.Update(topicVM.topic);
+                    }
                 }
 
                 _unitOfWork.Save();

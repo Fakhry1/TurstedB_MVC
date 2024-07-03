@@ -180,6 +180,12 @@
   <data name="Area Space" xml:space="preserve">
     <value>المساحة</value>
   </data>
+  <data name="Audio - Leasones" xml:space="preserve">
+    <value>استماع - دروس</value>
+  </data>
+  <data name="Audio - Qasaeid and Hadara" xml:space="preserve">
+    <value>استماع - قصائد وحضرات</value>
+  </data>
   <data name="Audios" xml:space="preserve">
     <value>استماع</value>
   </data>
@@ -351,6 +357,9 @@
   <data name="Finance Mangement" xml:space="preserve">
     <value>الادارة المالية</value>
   </data>
+  <data name="First" xml:space="preserve">
+    <value>البداية</value>
+  </data>
   <data name="Full Name" xml:space="preserve">
     <value>الاسم رباعي</value>
   </data>
@@ -369,6 +378,9 @@
   <data name="Hobbies" xml:space="preserve">
     <value>الهوايات</value>
   </data>
+  <data name="Holiya" xml:space="preserve">
+    <value>حوليات</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>الرئيسية</value>
   </data>
@@ -377,6 +389,21 @@
   </data>
   <data name="Images" xml:space="preserve">
     <value>صور</value>
+  </data>
+  <data name="Images Holiya" xml:space="preserve">
+    <value>صور حوليات</value>
+  </data>
+  <data name="Images Mouled" xml:space="preserve">
+    <value>صور موالد</value>
+  </data>
+  <data name="Images Murals" xml:space="preserve">
+    <value>صور جداريات</value>
+  </data>
+  <data name="Images Public Events" xml:space="preserve">
+    <value>صور مناسبات عامة</value>
+  </data>
+  <data name="Images Tarahoum" xml:space="preserve">
+    <value>صور تراحمات</value>
   </data>
   <data name="Item" xml:space="preserve">
     <value>البند</value>
@@ -393,6 +420,9 @@
   <data name="Languages" xml:space="preserve">
     <value>اللغات</value>
   </data>
+  <data name="Last" xml:space="preserve">
+    <value>الاخيرة</value>
+  </data>
   <data name="Lock" xml:space="preserve">
     <value>غير مفعل</value>
   </data>
@@ -408,6 +438,18 @@
   <data name="Main File" xml:space="preserve">
     <value>الملف الاساسي</value>
   </data>
+  <data name="Manage User Roles" xml:space="preserve">
+    <value>ادارة ادوار المستخدمين</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>المزيد</value>
+  </data>
+  <data name="Mouled" xml:space="preserve">
+    <value>موالد</value>
+  </data>
+  <data name="Murals" xml:space="preserve">
+    <value>جداريات</value>
+  </data>
   <data name="Murshied" xml:space="preserve">
     <value>المرشد</value>
   </data>
@@ -419,6 +461,12 @@
   </data>
   <data name="Neighborhood" xml:space="preserve">
     <value>الحي</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>الاخبار</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>التالي</value>
   </data>
   <data name="Note" xml:space="preserve">
     <value>الملاحظات</value>
@@ -449,6 +497,12 @@
   </data>
   <data name="Phone Number" xml:space="preserve">
     <value>رقم الهاتف</value>
+  </data>
+  <data name="Prev" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="Public Events" xml:space="preserve">
+    <value>مناسبات عامة</value>
   </data>
   <data name="Publish" xml:space="preserve">
     <value>نشر</value>
@@ -510,6 +564,9 @@
   <data name="Roles" xml:space="preserve">
     <value>الادوار</value>
   </data>
+  <data name="Roles Assignment" xml:space="preserve">
+    <value>اسناد الادوار</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>بحث</value>
   </data>
@@ -566,6 +623,9 @@
   </data>
   <data name="Sundry" xml:space="preserve">
     <value>نثرية</value>
+  </data>
+  <data name="Tarahoum" xml:space="preserve">
+    <value>تراحمات</value>
   </data>
   <data name="Tariqa Information" xml:space="preserve">
     <value>معلومات الطريقة</value>
@@ -627,6 +687,12 @@
   <data name="User" xml:space="preserve">
     <value>مستخدم</value>
   </data>
+  <data name="User Email" xml:space="preserve">
+    <value>ايميل المستخدم</value>
+  </data>
+  <data name="User Name" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
   <data name="Users" xml:space="preserve">
     <value>المستخدمين</value>
   </data>
@@ -638,5 +704,8 @@
   </data>
   <data name="Whatsup Phone" xml:space="preserve">
     <value>رقم الواتس</value>
+  </data>
+  <data name="You can follw all related news from here" xml:space="preserve">
+    <value>يمكنك متابعة كل الاخبار المتعلة بالطريقة</value>
   </data>
 </root>

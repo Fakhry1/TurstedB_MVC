@@ -18,6 +18,8 @@ namespace TrustedB.DataAccess.Repository.IRepository
         void RemoveRange(IEnumerable<T> entity);
 
         IEnumerable<T> GetAllPagination(int recSkip, int pageSize, Expression<Func<T, bool>>? filter, string? includeProperties = null);
+        IEnumerable<T> GetAllPaginationAudio(int recSkip, int pageSize, Expression<Func<T, bool>>? filter, string? includeProperties = null);
+
 
     }
 }

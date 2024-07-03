@@ -52,10 +52,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
              //GetAllPagination
             requestDetailsVM.TopicList = _unitOfWork.Topics.GetAllPagination(recSkip, pager.PageSize, filter: o => (o.CategoryID == 1), includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
-            //foreach(var topic in requestDetailsVM.TopicList) 
-            //{
-            //    requestDetailsVM.Test = 
-            //}
+          
             this.ViewBag.Pager = pager;
 
             if ( Id !=null )
@@ -68,8 +65,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             return View(requestDetailsVM);
             
         }
-        //[HttpPost]
-        //[DisableRequestSizeLimit]
+
         public IActionResult GuidanceDetails(Guid? Id)
         {
             RequestDetailsVM requestDetailsVM = new RequestDetailsVM();
@@ -96,13 +92,69 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             return File(bytes, "application/octet-stream", fileName.FilePath);
         }
 
-        public IActionResult AttachmentList(Guid? Id)
+        public IActionResult DownloadAudio(string? path)
+        {
+            string webRootPath = _hostEnvironment.WebRootPath;
+            //var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
+
+            string filePath = Path.Combine(webRootPath) + slash + path;
+
+            //Read the File data into Byte Array.
+            byte[] bytes = System.IO.File.ReadAllBytes(filePath);
+
+            //Send the File to Download.
+            return File(bytes, "application/octet-stream", "Image.png");
+        }
+
+        //______________________________Audio____________________________________
+
+        public IActionResult AllAudio(int pg = 1)
+        {
+     
+            AudioVM audioVM = new AudioVM();
+
+            const int pageSize = 4;
+            if (pg < 1) { pg = 1; }
+
+            int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).Count() + _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 5)).Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+
+            //GetAllPagination
+            audioVM.AudioQList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 4)).ToList();
+            audioVM.AudioLesonList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 5)).ToList();
+
+            //var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
+            this.ViewBag.Pager = pager;
+
+            return View(audioVM);
+
+        }
+
+        //______________________________Audio____________________________________
+
+        public IActionResult AllImages(int? SubCategoryID, int pg = 1)
         {
 
-            ViewBag.FileList = _unitOfWork.Attachments.GetAll(u => u.TopicId == Id).ToList();
-           //ViewBag.AttachmentList = fileList;
-            return View();
+            const int pageSize = 8;
+            if (pg < 1) { pg = 1; }
+
+            int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.SubCategoryID == SubCategoryID)).Count();
+            var pager = new Pager((int)SubCategoryID,recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+
+            //GetAllPagination
+            var ImageList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
+           
+            //var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
+            this.ViewBag.Pager = pager;
+          
+
+            return View(ImageList);
+
         }
+
+
 
         #region Localization
         public IActionResult ChangeLanguage(string culture)
