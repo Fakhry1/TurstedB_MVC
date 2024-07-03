@@ -15,63 +15,93 @@
 </head>
 <body>
     <header>
-        <div id="top-header">
-        <nav class="navbar navbar-expand-lg" style="height: 2rem;">
-            <div class="container-fluid">
+        <div class="row">
+            <div id="top-header">
+                <nav class="navbar navbar-expand-lg" style="height: 2rem;">
+                    <div class="container-fluid">
 
-                @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2">
+                            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+                                <ul class="navbar-nav pull-left">
+
+
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="Admin" asp-controller="Topic" asp-action="Index"> <i class="bi bi-envelope h6 m-1"></i>@_localization.Getkey("Test@test.com")</a>
+                                    </li>
+
+                                    @*  <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Topics")</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="Admin" asp-controller="User" asp-action="Index">@_localization.Getkey("Users")</a>
+                                    </li> *@
+                                </ul>
+
+
+                                @*  <partial name="_LoginPartial" /> *@
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 ">
+                            <ul class="navbar">
+                                <li class="nav-item dropdown position-absolute top-20 start-0 mt-3">
+                                    <a class="nav-link dropdown-toggle text-white " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-translate h4"></i>
+                                    </a>
+                                    <ul class="dropdown-menu position-absolute top-5 start-0">
+                                        <li class="nav-item">
+                                            <a class="dropdown-item text-center " asp-action="ChangeLanguage" asp-area="Customer" asp-controller="Home" asp-route-culture="ar"> @_localization.Getkey("عربي")</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="dropdown-item text-center" asp-action="ChangeLanguage" asp-area="Customer" asp-controller="Home" asp-route-culture="en"> @_localization.Getkey("English") </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>  *@
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>  *@
 
-                        <ul class="navbar-nav header-links pull-left">
-                       
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Topics")</a>
-                        </li>
-                      
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="Admin" asp-controller="User" asp-action="Index">@_localization.Getkey("Users")</a>
-                        </li>
-                    </ul>
-
-                       
-                    <partial name="_LoginPartial" />
-                      
-
-                </div>
+                    </div>
             </div>
 
-        </nav>
+            </nav>
 
         </div>
-
+        </div>
         <nav class="navbar navbar-expand-lg border-bottom border-primary border-3 shadow" style="height: 4rem;">
             <div class="container-fluid">
-             
-                    
-                        <a class="navbar-brand me-auto" asp-area="" asp-controller="Home" asp-action="Index">
-                           @*  <img src="~/Files/Logo/BName.png" class="" style="width:140px;" /> *@
-                             
- 
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+
+                <a class="navbar-brand me-auto" asp-area="" asp-controller="Home" asp-action="Index">
+                    @*  <img src="~/Files/Logo/BName.png" class="" style="width:140px;" /> *@
+
+
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 
                     <ul class="navbar-nav position-absolute top-0 start-50 translate-middle-x">
                         <li class="nav-item ">
-                                        <a class="nav-link active " asp-area="Customer" asp-controller="Home" asp-action="Index">
-                                        <i class="bi bi-house-door h5"></i>
-                                        @_localization.Getkey("Home")
-                                        </a>
-                                </li>
+                            <a class="nav-link active " asp-area="Customer" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house-door h5"></i>
+                                @_localization.Getkey("Home")
+                            </a>
+                        </li>
                         <li class="nav-item ">
                             <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Guidance">@_localization.Getkey("Guidance")</a>
-                             </li>
+                        </li>
 
                         <li class="nav-item ">
                             <a class="nav-link" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Images")</a>
@@ -87,7 +117,7 @@
                         <li class="nav-item ">
                             <a class="nav-link" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Reading")</a>
                         </li>
-                        
+
 
                     </ul>
 
@@ -95,19 +125,19 @@
 
                     <a class="navbar-brand align-items-center position-absolute top-0 start-0" asp-area="" asp-controller="Home" asp-action="Index">
 
-                     @*  <img src="~/Files/Logo/Blogo.png" class="" style="width:50px;" />  *@
+                        @*  <img src="~/Files/Logo/Blogo.png" class="" style="width:50px;" />  *@
 
-                            </a>
+                    </a>
 
-                       
-                          
-                       
-                    </div>
+
+
+
                 </div>
-            
+            </div>
+
         </nav>
     </header>
-    <div >
+    <div>
         <main role="main" class="container-fluid">
             @RenderBody()
         </main>
@@ -116,7 +146,23 @@
     <div style="bottom:0;position: fixed; width:100%;" class="bg-primary text-light text-center">
 
         <footer>
-            <i class="bi bi-c-circle"></i> Burhaniya
+            <div class="row">
+                <div class="col-4 d-sm-inline-flex justify-content-between">
+                    
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Topics")</a>
+                       
+
+                        
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="User" asp-action="Index">@_localization.Getkey("Users")</a>
+                     
+                </div>
+                <div class="col-2">
+                     Burhaniya
+                </div>
+                <div class="col-6">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
         </footer>
     </div>
 

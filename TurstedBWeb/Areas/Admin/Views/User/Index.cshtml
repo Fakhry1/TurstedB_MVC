@@ -3,7 +3,7 @@
     <div class="card-header bg-primary-subtle ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="py-2">@_localization.Getkey("Users List")</h2>
+                <h4 class="py-2">@_localization.Getkey("Users List")</h4>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
                             <div class="row">
                                 <div class="col-3">
                                     <a asp-action="ManageRole" asp-route-userId="@obj.Id" class="btn btn-primary w-100" style="cursor:pointer">
-                                        Roles
+                                        @_localization.Getkey("Roles")
                                     </a>
                                 </div>
 

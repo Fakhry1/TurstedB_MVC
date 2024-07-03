@@ -6,7 +6,7 @@
         <div class="card-header bg-dark ml-0 py-3">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="text-white py-2">@_localization.Getkey("Manage User Roles")</h2>
+                    <h4 class="text-white py-2">@_localization.Getkey("Manage User Roles")</h4>
                 </div>
             </div>
         </div>
@@ -28,12 +28,12 @@
                 </div>
 
                 <div class="form-group mt-3 p-2 border rounded">
-                    <span>Roles Assignment</span>
+                    <span>@_localization.Getkey("Roles Assignment")</span>
                     @for (int i = 0; i < Model.RolesList.Count; i++)
                     {
-                        <div class="m-2 form-check">
+                        <div class="m-2 form-check ">
                             <input asp-for="@Model.RolesList[i].RoleName" hidden />
-                            <input asp-for="@Model.RolesList[i].IsSelected" class="form-check-input" />
+                            <input asp-for="@Model.RolesList[i].IsSelected" class="form-check-input h4" />
                             <label class="form-check-label" asp-for="@Model.RolesList[i].IsSelected">
                                 @Model.RolesList[i].RoleName
                             </label>
@@ -44,11 +44,12 @@
 
 
                 <div class="form-group pt-3 row">
-                    <div class="col-md-6">
-                        <a class="btn btn-secondary w-100" asp-action="Index">@_localization.Getkey("User EmailBack to List")</a>
-                    </div>
+                   
                     <div class="col-md-6 ">
-                        <input type="submit" class="btn btn-primary w-100" value="Update" />
+                        <input type="submit" class="btn btn-primary w-100" value="@_localization.Getkey("Update")" />
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-primary w-100" asp-action="Index">@_localization.Getkey("Back to List")</a>
                     </div>
                 </div>
             </div>

@@ -4,49 +4,34 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
+<div class="row grid gap-0 ">
+    <div class="col-12 d-sm-inline-flex justify-content-between ">
+    
 
 
-<ul class="navbar-nav">
-  
-  
-    <li class="nav-item dropdown  ">
-        <a class="nav-link dropdown-toggle text-white " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-translate h4"></i>
-        </a>
-        <ul class="dropdown-menu position-absolute top-5 end-0">
-            <li class="nav-item">
-                <a class="dropdown-item text-center " asp-action="ChangeLanguage" asp-area="Customer" asp-controller="Home" asp-route-culture="ar"> @_localization.Getkey("عربي")</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="dropdown-item text-center" asp-action="ChangeLanguage" asp-area="Customer" asp-controller="Home" asp-route-culture="en"> @_localization.Getkey("English") </a>
-            </li>
-        </ul>
-    </li>
-   
-  
     @if (SignInManager.IsSignedIn(User))
     {
-       @*  <div class="position-absolute top-0 start-0"> *@
-        <li class="nav-item ">
+     
+        
 
                 <a id="manage" class="nav-link text-white">@_localization.Getkey("Hello") @UserManager.GetUserName(User)</a>
 
-        </li>
-        <li class="nav-item">
+      
+       
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link border-0 text-white">@_localization.Getkey("Logout")</button>
+                <button id="logout" type="submit" class="nav-link btn btn-link border-0 text-white"><i class="bi bi-box-arrow-right h5"></i></button>
             </form>
-        </li>
-       @*  </div> *@
+        
+    
+    
     }
     else
     {
-        <li class="nav-item">
-            <a class="nav-link text-white" id="login" asp-area="Identity" asp-page="/Account/Login">@_localization.Getkey("Login")</a>
-        </li>
-       
+
+            <a class="nav-link text-white" id="login" asp-area="Identity" asp-page="/Account/Login"><i class="bi bi-person-circle h5"></i></a>
+
     }
  
-    
-</ul>
+
+    </div>
+</div>

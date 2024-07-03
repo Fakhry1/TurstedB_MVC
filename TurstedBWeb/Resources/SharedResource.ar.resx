@@ -420,6 +420,12 @@
   <data name="Main File" xml:space="preserve">
     <value>الملف الاساسي</value>
   </data>
+  <data name="Manage User Roles" xml:space="preserve">
+    <value>ادارة ادوار المستخدمين</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>المزيد</value>
+  </data>
   <data name="Murshied" xml:space="preserve">
     <value>المرشد</value>
   </data>
@@ -527,6 +533,9 @@
   </data>
   <data name="Roles" xml:space="preserve">
     <value>الادوار</value>
+  </data>
+  <data name="Roles Assignment" xml:space="preserve">
+    <value>اسناد الادوار</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>بحث</value>
@@ -645,6 +654,12 @@
   <data name="User" xml:space="preserve">
     <value>مستخدم</value>
   </data>
+  <data name="User Email" xml:space="preserve">
+    <value>ايميل المستخدم</value>
+  </data>
+  <data name="User Name" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
   <data name="Users" xml:space="preserve">
     <value>المستخدمين</value>
   </data>
@@ -656,5 +671,8 @@
   </data>
   <data name="Whatsup Phone" xml:space="preserve">
     <value>رقم الواتس</value>
+  </data>
+  <data name="You can follw all related news from here" xml:space="preserve">
+    <value>يمكنك متابعة كل الاخبار المتعلة بالطرية</value>
   </data>
 </root>
