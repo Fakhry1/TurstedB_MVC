@@ -378,6 +378,9 @@
   <data name="Hobbies" xml:space="preserve">
     <value>الهوايات</value>
   </data>
+  <data name="Holiya" xml:space="preserve">
+    <value>حوليات</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>الرئيسية</value>
   </data>
@@ -386,6 +389,21 @@
   </data>
   <data name="Images" xml:space="preserve">
     <value>صور</value>
+  </data>
+  <data name="Images Holiya" xml:space="preserve">
+    <value>صور حوليات</value>
+  </data>
+  <data name="Images Mouled" xml:space="preserve">
+    <value>صور موالد</value>
+  </data>
+  <data name="Images Murals" xml:space="preserve">
+    <value>صور جداريات</value>
+  </data>
+  <data name="Images Public Events" xml:space="preserve">
+    <value>صور مناسبات عامة</value>
+  </data>
+  <data name="Images Tarahoum" xml:space="preserve">
+    <value>صور تراحمات</value>
   </data>
   <data name="Item" xml:space="preserve">
     <value>البند</value>
@@ -426,6 +444,12 @@
   <data name="More" xml:space="preserve">
     <value>المزيد</value>
   </data>
+  <data name="Mouled" xml:space="preserve">
+    <value>موالد</value>
+  </data>
+  <data name="Murals" xml:space="preserve">
+    <value>جداريات</value>
+  </data>
   <data name="Murshied" xml:space="preserve">
     <value>المرشد</value>
   </data>
@@ -437,6 +461,9 @@
   </data>
   <data name="Neighborhood" xml:space="preserve">
     <value>الحي</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>الاخبار</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>التالي</value>
@@ -473,6 +500,9 @@
   </data>
   <data name="Prev" xml:space="preserve">
     <value>السابق</value>
+  </data>
+  <data name="Public Events" xml:space="preserve">
+    <value>مناسبات عامة</value>
   </data>
   <data name="Publish" xml:space="preserve">
     <value>نشر</value>
@@ -594,6 +624,9 @@
   <data name="Sundry" xml:space="preserve">
     <value>نثرية</value>
   </data>
+  <data name="Tarahoum" xml:space="preserve">
+    <value>تراحمات</value>
+  </data>
   <data name="Tariqa Information" xml:space="preserve">
     <value>معلومات الطريقة</value>
   </data>
@@ -673,6 +706,6 @@
     <value>رقم الواتس</value>
   </data>
   <data name="You can follw all related news from here" xml:space="preserve">
-    <value>يمكنك متابعة كل الاخبار المتعلة بالطرية</value>
+    <value>يمكنك متابعة كل الاخبار المتعلة بالطريقة</value>
   </data>
 </root>

@@ -2,12 +2,14 @@
 
 
 @{
-    string path1 = "";
+    string Titel = "";
+    string path1= "";
     Pager pager = new Pager();
     int pageNo = 0;
     int ToltalP = 0;
     int Next = 0;
     int Prev = 0;
+    int subCategory = 0;
 
     if (ViewBag.Pager != null)
     {
@@ -16,6 +18,27 @@
         ToltalP = pager.TotalPages;
         Next = pageNo + 1;
         Prev = pageNo - 1;
+        subCategory = pager.SubCategoryID;
+    }
+    if (subCategory == 2)
+    {
+        Titel = "Murals";
+    }
+    else if (subCategory == 3)
+    {
+        Titel = "Mouled";
+    }
+    else if (subCategory == 4)
+    {
+        Titel = "Holiya";
+    }
+    else if (subCategory == 5)
+    {
+        Titel = "Public Events";
+    }
+    else if (subCategory == 6)
+    {
+        Titel = "Tarahoum";
     }
 }
 
@@ -28,7 +51,7 @@
         </button>
     </div>
     <div class="col-lg-10 col-md-10 col-sm-10 text-center">
-        <h6 class="text-primary py-2">@_localization.Getkey("Filter Images")</h6>
+        <h5 class="text-primary py-2">@_localization.Getkey("Images"+" "+@Titel)</h5>
     </div>
 </div>
 <div class="row">
@@ -42,37 +65,29 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary " aria-current="page" href="#">
-                                1 جداريات
-
-                            </a>
+                            <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="2" asp-route-pg="@Prev">@_localization.Getkey("Murals")</a>
+                            
                         </li>
                         <li class="nav-item mt-3">
-                            <a class="nav-link btn btn-primary " aria-current="page" href="#">
-                                2  جداريات
+                            <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="3" asp-route-pg="@Prev">@_localization.Getkey("Mouled")</a>
 
-                            </a>
                         </li>
 
                         <li class="nav-item mt-3">
-                            <a class="nav-link btn btn-primary " aria-current="page" href="#">
-                                3  جداريات
+                        <li class="nav-item mt-3">
+                            <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="4" asp-route-pg="@Prev">@_localization.Getkey("Holiya")</a>
 
-                            </a>
+                        </li>
+                        
+
+                        <li class="nav-item mt-3">
+                            <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="5" asp-route-pg="@Prev">@_localization.Getkey("Public Events")</a>
+
                         </li>
 
                         <li class="nav-item mt-3">
-                            <a class="nav-link btn btn-primary " aria-current="page" href="#">
-                                4  جداريات
+                            <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="6" asp-route-pg="@Prev">@_localization.Getkey("Tarahoum")</a>
 
-                            </a>
-                        </li>
-
-                        <li class="nav-item mt-3">
-                            <a class="nav-link btn btn-primary " aria-current="page" href="#">
-                                5  جداريات
-
-                            </a>
                         </li>
 
                     </ul>
@@ -136,7 +151,7 @@
                     </div>
                     <div class="modal-footer">
 
-                        <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@path1" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+                        <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
                     </div>
                 </div>
             </div>
@@ -145,3 +160,48 @@
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1"></div>
 </div>
+
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+        @if (pager.TotalPages > 0)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <nav class="Pager1" aria-label="pagination example">
+                    <ul class="pagination pagination-circle justify-content-center pagination-md">
+@* 
+                        <li class="page-item ">
+                            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID ="2" asp-route-pg="1">@_localization.Getkey("First")</a>
+                        </li> *@
+                        <li class="page-item ">
+                            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">@_localization.Getkey("Prev")</a>
+                        </li>
+
+                        @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                        {
+                            <li class="page-item @(pge == pager.CurrentPage ? "active": "")">
+                                <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@pge">@pge</a>
+                            </li>
+                        }
+
+                        <li class="page-item ">
+                            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
+                        </li>
+                        @* <li class="page-item ">
+                            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="2" asp-route-pg="@ToltalP">@_localization.Getkey("Last")</a>
+                        </li> *@
+
+
+                    </ul>
+                </nav>
+            </div>
+        }
+
+
+
+        <div class="col-lg-4 col-md-4 col-sm-4 "></div>
+
+    </div>
+</div>
+

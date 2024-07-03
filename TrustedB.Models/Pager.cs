@@ -14,10 +14,11 @@ namespace TrustedB.Models
        public int TotalPages { get; private set; }
        public int StartPage { get; private set; }
        public int EndPage { get; private set; }
+       public int SubCategoryID { get; private set; }
 
         public Pager() { }
 
-        public Pager(int totalItems,int page, int pageSize = 10) 
+        public Pager(int? subCadigoryID,int totalItems,int page, int pageSize = 10) 
         { 
         int totalPages = (int)Math.Ceiling((decimal)totalItems/(decimal)pageSize);
             int currentPage = page;
@@ -39,6 +40,7 @@ namespace TrustedB.Models
             TotalPages = totalPages;
             StartPage = startPage;
             EndPage = endPage;
+            SubCategoryID = (int)subCadigoryID;
         }
 
     }
