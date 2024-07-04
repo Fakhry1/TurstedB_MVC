@@ -1,0 +1,262 @@
+﻿@model List<Topics>
+
+
+@{
+    string Titel = "";
+    string path1= "";
+    Pager pager = new Pager();
+    int pageNo = 0;
+    int ToltalP = 0;
+    int Next = 0;
+    int Prev = 0;
+    int subCategory = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+        ToltalP = pager.TotalPages;
+        Next = pageNo + 1;
+        Prev = pageNo - 1;
+        subCategory = pager.SubCategoryID;
+    }
+    if (subCategory == 2)
+    {
+        Titel = "Murals";
+    }
+    else if (subCategory == 3)
+    {
+        Titel = "Mouled";
+    }
+    else if (subCategory == 4)
+    {
+        Titel = "Holiya";
+    }
+    else if (subCategory == 5)
+    {
+        Titel = "Public Events";
+    }
+    else if (subCategory == 6)
+    {
+        Titel = "Tarahoum";
+    }
+}
+
+
+<div class="p-4 ">
+    <p class="text-body">@_localization.Getkey("Tarahoum") </p>
+</div>
+
+<div class="row shadow">
+   
+    <div class="justify-content-between">
+    <nav class="navbar navbar-expand-lg  px-0 py-3">
+        <div class="container-xl">
+            
+            <!-- Navbar toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!-- Nav -->
+                <div class="navbar-nav mx-lg-auto">
+                        <a class="nav-item nav-link link-underline-dark active" href="#" aria-current="page">تجربة تجربة</a>
+                        <a class="nav-item nav-link" href="#">Product Home</a>
+                        <a class="nav-item nav-link" href="#">Features Home</a>
+                        <a class="nav-item nav-link" href="#">Pricing Home</a>
+                </div>
+              
+            </div>
+        </div>
+    </nav>
+    </div>
+    
+@*     <div class="col-lg-1 col-md-1 col-sm-1 text-end">
+        <button class="navbar-toggler " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+            <i class="bi bi-list h3"></i>
+        </button>
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-10 text-center">
+        <h5 class="text-primary py-2">@_localization.Getkey("Images"+" "+@Titel)</h5>
+    </div> *@
+</div>
+<div class="row">
+@*     <nav class="navbar">
+        <div class="container-fluid">
+            
+            <div class="offcanvas offcanvas-end w-10" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="2" asp-route-pg="@Prev">@_localization.Getkey("Murals")</a>
+                            
+                        </li>
+                        <li class="nav-item mt-3">
+                            <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="3" asp-route-pg="@Prev">@_localization.Getkey("Mouled")</a>
+
+                        </li>
+
+                        <li class="nav-item mt-3">
+                        <li class="nav-item mt-3">
+                            <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="4" asp-route-pg="@Prev">@_localization.Getkey("Holiya")</a>
+
+                        </li>
+                        
+
+                        <li class="nav-item mt-3">
+                            <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="5" asp-route-pg="@Prev">@_localization.Getkey("Public Events")</a>
+
+                        </li>
+
+                        <li class="nav-item mt-3">
+                            <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="6" asp-route-pg="@Prev">@_localization.Getkey("Tarahoum")</a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </nav> *@
+    @* ______________________________________________show image_______________________________ *@
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <div class="row mt-3">
+            @foreach (var obj in Model.OrderBy(u => u.CreationDate))
+            {
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="card radius-10 border  shadow">
+                        <div class="box-part text-center">
+
+                            <small class="text-body"> @obj.Titel</small>
+
+                            
+
+                            <div class="mt-2">
+
+                                <video width="295" height="166" pause controls>
+                                    <source src="@obj.MainFile" type="video/mp4">
+                                    <source src="@obj.MainFile" type="video/ogg">
+                                    Your browser does not support HTML video.
+                                </video>
+
+                              @*   <video controls>
+                                    <source src="@obj.MainFile" type="video/mp4">
+                                </video> *@
+
+                                @* <iframe width="295" height="166" src="@obj.MainFile" frameborder="0" allowfullscreen></iframe> *@
+                            
+                                @* <img src="@obj.MainFile" class="img-thumbnail" /> *@
+
+                            </div>
+
+                            <small class="text-muted"> @obj.TopicDiscription</small>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+
+                                </div>
+
+                                
+
+                                <div class="btn-group">
+                                    <button asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="bi bi-display h4"></i></button>
+                                    @{
+                                        path1 = @obj.MainFile;
+                                    }
+                                </div>
+
+
+                            </div>
+                            <!-- Button trigger modal -->
+                            <!-- Modal -->
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe width="470" height="250 " src="@path1" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="modal-footer">
+
+                        <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1">
+      
+            @* <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">@_localization.Getkey("Next")</a> *@
+       
+    </div>
+</div>
+
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 text-end mt-3">
+            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">
+              
+                <img src="~/Files/Logo/prev.svg" class="" style="width:50px;" />
+                @* @_localization.Getkey("Next") *@
+            </a>
+
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+        @* @if (pager.TotalPages > 0)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <nav class="Pager1" aria-label="pagination example">
+                    <ul class="pagination pagination-circle justify-content-center pagination-md">
+
+                        <li class="page-item ">
+                            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">@_localization.Getkey("Prev")</a>
+                        </li>
+
+                        @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                        {
+                            <li class="page-item @(pge == pager.CurrentPage ? "active": "")">
+                                <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@pge">@pge</a>
+                            </li>
+                        }
+
+                        <li class="page-item ">
+                            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
+                        </li>
+                     
+
+
+                    </ul>
+                </nav>
+            </div>
+        }
+ *@
+
+        <div class="col-lg-4 col-md-4 col-sm-4 text-start mt-3">
+            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">
+                <img src="~/Files/Logo/Next.svg" class="" style="width:50px;" />
+                @* @_localization.Getkey("Next") *@
+                </a>
+         
+        </div>
+
+    </div>
+</div>
+
