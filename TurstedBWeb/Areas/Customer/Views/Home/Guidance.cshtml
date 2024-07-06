@@ -41,7 +41,7 @@
                        
                     
                     <div class="col-lg-4 col-sm-4">
-                            <div class="card shadow-sm border-0 rounded">
+                        <div class="card radius-10  border-2 border-info">
                                 <div class="card-body p-0">
 
                                     <img src="@obj.MainFile" alt="" class="w-100 card-img-top">
@@ -82,33 +82,31 @@
                 <div class="col-4"></div>
                 @if (pager.TotalPages > 0)
                 {
-                    <div class="col-4">
+                    <div class="col-4 mb-3">
                         <nav class="Pager1" aria-label="pagination example">
-                            <ul class="pagination pagination-circle justify-content-center pagination-lg">
-                                @* @if (pager.CurrentPage >= 1)
-                            { *@
+                        <ul class="pagination pagination-circle justify-content-center pagination-md">
+                           
                                 <li class="page-item ">
-                                <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="1">>@_localization.Getkey("First")</a>
+                                <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="1">@_localization.Getkey("First")</a>
                                 </li>
                                 <li class="page-item ">
-                                <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Prev">>@_localization.Getkey("Prev")</a>
+                                <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Prev">@_localization.Getkey("Prev")</a>
                                 </li>
-                                @*   } *@
+                               
                                 @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
                                 {
                                     <li class="page-item @(pge == pager.CurrentPage ? "active": "")">
                                         <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@pge">@pge</a>
                                     </li>
                                 }
-                                @*  @if( pager.TotalPages>0)
-                            { *@
+                          
                                 <li class="page-item ">
                                 <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
                                 </li>
                                 <li class="page-item ">
                                 <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@ToltalP">@_localization.Getkey("Last")</a>
                                 </li>
-                                @* } *@
+                             
 
                             </ul>
                         </nav>

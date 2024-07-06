@@ -103,12 +103,12 @@
             @foreach (var obj in Model.OrderBy(u => u.CreationDate))
             {
                 <div class="col-lg-3 col-md-3 col-sm-3">
-                    <div class="card radius-10 border-bottom border-0  shadow">
-                        <div class="box-part text-center">
+                    <div class="card radius-10 border-start border-end border-0 border-3 border-info">
+                        
 
                             <div>
 
-                                <img src="@obj.MainFile" class="img-thumbnail" />
+                                <img class="w-100" src="@obj.MainFile"  height="200" />
 
                             </div>
 
@@ -134,7 +134,7 @@
                             <!-- Modal -->
 
 
-                        </div>
+                        
                     </div>
                 </div>
             }
@@ -170,11 +170,11 @@
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <nav class="Pager1" aria-label="pagination example">
                     <ul class="pagination pagination-circle justify-content-center pagination-md">
-@* 
+
                         <li class="page-item ">
                             <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID ="2" asp-route-pg="1">@_localization.Getkey("First")</a>
-                        </li> *@
-                        <li class="page-item ">
+                        </li>
+                        <li class="page-item">
                             <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">@_localization.Getkey("Prev")</a>
                         </li>
 
@@ -188,9 +188,9 @@
                         <li class="page-item ">
                             <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
                         </li>
-                        @* <li class="page-item ">
+                        <li class="page-item ">
                             <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="2" asp-route-pg="@ToltalP">@_localization.Getkey("Last")</a>
-                        </li> *@
+                        </li>
 
 
                     </ul>
