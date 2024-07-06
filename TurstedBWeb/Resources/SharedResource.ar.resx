@@ -366,6 +366,9 @@
   <data name="Gender" xml:space="preserve">
     <value>النوع</value>
   </data>
+  <data name="General Events" xml:space="preserve">
+    <value>مناسبات عامة</value>
+  </data>
   <data name="Guidance" xml:space="preserve">
     <value>توجيهات</value>
   </data>
@@ -380,6 +383,9 @@
   </data>
   <data name="Holiya" xml:space="preserve">
     <value>حوليات</value>
+  </data>
+  <data name="Holiya Events" xml:space="preserve">
+    <value>فعاليات الحوليات</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>الرئيسية</value>
@@ -447,6 +453,9 @@
   <data name="Mouled" xml:space="preserve">
     <value>موالد</value>
   </data>
+  <data name="Mouled Events" xml:space="preserve">
+    <value>فعاليات المولد</value>
+  </data>
   <data name="Murals" xml:space="preserve">
     <value>جداريات</value>
   </data>
@@ -464,6 +473,9 @@
   </data>
   <data name="News" xml:space="preserve">
     <value>الاخبار</value>
+  </data>
+  <data name="News List" xml:space="preserve">
+    <value>قائمة الاخبار</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>التالي</value>
@@ -497,6 +509,9 @@
   </data>
   <data name="Phone Number" xml:space="preserve">
     <value>رقم الهاتف</value>
+  </data>
+  <data name="Picks to watch" xml:space="preserve">
+    <value>مختارات للمشاهدة</value>
   </data>
   <data name="Prev" xml:space="preserve">
     <value>السابق</value>
@@ -587,6 +602,9 @@
   </data>
   <data name="Select Parent" xml:space="preserve">
     <value>اختار الاب</value>
+  </data>
+  <data name="Selections" xml:space="preserve">
+    <value>مختارات</value>
   </data>
   <data name="Sharing" xml:space="preserve">
     <value>الاشتراكات</value>

@@ -42,9 +42,38 @@
     }
 }
 
+<style>
+     .sunnave{
+        transition: all 0.2s;
+        position: relative;
+     
+    }
 
+        .sunnave:hover:before {
+        content:'';
+        height: 2px;
+        width: 100%;
+        background-color: greenyellow;
+        position:absolute;
+        bottom:0;
+        left:0;
+    }
+
+        .sunnave:active {
+                content: '';
+                height: 2px;
+                width: 100%;
+                background-color: greenyellow;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+
+    
+   
+</style>
 <div class="p-4 ">
-    <p class="text-body">@_localization.Getkey("Tarahoum") </p>
+    <p class="text-body">@_localization.Getkey("Picks to watch") </p>
 </div>
 
 <div class="row shadow">
@@ -53,18 +82,22 @@
     <nav class="navbar navbar-expand-lg  px-0 py-3">
         <div class="container-xl">
             
-            <!-- Navbar toggle -->
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- Collapse -->
+           
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <!-- Nav -->
-                <div class="navbar-nav mx-lg-auto">
-                        <a class="nav-item nav-link link-underline-dark active" href="#" aria-current="page">تجربة تجربة</a>
-                        <a class="nav-item nav-link" href="#">Product Home</a>
-                        <a class="nav-item nav-link" href="#">Features Home</a>
-                        <a class="nav-item nav-link" href="#">Pricing Home</a>
+
+                    <div class="navbar-nav mx-lg-auto nav-underline">
+                 
+                        <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllVideos">@_localization.Getkey("Holiya Events")</a>
+                        <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="5" asp-action="AllVideos">@_localization.Getkey("Mouled Events")</a>
+                        
+                        <a class="nav-item nav-link " href="#">@_localization.Getkey("General Events")</a>
+                        <a class="nav-item nav-link " href="#">@_localization.Getkey("Selections")</a>
+
+                        
                 </div>
               
             </div>
@@ -139,7 +172,7 @@
 
                             <div class="mt-2">
 
-                                <video width="295" height="166" pause controls>
+                                <video width="295" height="166" stop controls>
                                     <source src="@obj.MainFile" type="video/mp4">
                                     <source src="@obj.MainFile" type="video/ogg">
                                     Your browser does not support HTML video.
@@ -212,7 +245,7 @@
 <div class="container mb-4">
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 text-end mt-3">
-            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">
+            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllVideos" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">
               
                 <img src="~/Files/Logo/prev.svg" class="" style="width:50px;" />
                 @* @_localization.Getkey("Next") *@
@@ -250,7 +283,7 @@
  *@
 
         <div class="col-lg-4 col-md-4 col-sm-4 text-start mt-3">
-            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">
+            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllVideos" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">
                 <img src="~/Files/Logo/Next.svg" class="" style="width:50px;" />
                 @* @_localization.Getkey("Next") *@
                 </a>

@@ -82,7 +82,7 @@
 
 
                 <a class="navbar-brand me-auto" asp-area="" asp-controller="Home" asp-action="Index">
-                    @*  <img src="~/Files/Logo/BName.png" class="" style="width:140px;" /> *@
+                     <img src="~/Files/Logo/BName.png" class="" style="width:140px;" />
 
 
                 </a>
@@ -112,7 +112,7 @@
                         </li>
 
                         <li class="nav-item ">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Vedios")</a>
+                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID ="4" asp-action="AllVideos">@_localization.Getkey("Vedios")</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" asp-area="Customer" asp-controller="Topic" asp-action="Index">@_localization.Getkey("Reading")</a>
@@ -125,7 +125,7 @@
 
                     <a class="navbar-brand align-items-center position-absolute top-0 start-0" asp-area="" asp-controller="Home" asp-action="Index">
 
-                         @* <img src="~/Files/Logo/Blogo.png" class="" style="width:50px;" />  *@
+                         <img src="~/Files/Logo/Blogo.png" class="" style="width:50px;" /> 
 
                     </a>
 
