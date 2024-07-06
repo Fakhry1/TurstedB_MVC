@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\g\" />
     <Folder Include="wwwroot\Files\Topics\" />
   </ItemGroup>
 
