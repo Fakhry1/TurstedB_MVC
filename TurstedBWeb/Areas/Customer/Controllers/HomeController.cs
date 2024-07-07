@@ -118,18 +118,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
 
             return View(AudioList);
-            //AudioVM audioVM = new AudioVM();
-            //const int pageSize = 4;
-            //if (pg < 1) { pg = 1; }
-            //int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).Count() + _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 5)).Count();
-            //var pager = new Pager(recsCount, pg, pageSize);
-            //int recSkip = (pg - 1) * pageSize;
-            //audioVM.AudioQList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 4)).ToList();
-            //audioVM.AudioLesonList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 5)).ToList();
-            //this.ViewBag.Pager = pager;
-            //return View(audioVM);
-
-
+            
 
         }
 
@@ -148,7 +137,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             //GetAllPagination
             var ImageList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
            
-            //var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
+           
             this.ViewBag.Pager = pager;
           
 
