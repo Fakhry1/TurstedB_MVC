@@ -171,9 +171,9 @@
                 <nav class="Pager1" aria-label="pagination example">
                     <ul class="pagination pagination-circle justify-content-center pagination-md">
 
-                        <li class="page-item ">
+                        @* <li class="page-item ">
                             <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID ="2" asp-route-pg="1">@_localization.Getkey("First")</a>
-                        </li>
+                        </li> *@
                         <li class="page-item">
                             <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">@_localization.Getkey("Prev")</a>
                         </li>
@@ -188,9 +188,9 @@
                         <li class="page-item ">
                             <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
                         </li>
-                        <li class="page-item ">
+                       @*  <li class="page-item ">
                             <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="2" asp-route-pg="@ToltalP">@_localization.Getkey("Last")</a>
-                        </li>
+                        </li> *@
 
 
                     </ul>

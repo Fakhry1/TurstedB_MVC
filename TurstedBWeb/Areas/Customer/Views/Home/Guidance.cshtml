@@ -1,5 +1,4 @@
-﻿@model RequestDetailsVM
-
+﻿@model List<Topics>
 
 @{
     Pager pager = new Pager();
@@ -32,19 +31,19 @@
    @*  https://www.youtube.com/watch?v=X3Jc5UfGhhE
     https://www.youtube.com/watch?v=VF6wlRshzDQ
   *@
-        <div class="card-body p-4 ">
+        <div class="card-body mt-3">
 
             <div class="container">
                 <div class="row d-flex flex-row">
-                    @foreach (var obj in Model.TopicList.OrderBy(u => u.CreationDate))
+                    @foreach (var obj in Model.OrderBy(u => u.CreationDate))
                     {
                        
                     
                     <div class="col-lg-4 col-sm-4">
                         <div class="card radius-10  border-2 border-info">
-                                <div class="card-body p-0">
+                                <div class="card-body">
 
-                                    <img src="@obj.MainFile" alt="" class="w-100 card-img-top">
+                                    <img src="@obj.MainFile" alt="" class="w-100 card-img-top" height="450">
                                     <div class="p-4">
                                         <h5 class="mb-0">@obj.Titel</h5>
                                         <p class="small text-muted">@obj.TopicDiscription</p>
@@ -77,7 +76,7 @@
     
 
         @* ________________________Pagination_________________ *@
-        <div class="container">
+        <div class="container mb-4">
             <div class="row">
                 <div class="col-4"></div>
                 @if (pager.TotalPages > 0)
@@ -86,35 +85,31 @@
                         <nav class="Pager1" aria-label="pagination example">
                         <ul class="pagination pagination-circle justify-content-center pagination-md">
                            
+                               @*  <li class="page-item ">
+                                <a class="page-link" asp-area="" asp-controller="Home" asp-route-SubCategoryID="1"  asp-action="Guidance" asp-route-pg="1">@_localization.Getkey("First")</a>
+                                </li> *@
                                 <li class="page-item ">
-                                <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="1">@_localization.Getkey("First")</a>
-                                </li>
-                                <li class="page-item ">
-                                <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Prev">@_localization.Getkey("Prev")</a>
+                                <a class="page-link " asp-area="" asp-controller="Home" asp-route-SubCategoryID="1" asp-action="Guidance" asp-route-pg="@Prev">@_localization.Getkey("Prev")</a>
                                 </li>
                                
                                 @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
                                 {
                                     <li class="page-item @(pge == pager.CurrentPage ? "active": "")">
-                                        <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@pge">@pge</a>
+                                    <a class="page-link" asp-area="" asp-controller="Home" asp-route-SubCategoryID="1" asp-action="Guidance" asp-route-pg="@pge">@pge</a>
                                     </li>
                                 }
                           
                                 <li class="page-item ">
-                                <a class="page-link" asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
+                                <a class="page-link" asp-area="" asp-controller="Home" asp-route-SubCategoryID="1" asp-action="Guidance" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
                                 </li>
-                                <li class="page-item ">
-                                <a class="page-link " asp-area="" asp-controller="Home" asp-action="Guidance" asp-route-pg="@ToltalP">@_localization.Getkey("Last")</a>
-                                </li>
-                             
+                               @*  <li class="page-item ">
+                                <a class="page-link " asp-area="" asp-controller="Home" asp-route-SubCategoryID="1" asp-action="Guidance" asp-route-pg="@ToltalP">@_localization.Getkey("Last")</a>
+                                </li> *@
 
                             </ul>
                         </nav>
                     </div>
                 }
-
-
-
 
 
                 <div class="col-4"></div>

@@ -39,30 +39,25 @@ namespace TrustedBWeb.Areas.Customer.Controllers
         }
 
         //Guidance
-        public IActionResult Guidance(Guid? Id,int pg = 1 )
+        public IActionResult Guidance(int? SubCategoryID, int pg = 1 )
         {
-            RequestDetailsVM requestDetailsVM = new RequestDetailsVM();
-            
+
             const int pageSize = 3;
             if (pg < 1) { pg = 1; }
 
             int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 1)).Count();
-            var pager = new Pager(recsCount, pg, pageSize);
+            var pager = new Pager((int)SubCategoryID, recsCount, pg, pageSize);
             int recSkip = (pg - 1) * pageSize;
 
-             //GetAllPagination
-            requestDetailsVM.TopicList = _unitOfWork.Topics.GetAllPagination(recSkip, pager.PageSize, filter: o => (o.CategoryID == 1), includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
-          
+            //GetAllPagination
+            var NewsList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
+
+            //var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
             this.ViewBag.Pager = pager;
 
-            if ( Id !=null )
-            {
-                requestDetailsVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == Id, includeProperties: "Category");
-                requestDetailsVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == Id)).ToList();
-                ViewBag.FileList = requestDetailsVM.AttachmentsList;
-            }
 
-            return View(requestDetailsVM);
+            return View(NewsList);
+
             
         }
 
@@ -71,9 +66,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             RequestDetailsVM requestDetailsVM = new RequestDetailsVM();
             requestDetailsVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == Id, includeProperties: "Category");
             requestDetailsVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == Id)).ToList();
-            //return PartialView("_GuidanceDetails", requestDetailsVM.topic);
-
-            //var AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == Id)).ToList();
+           
             return View(requestDetailsVM);
         }
 
@@ -108,26 +101,35 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         //______________________________Audio____________________________________
 
-        public IActionResult AllAudio(int pg = 1)
+        public IActionResult AllAudio(int? SubCategoryID, int pg = 1)
         {
-     
-            AudioVM audioVM = new AudioVM();
-
             const int pageSize = 4;
             if (pg < 1) { pg = 1; }
 
-            int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).Count() + _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 5)).Count();
-            var pager = new Pager(recsCount, pg, pageSize);
+            int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.SubCategoryID == SubCategoryID)).Count(); 
+            var pager = new Pager((int)SubCategoryID, recsCount, pg, pageSize);
             int recSkip = (pg - 1) * pageSize;
 
             //GetAllPagination
-            audioVM.AudioQList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 4)).ToList();
-            audioVM.AudioLesonList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 5)).ToList();
+            var AudioList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
 
             //var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
             this.ViewBag.Pager = pager;
 
-            return View(audioVM);
+
+            return View(AudioList);
+            //AudioVM audioVM = new AudioVM();
+            //const int pageSize = 4;
+            //if (pg < 1) { pg = 1; }
+            //int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).Count() + _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 5)).Count();
+            //var pager = new Pager(recsCount, pg, pageSize);
+            //int recSkip = (pg - 1) * pageSize;
+            //audioVM.AudioQList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 4)).ToList();
+            //audioVM.AudioLesonList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.CategoryID == 5)).ToList();
+            //this.ViewBag.Pager = pager;
+            //return View(audioVM);
+
+
 
         }
 
@@ -159,7 +161,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
         public IActionResult AllVideos(int? SubCategoryID, int pg = 1)
         {
 
-            const int pageSize = 8;
+            const int pageSize = 3;
             if (pg < 1) { pg = 1; }
 
             int recsCount = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 3)).Count();
