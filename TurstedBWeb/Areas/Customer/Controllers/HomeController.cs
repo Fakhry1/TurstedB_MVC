@@ -38,7 +38,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             return View();
         }
 
-        //Guidance
+        //Guidance - check deploy
         public IActionResult Guidance(int? SubCategoryID, int pg = 1 )
         {
 
