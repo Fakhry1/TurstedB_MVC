@@ -20,11 +20,11 @@
         Prev = pageNo - 1;
         subCategory = pager.SubCategoryID;
     }
-    if (subCategory == 4)
+    if (subCategory == 6)
     {
         Titel = "Qasaeid and Hadrah";
     }
-    else if (subCategory == 3)
+    else if (subCategory == 7)
     {
         Titel = "Lessons";
     }
@@ -98,8 +98,8 @@
 
                     <div class="navbar-nav mx-lg-auto nav-underline">
 
-                        <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllAudio">@_localization.Getkey("Qasaeid and Hadrah")</a>
-                        <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="3" asp-action="AllAudio">@_localization.Getkey("Audio Lessons")</a>
+                        <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio">@_localization.Getkey("Qasaeid and Hadrah")</a>
+                        <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Audio Lessons")</a>
                         <a class="nav-item nav-link " href="#">@_localization.Getkey("Audio Speech")</a>
                         <a class="nav-item nav-link " href="#">@_localization.Getkey("Audio Jumaha")</a>
 
