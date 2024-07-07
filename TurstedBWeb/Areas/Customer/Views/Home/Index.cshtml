@@ -80,11 +80,11 @@
         </div>
 
         <div class="text">
-                    <p class="text-truncate">@_localization.Getkey("You can follw all related news from here")</p>
+                    <p class="text-truncate">@_localization.Getkey("ولتسمعو قولي صحيحا مسندا")</p>
         </div>
 
 
-            <a class="mb-1 btn btn-outline-primary text-sm-center" asp-area="Customer" asp-controller="Home" asp-action="Guidance">
+                <a class="mb-1 btn btn-outline-primary text-sm-center" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="1" asp-action="Guidance">
                     @_localization.Getkey("More")
             </a>
         
@@ -110,8 +110,8 @@
         </div>
 
 
-                <a class="mb-1 btn btn-outline-primary text-sm-center" asp-area="Customer" asp-controller="Home" asp-action="AllAudio">
-                    @_localization.Getkey("More")
+                <a class="mb-1 btn btn-outline-primary text-sm-center" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllAudio">
+                                        @_localization.Getkey("More")
         </a>
 
 
@@ -159,7 +159,8 @@
                 </div>
 
 
-                <a class="mb-1 btn btn-outline-primary text-sm-center" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllVideos">
+                <a class="mb-1 btn btn-outline-primary text-sm-center" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="3" asp-action="AllVideos">
+                    
                     @_localization.Getkey("More")
                 </a>
 
