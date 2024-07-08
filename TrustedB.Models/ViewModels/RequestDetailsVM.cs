@@ -13,6 +13,7 @@ namespace TrustedB.Models.ViewModels
 {
     public class RequestDetailsVM
     {
+        public string? StorageName { get; set; }
         public Topics? topic { get; set; }
         public List<Attachments>? AttachmentsList { get; set; }
         public List<Topics>? TopicList { get; set; }

@@ -6,9 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Customer\Views\Home\checkStorageAsync.cshtml" />
+  </ItemGroup>
  
 
   <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.20.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.4" />
@@ -31,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Customer\Views\Home\checkStorageAsync.cshtml" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />

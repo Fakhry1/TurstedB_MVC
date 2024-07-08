@@ -16,6 +16,7 @@ using TurstedB.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using TrustedB.Utility;
 using TrustedB.Models;
+using Azure.Storage.Blobs;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -35,6 +36,10 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+builder.Services.AddSingleton(u => new BlobServiceClient(
+    builder.Configuration.GetValue<string>("BlobConnection")
+    ));
 
 builder.Services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 

@@ -29,6 +29,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         public string fileName = "";
         public string slash = @"\";
 
+        //private readonly IBlobService _blobService;
         //public var topicList;
         public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
         {
@@ -181,74 +182,90 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         //______________________________Attachments_________________
 
+        //[HttpPost]
+        //[DisableRequestSizeLimit]
+        //public async Task<IActionResult> Attachment(Guid? id, TopicVM topicVM)
+        //{
+        //    //Handel handel = new Handel(_unitOfWork);
+        //    topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id,includeProperties: "ApplicationUser,TopicsStates");
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //        string webRootPath = _hostEnvironment.WebRootPath;
+        //        var files = HttpContext.Request.Form.Files;
+
+        //        if (topicVM.topic != null && topicVM.attachments != null)
+        //        {
+
+        //            if (files.Count > 0)
+        //            {
+
+        //                string fileName = Guid.NewGuid().ToString();
+        //                var uploads = Path.Combine(webRootPath, @"Files\Topics");
+        //                var extension = Path.GetExtension(files[0].FileName);
+
+
+        //                if (topicVM.attachments.FileType != extension)
+        //                {
+        //                    TempData[SD.Error] = "Please Add"+ topicVM.attachments.FileType + "file";
+        //                      return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
+        //                }
+
+        //                    var attchmentPath = Path.Combine(uploads, fileName + extension);
+
+        //                using (var fileStreams = new FileStream(attchmentPath, FileMode.Create))
+        //                {
+
+        //                    files[0].CopyTo(fileStreams);
+        //                    fileStreams.Close();
+
+        //                    var data = System.IO.File.ReadAllBytes(attchmentPath);
+
+        //                }
+
+
+        //                topicVM.attachments.FilePath = @"\Files\Topics\" + fileName + extension;
+
+        //            }
+
+        //            topicVM.attachments.AttachmentSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
+        //            topicVM.attachments.ApplicationUserId = userLoginId;
+        //            topicVM.attachments.TopicId = topicVM.topic.TopicId;
+        //            topicVM.attachments.stateId = topicVM.topic.stateId;
+        //            _unitOfWork.Attachments.Add(topicVM.attachments);
+
+        //            if (topicVM.attachments.MainFile =="true") 
+        //            {
+        //                topicVM.topic.MainFile = topicVM.attachments.FilePath;
+        //                _unitOfWork.Topics.Update(topicVM.topic);
+        //            }
+        //            _unitOfWork.Save();
+
+
+        //        }
+        //    }
+
+        //    return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
+
+        //}
+
+
         [HttpPost]
         [DisableRequestSizeLimit]
-        public IActionResult Attachment(Guid? id, TopicVM topicVM)
+        public async Task<IActionResult> Attachment(Guid? id, string? ContainerName, TopicVM topicVM)
         {
-            //if (id == null)
-            //{
-            //    TempData[SD.Error] = "Please Add Topic firstly";
-            //    return RedirectToAction(nameof(Upsert));
-            //}
-            topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id,includeProperties: "ApplicationUser,TopicsStates");
+            Handel handel = new Handel(_unitOfWork);
+            topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id, includeProperties: "ApplicationUser,TopicsStates");
 
-            if (ModelState.IsValid)
-            {
-                var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                string webRootPath = _hostEnvironment.WebRootPath;
-                var files = HttpContext.Request.Form.Files;
-
-                //add new Request
-                if (topicVM.topic != null && topicVM.attachments != null)
-                {
-
-                    if (files.Count > 0)
-                    {
-                        string fileName = Guid.NewGuid().ToString();
-                        var uploads = Path.Combine(webRootPath, @"Files\Topics");
-                        var extension = Path.GetExtension(files[0].FileName);
-
-                        if (topicVM.attachments.FileType != extension)
-                        {
-                            TempData[SD.Error] = "Please Add"+ topicVM.attachments.FileType + "file";
-                              return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
-                        }
-
-                            var attchmentPath = Path.Combine(uploads, fileName + extension);
-
-                        using (var fileStreams = new FileStream(attchmentPath, FileMode.Create))
-                        {
-                            files[0].CopyTo(fileStreams);
-                            fileStreams.Close();
-                            var data = System.IO.File.ReadAllBytes(attchmentPath);
-
-                        }
-
-
-                        topicVM.attachments.FilePath = @"\Files\Topics\" + fileName + extension;
-
-                    }
-
-                    topicVM.attachments.AttachmentSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
-                    topicVM.attachments.ApplicationUserId = userLoginId;
-                    topicVM.attachments.TopicId = topicVM.topic.TopicId;
-                    topicVM.attachments.stateId = topicVM.topic.stateId;
-                    _unitOfWork.Attachments.Add(topicVM.attachments);
-
-                    if (topicVM.attachments.MainFile =="true") 
-                    {
-                        topicVM.topic.MainFile = topicVM.attachments.FilePath;
-                        _unitOfWork.Topics.Update(topicVM.topic);
-                    }
-                    _unitOfWork.Save();
-
-
-                }
-            }
-
+           
             return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
 
         }
+
+
+
+
 
 
         //_____________________addComments_______________________

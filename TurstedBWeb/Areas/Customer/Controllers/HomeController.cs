@@ -10,6 +10,7 @@ using TrustedB.DataAccess.Data;
 using TrustedB.Models;
 using TrustedB.Models.ViewModels;
 using TrustedBWeb.Areas.Admin.Controllers;
+using TrustedBWeb.Logic;
 using TurstedB.DataAccess.Repository.IRepository;
 using TurstedBWeb.Models;
 
@@ -61,12 +62,14 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             
         }
 
-        public IActionResult GuidanceDetails(Guid? Id)
+        public async Task<IActionResult> GuidanceDetails(Guid? Id)
         {
+            Handel handel = new Handel(_unitOfWork);
+           // var containername = 
             RequestDetailsVM requestDetailsVM = new RequestDetailsVM();
             requestDetailsVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == Id, includeProperties: "Category");
             requestDetailsVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == Id)).ToList();
-           
+            requestDetailsVM.StorageName = await handel.ListBlobContainersAsync();
             return View(requestDetailsVM);
         }
 
@@ -166,6 +169,17 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
             return View(ImageList);
 
+        }
+
+        //_______________________________storage____________________
+
+        public async Task<IActionResult> checkStorageAsync()
+        {
+            //TestVM testVM = new TestVM();
+            Handel handel = new Handel(_unitOfWork);
+            var containername = await handel.ListBlobContainersAsync();
+
+            return View(containername);
         }
 
 
