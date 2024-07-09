@@ -43,7 +43,7 @@ namespace TrustedB.Areas.Admin.Controllers
 
             //file name - xps_img2.png 
             //new name - xps_img2_GUIDHERE.png
-            var fileName = Path.GetFileNameWithoutExtension(file.FileName) + "_" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+            var fileName =Guid.NewGuid() + Path.GetExtension(file.FileName);
             var result = await _blobService.UploadBlob(fileName, file, containerName, blob);
 
             if (result)

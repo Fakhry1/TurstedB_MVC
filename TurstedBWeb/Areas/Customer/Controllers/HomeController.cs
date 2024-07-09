@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
@@ -22,15 +24,17 @@ namespace TrustedBWeb.Areas.Customer.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly ApplicationDbContext _appcontext;
         private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IConfiguration _configuration;
         public string fileName = "";
         public string slash = @"\";
 
-        public HomeController( IUnitOfWork unitOfWork, ApplicationDbContext appcontext, IWebHostEnvironment hostEnvironment)
+        public HomeController( IUnitOfWork unitOfWork, ApplicationDbContext appcontext, IWebHostEnvironment hostEnvironment, IConfiguration configuration)
         {
            
             _unitOfWork = unitOfWork;
             _appcontext = appcontext;
             _hostEnvironment = hostEnvironment;
+            _configuration = configuration;
         }
 
 
@@ -74,32 +78,53 @@ namespace TrustedBWeb.Areas.Customer.Controllers
         }
 
 
-        public IActionResult DownloadFile(Guid? id)
+        //public IActionResult DownloadFile(Guid? id)
+        //{
+        //    string webRootPath = _hostEnvironment.WebRootPath;
+        //    var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
+
+        //    string path = Path.Combine(webRootPath) + slash + fileName.FilePath;
+
+        //    //Read the File data into Byte Array.
+        //    byte[] bytes = System.IO.File.ReadAllBytes(path);
+
+        //    //Send the File to Download.
+        //    return File(bytes, "application/octet-stream", fileName.FilePath);
+        //}
+
+        public async Task<IActionResult> DownloadAudioAsync(string? path)
         {
-            string webRootPath = _hostEnvironment.WebRootPath;
-            var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
+            //string webRootPath = _hostEnvironment.WebRootPath;
+            //string filePath = Path.Combine(webRootPath) + slash + path;
+            //byte[] bytes = System.IO.File.ReadAllBytes(filePath);
+            //return File(bytes, "application/octet-stream", "Image.png");
 
-            string path = Path.Combine(webRootPath) + slash + fileName.FilePath;
-
-            //Read the File data into Byte Array.
-            byte[] bytes = System.IO.File.ReadAllBytes(path);
-
-            //Send the File to Download.
-            return File(bytes, "application/octet-stream", fileName.FilePath);
-        }
-
-        public IActionResult DownloadAudio(string? path)
-        {
-            string webRootPath = _hostEnvironment.WebRootPath;
             //var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
 
-            string filePath = Path.Combine(webRootPath) + slash + path;
+            List<string> storageData = new List<string>();
+            foreach (var includeProp in path
+                    .Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                storageData.Add(includeProp);
+            }
 
-            //Read the File data into Byte Array.
-            byte[] bytes = System.IO.File.ReadAllBytes(filePath);
+            var blobName = storageData[3];
+            var containerName = storageData[2];
 
-            //Send the File to Download.
-            return File(bytes, "application/octet-stream", "Image.png");
+            CloudBlockBlob blockBlob;
+            await using (MemoryStream memoryStream = new MemoryStream())
+            {
+                string blobstorageconnection = _configuration.GetValue<string>("BlobConnection");
+                CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
+                CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
+                CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference(containerName);
+                blockBlob = cloudBlobContainer.GetBlockBlobReference(blobName);
+                await blockBlob.DownloadToStreamAsync(memoryStream);
+            }
+            Stream blobStream = blockBlob.OpenReadAsync().Result;
+            return File(blobStream, blockBlob.Properties.ContentType, blockBlob.Name);
+
+
         }
 
         //______________________________Audio____________________________________

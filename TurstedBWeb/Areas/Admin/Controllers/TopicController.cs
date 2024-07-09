@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
 using System.Diagnostics;
 using System.Reflection.Metadata;
@@ -16,6 +18,7 @@ using TrustedBWeb.Logic;
 using TurstedB.DataAccess.Repository.IRepository;
 using TurstedBWeb.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace TrustedBWeb.Areas.Admin.Controllers
 {
@@ -26,6 +29,8 @@ namespace TrustedBWeb.Areas.Admin.Controllers
         private readonly ILogger<TopicController> _logger;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IBlobService _blobService;
+        private readonly IConfiguration _configuration;
+        private readonly BlobServiceClient _blobClient;
         private readonly UserManager<ApplicationUser> _userManager;
 
         private readonly IWebHostEnvironment _hostEnvironment;
@@ -34,13 +39,15 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         //private readonly IBlobService _blobService;
         //public var topicList;
-        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, IBlobService blobService)
+        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, IBlobService blobService, BlobServiceClient blobClient, IConfiguration configuration)
         {
             _logger = logger;
             _hostEnvironment = hostEnvironment;
             _unitOfWork = unitOfWork;
             _userManager = userManager;
             _blobService = blobService;
+            _blobClient = blobClient;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -166,12 +173,11 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         }
 
-
         //__________________download______________________
 
         public async Task<IActionResult> DownloadFileAsync(Guid? id)
         {
-            string webRootPath = _hostEnvironment.WebRootPath;
+            
             var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
             
             List<string> storageData = new List<string>();
@@ -184,18 +190,18 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             var blobName = storageData[3];
             var containerName = storageData[2];
 
-           // await _blobService.DownloadBlob(blobName, containerName, "C:\\Users\\f.satti\\Desktop\\images");
-
-            //string path = Path.Combine(webRootPath) + slash + fileName.FilePath;
-
-            //Read the File data into Byte Array.
-           // byte[] bytes = System.IO.File.ReadAllBytes(fileName.FilePath);
-
-            //Send the File to Download.
-           // return File(bytes, "application/octet-stream", fileName.FilePath);
-
-            return Redirect(await _blobService.GetBlob(blobName, containerName));
-            
+            CloudBlockBlob blockBlob;
+            await using (MemoryStream memoryStream = new MemoryStream())
+            {
+                string blobstorageconnection = _configuration.GetValue<string>("BlobConnection");
+                CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
+                CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
+                CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference(containerName);
+                blockBlob = cloudBlobContainer.GetBlockBlobReference(blobName);
+                await blockBlob.DownloadToStreamAsync(memoryStream);
+            }
+            Stream blobStream = blockBlob.OpenReadAsync().Result;
+            return File(blobStream, blockBlob.Properties.ContentType, blockBlob.Name);
 
         }
 
@@ -243,21 +249,8 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                         var result = await _blobService.UploadBlob(fullFileName, files[0], ContainerName, blob);
                         var containerPath = await _blobService.GetBlob(fullFileName, ContainerName);
 
-                        //var attchmentPath = Path.Combine(uploads, fileName + extension);
-
-                        //using (var fileStreams = new FileStream(attchmentPath, FileMode.Create))
-                        //{
-
-                        //    files[0].CopyTo(fileStreams);
-                        //    fileStreams.Close();
-
-                        //    var data = System.IO.File.ReadAllBytes(attchmentPath);
-
-                        //}
-
-
                         topicVM.attachments.FilePath = containerPath;
-                        topicVM.attachments.BlobName = fullFileName;
+                        
                     }
 
                     topicVM.attachments.AttachmentSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
@@ -280,13 +273,6 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
 
         }
-
-
-
-
-
-
-
 
         //_____________________addComments_______________________
 

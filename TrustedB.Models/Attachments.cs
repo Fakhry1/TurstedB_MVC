@@ -52,8 +52,8 @@ namespace TrustedB.Models
         [NotMapped]
         public string? Uri { get; set; }
 
-        [DisplayName("BlobName")]
-        public string? BlobName { get; set; }
+        //[DisplayName("BlobName")]
+        //public string? BlobName { get; set; }
 
     }
 
