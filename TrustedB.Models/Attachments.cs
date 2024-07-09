@@ -49,6 +49,12 @@ namespace TrustedB.Models
         [ValidateNever]
         public string? MainFile { get; set; }
 
+        [NotMapped]
+        public string? Uri { get; set; }
+
+        [DisplayName("BlobName")]
+        public string? BlobName { get; set; }
+
     }
 
 }

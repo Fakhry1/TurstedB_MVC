@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 using System.Security.Claims;
 using TrustedB.DataAccess.Repository;
 using TrustedB.Models;
@@ -13,6 +15,7 @@ using TrustedB.Utility;
 using TrustedBWeb.Logic;
 using TurstedB.DataAccess.Repository.IRepository;
 using TurstedBWeb.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TrustedBWeb.Areas.Admin.Controllers
 {
@@ -22,7 +25,7 @@ namespace TrustedBWeb.Areas.Admin.Controllers
     {
         private readonly ILogger<TopicController> _logger;
         private readonly IUnitOfWork _unitOfWork;
-
+        private readonly IBlobService _blobService;
         private readonly UserManager<ApplicationUser> _userManager;
 
         private readonly IWebHostEnvironment _hostEnvironment;
@@ -31,12 +34,13 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         //private readonly IBlobService _blobService;
         //public var topicList;
-        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
+        public TopicController(ILogger<TopicController> logger, IWebHostEnvironment hostEnvironment, IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, IBlobService blobService)
         {
             _logger = logger;
             _hostEnvironment = hostEnvironment;
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+            _blobService = blobService;
         }
 
         public IActionResult Index()
@@ -165,103 +169,119 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         //__________________download______________________
 
-        public IActionResult DownloadFile(Guid? id)
+        public async Task<IActionResult> DownloadFileAsync(Guid? id)
         {
             string webRootPath = _hostEnvironment.WebRootPath;
             var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
+            
+            List<string> storageData = new List<string>();
+            foreach (var includeProp in fileName.FilePath
+                    .Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                storageData.Add(includeProp);
+            }
 
-            string path = Path.Combine(webRootPath) + slash + fileName.FilePath;
+            var blobName = storageData[3];
+            var containerName = storageData[2];
+
+           // await _blobService.DownloadBlob(blobName, containerName, "C:\\Users\\f.satti\\Desktop\\images");
+
+            //string path = Path.Combine(webRootPath) + slash + fileName.FilePath;
 
             //Read the File data into Byte Array.
-            byte[] bytes = System.IO.File.ReadAllBytes(path);
+           // byte[] bytes = System.IO.File.ReadAllBytes(fileName.FilePath);
 
             //Send the File to Download.
-            return File(bytes, "application/octet-stream", fileName.FilePath);
+           // return File(bytes, "application/octet-stream", fileName.FilePath);
+
+            return Redirect(await _blobService.GetBlob(blobName, containerName));
+            
+
         }
 
 
         //______________________________Attachments_________________
 
-        //[HttpPost]
-        //[DisableRequestSizeLimit]
-        //public async Task<IActionResult> Attachment(Guid? id, TopicVM topicVM)
-        //{
-        //    //Handel handel = new Handel(_unitOfWork);
-        //    topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id,includeProperties: "ApplicationUser,TopicsStates");
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //        string webRootPath = _hostEnvironment.WebRootPath;
-        //        var files = HttpContext.Request.Form.Files;
-
-        //        if (topicVM.topic != null && topicVM.attachments != null)
-        //        {
-
-        //            if (files.Count > 0)
-        //            {
-
-        //                string fileName = Guid.NewGuid().ToString();
-        //                var uploads = Path.Combine(webRootPath, @"Files\Topics");
-        //                var extension = Path.GetExtension(files[0].FileName);
-
-
-        //                if (topicVM.attachments.FileType != extension)
-        //                {
-        //                    TempData[SD.Error] = "Please Add"+ topicVM.attachments.FileType + "file";
-        //                      return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
-        //                }
-
-        //                    var attchmentPath = Path.Combine(uploads, fileName + extension);
-
-        //                using (var fileStreams = new FileStream(attchmentPath, FileMode.Create))
-        //                {
-
-        //                    files[0].CopyTo(fileStreams);
-        //                    fileStreams.Close();
-
-        //                    var data = System.IO.File.ReadAllBytes(attchmentPath);
-
-        //                }
-
-
-        //                topicVM.attachments.FilePath = @"\Files\Topics\" + fileName + extension;
-
-        //            }
-
-        //            topicVM.attachments.AttachmentSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
-        //            topicVM.attachments.ApplicationUserId = userLoginId;
-        //            topicVM.attachments.TopicId = topicVM.topic.TopicId;
-        //            topicVM.attachments.stateId = topicVM.topic.stateId;
-        //            _unitOfWork.Attachments.Add(topicVM.attachments);
-
-        //            if (topicVM.attachments.MainFile =="true") 
-        //            {
-        //                topicVM.topic.MainFile = topicVM.attachments.FilePath;
-        //                _unitOfWork.Topics.Update(topicVM.topic);
-        //            }
-        //            _unitOfWork.Save();
-
-
-        //        }
-        //    }
-
-        //    return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
-
-        //}
-
-
         [HttpPost]
         [DisableRequestSizeLimit]
-        public async Task<IActionResult> Attachment(Guid? id, string? ContainerName, TopicVM topicVM)
+        public async Task<IActionResult> Attachment(Guid? id, TopicVM topicVM)
         {
-            Handel handel = new Handel(_unitOfWork);
+            //Handel handel = new Handel(_unitOfWork);
             topicVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == id, includeProperties: "ApplicationUser,TopicsStates");
+            var ContainerName = _unitOfWork.SubCategory.Get(u => u.SubCategoryId == topicVM.topic.SubCategoryID).SubEnglishName;
 
-           
+            if (ModelState.IsValid)
+            {
+                var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                string webRootPath = _hostEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files;
+
+                if (topicVM.topic != null && topicVM.attachments != null)
+                {
+
+                    if (files.Count > 0)
+                    {
+
+                        string fileName = Guid.NewGuid().ToString();
+                        var uploads = Path.Combine(webRootPath, @"Files\Topics");
+                        var extension = Path.GetExtension(files[0].FileName);
+
+
+                        if (topicVM.attachments.FileType != extension)
+                        {
+                            TempData[SD.Error] = "Please Add" + topicVM.attachments.FileType + "file";
+                            return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
+                        }
+                        TrustedB.Models.Blob blob = new()
+                        {
+                            Title = topicVM.attachments.FileName,
+                            Comment = null,
+                            Uri = topicVM.attachments.Uri
+                        };
+
+                        var fullFileName = fileName + extension;
+                        var result = await _blobService.UploadBlob(fullFileName, files[0], ContainerName, blob);
+                        var containerPath = await _blobService.GetBlob(fullFileName, ContainerName);
+
+                        //var attchmentPath = Path.Combine(uploads, fileName + extension);
+
+                        //using (var fileStreams = new FileStream(attchmentPath, FileMode.Create))
+                        //{
+
+                        //    files[0].CopyTo(fileStreams);
+                        //    fileStreams.Close();
+
+                        //    var data = System.IO.File.ReadAllBytes(attchmentPath);
+
+                        //}
+
+
+                        topicVM.attachments.FilePath = containerPath;
+                        topicVM.attachments.BlobName = fullFileName;
+                    }
+
+                    topicVM.attachments.AttachmentSetDate = DateTime.UtcNow.AddMinutes(180).ToString();
+                    topicVM.attachments.ApplicationUserId = userLoginId;
+                    topicVM.attachments.TopicId = topicVM.topic.TopicId;
+                    topicVM.attachments.stateId = topicVM.topic.stateId;
+                    _unitOfWork.Attachments.Add(topicVM.attachments);
+
+                    if (topicVM.attachments.MainFile == "true")
+                    {
+                        topicVM.topic.MainFile = topicVM.attachments.FilePath;
+                        _unitOfWork.Topics.Update(topicVM.topic);
+                    }
+                    _unitOfWork.Save();
+
+
+                }
+            }
+
             return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
 
         }
+
+
 
 
 

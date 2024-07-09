@@ -64,12 +64,12 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         public async Task<IActionResult> GuidanceDetails(Guid? Id)
         {
-            Handel handel = new Handel(_unitOfWork);
+            //Handel handel = new Handel(_unitOfWork);
            // var containername = 
             RequestDetailsVM requestDetailsVM = new RequestDetailsVM();
             requestDetailsVM.topic = _unitOfWork.Topics.Get(u => u.TopicId == Id, includeProperties: "Category");
             requestDetailsVM.AttachmentsList = _unitOfWork.Attachments.GetAll(filter: o => (o.TopicId == Id)).ToList();
-            requestDetailsVM.StorageName = await handel.ListBlobContainersAsync();
+            //requestDetailsVM.StorageName = await handel.ListBlobContainersAsync();
             return View(requestDetailsVM);
         }
 
@@ -173,14 +173,14 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         //_______________________________storage____________________
 
-        public async Task<IActionResult> checkStorageAsync()
-        {
-            //TestVM testVM = new TestVM();
-            Handel handel = new Handel(_unitOfWork);
-            var containername = await handel.ListBlobContainersAsync();
+        //public async Task<IActionResult> checkStorageAsync()
+        //{
+        //    //TestVM testVM = new TestVM();
+        //    BlobService handel = new Handel(_unitOfWork);
+        //    var containername = await handel.ListBlobContainersAsync();
 
-            return View(containername);
-        }
+        //    return View(containername);
+        //}
 
 
 
