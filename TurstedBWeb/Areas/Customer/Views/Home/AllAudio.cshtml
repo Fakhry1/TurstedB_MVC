@@ -43,32 +43,8 @@
 }
 
 <style>
-    .sunnave {
-        transition: all 0.2s;
-        position: relative;
-    }
 
-        .sunnave:hover:before {
-            content: '';
-            height: 2px;
-            width: 100%;
-            background-color: greenyellow;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-
-        .sunnave:active {
-            content: '';
-            height: 2px;
-            width: 100%;
-            background-color: greenyellow;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-
- 
+  
 
     audio {
         max-height: 100%;
@@ -78,12 +54,64 @@
     }
 
 
+    .nav .nav-item a.active {
+        background-color: transparent;
+        color: var(--bs-primary) !important;
+    }
+
+    .nav .nav-item a.active::after {
+            content: "";
+            border-bottom: 4px solid var(--bs-primary);
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            border-radius: 5px 5px 0 0;
+        }
+
+
+
 </style>
 <div class="p-4 ">
     <p class="text-body">@_localization.Getkey("Picks to watch") </p>
 </div>
 
-<div class="row shadow">
+<div class="container-fluid  p-5">
+    <div class="justify-content-md-between">
+  <ul class="nav nav-pills mb-3 border-bottom border-2" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link text-primary fw-semibold active position-relative"  data-bs-toggle="pill"  type="button"  aria-controls="pills-home" aria-selected="true">Home</a>
+    </li>
+    <li class="nav-item" role="presentation">
+                <a class="nav-link text-primary fw-semibold position-relative"  type="button"  asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Lesones")</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link text-primary fw-semibold position-relative"  data-bs-toggle="pill" data-bs-target="#pills-contact" type="button"  aria-controls="pills-contact" aria-selected="false">Contact</a>
+    </li>
+  </ul>
+    </div>
+  @* <div class="tab-content border rounded-3 border-primary p-3 text-danger" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <h2>Home</h2>
+      <p>Please check our more design  <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+      <h2>Profile</h2>
+      <p>Please check our more design  <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
+    </div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+      <h2>Contact</h2>
+      <p>Please check our more design  <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
+    </div>
+  </div> *@
+</div>
+
+
+
+
+
+
+@* <div class="row shadow">
 
     <div class="justify-content-between">
         <nav class="navbar navbar-expand-lg  px-0 py-3">
@@ -98,10 +126,11 @@
 
                     <div class="navbar-nav mx-lg-auto nav-underline">
 
-                        <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio">@_localization.Getkey("Qasaeid and Hadrah")</a>
-                        <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Audio Lessons")</a>
-                        <a class="nav-item nav-link " href="#">@_localization.Getkey("Audio Speech")</a>
-                        <a class="nav-item nav-link " href="#">@_localization.Getkey("Audio Jumaha")</a>
+                        <a class="nav-link nav-item active"  asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio">@_localization.Getkey("Qasaeid")</a>
+                        <a class="nav-link nav-item"  asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Lesones")</a>
+
+                        <a class="nav-item nav-link " href="#">@_localization.Getkey("General Events")</a>
+                        <a class="nav-item nav-link " href="#">@_localization.Getkey("Selections")</a>
 
 
                     </div>
@@ -111,79 +140,73 @@
         </nav>
     </div>
 
-</div>
-<div class="row">
-   
+    
+</div> *@
+
     @* ______________________________________________show image_______________________________ *@
-    <div class="col-lg-1 col-md-1 col-sm-1"></div>
-    <div class="col-lg-10 col-md-10 col-sm-10">
-        <div class="row mt-5">
-            @foreach (var obj in Model.OrderBy(u => u.CreationDate))
-            {
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-2">
-                    <div class="card radius-10 border-start border-end border-0 border-3 border-info">
-                        <div class="card-body p-0 shadow">
 
-                            <div class="title text-center">
-                                <h6 class="mb-1 mt-1">
-                                    @obj.Titel
-                                    <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile">
-                                        <i class="bi bi-download h5 "></i>
-                                    </a>
-                                </h6>
+    <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <div class="col-lg-10 col-md-10 col-sm-10">
+            <div class="row mt-5">
+                @foreach (var obj in Model.OrderBy(u => u.CreationDate))
+                {
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-2">
+                        <div class="card radius-10 border-start border-end border-0 border-3 border-info">
+                            <div class="card-body p-0 shadow">
+
+                                <div class="title text-center">
+                                    <h6 class="mb-1 mt-1">
+                                        @obj.Titel
+                                        <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile">
+                                            <i class="bi bi-download h5 "></i>
+                                        </a>
+                                    </h6>
+                                </div>
+
+                                <div class="text-center">
+                                    <audio controls>
+
+                                        <source src="@obj.MainFile" type="audio/ogg">
+                                        <source src="@obj.MainFile" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <p class="small text-muted text-truncate">
+                                        @obj.TopicDiscription
+
+                                    </p>
+                                </div>
+
                             </div>
-
-                            <div class="text-center">
-                                <audio controls>
-
-                                    <source src="@obj.MainFile" type="audio/ogg">
-                                    <source src="@obj.MainFile" type="audio/mpeg">
-                                    Your browser does not support the audio element.
-                                </audio>
-                                <p class="small text-muted text-truncate">
-                                    @obj.TopicDiscription
-
-                                </p>
-                            </div>
-
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
+
         </div>
-
-
-
+        <div class="col-lg-1 col-md-1 col-sm-1">
+        </div>
     </div>
-    <div class="col-lg-1 col-md-1 col-sm-1">
-
-    </div>
-</div>
-
 
 <div class="container mb-4">
     <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4  mt-3 mb-3">
-           
-            <a class="page-link text-end" asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">
+        <div class="col-lg-4 col-md-4 col-sm-4 text-end mt-3">
+            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">
 
                 <img src="~/Files/Logo/prev.svg" class="" style="width:50px;" />
                 @* @_localization.Getkey("Next") *@
             </a>
-           
-          
+
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4"></div>
-        
-
+       
         <div class="col-lg-4 col-md-4 col-sm-4 text-start mt-3 mb-5">
             <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">
                 <img src="~/Files/Logo/Next.svg" class="" style="width:50px;" />
-               
+                @* @_localization.Getkey("Next") *@
             </a>
-    </div>
+
         </div>
- 
+
     </div>
-
-
+</div>
