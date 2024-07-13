@@ -95,11 +95,11 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
 
                     <div class="navbar-nav mx-lg-auto nav-underline">
-                        <a class="nav-link focus-ring focus-ring-primary" href="@Url.Action("AllAudio", "Home", new {SubCategoryID=6})">@_localization.Getkey("Qasaeid")</a>
+                        <a class="nav-link " href="@Url.Action("AllPDF", "Home", new {SubCategoryID=8})">@_localization.Getkey("Qasaeid")</a>
                         
-                        <a class="nav-link"  href="@Url.Action("AllAudio", "Home", new {SubCategoryID=7})">@_localization.Getkey("Lesones")</a>
+                       @*  <a class="nav-link"  href="@Url.Action("AllAudio", "Home", new {SubCategoryID=7})">@_localization.Getkey("Lesones")</a>
                         <a class="nav-link " href="#">@_localization.Getkey("General Events")</a>
-                        <a class="nav-link " href="#">@_localization.Getkey("Selections")</a>
+                        <a class="nav-link " href="#">@_localization.Getkey("Selections")</a> *@
 
 
                     </div>
@@ -134,12 +134,10 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <audio controls>
+                                    <pdf controls>
 
-                                        <source src="@obj.MainFile" type="audio/ogg">
-                                        <source src="@obj.MainFile" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
+                                        <source src="@obj.MainFile" type="">
+                                       
                                     <p class="small text-muted text-truncate">
                                         @obj.TopicDiscription
 
