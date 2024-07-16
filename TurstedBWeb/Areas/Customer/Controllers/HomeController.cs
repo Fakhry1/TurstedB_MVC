@@ -78,29 +78,11 @@ namespace TrustedBWeb.Areas.Customer.Controllers
         }
 
 
-        //public IActionResult DownloadFile(Guid? id)
-        //{
-        //    string webRootPath = _hostEnvironment.WebRootPath;
-        //    var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
-
-        //    string path = Path.Combine(webRootPath) + slash + fileName.FilePath;
-
-        //    //Read the File data into Byte Array.
-        //    byte[] bytes = System.IO.File.ReadAllBytes(path);
-
-        //    //Send the File to Download.
-        //    return File(bytes, "application/octet-stream", fileName.FilePath);
-        //}
+  
 
         public async Task<IActionResult> DownloadAudioAsync(string? path)
         {
-            //string webRootPath = _hostEnvironment.WebRootPath;
-            //string filePath = Path.Combine(webRootPath) + slash + path;
-            //byte[] bytes = System.IO.File.ReadAllBytes(filePath);
-            //return File(bytes, "application/octet-stream", "Image.png");
-
-            //var fileName = _unitOfWork.Attachments.Get(u => u.FileId == id);
-
+  
             List<string> storageData = new List<string>();
             foreach (var includeProp in path
                     .Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries))
