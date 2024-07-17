@@ -429,6 +429,9 @@
   <data name="Last" xml:space="preserve">
     <value>الاخيرة</value>
   </data>
+  <data name="Lesones" xml:space="preserve">
+    <value>دروس</value>
+  </data>
   <data name="Lock" xml:space="preserve">
     <value>غير مفعل</value>
   </data>
@@ -521,6 +524,9 @@
   </data>
   <data name="Publish" xml:space="preserve">
     <value>نشر</value>
+  </data>
+  <data name="Qasaeid" xml:space="preserve">
+    <value>قصائد</value>
   </data>
   <data name="Qualification" xml:space="preserve">
     <value>المؤهل</value>

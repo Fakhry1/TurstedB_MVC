@@ -15,9 +15,9 @@
 </head>
 <body>
     <header>
-        <div class="row">
-           
-            <div class="col-6 bg-primary">
+        @* <div class="container-fluid"> *@
+
+        <div class="col-12 bg-primary d-inline-flex justify-content-between">
                 <div class="px-5">
 
                     <ul class="navbar-nav pull-left">
@@ -31,10 +31,10 @@
                     </ul>
 
                 </div>
-            </div>
+         
             
-            <div class="col-6 bg-primary px-5">
-                <ul class="navbar">
+            <div class=" px-5">
+                <ul class="navbar ">
                     <li class="nav-item dropdown position-absolute top-20 start-0 mt-3">
                         <a class="nav-link dropdown-toggle text-white " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-translate h4"></i>
@@ -53,7 +53,7 @@
 
                 </ul>
             </div>
-           
+          @*   </div> *@
             @* <div id="top-header">
                 <nav class="navbar navbar-expand-lg" style="height: 2rem;">
                    
@@ -103,7 +103,7 @@
         </div>
       
 
-        <div class="row">
+      @*   <div class="row"> *@
             <nav class="navbar navbar-expand-lg border-bottom border-primary border-3 shadow px-5">
            
             <div class="container-fluid ">
@@ -165,14 +165,14 @@
             </div>
 
         </nav> 
-        </div>
+       @*  </div> *@
     </header>
     <div>
         <main class="main" role="main">
             @RenderBody()
         </main>
     </div>
-    <div class="row">
+   
     <footer class="bg-primary text-light text-center " style="bottom:0;position: fixed; width:100%;">
             <div class="row">
                 <div class="col-6 d-sm-inline-flex justify-content-between px-5">
@@ -190,16 +190,12 @@
                 </div>
             </div>
         </footer>
-    </div>
+ 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/toastr.js" asp-append-version="true"></script>
-
-
-
-
 
 
 

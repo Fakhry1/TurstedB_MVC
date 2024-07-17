@@ -81,7 +81,7 @@
 
 
 
- <div class="row shadow">
+<div class="container-fluid shadow">
  
     <div class="justify-content-between">
         <nav class="navbar navbar-expand-lg  px-4 py-3">
@@ -94,7 +94,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
 
-                    <div class="navbar-nav mx-lg-auto nav-underline">
+                    <div class="nav navbar-nav mx-lg-auto nav-underline">
                         <a class="nav-link focus-ring focus-ring-primary" href="@Url.Action("AllAudio", "Home", new {SubCategoryID=6})">@_localization.Getkey("Qasaeid")</a>
                         
                         <a class="nav-link"  href="@Url.Action("AllAudio", "Home", new {SubCategoryID=7})">@_localization.Getkey("Lesones")</a>
@@ -114,7 +114,7 @@
 
     @* ______________________________________________show image_______________________________ *@
 
-    <div class="row">
+<div class="container-fluid shadow text-center d-inline-flex">
         <div class="col-lg-1 col-md-1 col-sm-1"></div>
         <div class="col-lg-10 col-md-10 col-sm-10">
             <div class="row mt-5">
@@ -168,7 +168,7 @@
 
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4"></div>
-       
+
         <div class="col-lg-4 col-md-4 col-sm-4 text-start mt-3 mb-5">
             <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">
                 <img src="~/Files/Logo/Next.svg" class="" style="width:50px;" />
@@ -179,3 +179,5 @@
 
     </div>
 </div>
+
+
