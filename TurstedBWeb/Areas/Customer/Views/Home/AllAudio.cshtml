@@ -1,23 +1,12 @@
 ﻿ @model List<Topics>
-
-
-
-
-@* <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> *@
-
+@{
+    string url = "";
+}
 <link href="~/css/NavBar.css" rel="stylesheet">
-
-@* <div class="fixed-top"> *@
 
     <nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
         <div class="container">
-            
-    
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent1"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,12 +27,21 @@
                         <a class="nav-link" href="#">About</a>
                     </li>
 
-                    <li class="nav-item">
-                     @*    <a class="nav-link active" href="/Customer/Home/AllAudio?SubCategoryID=7">Testing</a> *@
+                <li class="nav-item" >
+@*                      @{
+                        url = @Url.Action("AllAudio", "Home", new { SubCategoryID = 7 });
+                    }
+
+                     <a class="nav-link" href="#">@_localization.Getkey("Qasaeid")</a> 
+                    <a class="nav-link"  herf="@url">@_localization.Getkey("Qasaeid")</a> *@
+
+                    <div class="btn btn-white " id="Test" onclick="myFunction()">
+                        @_localization.Getkey("Qasaeid")
+                    <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio"></a>
                        
-                        <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="AllAudio">@_localization.Getkey("Qasaeid")</a> 
-                    @*    <a class="nav-link" href="#">@_localization.Getkey("Qasaeid")  @Html.ActionLink(@_localization.Getkey("Qasaeid"), "AllAudio", "Home", new { SubCategoryID = "7" }) </a> *@
-                    </li>
+                        
+                    </div>
+                </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sea food</a>
@@ -64,41 +62,12 @@
             </div>
         </div>
     </nav>
-@* </div>  *@
-@* 
-<div class="list-group">
-    <a href="@Url.Action("AllAudio", "Home", new {SubCategoryID=7})" class="list-group-item Item1" onclick="makeActive(event)">Item 1</a>
-    <a href="@Url.Action("AllAudio", "Home", new {SubCategoryID=7})" class="list-group-item" onclick="makeActive(event)">Item 2</a> 
-    <a href="#" class="list-group-item Item1" onclick="makeActive(event)">Item 1</a>
-    <a href="#" class="list-group-item" onclick="makeActive(event)">Item 2</a>
-    <a href="#" class="list-group-item" onclick="makeActive(event)">Item 3</a>
-</div>
-<script>
-    function makeActive(event) {
-        var previous = document.getElementsByClassName("active");
-        if (previous.length > 0) {
-            previous[0].className = previous[0].className.replace("active", "");
-        }
-        event.target.className += " active";
-        document.getElementById("Item1").style.color = "#ff0000";
-    }
-</script>  *@
-
-
-@*     <h2> Change the font color using JavaScript.</h2>
-    <div id="fonts"> Click the button to change the color of font inside the button.</div>
- <a onclick="changeFontColor()" id="btn">change color</a> *
-<a href="/Customer/Home/AllAudio?SubCategoryID=7" onclick="changeFontColor()" id="btn">@_localization.Getkey("News")</a>
     <script>
 
-        // function to change the font color of button
-        function changeFontColor() {
-            let button = document.getElementById("btn"); // access the button by id
-            let color = button.style.color;
-            if (color == "red") { // if button color is red change it green otherwise change it to red.
-                button.style.color = 'green';
-            } else {
-                button.style.color = 'red';
-            }
-        }
-    </script> *@
+    document.getElementById("Test").style.color = "white";
+    function myFunction() {
+        document.getElementById("Test").style.color = "#ff0000";
+
+        
+    }
+    </script>

@@ -111,7 +111,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         //______________________________Audio____________________________________
    
-        public IActionResult AllAudio(int? SubCategoryID, int pg = 1)
+        public IActionResult AllAudio(int? SubCategoryID = 6, int pg = 1)
         {
             const int pageSize = 4;
             if (pg < 1) { pg = 1; }
