@@ -1,8 +1,8 @@
 ﻿ @model List<Topics>
-@{
+@* @{
     string url = "";
-}
-<link href="~/css/NavBar.css" rel="stylesheet">
+} *@
+<link href="~/css/NavBar.css" rel="stylesheet"/>
 
     <nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
         <div class="container">
@@ -28,29 +28,11 @@
                     </li>
 
                 <li class="nav-item" >
-@*                   @{
-                        url = @Url.Action("AllAudio", "Home", new { SubCategoryID = 7 });
-                    }
 
-                     <a class="nav-link" href="#">@_localization.Getkey("Qasaeid")</a> 
-                    <a class="nav-link"  herf="@url">@_localization.Getkey("Qasaeid")</a> 
-
-                    <div class="btn btn-white " id="Test" onclick="myFunction()">
-                        @_localization.Getkey("Qasaeid")
-                     <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio"></a>  
-  
-                    </div> *@
-
-
-               @*      <div class="cart">
-                        <a onclick="addToCart('7');" class="button"><span>Add to Cart</span></a>
-                    </div>
- *@
               <li class="nav-item" >
                     <button type="button" id="UseShipAddr" onclick="myFunction('7')" class="nav-link" href="#"> @_localization.Getkey("Qasaeid")</button>
                 </li>
 
-                
 
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sea food</a>
@@ -73,38 +55,13 @@
     </nav>
     <script>
 
-
-    function AddToCart(id) {
-        $.ajax({
-            url: "/Home/AllAudio",
-            data: { subCategoryID: id }
-        }).done(function () {
-            alert('Added');
-        });
-    }
-    
-    // function myFunction() {
-    //     document.getElementById("Test").style.color = "#ff0000";
-    //     $.ajax({
-
-    //         type:"GET",
-    //         url: "/Home/AllAudio",
-
-    //         data: { "subCategoryID":"6" }
-    //     });
-        
-    // }
-
-
     function myFunction(id) {
 
-        // $('#UseShipAddr').click(function () {
-      
             $.ajax({
 
             url: '@Url.Action("AllAudio", "Home")',
                  data: {subCategoryID: id }
             });
-        // });
+
     }
     </script>
