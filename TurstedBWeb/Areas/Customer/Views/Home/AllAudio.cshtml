@@ -1,110 +1,225 @@
-﻿ @model List<Topics>
+﻿@model List<Topics>
+
+
 @{
-    string url = "";
+    string Titel = "";
+    string path1 = "";
+    string url;
+    Pager pager = new Pager();
+    int pageNo = 0;
+    int ToltalP = 0;
+    int Next = 0;
+    int Prev = 0;
+    int subCategory = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+        ToltalP = pager.TotalPages;
+        Next = pageNo + 1;
+        Prev = pageNo - 1;
+        subCategory = pager.SubCategoryID;
+    }
+    if (subCategory == 6)
+    {
+        Titel = "Qasaeid and Hadrah";
+    }
+    else if (subCategory == 7)
+    {
+        Titel = "Lessons";
+    }
+    else if (subCategory == 4)
+    {
+        Titel = "Holiya";
+    }
+    else if (subCategory == 4)
+    {
+        Titel = "Speech";
+    }
+    else if (subCategory == 4)
+    {
+        Titel = "Jumaha";
+    }
 }
-<link href="~/css/NavBar.css" rel="stylesheet">
 
-    <nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
-        <div class="container">
+<style>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent1"
+  
+
+    audio {
+        max-height: 100%;
+        max-width: 100%;
+        margin: auto;
+        object-fit: contain;
+    }
+
+
+
+</style>
+<div class="p-4 ">
+    <p class="text-body">@_localization.Getkey("Picks to watch") </p>
+</div>
+
+
+
+
+@* <div class="container-fluid shadow"> *@
+ 
+    <div class="justify-content-between">
+         <nav class="navbar navbar-expand-lg  px-4 py-3">
+           @*  <div class="container-xl">
+                
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                <div class="nav navbar-nav mx-lg-auto nav-underline ">
+
+                   
+                      
+                       <a class="nav-link active" href="@Url.Action("AllAudio", "Home", new {SubCategoryID=6})">@_localization.Getkey("Qasaeid")</a>
+
+                        <a class="nav-link" href="@Url.Action("AllAudio", "Home", new {SubCategoryID=7})">@_localization.Getkey("Lesones")</a>
+                        <a class="one nav-link " href="#">@_localization.Getkey("General Events")</a>
+                        <a class="one nav-link " href="#">@_localization.Getkey("Selections")</a> 
+                       
+
+                    </div>
+
+                </div>
+            </div> *@
+
+        <div class="container-fluid ">
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+               
 
-                <ul class="navbar-nav ml-auto">
+                <ul class="nav navbar-nav nav-underline">
+                  
+                    <li class="nav-item ">
+                        <a class="nav-item nav-link " onclick="myFunction('7')" href="#"> @_localization.Getkey("Qasaeid")</a>
+                        @* <a class="nav-link active" >
 
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">
-                            Home
-                            <span class="sr-only">(current)</span>
-                        </a>
+                            @Html.ActionLink(@_localization.Getkey("Qasaeid"), "AllAudio", "Home", new { SubCategoryID = "6" })
+                        </a> *@
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                    <li class="nav-item ">
+                        <a class="nav-item nav-link " onclick="myFunction('6')" href="#">@_localization.Getkey("Lesones")</a>
+                       @*  <a class="nav-link">
+                            @_localization.Getkey("Lesones")
+                            @Html.ActionLink(@_localization.Getkey("Qasaeid"), "AllAudio", "Home", new { SubCategoryID = "7" })
+                        </a> *@
                     </li>
 
-                <li class="nav-item" >
-@*                   @{
-                        url = @Url.Action("AllAudio", "Home", new { SubCategoryID = 7 });
-                    }
-
-                     <a class="nav-link" href="#">@_localization.Getkey("Qasaeid")</a> 
-                    <a class="nav-link"  herf="@url">@_localization.Getkey("Qasaeid")</a> 
-
-                    <div class="btn btn-white " id="Test" onclick="myFunction()">
-                        @_localization.Getkey("Qasaeid")
-                     <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio"></a>  
-  
-                    </div> *@
-
-
-               @*      <div class="cart">
-                        <a onclick="addToCart('7');" class="button"><span>Add to Cart</span></a>
-                    </div>
- *@
-              <li class="nav-item" >
-                    <button type="button" id="UseShipAddr" onclick="myFunction()" class="nav-link" href="#"> @_localization.Getkey("Qasaeid")</button>
-                </li>
-
-                
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sea food</a>
+                    <li class="nav-item ">
+                    <a class="nav-item nav-link " href="#">@_localization.Getkey("General Events")</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Vegetables</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Blog</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                    <li class="nav-item ">
+                    <a class="nav-item nav-link " href="#">@_localization.Getkey("Selections")</a>
                     </li>
                 </ul>
+
+
+
             </div>
         </div>
-    </nav>
-    <script>
 
+        </nav> 
+ 
 
-    function AddToCart(id) {
-        $.ajax({
-            url: "/Home/AllAudio",
-            data: { subCategoryID: id }
-        }).done(function () {
-            alert('Added');
-        });
-    }
-    
-    // function myFunction() {
-    //     document.getElementById("Test").style.color = "#ff0000";
-    //     $.ajax({
+  
+</div>  
 
-    //         type:"GET",
-    //         url: "/Home/AllAudio",
+    @* ______________________________________________show image_______________________________ *@
 
-    //         data: { "subCategoryID":"6" }
-    //     });
-        
-    // }
+<div class="container-fluid shadow text-center d-inline-flex">
+        <div class="col-lg-1 col-md-1 col-sm-1"></div>
+        <div class="col-lg-10 col-md-10 col-sm-10">
+            <div class="row mt-5">
+                @foreach (var obj in Model.OrderBy(u => u.CreationDate))
+                {
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-2">
+                        <div class="card radius-10 border-start border-end border-0 border-3 border-info">
+                            <div class="card-body p-0 shadow">
 
+                                <div class="title text-center">
+                                    <h6 class="mb-1 mt-1">
+                                        @obj.Titel
+                                        <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile">
+                                            <i class="bi bi-download h5 "></i>
+                                        </a>
+                                    </h6>
+                                </div>
 
-    function myFunction() {
+                                <div class="text-center">
+                                    <audio controls>
+
+                                        <source src="@obj.MainFile" type="audio/ogg">
+                                        <source src="@obj.MainFile" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <p class="small text-muted text-truncate">
+                                        @obj.TopicDiscription
+
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1">
+        </div>
+    </div>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 text-end mt-3">
+            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">
+
+                <img src="~/Files/Logo/prev.svg" class="" style="width:50px;" />
+               
+            </a>
+
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+
+        <div class="col-lg-4 col-md-4 col-sm-4 text-start mt-3 mb-5">
+            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">
+                <img src="~/Files/Logo/Next.svg" class="" style="width:50px;" />
+              
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function myFunction(id) {
 
         // $('#UseShipAddr').click(function () {
-      
-            $.ajax({
 
-            url: '@Url.Action("AllAudio", "Home", new { SubCategoryID = 7 })'
-                // data: { "subCategoryID": "6" }
-            });
+        $.ajax({
+
+            url: '@Url.Action("AllAudio", "Home")',
+            data: { subCategoryID: id }
+        });
         // });
     }
-    </script>
+</script> 
