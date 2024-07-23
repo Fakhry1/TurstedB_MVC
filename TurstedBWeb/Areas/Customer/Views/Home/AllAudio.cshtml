@@ -28,20 +28,29 @@
                     </li>
 
                 <li class="nav-item" >
-@*                      @{
+@*                   @{
                         url = @Url.Action("AllAudio", "Home", new { SubCategoryID = 7 });
                     }
 
                      <a class="nav-link" href="#">@_localization.Getkey("Qasaeid")</a> 
-                    <a class="nav-link"  herf="@url">@_localization.Getkey("Qasaeid")</a> *@
+                    <a class="nav-link"  herf="@url">@_localization.Getkey("Qasaeid")</a> 
 
                     <div class="btn btn-white " id="Test" onclick="myFunction()">
                         @_localization.Getkey("Qasaeid")
-                    <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio"></a>
-                       
-                        
+                     <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio"></a>  
+  
+                    </div> *@
+
+
+               @*      <div class="cart">
+                        <a onclick="addToCart('7');" class="button"><span>Add to Cart</span></a>
                     </div>
+ *@
+              <li class="nav-item" >
+                    <button type="button" id="UseShipAddr" onclick="myFunction()" class="nav-link" href="#"> @_localization.Getkey("Qasaeid")</button>
                 </li>
+
+                
 
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sea food</a>
@@ -64,10 +73,38 @@
     </nav>
     <script>
 
-    document.getElementById("Test").style.color = "white";
-    function myFunction() {
-        document.getElementById("Test").style.color = "#ff0000";
 
+    function AddToCart(id) {
+        $.ajax({
+            url: "/Home/AllAudio",
+            data: { subCategoryID: id }
+        }).done(function () {
+            alert('Added');
+        });
+    }
+    
+    // function myFunction() {
+    //     document.getElementById("Test").style.color = "#ff0000";
+    //     $.ajax({
+
+    //         type:"GET",
+    //         url: "/Home/AllAudio",
+
+    //         data: { "subCategoryID":"6" }
+    //     });
         
+    // }
+
+
+    function myFunction() {
+
+        // $('#UseShipAddr').click(function () {
+      
+            $.ajax({
+
+            url: '@Url.Action("AllAudio", "Home", new { SubCategoryID = 7 })'
+                // data: { "subCategoryID": "6" }
+            });
+        // });
     }
     </script>
