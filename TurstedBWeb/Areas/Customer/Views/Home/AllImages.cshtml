@@ -43,7 +43,6 @@
 }
 
 
-
 <div class=" container-fluid shadow text-center d-inline-flex">
     <div class="col-lg-1 col-md-1 col-sm-1 text-end">
         <button class="navbar-toggler " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
@@ -54,7 +53,7 @@
         <h5 class="text-primary py-2">@_localization.Getkey("Images"+" "+@Titel)</h5>
     </div>
 </div>
-@* <div class="row"> *@
+
     <nav class="navbar">
         <div class="container-fluid">
             
@@ -96,8 +95,7 @@
             </div>
         </div>
     </nav>
-    @* ______________________________________________show image_______________________________ *@
-    @* <div class="col-lg-1 col-md-1 col-sm-1"></div> *@
+
     <div class="container-fluid">
     <div class="col-lg-12 col-md-12 col-sm-12 px-3">
         <div class="row mt-3">
@@ -105,7 +103,6 @@
             {
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <div class="card radius-10 border-start border-end border-0 border-3 border-info">
-                        
 
                             <div>
 
@@ -127,21 +124,20 @@
                                     @{
                                         path1 = @obj.MainFile;
                                     }
+
+
                                 </div>
 
 
                             </div>
-                            <!-- Button trigger modal -->
-                            <!-- Modal -->
 
-
-                        
                     </div>
                 </div>
             }
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       
+         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -156,12 +152,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
 
     </div>
     </div>
-    @* <div class="col-lg-1 col-md-1 col-sm-1"></div> *@
-@* </div> *@
+   
 
 
 <div class="container mb-5">
@@ -173,9 +168,7 @@
                 <nav class="Pager1" aria-label="pagination example">
                     <ul class="pagination pagination-circle justify-content-center pagination-md">
 
-                        @* <li class="page-item ">
-                            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID ="2" asp-route-pg="1">@_localization.Getkey("First")</a>
-                        </li> *@
+                      
                         <li class="page-item">
                             <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">@_localization.Getkey("Prev")</a>
                         </li>
@@ -190,10 +183,7 @@
                         <li class="page-item ">
                             <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
                         </li>
-                       @*  <li class="page-item ">
-                            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="2" asp-route-pg="@ToltalP">@_localization.Getkey("Last")</a>
-                        </li> *@
-
+                   
 
                     </ul>
                 </nav>
@@ -206,4 +196,3 @@
 
     </div>
 </div>
-
