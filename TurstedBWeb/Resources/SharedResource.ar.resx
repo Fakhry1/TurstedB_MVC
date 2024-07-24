@@ -423,6 +423,9 @@
   <data name="Items List" xml:space="preserve">
     <value>قائمة البنود</value>
   </data>
+  <data name="Khoutap" xml:space="preserve">
+    <value>خطب</value>
+  </data>
   <data name="Languages" xml:space="preserve">
     <value>اللغات</value>
   </data>
@@ -430,6 +433,9 @@
     <value>الاخيرة</value>
   </data>
   <data name="Lesones" xml:space="preserve">
+    <value>دروس</value>
+  </data>
+  <data name="Lessones" xml:space="preserve">
     <value>دروس</value>
   </data>
   <data name="Lock" xml:space="preserve">
@@ -629,6 +635,9 @@
   </data>
   <data name="Specialization" xml:space="preserve">
     <value>التخصص</value>
+  </data>
+  <data name="Speeches" xml:space="preserve">
+    <value>خطابات</value>
   </data>
   <data name="State" xml:space="preserve">
     <value>الحالة</value>

@@ -23,11 +23,11 @@
     }
     if (subCategory == 6)
     {
-        Titel = "Qasaeid and Hadrah";
+        Titel = "Qasaeid";
     }
     else if (subCategory == 7)
     {
-        Titel = "Lessons";
+        Titel = "Lessones";
     }
     else if (subCategory == 4)
     {
@@ -35,11 +35,11 @@
     }
     else if (subCategory == 4)
     {
-        Titel = "Speech";
+        Titel = "Speeches";
     }
     else if (subCategory == 4)
     {
-        Titel = "Jumaha";
+        Titel = "Khoutap";
     }
 }
 
@@ -80,47 +80,37 @@
 
             <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">
-                        Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
+               
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
+               
 
-                <li class="nav-item">
 
-                <li class="nav-item">
-                    <button type="button" id="UseShipAddr" onclick="myFunction('7')" class="nav-link" href="#"> @_localization.Getkey("Qasaeid")
-                    </button>
-                   @*  <a class="nav-link" onclick="myFunction('7')" >@_localization.Getkey("Qasaeid")</a> *@
-                    
+                <li class="nav-item ">
+
+                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio">@_localization.Getkey("Qasaeid")</a>
+
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sea food</a>
+                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Lessones")</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Vegetables</a>
+                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Speeches")</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Blog</a>
+                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Khoutap")</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
             </ul>
         </div>
 
-        <div class="px-0">
-            <p class="text-primary ">@_localization.Getkey(Titel) </p>
+        <div class=" ms-5 d-inline-flex position-absolute top-50 start-0 translate-middle ">
+          
+            <p class="fw-bold text-white">@_localization.Getkey( Titel) </p>
+            <i class="bi bi-music-note-beamed text-white h4 "></i>
         </div>
 
 
@@ -280,5 +270,12 @@
              data: { subCategoryID: id }
         });
         // });
+    }
+</script>
+<script>
+
+    function init() {
+        document.getElementById("about").style.color = 'blue';
+        // document.querySelectorAll('p')[0].style.color = 'blue';
     }
 </script>
