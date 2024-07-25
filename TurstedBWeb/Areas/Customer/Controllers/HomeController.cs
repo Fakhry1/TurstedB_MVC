@@ -109,13 +109,13 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         }
 
-        public async Task<IActionResult> DisplayImage(string? path)
-        {
+        //public async Task<IActionResult> DisplayImage(string? path)
+        //{
 
-            return View(path);
+        //    return View();
 
 
-        }
+        //}
 
         //______________________________Audio____________________________________
 
