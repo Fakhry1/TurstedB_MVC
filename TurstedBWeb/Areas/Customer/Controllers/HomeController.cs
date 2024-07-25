@@ -109,8 +109,16 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         }
 
+        public async Task<IActionResult> DisplayImage(string? path)
+        {
+
+            return View(path);
+
+
+        }
+
         //______________________________Audio____________________________________
-   
+
         public IActionResult AllAudio(int? SubCategoryID = 6, int pg = 1)
         {
             const int pageSize = 4;
