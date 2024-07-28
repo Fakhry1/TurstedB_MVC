@@ -120,32 +120,21 @@
 
                         </div>
 
-                        <div class="d-flex justify-content-between align-items-center">
+                       <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
-
+                                
                             </div>
 
                             <small class="text-muted"> @obj.Titel</small>
 
-                            <div class="btn-group">
-                               @*  <a asp-controller="Home" asp-action="DisplayImage" asp-route-path="@obj.MainFile" type="button" class="btn btn-sm" > <i class="bi bi-display h4"></i></a> *@
-                                <ul class="nav nav-tabs">
-                                    <li class="nav-item h5">
-                                        <a class="nav-link text-body fw-bold active" data-bs-toggle="tab" href="#States"> @_localization.Getkey("States History")</a>
-                                    </li>
-                                   
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane container" id="States">
-                                        <div class=" col-12  p-3 mb-5 ">
-                                            <partial name="_DisplayImage" />
-                                        </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            
+                            <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">open</a>
+                            @Html.Partial("_DisplayImage", @obj.MainFile)
+                           @*  <partial name="_DisplayImage" /> *@
+                          @*   @Html.Partial("_DisplayImage", @obj.MainFile) *@
 
+                    </div> 
                     </div>
                 </td>
             </tr>

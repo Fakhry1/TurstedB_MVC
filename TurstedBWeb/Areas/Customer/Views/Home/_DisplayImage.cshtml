@@ -1,26 +1,5 @@
-﻿@* @model string  *@
-
-@* <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <img src="@Model" class="w-100" />
-            </div>
-            <div class="modal-footer">
-                 <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@Model" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-
-         *@
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+﻿@model string
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -28,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+             ........
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -37,9 +16,3 @@
         </div>
     </div>
 </div>
-
-                <script>
-    var myModal = new bootstrap.Modal(document.getElementById("exampleModal"));
-    myModal.show();
-
-                </script>
