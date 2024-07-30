@@ -109,9 +109,9 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         }
 
-        public IActionResult DisplayImage(string path)
+        public IActionResult DisplayImage(string? path)
         {
-            string ImagePath = path;
+            var ImagePath = _unitOfWork.Topics.Get(u=>u.MainFile == path);
             return View(ImagePath);
 
 

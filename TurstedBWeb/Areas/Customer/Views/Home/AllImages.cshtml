@@ -2,6 +2,7 @@
 
 
 @{
+    int Leng = Model.Count();
     string Titel = "";
     string path1= "";
     Pager pager = new Pager();
@@ -42,7 +43,7 @@
     }
 }
 
-
+@* <link rel="stylesheet" href="~/css/ImageSize.css" asp-append-version="true" /> *@
 <div class=" container-fluid shadow text-center d-inline-flex">
     <div class="col-lg-1 col-md-1 col-sm-1 text-end">
         <button class="navbar-toggler " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
@@ -97,7 +98,186 @@
     </nav>
     @* __________________________________________________________________________________ *@
 
-<table id="tblData" class="table table-bordered table-striped" style="width:100%">
+<div class="container-fluid  text-center d-inline-flex">
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <div class="row mt-3">
+            @* ____________________________________ 1 _________________________ *@
+            @if (Leng > 0)
+            {
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="card radius-10 border-start border-end border-0 border-3 border-info">
+                        <div>
+                            <img class="w-100" src="@Model[0].MainFile" height="280" />
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@Model[0].MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+
+                            </div>
+
+                        <small class="text-muted"> @Model[0].Titel</small>
+
+                            <div class="btn-group">
+                                <button asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal0"> <i class="bi bi-display h4"></i></button>
+                            <div class="modal" id="exampleModal0" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="@Model[0].MainFile" />
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            @* ____________________________________ 1 _________________________ *@
+
+            @* ____________________________________ 2 _________________________ *@
+            @if (Leng > 1)
+            {
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="card radius-10 border-start border-end border-0 border-3 border-info">
+                    <div>
+                        <img class="w-100" src="@Model[1].MainFile" height="280" />
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@Model[1].MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+
+                        </div>
+
+                        <small class="text-muted"> @Model[1].Titel</small>
+
+                        <div class="btn-group">
+                            <button  class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1"> <i class="bi bi-display h4"></i></button>
+                            <div class="modal" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                           
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="@Model[1].MainFile" />
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+            @* ____________________________________ 2 _________________________ *@
+            
+            @* ____________________________________ 3 _________________________ *@
+            @if (Leng > 2)
+            {
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card radius-10 border-start border-end border-0 border-3 border-info">
+                    <div>
+                        <img class="w-100" src="@Model[2].MainFile" height="280" />
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@Model[2].MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+
+                        </div>
+
+                        <small class="text-muted"> @Model[2].Titel</small>
+
+                        <div class="btn-group">
+                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal2"> <i class="bi bi-display h4"></i></button>
+                            <div class="modal" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                           
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="@Model[2].MainFile" />
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+            }
+            @* ____________________________________ 3 _________________________ *@
+
+            @* ____________________________________ 4 _________________________ *@
+            @if (Leng > 3)
+            {
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="card radius-10 border-start border-end border-0 border-3 border-info">
+                    <div>
+                        <img class="w-100" src="@Model[3].MainFile" height="280" />
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@Model[3].MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+
+                        </div>
+
+                        <small class="text-muted"> @Model[3].Titel</small>
+
+                        <div class="btn-group">
+                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal3"> <i class="bi bi-display h4"></i></button>
+                            <div class="modal" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                           
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="@Model[3].MainFile" />
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+            @* ____________________________________ 3 _________________________ *@
+
+
+        </div>
+
+
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1">
+
+        @* <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">@_localization.Getkey("Next")</a> *@
+
+    </div>
+</div>
+@* __________________________________________________________________ *@
+@* <table id="tblData" class="table table-bordered table-striped" style="width:100%">
     <thead>
 
         <tr>
@@ -106,13 +286,13 @@
         </tr>
 
     </thead>
-    <tbody>
-        @foreach (var obj in Model.OrderBy(u => u.CreationDate))
+    <tbody> *@
+@*         @foreach (var obj in Model.OrderBy(u => u.CreationDate))
         {
-            <tr>
+@*             <tr>
 
-                <td>
-                    <div class="card radius-10 border-start border-end border-0 border-3 border-info">
+                <td> *@
+        @*             <div class="card radius-10 border-start border-end border-0 border-3 border-info">
 
                         <div>
 
@@ -126,14 +306,27 @@
                                 
                             </div>
 
-                            <small class="text-muted"> @obj.Titel</small>
+                            <small class="text-muted"> @obj.Titel</small> 
 
-                            <a asp-controller="Home" asp-action="DisplayImage" asp-route-path="Test"  class="btn btn-sm">
-                                open1
-                               @*  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">open</a>  
-                                 @Html.Partial("_DisplayImage", @obj.Titel)
+ *@
 
-                                 <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                           @*  <ul class="nav nav-tabs">
+                                <li class="nav-item h5">
+                                    <a class="nav-link text-body fw-bold active" data-bs-toggle="tab"  href="#States"> @_localization.Getkey("States History")</a>
+                                </li>
+                                </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane container" id="States">
+                                    <partial name="_DisplayImage" />
+                                </div>
+                            </div> *@
+                           @*  <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="DisplayImage" asp-route-path="@obj.MainFile" class="btn btn-sm">
+                                open1 
+                                
+                                 @Html.Partial("_DisplayImage") 
+
+                                @* <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -150,17 +343,36 @@
                                         </div>
                                     </div>
                                 </div>  *@
-                                </a>
-                           
-                        
+                              @*   </a> *@
+                        @*     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">open</a> *@
+                           @*  <partial name="_DisplayImage" /> *@
 
-                    </div> 
-                    </div>
-                </td>
-            </tr>
+@* 
+                            <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @obj.MainFile
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> *@
+@* 
+                        </div> 
+                    </div>  *@
+@*                 </td>
+            </tr> *@
         }
-    </tbody>
-</table>
+  @*   </tbody>
+</table> *@
     @* ___________________________________________________________________________________ *@
     <div class="container-fluid">
     <div class="col-lg-12 col-md-12 col-sm-12 px-3">
@@ -262,3 +474,25 @@
 
     </div>
 </div>
+<script>
+  
+    var modal = document.getElementById("myModal");
+
+   
+    var img = document.getElementById("myImg");
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    img.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    }
+
+   
+    var span = document.getElementsByClassName("close")[0];
+
+  
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+</script>
