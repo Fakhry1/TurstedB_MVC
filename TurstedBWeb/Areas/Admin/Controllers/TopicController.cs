@@ -50,12 +50,20 @@ namespace TrustedBWeb.Areas.Admin.Controllers
             _configuration = configuration;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pg = 1)
         {
+            const int pageSize = 3;
+            if (pg < 1) { pg = 1; }
+
+            int recsCount = _unitOfWork.Topics.GetAll().Count();
+            var pager = new Pager( recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
             var topicList = new List<Topics>();
+            topicList = _unitOfWork.Topics.GetAllPagination(recSkip, pager.PageSize,null, includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
 
+            this.ViewBag.Pager = pager;
 
-            topicList = _unitOfWork.Topics.GetAll(includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
+            //  topicList = _unitOfWork.Topics.GetAll(includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
 
 
             return View(topicList);

@@ -1,4 +1,19 @@
 ﻿@model List<Topics>
+@{
+    Pager pager = new Pager();
+    int pageNo = 0;
+    int ToltalP = 0;
+    int Next = 0;
+    int Prev = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+        ToltalP = pager.TotalPages;
+        Next = pageNo + 1;
+        Prev = pageNo - 1;
+    }
+}
 
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -61,7 +76,43 @@
 
     </div>
 </div>
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+        @if (pager.TotalPages > 0)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <nav class="Pager1" aria-label="pagination example">
+                    <ul class="pagination pagination-circle justify-content-center pagination-md">
 
+
+                        <li class="page-item">
+                            <a class="page-link " asp-area="Admin" asp-controller="Topic" asp-action="Index"  asp-route-pg="@Prev">@_localization.Getkey("Prev")</a>
+                        </li>
+
+                        @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                        {
+                            <li class="page-item @(pge == pager.CurrentPage ? "active": "")">
+                                <a class="page-link" asp-area="Admin" asp-controller="Topic" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                            </li>
+                        }
+
+                        <li class="page-item ">
+                            <a class="page-link" asp-area="Admin" asp-controller="Topic" asp-action="Index" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+        }
+
+
+
+        <div class="col-lg-4 col-md-4 col-sm-4 "></div>
+
+    </div>
+</div>
 @section Scripts{
   
 }
