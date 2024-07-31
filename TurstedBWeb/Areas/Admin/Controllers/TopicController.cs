@@ -52,13 +52,14 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         public IActionResult Index(int pg = 1)
         {
-            const int pageSize = 3;
+            var topicList = new List<Topics>();
+            const int pageSize = 10;
             if (pg < 1) { pg = 1; }
 
             int recsCount = _unitOfWork.Topics.GetAll().Count();
-            var pager = new Pager( recsCount, pg, pageSize);
+            var pager = new Pager(null, recsCount, pg, pageSize);
             int recSkip = (pg - 1) * pageSize;
-            var topicList = new List<Topics>();
+           
             topicList = _unitOfWork.Topics.GetAllPagination(recSkip, pager.PageSize,null, includeProperties: "ApplicationUser,TopicsStates,Category").ToList();
 
             this.ViewBag.Pager = pager;

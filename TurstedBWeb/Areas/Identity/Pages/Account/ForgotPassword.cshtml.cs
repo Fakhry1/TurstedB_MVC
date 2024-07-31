@@ -13,18 +13,22 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using TrustedB.DataAccess.Data;
+using TrustedB.Models;
 
 namespace TrustedBWeb.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
+        //private readonly ApplicationDbContext _context;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender/*, ApplicationDbContext context*/)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            //_context = context;
         }
 
         /// <summary>
@@ -54,7 +58,7 @@ namespace TrustedBWeb.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user == null )
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return RedirectToPage("./ForgotPasswordConfirmation");
@@ -69,6 +73,9 @@ namespace TrustedBWeb.Areas.Identity.Pages.Account
                     pageHandler: null,
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
+
+                //string body = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                //await Helper.ChangePasswordEmail(_context, Input.Email, body, "Reset your password");
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,

@@ -18,21 +18,21 @@ namespace TrustedB.Models
 
         public Pager() { }
 
-        public Pager(int? subCadigoryID,int totalItems,int page, int pageSize = 10) 
-        { 
-        int totalPages = (int)Math.Ceiling((decimal)totalItems/(decimal)pageSize);
+        public Pager(int? subCadigoryID, int totalItems, int page, int pageSize = 10)
+        {
+            int totalPages = (int)Math.Ceiling((decimal)totalItems / (decimal)pageSize);
             int currentPage = page;
             int startPage = currentPage - 5;
             int endPage = currentPage + 4;
-            if (startPage <=0)
+            if (startPage <= 0)
             {
-                endPage = endPage - (startPage-1);
+                endPage = endPage - (startPage - 1);
                 startPage = 1;
             }
             if (endPage > totalPages)
             {
-              endPage = totalPages;
-                if (endPage>10) { startPage = endPage - 9; }
+                endPage = totalPages;
+                if (endPage > 10) { startPage = endPage - 9; }
             }
             TotalItems = totalItems;
             CurrentPage = currentPage;
@@ -40,7 +40,8 @@ namespace TrustedB.Models
             TotalPages = totalPages;
             StartPage = startPage;
             EndPage = endPage;
-            SubCategoryID = (int)subCadigoryID;
+            if (subCadigoryID != null) { SubCategoryID = (int)subCadigoryID; }
+            
         }
 
     }

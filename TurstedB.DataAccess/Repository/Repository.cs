@@ -80,15 +80,45 @@ namespace TrustedB.DataAccess.Repository
             dbSet.RemoveRange(entity);
         }
 
+        //public IEnumerable<T> GetAllPagination(int recSkip, int recTak, Expression<Func<T, bool>>? filter, string? includeProperties = null)
+        //{
+
+        //    IQueryable<T> query = dbSet;
+
+        //    if (filter != null)
+        //    {
+        //        query = query.Skip(recSkip).Take(recTak).Where(filter);
+        //    }
+
+        //    if (!string.IsNullOrEmpty(includeProperties))
+        //    {
+        //        foreach (var includeProp in includeProperties
+        //            .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+        //        {
+        //            query = query.Include(includeProp);
+        //        }
+        //    }
+
+        //    return query.ToList();
+
+        //}
+
         public IEnumerable<T> GetAllPagination(int recSkip, int recTak, Expression<Func<T, bool>>? filter, string? includeProperties = null)
         {
 
             IQueryable<T> query = dbSet;
-            
+
             if (filter != null)
             {
-                query = query.Skip(recSkip).Take(recTak).Where(filter);
+                //query = query.Where(filter);
+                query = query.Where(filter).Skip(recSkip).Take(recTak);
             }
+            else
+            {
+                query = query.Skip(recSkip).Take(recTak);
+            }
+            //query = query.Skip(recSkip).Take(recTak);
+
 
             if (!string.IsNullOrEmpty(includeProperties))
             {

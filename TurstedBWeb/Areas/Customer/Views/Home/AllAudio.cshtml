@@ -57,6 +57,12 @@
 
 
 </style>
+<style>
+    /*Code to change color of active link*/
+    .navbar-nav > .active > a {
+        color: red;
+    }
+</style>
 <link href="~/css/NavBar.css" rel="stylesheet" />
 <div class="p-4 ">
     <p class="text-body">@_localization.Getkey("Picks to watch") </p>
@@ -199,4 +205,13 @@
         document.getElementById("about").style.color = 'blue';
         // document.querySelectorAll('p')[0].style.color = 'blue';
     }
+</script>
+
+    <script>
+        $(document).ready(function () {
+            $("ul.navbar-nav > li").click(function (e) {
+                $("ul.navbar-nav > li").removeClass("active");
+                $(this).addClass("active");
+            });
+        });
 </script>
