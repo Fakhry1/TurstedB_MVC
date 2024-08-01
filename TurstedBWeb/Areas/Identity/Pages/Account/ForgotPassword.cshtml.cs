@@ -7,12 +7,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Azure.Communication.Email;
+using Azure.Core;
+using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using TrustedB.DataAccess.Data;
 using TrustedB.Models;
 
@@ -76,11 +80,21 @@ namespace TrustedBWeb.Areas.Identity.Pages.Account
 
                 //string body = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
                 //await Helper.ChangePasswordEmail(_context, Input.Email, body, "Reset your password");
+                const string connectionString = "endpoint=https://truest-communication.unitedstates.communication.azure.com/;accesskey=5RaeiQc5J2e4kli3Z8emCGNVyuGvu9blCXR8h6hi1oqxmLmSVxwPJQQJ99AHACULyCpAIX8yAAAAAZCSXAd5";
+                EmailClient emailClient = new EmailClient(connectionString);
+                EmailSendOperation msg = emailClient.Send(
+            WaitUntil.Completed,
+            senderAddress: "DoNotReply@594485c5-c4b7-4ed6-9abe-b938b6558f8e.azurecomm.net",
+            recipientAddress: Input.Email,
+            subject: "Reset Password",
+            htmlContent: $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
+            plainTextContent: $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                //await _emailSender.SendEmailAsync(
+                //    Input.Email,
+                //    "Reset Password",
+                //    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
