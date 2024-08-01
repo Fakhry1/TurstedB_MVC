@@ -150,6 +150,9 @@
   <data name="Activities In Tariqa" xml:space="preserve">
     <value>النشاط في الطريقة</value>
   </data>
+  <data name="Add New Comment" xml:space="preserve">
+    <value>اضافة تعليق</value>
+  </data>
   <data name="Add New Topic" xml:space="preserve">
     <value>اضافة طلب جديد</value>
   </data>
@@ -224,6 +227,9 @@
   </data>
   <data name="Category Name" xml:space="preserve">
     <value>اسم التصنيف</value>
+  </data>
+  <data name="Change your password" xml:space="preserve">
+    <value>تغير كلمة المرور</value>
   </data>
   <data name="Change your password?" xml:space="preserve">
     <value>تغير كلمة المرور؟</value>
@@ -342,6 +348,9 @@
   <data name="English" xml:space="preserve">
     <value>Eng</value>
   </data>
+  <data name="Enter your email" xml:space="preserve">
+    <value>ادخل الايميل</value>
+  </data>
   <data name="File Name" xml:space="preserve">
     <value>اسم الملف</value>
   </data>
@@ -452,6 +461,9 @@
   </data>
   <data name="Main File" xml:space="preserve">
     <value>الملف الاساسي</value>
+  </data>
+  <data name="Main File?" xml:space="preserve">
+    <value>ملف اساسي؟</value>
   </data>
   <data name="Manage User Roles" xml:space="preserve">
     <value>ادارة ادوار المستخدمين</value>
@@ -582,6 +594,9 @@
   <data name="Remember me?" xml:space="preserve">
     <value>تزكرني؟</value>
   </data>
+  <data name="Reset Password" xml:space="preserve">
+    <value>اعادة تعيين</value>
+  </data>
   <data name="Role" xml:space="preserve">
     <value>الدور</value>
   </data>
@@ -593,6 +608,9 @@
   </data>
   <data name="Roles Assignment" xml:space="preserve">
     <value>اسناد الادوار</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>بحث</value>
