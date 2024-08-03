@@ -75,7 +75,7 @@
 
 </style>
 <div class="p-4 ">
-    <p class="text-body">@_localization.Getkey("Picks to watch") </p>
+    <p class="text-body">@_localization.Getkey("Picks to Reading") </p>
 </div>
 
 
@@ -95,7 +95,8 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
 
                     <div class="navbar-nav mx-lg-auto nav-underline">
-                        <a class="nav-link " href="@Url.Action("AllPDF", "Home", new {SubCategoryID=8})">@_localization.Getkey("Qasaeid")</a>
+                        <a class="nav-link active" href="@Url.Action("AllPDF", "Home", new {SubCategoryID=8})">@_localization.Getkey("Khoutap")</a>
+                        <a class="nav-link " href="@Url.Action("AllPDF", "Home", new {SubCategoryID=8})">@_localization.Getkey("Speeches")</a>
                         
                        @*  <a class="nav-link"  href="@Url.Action("AllAudio", "Home", new {SubCategoryID=7})">@_localization.Getkey("Lesones")</a>
                         <a class="nav-link " href="#">@_localization.Getkey("General Events")</a>

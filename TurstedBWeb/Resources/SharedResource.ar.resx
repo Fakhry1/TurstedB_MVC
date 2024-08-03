@@ -531,6 +531,12 @@
   <data name="Phone Number" xml:space="preserve">
     <value>رقم الهاتف</value>
   </data>
+  <data name="Picks to Listen" xml:space="preserve">
+    <value>مختارات للاستماع</value>
+  </data>
+  <data name="Picks to Reading" xml:space="preserve">
+    <value>مختارات للاطلاع</value>
+  </data>
   <data name="Picks to watch" xml:space="preserve">
     <value>مختارات للمشاهدة</value>
   </data>

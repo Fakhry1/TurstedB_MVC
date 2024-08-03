@@ -29,15 +29,15 @@
     {
         Titel = "Lessones";
     }
-    else if (subCategory == 4)
+    else if (subCategory == 7)
     {
         Titel = "Holiya";
     }
-    else if (subCategory == 4)
+    else if (subCategory == 7)
     {
         Titel = "Speeches";
     }
-    else if (subCategory == 4)
+    else if (subCategory == 7)
     {
         Titel = "Khoutap";
     }
@@ -57,15 +57,10 @@
 
 
 </style>
-<style>
-    /*Code to change color of active link*/
-    .navbar-nav > .active > a {
-        color: red;
-    }
-</style>
+
 <link href="~/css/NavBar.css" rel="stylesheet" />
 <div class="p-4 ">
-    <p class="text-body">@_localization.Getkey("Picks to watch") </p>
+    <p class="text-body">@_localization.Getkey("Picks to Listen") </p>
 </div>
 
 
@@ -77,21 +72,39 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-
         <div class="collapse navbar-collapse" id="navbarCollapse">
 
             <ul class="navbar-nav ml-auto">
 
+                @if (subCategory == 6)
+                {
                 <li class="nav-item ">
+                    <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio">@_localization.Getkey("Qasaeid")</a>
 
+                </li>
+                }
+                else
+                {
+                <li class="nav-item ">
                     <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="6" asp-action="AllAudio">@_localization.Getkey("Qasaeid")</a>
 
                 </li>
+                }
+                
+                @if (subCategory == 7)
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Lesones")</a>
 
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Lesones")</a>
 
-                <li class="nav-item">
-                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Lessones")</a>
-                </li>
+                    </li>
+                }
 
                 <li class="nav-item">
                     <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Speeches")</a>
@@ -105,8 +118,8 @@
         </div>
 
         <div class=" ms-5 d-inline-flex position-absolute top-50 start-0 translate-middle ">
-          
-            <p class="fw-bold text-white">@_localization.Getkey( Titel) </p>
+
+            <p class="fw-bold text-white">@_localization.Getkey(Titel) </p>
             <i class="bi bi-music-note-beamed text-white h4 "></i>
         </div>
 

@@ -90,9 +90,25 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
 
                     <div class="navbar-nav mx-lg-auto nav-underline">
-                 
-                        <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllVideos">@_localization.Getkey("Holiya Events")</a>
-                        <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="5" asp-action="AllVideos">@_localization.Getkey("Mouled Events")</a>
+                        @if (subCategory == 4)
+                        {
+                            <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllVideos">@_localization.Getkey("Holiya Events")</a>
+                        }
+                        else 
+                        {
+                            <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllVideos">@_localization.Getkey("Holiya Events")</a>
+                        }
+
+                        @if (subCategory == 5)
+                        {
+                            <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="5" asp-action="AllVideos">@_localization.Getkey("Mouled Events")</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="5" asp-action="AllVideos">@_localization.Getkey("Mouled Events")</a>
+                        }
+                       
+                      
                         
                         <a class="nav-item nav-link " href="#">@_localization.Getkey("General Events")</a>
                         <a class="nav-item nav-link " href="#">@_localization.Getkey("Selections")</a>
