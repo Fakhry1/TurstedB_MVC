@@ -600,6 +600,9 @@
   <data name="Remember me?" xml:space="preserve">
     <value>تزكرني؟</value>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>تغير كلمة المرور</value>
+  </data>
   <data name="Reset Password" xml:space="preserve">
     <value>اعادة تعيين</value>
   </data>

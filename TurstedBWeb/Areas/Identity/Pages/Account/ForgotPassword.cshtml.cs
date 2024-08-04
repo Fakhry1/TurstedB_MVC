@@ -78,7 +78,7 @@ namespace TrustedBWeb.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                //string body = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                string body = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
                 //await Helper.ChangePasswordEmail(_context, Input.Email, body, "Reset your password");
                 const string connectionString = "endpoint=https://truest-communication.unitedstates.communication.azure.com/;accesskey=5RaeiQc5J2e4kli3Z8emCGNVyuGvu9blCXR8h6hi1oqxmLmSVxwPJQQJ99AHACULyCpAIX8yAAAAAZCSXAd5";
                 EmailClient emailClient = new EmailClient(connectionString);
@@ -86,9 +86,9 @@ namespace TrustedBWeb.Areas.Identity.Pages.Account
             WaitUntil.Completed,
             senderAddress: "DoNotReply@594485c5-c4b7-4ed6-9abe-b938b6558f8e.azurecomm.net",
             recipientAddress: Input.Email,
-            subject: "Reset Password",
-            htmlContent: $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
-            plainTextContent: $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+            subject: "Reset your password",
+            htmlContent: body,
+            plainTextContent: body);
 
 
                 //await _emailSender.SendEmailAsync(
