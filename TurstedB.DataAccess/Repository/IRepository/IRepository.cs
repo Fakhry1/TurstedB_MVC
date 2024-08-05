@@ -19,6 +19,7 @@ namespace TrustedB.DataAccess.Repository.IRepository
 
         IEnumerable<T> GetAllPagination(int recSkip, int pageSize, Expression<Func<T, bool>>? filter, string? includeProperties = null);
         IEnumerable<T> GetAllPaginationAudio(int recSkip, int pageSize, Expression<Func<T, bool>>? filter, string? includeProperties = null);
+        public IEnumerable<Topics> GetAllPaginationDB(int recSkip, int recTak, int subCategory, string? includeProperties = null);
 
 
     }

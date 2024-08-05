@@ -158,7 +158,24 @@ namespace TrustedB.DataAccess.Repository
             return query.ToList();
 
         }
+        //___________________________________________________________
+        public IEnumerable<Topics> GetAllPaginationDB(int recSkip, int recTak, int subCategory, string? includeProperties = null)
+        {
+           
+            var query = _db.Topics.Where(u => (u.SubCategoryID == subCategory)&&(u.Active == "نعم")).OrderBy(u => u.CreationDate).Skip(recSkip).Take(recTak);
+  
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
 
+            return query.ToList();
 
+        }
+//___________________________________________________
     }
 }

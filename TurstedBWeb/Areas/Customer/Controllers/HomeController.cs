@@ -143,10 +143,10 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         //______________________________Audio____________________________________
 
-        public IActionResult AllImages(int? SubCategoryID, int pg = 1)
+        public IActionResult AllImages(int SubCategoryID, int pg = 1)
         {
 
-            const int pageSize = 4;
+            const int pageSize = 1;
             if (pg < 1) { pg = 1; }
 
             int recsCount = _unitOfWork.Topics.GetAll(filter: o =>(o.CategoryID == 1)).Count();
@@ -154,9 +154,9 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             int recSkip = (pg - 1) * pageSize;
 
             //GetAllPagination
-            var ImageList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
-           
-           
+            //var ImageList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
+            var ImageList = _unitOfWork.Topics.GetAllPaginationDB(recSkip, pager.PageSize, SubCategoryID).ToList();
+
             this.ViewBag.Pager = pager;
           
 
