@@ -1,5 +1,4 @@
-﻿@model List<Topics>
-
+﻿@* @model List<Topics>
 
 @{
     int Leng = Model.Count();
@@ -41,9 +40,9 @@
     {
         Titel = "Tarahoum";
     }
-}
+} *@
 
-@* <link rel="stylesheet" href="~/css/ImageSize.css" asp-append-version="true" /> *@
+@* 
 <div class=" container-fluid shadow text-center d-inline-flex">
     <div class="col-lg-1 col-md-1 col-sm-1 text-end">
         <button class="navbar-toggler " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
@@ -96,13 +95,11 @@
             </div>
         </div>
     </nav>
-    @* __________________________________________________________________________________ *@
-
-<div class="container-fluid  text-center d-inline-flex">
+   
     <div class="col-lg-1 col-md-1 col-sm-1"></div>
     <div class="col-lg-10 col-md-10 col-sm-10">
         <div class="row mt-3">
-            @* ____________________________________ 1 _________________________ *@
+            
             @if (Leng > 0)
             {
                 <div class="col-lg-3 col-md-3 col-sm-3">
@@ -140,9 +137,8 @@
                     </div>
                 </div>
                 }
-            @* ____________________________________ 1 _________________________ *@
+            
 
-            @* ____________________________________ 2 _________________________ *@
             @if (Leng > 1)
             {
                 <div class="col-lg-3 col-md-3 col-sm-3">
@@ -181,9 +177,8 @@
                 </div>
             </div>
             }
-            @* ____________________________________ 2 _________________________ *@
             
-            @* ____________________________________ 3 _________________________ *@
+
             @if (Leng > 2)
             {
             <div class="col-lg-3 col-md-3 col-sm-3">
@@ -222,9 +217,8 @@
                 </div>
                 </div>
             }
-            @* ____________________________________ 3 _________________________ *@
+          
 
-            @* ____________________________________ 4 _________________________ *@
             @if (Leng > 3)
             {
                 <div class="col-lg-3 col-md-3 col-sm-3">
@@ -263,8 +257,7 @@
                 </div>
             </div>
             }
-            @* ____________________________________ 3 _________________________ *@
-
+           
 
         </div>
 
@@ -272,165 +265,13 @@
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1">
 
-        @* <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">@_localization.Getkey("Next")</a> *@
+      
 
     </div>
 </div>
-@* __________________________________________________________________ *@
-@* <table id="tblData" class="table table-bordered table-striped" style="width:100%">
-    <thead>
 
-        <tr>
-            <th></th>
-
-        </tr>
-
-    </thead>
-    <tbody> *@
-@*         @foreach (var obj in Model.OrderBy(u => u.CreationDate))
-        {
-@*             <tr>
-
-                <td> *@
-        @*             <div class="card radius-10 border-start border-end border-0 border-3 border-info">
-
-                        <div>
-
-                            <img class="w-100" src="@obj.MainFile" height="280" />
-
-                        </div>
-
-                       <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
-                                
-                            </div>
-
-                            <small class="text-muted"> @obj.Titel</small> 
-
- *@
-
-
-                           @*  <ul class="nav nav-tabs">
-                                <li class="nav-item h5">
-                                    <a class="nav-link text-body fw-bold active" data-bs-toggle="tab"  href="#States"> @_localization.Getkey("States History")</a>
-                                </li>
-                                </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane container" id="States">
-                                    <partial name="_DisplayImage" />
-                                </div>
-                            </div> *@
-                           @*  <a class="nav-link btn btn-primary" asp-area="" asp-controller="Home" asp-action="DisplayImage" asp-route-path="@obj.MainFile" class="btn btn-sm">
-                                open1 
-                                
-                                 @Html.Partial("_DisplayImage") 
-
-                                @* <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
-                                            </div>
-                                            <div class="modal-body">
-                                                @obj.MainFile
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  *@
-                              @*   </a> *@
-                        @*     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">open</a> *@
-                           @*  <partial name="_DisplayImage" /> *@
-
-@* 
-                            <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            @obj.MainFile
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> *@
-@* 
-                        </div> 
-                    </div>  *@
-@*                 </td>
-            </tr> *@
-        }
-  @*   </tbody>
-</table> *@
-    @* ___________________________________________________________________________________ *@
     <div class="container-fluid">
     <div class="col-lg-12 col-md-12 col-sm-12 px-3">
-@*         <div class="row mt-3">
-            @foreach (var obj in Model.OrderBy(u => u.CreationDate))
-            {
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <div class="card radius-10 border-start border-end border-0 border-3 border-info">
-
-                            <div>
-
-                                <img class="w-100" src="@obj.MainFile"  height="280" />
-
-                            </div>
-
-
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
-
-                                </div>
-
-                                <small class="text-muted"> @obj.Titel</small>
-
-                                <div class="btn-group">
-                                    <button asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="bi bi-display h4"></i></button>
-                                    @{
-                                        path1 = @obj.MainFile;
-                                    }
-
-
-                                </div>
-
-
-                            </div>
-
-                    </div>
-                </div>
-            }
-        </div> *@
-
-       
-@*          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <img src="@path1" class="w-100" />
-                    </div>
-                    <div class="modal-footer">
-
-                        <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>  *@
 
     </div>
     </div>
@@ -495,4 +336,236 @@
     span.onclick = function() {
       modal.style.display = "none";
     }
+</script>
+ *@
+
+    @* _________________________________________________________________ *@
+
+    @model List<Topics>
+
+
+@{
+    string Titel = "";
+    string path1 = "";
+    string url;
+    Pager pager = new Pager();
+    int pageNo = 0;
+    int ToltalP = 0;
+    int Next = 0;
+    int Prev = 0;
+    int subCategory = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+        ToltalP = pager.TotalPages;
+        Next = pageNo + 1;
+        Prev = pageNo - 1;
+        subCategory = pager.SubCategoryID;
+    }
+    if (subCategory == 6)
+    {
+        Titel = "Qasaeid";
+    }
+    else if (subCategory == 7)
+    {
+        Titel = "Lessones";
+    }
+    else if (subCategory == 7)
+    {
+        Titel = "Holiya";
+    }
+    else if (subCategory == 7)
+    {
+        Titel = "Speeches";
+    }
+    else if (subCategory == 7)
+    {
+        Titel = "Khoutap";
+    }
+}
+
+<style>
+
+
+
+    audio {
+        max-height: 100%;
+        max-width: 100%;
+        margin: auto;
+        object-fit: contain;
+    }
+
+</style>
+
+<link href="~/css/NavBar.css" rel="stylesheet" />
+<div class="p-4 ">
+    <p class="text-body">@_localization.Getkey("Picks to Listen") </p>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
+    <div class="container">
+
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+            <ul class="navbar-nav ml-auto">
+
+                @if (subCategory == 6)
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="2" asp-action="AllImages">@_localization.Getkey("Murals")</a>
+                                                
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="2" asp-action="AllImages">@_localization.Getkey("Murals")</a>
+
+                    </li>
+                }
+
+                @if (subCategory == 7)
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Lesones")</a>
+
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Lesones")</a>
+
+                    </li>
+                }
+
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Speeches")</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Khoutap")</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class=" ms-5 d-inline-flex position-absolute top-50 start-0 translate-middle ">
+
+            <p class="fw-bold text-white">@_localization.Getkey(Titel) </p>
+            <i class="bi bi-music-note-beamed text-white h4 "></i>
+        </div>
+
+
+    </div>
+</nav>
+
+
+
+
+@* ______________________________________________show image_______________________________ *@
+
+<div class="container-fluid shadow text-center d-inline-flex">
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <div class="row mt-5">
+            @foreach (var obj in Model.OrderBy(u => u.CreationDate))
+            {
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-2">
+                    <div class="card radius-10 border-start border-end border-0 border-3 border-info">
+                        <div class="card-body p-0 shadow">
+
+                            <div class="title text-center">
+                                <h6 class="mb-1 mt-1">
+                                    @obj.Titel
+                                    <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile">
+                                        <i class="bi bi-download h5 "></i>
+                                    </a>
+                                </h6>
+                            </div>
+
+                            <div class="text-center">
+                                <audio controls>
+
+                                    <source src="@obj.MainFile" type="audio/ogg">
+                                    <source src="@obj.MainFile" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                                <p class="small text-muted text-truncate">
+                                    @obj.TopicDiscription
+
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1">
+    </div>
+</div>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 text-end mt-3">
+            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">
+
+                <img src="~/Files/Logo/prev.svg" class="" style="width:50px;" />
+
+            </a>
+
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4"></div>
+
+        <div class="col-lg-4 col-md-4 col-sm-4 text-start mt-3 mb-5">
+            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">
+                <img src="~/Files/Logo/Next.svg" class="" style="width:50px;" />
+
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function myFunction(id) {
+
+        // $('#UseShipAddr').click(function () {
+
+        $.ajax({
+            //url: '/Customer/Home/AllAudio?SubCategoryID=7'
+            url: '@Url.Action("AllAudio", "Home")',
+            type: 'GET'
+                 data: { subCategoryID: id }
+        });
+        // });
+    }
+</script>
+<script>
+
+    function init() {
+        document.getElementById("about").style.color = 'blue';
+        // document.querySelectorAll('p')[0].style.color = 'blue';
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("ul.navbar-nav > li").click(function (e) {
+            $("ul.navbar-nav > li").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
 </script>

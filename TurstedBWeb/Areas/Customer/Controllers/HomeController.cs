@@ -119,7 +119,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         //______________________________Audio____________________________________
 
-        public IActionResult AllAudio(int? SubCategoryID = 6, int pg = 1)
+        public IActionResult AllAudio(int SubCategoryID = 6, int pg = 1)
         {
             const int pageSize = 4;
             if (pg < 1) { pg = 1; }
@@ -129,7 +129,8 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             int recSkip = (pg - 1) * pageSize;
 
             //GetAllPagination
-            var AudioList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
+            //var AudioList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
+            var AudioList = _unitOfWork.Topics.GetAllPaginationDB(recSkip, pager.PageSize, SubCategoryID).ToList();
 
             //var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
             this.ViewBag.Pager = pager;
@@ -166,7 +167,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
 
         //___________________________________Videos___________________________
 
-        public IActionResult AllVideos(int? SubCategoryID, int pg = 1)
+        public IActionResult AllVideos(int SubCategoryID, int pg = 1)
         {
 
             const int pageSize = 3;
@@ -177,17 +178,17 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             int recSkip = (pg - 1) * pageSize;
 
             //GetAllPagination
-            var ImageList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
-
+            //var ImageList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
+            var VideoList = _unitOfWork.Topics.GetAllPaginationDB(recSkip, pager.PageSize, SubCategoryID).ToList();
             //var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
             this.ViewBag.Pager = pager;
 
 
-            return View(ImageList);
+            return View(VideoList);
 
         }
 
-        public IActionResult AllPDF(int? SubCategoryID, int pg = 1)
+        public IActionResult AllPDF(int SubCategoryID, int pg = 1)
         {
 
             const int pageSize = 3;
@@ -198,13 +199,13 @@ namespace TrustedBWeb.Areas.Customer.Controllers
             int recSkip = (pg - 1) * pageSize;
 
             //GetAllPagination
-            var ImageList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
-
+            // var ImageList = _unitOfWork.Topics.GetAllPaginationAudio(recSkip, pager.PageSize, filter: o => (o.SubCategoryID == SubCategoryID)).ToList();
+            var PDFList = _unitOfWork.Topics.GetAllPaginationDB(recSkip, pager.PageSize, SubCategoryID).ToList();
             //var TopicList = _unitOfWork.Topics.GetAll(filter: o => (o.CategoryID == 4)).ToList();
             this.ViewBag.Pager = pager;
 
 
-            return View(ImageList);
+            return View(PDFList);
 
         }
 
