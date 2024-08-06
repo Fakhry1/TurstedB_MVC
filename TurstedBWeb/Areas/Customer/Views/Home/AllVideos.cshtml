@@ -42,36 +42,8 @@
     }
 }
 
-<style>
-     .sunnave{
-        transition: all 0.2s;
-        position: relative;
-     
-    }
 
-        .sunnave:hover:before {
-        content:'';
-        height: 2px;
-        width: 100%;
-        background-color: greenyellow;
-        position:absolute;
-        bottom:0;
-        left:0;
-    }
 
-        .sunnave:active {
-                content: '';
-                height: 2px;
-                width: 100%;
-                background-color: greenyellow;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-            }
-
-    
-   
-</style>
 <div class="p-4 ">
     <p class="text-body">@_localization.Getkey("Picks to watch") </p>
 </div>
@@ -89,10 +61,10 @@
            
             <div class="collapse navbar-collapse" id="navbarCollapse">
 
-                    <div class="navbar-nav mx-lg-auto nav-underline">
+                    <div class="navbar-nav mx-lg-auto ">
                         @if (subCategory == 4)
                         {
-                            <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllVideos">@_localization.Getkey("Holiya Events")</a>
+                            <a class="nav-link nav-item text-decoration-underline active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllVideos">@_localization.Getkey("Holiya Events")</a>
                         }
                         else 
                         {
@@ -152,7 +124,7 @@
     <div class="col-lg-1 col-md-1 col-sm-1"></div>
     <div class="col-lg-10 col-md-10 col-sm-10">
         <div class="row mt-3">
-            @foreach (var obj in Model.OrderBy(u => u.CreationDate))
+            @foreach (var obj in Model.OrderByDescending(u => u.CreationDate))
             {
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="card radius-10 border  shadow">

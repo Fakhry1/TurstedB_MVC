@@ -6,10 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Remove="Areas\Customer\Views\Home\checkStorageAsync.cshtml" />
-  </ItemGroup>
  
 
   <ItemGroup>
@@ -33,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Areas\Customer\Views\Home\checkStorageAsync.cshtml" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
@@ -77,18 +72,6 @@
 
   <ItemGroup>
     <Content Update="Areas\Customer\Views\Home\AllImages.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\Customer\Views\Home\_DisplayImage.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\Customer\Views\Home\_AudioQ.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\Customer\Views\Home\_AttachmentList.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
