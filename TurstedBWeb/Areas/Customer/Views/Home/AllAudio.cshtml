@@ -106,13 +106,35 @@
                     </li>
                 }
 
-                <li class="nav-item">
-                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Speeches")</a>
-                </li>
+                @if (subCategory == 11)
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="11" asp-action="AllAudio">@_localization.Getkey("Speeches")</a>
 
-                <li class="nav-item">
-                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Khoutap")</a>
-                </li>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="11" asp-action="AllAudio">@_localization.Getkey("Speeches")</a>
+
+                    </li>
+                }
+
+                @if (subCategory == 12)
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="12" asp-action="AllAudio">@_localization.Getkey("Khoutap")</a>
+
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="12" asp-action="AllAudio">@_localization.Getkey("Khoutap")</a>
+
+                    </li>
+                }
 
             </ul>
         </div>

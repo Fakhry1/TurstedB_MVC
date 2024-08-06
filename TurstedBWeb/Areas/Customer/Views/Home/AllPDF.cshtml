@@ -95,12 +95,33 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
 
                     <div class="navbar-nav mx-lg-auto nav-underline">
-                        <a class="nav-link active" href="@Url.Action("AllPDF", "Home", new {SubCategoryID=8})">@_localization.Getkey("Khoutap")</a>
-                        <a class="nav-link " href="@Url.Action("AllPDF", "Home", new {SubCategoryID=8})">@_localization.Getkey("Speeches")</a>
-                        
-                       @*  <a class="nav-link"  href="@Url.Action("AllAudio", "Home", new {SubCategoryID=7})">@_localization.Getkey("Lesones")</a>
-                        <a class="nav-link " href="#">@_localization.Getkey("General Events")</a>
-                        <a class="nav-link " href="#">@_localization.Getkey("Selections")</a> *@
+
+                        @if (subCategory == 8)
+                        {
+                            <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="8" asp-action="AllPDF">@_localization.Getkey("Speeches")</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="8" asp-action="AllPDF">@_localization.Getkey("Speeches")</a>
+                        }
+
+                        @if (subCategory == 15)
+                        {
+                            <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="15" asp-action="AllPDF">@_localization.Getkey("Khoutap")</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="15" asp-action="AllPDF">@_localization.Getkey("Khoutap")</a>
+                        }
+
+                        @if (subCategory == 16)
+                        {
+                            <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="16" asp-action="AllPDF">@_localization.Getkey("Books")</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="16" asp-action="AllPDF">@_localization.Getkey("Books")</a>
+                        }
 
 
                     </div>
@@ -117,8 +138,8 @@
 
     <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-1"></div>
-        <div class="col-lg-10 col-md-10 col-sm-10">
-            <div class="row mt-5">
+        <div class="col-lg-10 col-md-10 col-sm-10 mt-5">
+            
                 @foreach (var obj in Model.OrderBy(u => u.CreationDate))
                 {
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-2">
@@ -146,7 +167,7 @@
                         </div>
                     </div>
                 }
-            </div>
+           
 
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1">
@@ -154,7 +175,7 @@
     </div>
 
 <div class="container mb-4">
-    <div class="row">
+   @*  <div class="row"> *@
         <div class="col-lg-4 col-md-4 col-sm-4 text-end mt-3">
             <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">
 
@@ -173,5 +194,5 @@
 
         </div>
 
-    </div>
+  @*   </div> *@
 </div>

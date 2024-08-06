@@ -309,11 +309,8 @@
             </div>
         }
 
-
-
         <div class="col-lg-4 col-md-4 col-sm-4 "></div>
-
-    </div>
+        </div>
 </div>
 <script>
   
@@ -345,6 +342,7 @@
 
 
 @{
+    int Leng = Model.Count();
     string Titel = "";
     string path1 = "";
     string url;
@@ -364,25 +362,25 @@
         Prev = pageNo - 1;
         subCategory = pager.SubCategoryID;
     }
-    if (subCategory == 6)
+    if (subCategory == 2)
     {
-        Titel = "Qasaeid";
+        Titel = "Murals";
     }
-    else if (subCategory == 7)
+    else if (subCategory == 3)
     {
-        Titel = "Lessones";
+        Titel = "Mouled";
     }
-    else if (subCategory == 7)
+    else if (subCategory == 4)
     {
         Titel = "Holiya";
     }
-    else if (subCategory == 7)
+    else if (subCategory == 5)
     {
-        Titel = "Speeches";
+        Titel = "Public Events";
     }
-    else if (subCategory == 7)
+    else if (subCategory == 6)
     {
-        Titel = "Khoutap";
+        Titel = "Tarahoum";
     }
 }
 
@@ -417,7 +415,7 @@
 
             <ul class="navbar-nav ml-auto">
 
-                @if (subCategory == 6)
+                @if (subCategory == 2)
                 {
                     <li class="nav-item ">
                         <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="2" asp-action="AllImages">@_localization.Getkey("Murals")</a>
@@ -432,28 +430,52 @@
                     </li>
                 }
 
-                @if (subCategory == 7)
+                @if (subCategory == 3)
                 {
                     <li class="nav-item ">
-                        <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Lesones")</a>
+                        <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="3" asp-action="AllImages">@_localization.Getkey("Mouled")</a>
 
                     </li>
                 }
                 else
                 {
                     <li class="nav-item ">
-                        <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Lesones")</a>
+                        <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="3" asp-action="AllImages">@_localization.Getkey("Mouled")</a>
 
                     </li>
                 }
 
-                <li class="nav-item">
-                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Speeches")</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="7" asp-action="AllAudio">@_localization.Getkey("Khoutap")</a>
-                </li>
+                @if (subCategory == 9)
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="9" asp-action="AllImages">@_localization.Getkey("Holiya")</a>
+
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="9" asp-action="AllImages">@_localization.Getkey("Holiya")</a>
+
+                    </li>
+                }
+
+                @if (subCategory == 10)
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="10" asp-action="AllImages">@_localization.Getkey("Public Events")</a>
+
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item ">
+                        <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="10" asp-action="AllImages">@_localization.Getkey("Public Events")</a>
+
+                    </li>
+                }
+               
 
             </ul>
         </div>
@@ -473,69 +495,212 @@
 
 @* ______________________________________________show image_______________________________ *@
 
-<div class="container-fluid shadow text-center d-inline-flex">
-    <div class="col-lg-1 col-md-1 col-sm-1"></div>
-    <div class="col-lg-10 col-md-10 col-sm-10">
-        <div class="row mt-5">
-            @foreach (var obj in Model.OrderBy(u => u.CreationDate))
-            {
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-2">
-                    <div class="card radius-10 border-start border-end border-0 border-3 border-info">
-                        <div class="card-body p-0 shadow">
+<div class="col-lg-1 col-md-1 col-sm-1"></div>
+<div class="col-lg-10 col-md-10 col-sm-10 px-4 mt-3">
+   @*  <div class="row mt-3 px-5"> *@
 
-                            <div class="title text-center">
-                                <h6 class="mb-1 mt-1">
-                                    @obj.Titel
-                                    <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@obj.MainFile">
-                                        <i class="bi bi-download h5 "></i>
-                                    </a>
-                                </h6>
-                            </div>
+        @if (Leng > 0)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card radius-10  border-3 border-info">
+                    <div>
+                        <img class="w-100" src="@Model[0].MainFile" height="350" />
+                    </div>
 
-                            <div class="text-center">
-                                <audio controls>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@Model[0].MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
 
-                                    <source src="@obj.MainFile" type="audio/ogg">
-                                    <source src="@obj.MainFile" type="audio/mpeg">
-                                    Your browser does not support the audio element.
-                                </audio>
-                                <p class="small text-muted text-truncate">
-                                    @obj.TopicDiscription
+                        </div>
 
-                                </p>
+                        <small class="text-muted"> @Model[0].Titel</small>
+
+                        <div class="btn-group">
+                            <button asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal0"> <i class="bi bi-display h4"></i></button>
+                            <div class="modal" id="exampleModal0" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="w-100" src="@Model[0].MainFile" />
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
+
+
+        @if (Leng > 1)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card radius-10 border-3 border-info">
+                    <div>
+                    <img class="w-100" src="@Model[1].MainFile" height="350" />
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@Model[1].MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+
+                        </div>
+
+                        <small class="text-muted"> @Model[1].Titel</small>
+
+                        <div class="btn-group">
+                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1"> <i class="bi bi-display h4"></i></button>
+                            <div class="modal" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="w-100" src="@Model[1].MainFile" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @if (Leng > 2)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card radius-10  border-3 border-info">
+                    <div>
+                    <img class="w-100" src="@Model[2].MainFile" height="350" />
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@Model[2].MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+
+                        </div>
+
+                        <small class="text-muted"> @Model[2].Titel</small>
+
+                        <div class="btn-group">
+                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal2"> <i class="bi bi-display h4"></i></button>
+                            <div class="modal" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="w-100" src="@Model[2].MainFile" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @if (Leng > 3)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="card radius-10  border-3 border-info">
+                    <div>
+                    <img class="w-100" src="@Model[3].MainFile" height="350" />
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a asp-controller="Home" asp-action="DownloadAudio" asp-route-path="@Model[3].MainFile" type="button" class="btn btn-sm"> <i class="bi bi-download h4 "></i></a>
+
+                        </div>
+
+                        <small class="text-muted"> @Model[3].Titel</small>
+
+                        <div class="btn-group">
+                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal3"> <i class="bi bi-display h4"></i></button>
+                            <div class="modal" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="w-100" src="@Model[3].MainFile" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
 
     </div>
-    <div class="col-lg-1 col-md-1 col-sm-1">
-    </div>
+
+@* 
 </div>
+ *@<div class="col-lg-1 col-md-1 col-sm-1"></div>
 
-<div class="container mb-4">
+
+
+
+
+@* __________________________________________________________________________ *@
+<div class="container mb-5">
     <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4 text-end mt-3">
-            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">
-
-                <img src="~/Files/Logo/prev.svg" class="" style="width:50px;" />
-
-            </a>
-
-        </div>
         <div class="col-lg-4 col-md-4 col-sm-4"></div>
+        @if (pager.TotalPages > 0)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <nav class="Pager1" aria-label="pagination example">
+                    <ul class="pagination pagination-circle justify-content-center pagination-md">
 
-        <div class="col-lg-4 col-md-4 col-sm-4 text-start mt-3 mb-5">
-            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllAudio" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">
-                <img src="~/Files/Logo/Next.svg" class="" style="width:50px;" />
 
-            </a>
+                        <li class="page-item">
+                            <a class="page-link " asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Prev">@_localization.Getkey("Prev")</a>
+                        </li>
 
-        </div>
+                        @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                        {
+                            <li class="page-item @(pge == pager.CurrentPage ? "active": "")">
+                                <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@pge">@pge</a>
+                            </li>
+                        }
 
+                        <li class="page-item ">
+                            <a class="page-link" asp-area="" asp-controller="Home" asp-action="AllImages" asp-route-SubCategoryID="@subCategory" asp-route-pg="@Next">@_localization.Getkey("Next")</a>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+        }
+
+        <div class="col-lg-4 col-md-4 col-sm-4 "></div>
     </div>
 </div>
 

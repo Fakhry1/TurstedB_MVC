@@ -107,11 +107,27 @@
                         {
                             <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="5" asp-action="AllVideos">@_localization.Getkey("Mouled Events")</a>
                         }
-                       
+
+                        @if (subCategory == 13)
+                        {
+                            <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="13" asp-action="AllVideos">@_localization.Getkey("Public Events")</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="13" asp-action="AllVideos">@_localization.Getkey("Public Events")</a>
+                        }
+                        @if (subCategory == 14)
+                        {
+                            <a class="nav-link nav-item active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="14" asp-action="AllVideos">@_localization.Getkey("Selections")</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="14" asp-action="AllVideos">@_localization.Getkey("Selections")</a>
+                        }
                       
                         
-                        <a class="nav-item nav-link " href="#">@_localization.Getkey("General Events")</a>
-                        <a class="nav-item nav-link " href="#">@_localization.Getkey("Selections")</a>
+                       
+                      
 
                         
                 </div>
