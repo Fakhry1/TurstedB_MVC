@@ -61,10 +61,10 @@
            
             <div class="collapse navbar-collapse" id="navbarCollapse">
 
-                    <div class="navbar-nav mx-lg-auto ">
+                    <div class="navbar-nav mx-lg-auto nav-underline">
                         @if (subCategory == 4)
                         {
-                            <a class="nav-link nav-item text-decoration-underline active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllVideos">@_localization.Getkey("Holiya Events")</a>
+                            <a class="nav-link nav-item  active" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="4" asp-action="AllVideos">@_localization.Getkey("Holiya Events")</a>
                         }
                         else 
                         {
@@ -96,12 +96,7 @@
                         {
                             <a class="nav-link nav-item" asp-area="Customer" asp-controller="Home" asp-route-SubCategoryID="14" asp-action="AllVideos">@_localization.Getkey("Selections")</a>
                         }
-                      
-                        
-                       
-                      
-
-                        
+    
                 </div>
               
             </div>
@@ -154,13 +149,13 @@
 
                                 
 
-                                <div class="btn-group">
+                                @* <div class="btn-group">
                                     <button asp-controller="Home" asp-action="DownloadAudio" asp-route-path="" type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="bi bi-display h4"></i></button>
                                     @{
                                         path1 = @obj.MainFile;
                                     }
                                 </div>
-
+ *@
 
                             </div>
                             <!-- Button trigger modal -->

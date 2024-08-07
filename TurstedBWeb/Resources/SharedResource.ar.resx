@@ -204,6 +204,9 @@
   <data name="Block Name" xml:space="preserve">
     <value>اسم المربوع</value>
   </data>
+  <data name="Books" xml:space="preserve">
+    <value>كتب</value>
+  </data>
   <data name="Brother" xml:space="preserve">
     <value>اخ</value>
   </data>
@@ -350,6 +353,9 @@
   </data>
   <data name="Enter your email" xml:space="preserve">
     <value>ادخل الايميل</value>
+  </data>
+  <data name="Events." xml:space="preserve">
+    <value>عامة</value>
   </data>
   <data name="File Name" xml:space="preserve">
     <value>اسم الملف</value>

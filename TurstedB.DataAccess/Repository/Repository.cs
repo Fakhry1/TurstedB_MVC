@@ -162,7 +162,7 @@ namespace TrustedB.DataAccess.Repository
         public IEnumerable<Topics> GetAllPaginationDB(int recSkip, int recTak, int subCategory, string? includeProperties = null)
         {
            
-            var query = _db.Topics.Where(u => (u.SubCategoryID == subCategory)&&(u.Active == "نعم")).OrderBy(u => u.CreationDate).Skip(recSkip).Take(recTak);
+            var query = _db.Topics.Where(u => (u.SubCategoryID == subCategory)&&(u.Active == "نعم")).OrderByDescending(u => u.CreationDate).Skip(recSkip).Take(recTak);
   
             if (!string.IsNullOrEmpty(includeProperties))
             {
