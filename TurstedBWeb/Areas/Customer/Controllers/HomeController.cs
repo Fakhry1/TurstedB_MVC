@@ -147,7 +147,7 @@ namespace TrustedBWeb.Areas.Customer.Controllers
         public IActionResult AllImages(int SubCategoryID, int pg = 1)
         {
 
-            const int pageSize = 1;
+            const int pageSize = 4;
             if (pg < 1) { pg = 1; }
 
             int recsCount = _unitOfWork.Topics.GetAll(filter: o =>(o.CategoryID == 1)).Count();
