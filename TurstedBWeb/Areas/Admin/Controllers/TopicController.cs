@@ -1,4 +1,5 @@
-﻿using Azure.Storage.Blobs;
+﻿using Azure.Core;
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -109,13 +110,19 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         [HttpPost]
         [DisableRequestSizeLimit]
-        public IActionResult Upsert(TopicVM topicVM)
+        public async Task<IActionResult> UpsertAsync(TopicVM topicVM)
         {
+            var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var applicationuser = _unitOfWork.ApplicationUser.Get(u => u.Id == userLoginId);
+            topicVM.applicationUser = applicationuser;
+            List<string> exsitingUserRoles = await _userManager.GetRolesAsync(applicationuser) as List<string>;
+
+
             Handel handel = new Handel(_unitOfWork);
             if (ModelState.IsValid)
             {
 
-                var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+               // var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 //add new topic
                 if (topicVM.topic.TopicId == Guid.Empty)

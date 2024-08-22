@@ -81,9 +81,9 @@ namespace TrustedBWeb.Logic
                 List<string> rolesFromTstate;// = new List<string>();
                 if (state.Statefrom == oldState && state.Stateto == newState)
                 {
-                    if (state.RoleId != null)
+                    if (state.RoleName != null)
                     {
-                        foreach (var includeProp in state.RoleId.ToString()
+                        foreach (var includeProp in state.RoleName
                             .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                         {
                             foreach (var role in Roles)

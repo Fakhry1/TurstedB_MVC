@@ -20,6 +20,8 @@ namespace TrustedB.Models.ViewModels
         public List<Attachments>? AttachmentsList { get; set; }
         public List<CommentHistory>? CommentList { get; set; }
 
+        public ApplicationUser? applicationUser { get; set; }
+
         public IEnumerable<SelectListItem>? CategoryList { get; set; }
         public IEnumerable<SelectListItem>? SubCategoryList { get; set; }
 

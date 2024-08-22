@@ -19,6 +19,7 @@ namespace TurstedB.DataAccess.Repository.IRepository
         IStateTransitionRepository StateTransition { get; }
         ICategoryRepository Category { get; }
         ISubCategoryRepository SubCategory { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }
