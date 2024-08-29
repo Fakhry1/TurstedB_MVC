@@ -20,6 +20,8 @@ namespace TrustedB.Models
         [ValidateNever]
         public int? Stateto { get; set; }
 
+        public Guid? RoleId { get; set; }
+
         public string? RoleName { get; set; }
 
     }
