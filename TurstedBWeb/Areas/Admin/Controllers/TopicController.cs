@@ -1,6 +1,8 @@
-﻿using Azure.Storage.Blobs;
+﻿using Azure.Core;
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using TrustedB.DataAccess.Repository;
 using TrustedB.Models;
 using TrustedB.Models.ViewModels;
@@ -109,13 +112,22 @@ namespace TrustedBWeb.Areas.Admin.Controllers
 
         [HttpPost]
         [DisableRequestSizeLimit]
-        public IActionResult Upsert(TopicVM topicVM)
+        public async Task<IActionResult> UpsertAsync(TopicVM topicVM)
         {
+            var rqf = Request.HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = rqf.RequestCulture.Culture;
+
+            var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var applicationuser = _unitOfWork.ApplicationUser.Get(u => u.Id == userLoginId);
+            topicVM.applicationUser = applicationuser;
+            List<string> exsitingUserRoles = await _userManager.GetRolesAsync(applicationuser) as List<string>;
+
+
             Handel handel = new Handel(_unitOfWork);
             if (ModelState.IsValid)
             {
 
-                var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+               // var userLoginId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 //add new topic
                 if (topicVM.topic.TopicId == Guid.Empty)
@@ -142,9 +154,13 @@ namespace TrustedBWeb.Areas.Admin.Controllers
                     var oldTopic = _unitOfWork.Topics.Get(u => u.TopicId == topicVM.topic.TopicId);
                    
                     
-                    bool transition = handel.StateTransition(oldTopic.stateId, topicVM.topic.stateId);
+                    bool transition = handel.StateTransition(oldTopic.stateId, topicVM.topic.stateId, exsitingUserRoles);
+                    if (!transition)
+                    {
+                        TempData[SD.Error] = culture.Name == "ar" ? "عفوا ليس لديك الصلاحية المناسبة" : "Sorry you havn't permission";
+                        return RedirectToAction("Upsert", new { id = topicVM.topic.TopicId });
+                    }
 
-                 
 
                     if (oldTopic.stateId != topicVM.topic.stateId && transition)
                     {
